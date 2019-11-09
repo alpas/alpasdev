@@ -1,6 +1,6 @@
-package __PACKAGE__.database.migrations
+package dev.alpas.alpasdev.database.migrations
 
-import __PACKAGE__.entities.Users
+import dev.alpas.alpasdev.entities.Users
 import dev.alpas.ozone.migration.Migration
 
 class CreateUsersTable : Migration() {

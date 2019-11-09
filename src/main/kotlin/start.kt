@@ -1,4 +1,4 @@
-package __PACKAGE__
+package dev.alpas.alpasdev
 
 import dev.alpas.AlpasApp
 import dev.alpas.make

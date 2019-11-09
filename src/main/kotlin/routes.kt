@@ -1,6 +1,6 @@
-package __PACKAGE__
+package dev.alpas.alpasdev
 
-import __PACKAGE__.controllers.WelcomeController
+import dev.alpas.alpasdev.controllers.WelcomeController
 import dev.alpas.routing.Router
 
 fun Router.addRoutes() = apply {

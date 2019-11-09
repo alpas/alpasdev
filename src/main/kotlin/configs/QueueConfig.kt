@@ -1,4 +1,4 @@
-package __PACKAGE__.configs
+package dev.alpas.alpasdev.configs
 
 import dev.alpas.Environment
 import dev.alpas.queue.QueueConnectionConfig
