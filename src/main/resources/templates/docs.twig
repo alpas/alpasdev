@@ -1,0 +1,9 @@
+{% extends "layout/app.twig" %}
+{% block content %}
+    <section class="h-full py-5 flex justify-center docs_content">
+        <div class="md:w-3/5 sm:w-full flex flex-col">
+            <h1 class="text-4xl my-10 capitalize font-bold">{{ title }}</h1>
+            {{ content | raw }}
+        </div>
+    </section>
+{% endblock %}

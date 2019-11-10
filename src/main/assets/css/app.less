@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+
+html {
+  font-family: 'Quicksand', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.hover-controller .hover-target {
+  opacity: 0;
+}
+
+.hover-controller:hover .hover-target {
+  opacity: 1;
+}
+
+.docs_content {
+
+  a {
+  @apply text-red-600;
+
+    &:hover {
+    @apply text-orange-600;
+    }
+  }
+
+  code {
+  @apply bg-gray-300 font-mono px-2 py-1 rounded-sm text-sm;
+  }
+
+  p {
+  @apply mb-8 text-gray-800;
+  }
+
+  blockquote {
+  @apply bg-gray-100 m-6 p-6 self-center shadow-lg;
+
+    code {
+    @apply bg-gray-200;
+    }
+
+    p {
+    @apply mb-0 text-gray-800 inline-flex items-center;
+
+      .icon {
+      @apply mr-4;
+        display: inline-block;
+      }
+    }
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .tip .icon svg path {
+      fill: #68d391;
+    }
+
+    .info .icon svg path {
+      fill: cornflowerblue;
+    }
+  }
+
+  h1 + ul li {
+  @apply mb-4;
+
+    a::before {
+      content: "-> ";
+    @apply text-blue-600;
+    }
+
+    a {
+    @apply text-gray-800 font-semibold;
+    }
+
+    ul {
+    @apply ml-4;
+
+      li {
+      @apply mb-1;
+
+        &:first-child {
+        @apply mt-2;
+        }
+
+        a::before {
+          content: "-> ";
+        @apply text-blue-400;
+        }
+
+        a {
+        @apply text-gray-800 font-normal;
+        }
+      }
+    }
+  }
+
+  h2 a::before, h3 a::before {
+    content: "-> ";
+  @apply text-blue-300;
+  }
+
+  h3 {
+  @apply font-medium text-xl text-blue-600 mb-6;
+
+    a {
+    @apply text-blue-500;
+    }
+  }
+
+  h4 {
+  @apply font-medium mb-3;
+  }
+
+  .sublist {
+
+    ol {
+    @apply ml-10;
+      list-style: decimal;
+
+      li {
+      @apply text-gray-700 pb-1;
+      }
+    }
+
+    ul {
+    @apply ml-4;
+      list-style: none;
+
+      li {
+      @apply text-gray-700 pb-1;
+
+        &::before {
+          content: "◦ ";
+        @apply text-gray-600;
+        }
+      }
+    }
+  }
+
+}
+
+@tailwind utilities;
