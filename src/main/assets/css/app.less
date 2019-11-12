@@ -16,6 +16,9 @@ html {
 }
 
 .docs_content {
+  :not(pre) > code[class*="language-"], pre[class*="language-"] {
+  @apply bg-white m-6 p-6 shadow-lg rounded;
+  }
 
   a {
   @apply text-red-600;
@@ -26,11 +29,11 @@ html {
   }
 
   code {
-  @apply bg-gray-300 font-mono px-2 py-1 rounded-sm text-sm;
+  @apply bg-gray-300 font-mono px-2 py-1 rounded-sm text-sm text-red-600;
   }
 
   p {
-  @apply mb-8 text-gray-800;
+  @apply mb-5 text-gray-800;
   }
 
   blockquote {
@@ -61,13 +64,17 @@ html {
     .info .icon svg path {
       fill: cornflowerblue;
     }
+
+    .alert .icon svg path {
+      fill: red;
+    }
   }
 
   h1 + ul li {
   @apply mb-4;
 
     a::before {
-      content: "-> ";
+      content: "› ";
     @apply text-blue-600;
     }
 
@@ -85,11 +92,6 @@ html {
         @apply mt-2;
         }
 
-        a::before {
-          content: "-> ";
-        @apply text-blue-400;
-        }
-
         a {
         @apply text-gray-800 font-normal;
         }
@@ -97,13 +99,13 @@ html {
     }
   }
 
-  h2 a::before, h3 a::before {
-    content: "-> ";
+  h2 a::before {
+    content: "› ";
   @apply text-blue-300;
   }
 
   h3 {
-  @apply font-medium text-xl text-blue-600 mb-6;
+  @apply font-medium text-xl text-blue-600 mb-2;
 
     a {
     @apply text-blue-500;
@@ -115,7 +117,6 @@ html {
   }
 
   .sublist {
-
     ol {
     @apply ml-10;
       list-style: decimal;
@@ -139,7 +140,6 @@ html {
       }
     }
   }
-
 }
 
 @tailwind utilities;

@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    [
+      "prismjs",
+      {
+        "languages": [
+          "javascript",
+          "kotlin"
+        ],
+        "plugins": [
+          "line-numbers"
+        ],
+        "theme": "default",
+        "css": true
+      }
+    ]
+  ]
+}

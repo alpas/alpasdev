@@ -36,7 +36,6 @@ class Markdown {
     private val options by lazy {
         MutableDataSet().apply {
             set(Parser.EXTENSIONS, listOf(AutolinkExtension.create()))
-            set(HtmlRenderer.SOFT_BREAK, "<br />\n")
             set(HtmlRenderer.HARD_BREAK, "<br />\n")
         }
     }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <title>&nwarrow;&nearrow; {{ env('APP_NAME') }}</title>
+    <title>🚀 {{ env('APP_NAME') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
     <style>
         #menu-toggle:checked + #menu {
@@ -22,13 +22,11 @@
         <header class="lg:px-16 px-6 bg-white flex flex-wrap items-center py-3 w-full">
             <div class="flex-1 flex items-center">
                 <a href="/" class="text-2xl font-medium flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                         class="bg-blue-500">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path class="text-white" fill="currentColor"
-                              d="M14 4l2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4zm-4 0H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="32" width="32">
+                        <path fill="red" d="M256 421.6c-18.1 0-33.2-6.8-42.9-10.9-5.4-2.3-11.3 1.8-10.9 7.6l3.5 51c.2 3.1 3.8 4.7 6.3 2.8l14.5-11c1.8-1.4 4.5-.9 5.7 1l20.5 32.1c1.5 2.4 5.1 2.4 6.6 0l20.5-32.1c1.2-1.9 3.9-2.4 5.7-1l14.5 11c2.5 1.9 6.1.3 6.3-2.8l3.5-51c.4-5.8-5.5-10-10.9-7.6-9.8 4.1-24.8 10.9-42.9 10.9z"/>
+                        <path fill="#244db7" d="M397.7 293.1l-48-49.1c0-158-93.2-228-93.2-228s-94.1 70-94.1 228l-48 49.1c-1.8 1.8-2.6 4.5-2.2 7.1L130.6 412c.9 5.7 7.1 8.5 11.8 5.4l67.1-45.4s20.7 20 47.1 20c26.4 0 46.1-20 46.1-20l67.1 45.4c4.6 3.1 10.8.3 11.8-5.4l18.5-111.9c.2-2.6-.6-5.2-2.4-7zM256.5 192c-17 0-30.7-14.3-30.7-32s13.8-32 30.7-32c17 0 30.7 14.3 30.7 32s-13.7 32-30.7 32z"/>
                     </svg>
-                    <span class="ml-2"> {{ env('APP_NAME').toUpperCase() }} </span>
+                    <span> {{ env('APP_NAME') }} </span>
                 </a>
             </div>
 
@@ -43,64 +41,6 @@
             <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
                 <div class="flex flex-col-reverse lg:flex lg:flex-row lg:w-auto w-full mt-6 lg:mt-0">
                     <nav>
-                        <ul class="lg:flex items-center justify-between text-base pt-4 lg:pt-0">
-                            {% guest %}
-                                <li>
-                                    <a class="text-blue-500 lg:p-4 py-3 px-0 block hover:text-blue-700"
-                                       href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24"
-                                             fill="none" stroke="currentColor" stroke-width="2"
-                                             stroke-linecap="round"
-                                             stroke-linejoin="round" class="inline">
-                                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                                            <polyline points="10 17 15 12 10 7"></polyline>
-                                            <line x1="15" y1="12" x2="3" y2="12"></line>
-                                        </svg>
-                                        Log in
-                                    </a>
-                                </li>
-                            {% endguest %}
-                            {% auth %}
-                                {% if not routeIsOneOf(['redirects.create']) %}
-                                    <li>
-                                        <a class="text-blue-500 lg:p-4 py-3 px-0 block hover:text-blue-700"
-                                           href="{{ route('redirects.create') }}">
-                                            + Add New Redirect
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                <li>
-                                    <div class="lg:ml-4 flex items-center justify-start lg:mb-0 mb-4 pointer-cursor border-b lg:border-0 lg:p-3 pb-4">
-                                        <img class="rounded-full w-10 h-10"
-                                             src="{{ auth.user.gravatarUrl() }}" alt="{{ auth.user.name }}">
-                                        <span class="ml-3 text-gray-700">{{ auth.user.email }}</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="post">
-                                        {% csrf %}
-                                        <button class="text-blue-500 lg:p-4 py-3 px-0 flex hover:text-blue-700"
-                                                type="submit">
-                                            <svg focusable="false" width="24"
-                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                <g>
-                                                    <path class="text-red-500" fill="currentColor"
-                                                          d="M272 0a23.94 23.94 0 0 1 24 24v240a23.94 23.94 0 0 1-24 24h-32a23.94 23.94 0 0 1-24-24V24a23.94 23.94 0 0 1 24-24z"
-                                                          opacity="0.8"></path>
-                                                    <path class="text-red-600" fill="currentColor"
-                                                          d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 0 1 111.8 54.2a24.07 24.07 0 0 1 35 7.7L162.6 90a24 24 0 0 1-6.6 31 168 168 0 0 0 100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 0 0-68.1-134 23.86 23.86 0 0 1-6.5-30.9l15.8-28.1a24 24 0 0 1 34.8-7.8A247.51 247.51 0 0 1 504 256z"
-                                                    ></path>
-                                                </g>
-                                            </svg>
-                                            <span class="ml-2 lg:hidden">
-                                                Log Out
-                                            </span>
-                                        </button>
-                                    </form>
-                                </li>
-                            {% endauth %}
-                        </ul>
                     </nav>
                 </div>
             </div>

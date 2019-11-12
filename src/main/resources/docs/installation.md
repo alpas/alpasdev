@@ -24,7 +24,7 @@ Alpas has only few system requirements. The requirements vary based on whether y
 
 > /info/ <span>You need a GitHub account to create your project based on Alpas's framework template. Once created, you can host your git project anywhere you'd like.</span>
 
-> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different version of Alpas system requirements.</span>
+> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different versions of system requirements.</span>
 
 <a name="production"></a>
 #### Production
