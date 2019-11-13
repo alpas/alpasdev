@@ -14,11 +14,16 @@ import java.nio.file.Paths
 
 class DocsController : Controller() {
     fun show(call: HttpCall) {
-        val page = call.paramAsString("page")!!
+        val page = call.paramAsString("page") ?: "installation"
         val doc = Documentation(call.make())
         val content = doc.get(page)
-        val title = page
-        call.render("docs", mapOf("content" to content, "title" to title))
+        val toc = doc.toc()
+        val title = page.replace("-", " ")
+        call.render("docs", mapOf("content" to content, "title" to title, "toc" to toc))
+    }
+
+    fun index(call: HttpCall) {
+        call.redirect().toRouteNamed("docs.show", mapOf("page" to "installation"))
     }
 }
 
@@ -27,6 +32,12 @@ class Documentation(private val resourceLoader: ResourceLoader) {
 
     fun get(page: String): String {
         val path = resourceLoader.load(docsPath("$page.md").toString())?.toURI().orAbort("Page $page not found!")
+        val markdown = File(path).readText()
+        return Markdown.render(markdown)
+    }
+
+    fun toc(): String {
+        val path = resourceLoader.load(docsPath("toc.md").toString())?.toURI().orAbort()
         val markdown = File(path).readText()
         return Markdown.render(markdown)
     }
@@ -52,5 +63,4 @@ class Markdown {
         val document = parser.parse(markdown.orEmpty())
         return renderer.render(document)
     }
-
 }

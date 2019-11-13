@@ -1,3 +1,6 @@
+- [Directories](#directories)
+- [Files](#files)
+
 When scaffolding a new app, Alpas only creates the basic minimum files and directories for you and no more. However, 
 even these few directories could be overwhelming esp. if you are new to web framework world.
 
@@ -43,8 +46,8 @@ A standard Alpas project structure look something like this:
 
 ``` 
 
-
-### Directories
+<a name="directories"></a>
+### [Directories](#directories)
 
 **src/main/kotlin/configs**
 
@@ -99,7 +102,8 @@ You should place all your tests in here. Feel free to organize your tests in sub
 This directory contains the assets mostly created during the runtime of your app such as all your file based sessions, 
 application logs etc.
 
-### Files
+<a name="files"></a>
+### [Files](#files)
 
 Here are some notable core files that you should be paying attention to:
 

@@ -15,7 +15,7 @@ Alpas has only few system requirements. The requirements vary based on whether y
 development or for production. Obviously, there are more system requirements for a dev machine than for a prod machine.
  
 <a name="development"></a>
-#### Development
+#### [Development](#development)
 
 <div class="sublist">
 
@@ -31,7 +31,7 @@ development or for production. Obviously, there are more system requirements for
 > requirements.</span>
 
 <a name="production"></a>
-#### Production
+#### [Production](#production)
 
 If you have created a fat jar file for serving your app, the only requirement is Java Runtime `jre`. If you intend to
  run some alpas command, such as `alpas migrate` then you can setup your prod machine as if it was your dev machine
@@ -43,7 +43,7 @@ If you have created a fat jar file for serving your app, the only requirement is
 After you have set up your machine, it only takes few steps to have your new Alpas app up and running:
 
 <a name="creating-new-project"></a>
-#### Creating New Project
+#### [Creating New Project](#creating-new-project)
 
 <div class="sublist">
 
@@ -59,7 +59,7 @@ After you have set up your machine, it only takes few steps to have your new Alp
 > path.</span>
 
 <a name="configuring"></a>
-#### Configuring
+#### [Configuring](#configuring)
 
 Once the new app is initialized, you can start configuring your app. Start with `.env` file that is automatically
  created under the root directory for you during the initialization. You should at least configure the database
@@ -69,7 +69,7 @@ Once the new app is initialized, you can start configuring your app. Start with 
 > `DatabaseConfig.kt` class and comment out all the default connections inside the `init` function. </span>
 
 <a name="serving-locally"></a>
-#### Serving Locally
+#### [Serving Locally](#serving-locally)
 
 You can serve your app from the command line or import it in IntellJ IDEA and then run it from within the IDE. To
  serve it from the command line, use: `./alpas serve`. If everything goes well, your web app will be available at
@@ -79,7 +79,7 @@ You can serve your app from the command line or import it in IntellJ IDEA and th
 > is already in use. If you want to use a different port, change the `APP_PORT` value in your `.env` file.</span>
 
 <a name="serving-externally"></a>
-#### Serving Externally
+#### [Serving Externally](#serving-locally)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is convenient to 
 have your web app accessible from within a different device within the same network. This is very helpful while 

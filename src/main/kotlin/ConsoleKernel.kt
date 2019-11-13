@@ -2,12 +2,12 @@ package dev.alpas.alpasdev
 
 import dev.alpas.Application
 import dev.alpas.ServiceProvider
+import dev.alpas.alpasdev.providers.RouteServiceProvider
 import dev.alpas.console.ConsoleKernel
 import dev.alpas.encryption.EncryptionServiceProvider
 import dev.alpas.hashing.HashServiceProvider
 import dev.alpas.logging.LoggerServiceProvider
 import dev.alpas.ozone.OzoneProvider
-import dev.alpas.routing.RouteServiceProvider
 import kotlin.reflect.KClass
 
 @Suppress("unused")

@@ -3,7 +3,7 @@
 
 html {
   font-family: 'Quicksand', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 500;
 }
 
@@ -17,7 +17,7 @@ html {
 
 .docs_content {
   :not(pre) > code[class*="language-"], pre[class*="language-"] {
-  @apply bg-white m-6 p-6 shadow-lg rounded;
+  @apply bg-gray-100 m-6 p-6 shadow text-sm;
   }
 
   a {
@@ -29,7 +29,7 @@ html {
   }
 
   code {
-  @apply bg-gray-300 font-mono px-2 py-1 rounded-sm text-sm text-red-600;
+  @apply bg-gray-100 font-mono px-2 py-1 rounded-sm text-sm text-red-600;
   }
 
   p {
@@ -71,27 +71,12 @@ html {
   }
 
   h1 + ul li {
-  @apply mb-4;
-
-    a::before {
-      content: "› ";
-    @apply text-blue-600;
-    }
-
     a {
     @apply text-gray-800 font-semibold;
     }
 
     ul {
-    @apply ml-4;
-
       li {
-      @apply mb-1;
-
-        &:first-child {
-        @apply mt-2;
-        }
-
         a {
         @apply text-gray-800 font-normal;
         }
@@ -100,7 +85,7 @@ html {
   }
 
   h2 a::before {
-    content: "› ";
+    content: "◦ ";
   @apply text-blue-300;
   }
 
@@ -113,7 +98,11 @@ html {
   }
 
   h4 {
-  @apply font-medium mb-3;
+  @apply font-bold mb-3;
+
+    a {
+    @apply text-black;
+    }
   }
 
   .sublist {
@@ -133,9 +122,61 @@ html {
       li {
       @apply text-gray-700 pb-1;
 
+        p {
+        @apply inline;
+        }
+
         &::before {
           content: "◦ ";
         @apply text-gray-600;
+        }
+      }
+    }
+  }
+}
+
+ul li {
+@apply mb-4;
+
+  a::before {
+    content: "◦ ";
+  @apply text-blue-600;
+  }
+
+  a {
+  @apply text-gray-800 font-semibold;
+  }
+
+  ul {
+  @apply ml-4;
+
+    li {
+    @apply mb-1;
+
+      &:first-child {
+      @apply mt-2;
+      }
+
+      a {
+      @apply text-gray-800 font-normal;
+      }
+    }
+  }
+}
+
+.docs_toc {
+  ul {
+    li {
+
+      h4 {
+      @apply uppercase text-gray-800 font-bold text-sm;
+      }
+
+      a {
+      @apply font-medium text-black;
+
+        &:hover {
+        @apply text-orange-600;
         }
       }
     }

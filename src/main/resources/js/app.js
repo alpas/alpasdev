@@ -28,7 +28,6 @@ jQuery(function ($) {
             }
 
             $(this).html(str.replace(/\/(.*?)\//, '<div class="icon"><span class="svg">' + icon + '</span></div>'));
-            $(this).parent().addClass(`has-icon ${word}`);
             $(this).addClass(word);
         }
     });

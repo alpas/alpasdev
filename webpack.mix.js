@@ -1,12 +1,12 @@
 let mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
 const publicPath = 'src/main/resources/web'
-const assetsPath = 'src/main/assets'
+const resources = 'src/main/resources'
 
 mix
     .setPublicPath(publicPath)
-    .js(`${assetsPath}/js/app.js`, 'js')
-    .less(`${assetsPath}/css/app.less`, 'css/app.css')
+    .js(`${resources}/js/app.js`, 'js')
+    .less(`${resources}/css/app.less`, 'css/app.css')
     .options({
         postCss: [
             tailwindcss('./tailwind.config.js'),

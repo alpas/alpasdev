@@ -11,5 +11,5 @@ fun Router.addRoutes() = apply {
 private fun Router.webRoutes() {
     get("/", WelcomeController::class).name("welcome")
     get("/docs/<page>", DocsController::class, "show").name("docs.show")
+    get("/docs", DocsController::class, "index").name("docs.index")
 }
-
