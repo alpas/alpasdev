@@ -118,7 +118,7 @@ class AdminController : Controller() {
                 .report(AuthenticationException("Suspicious activity 😱"))
             return
         }
-        call.say("Hello, Admin!")
+        call.reply("Hello, Admin!")
     }
 }
 
