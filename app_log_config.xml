@@ -10,7 +10,7 @@
         <file>storage/logs/alpas.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>storage/logs/logFile.%d.log</fileNamePattern>
 
             <!-- keep 10 days' worth of history capped at 50MB total size -->
             <maxHistory>10</maxHistory>
@@ -25,7 +25,7 @@
     <root level="error">
         <appender-ref ref="STDOUT"/>
     </root>
-    <logger name="alpas" level="debug">
+    <logger name="alpas" level="info">
         <appender-ref ref="FILE"/>
     </logger>
     <logger name="dev.alpas.http.HttpCall" level="warn">
