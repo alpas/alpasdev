@@ -2,17 +2,25 @@
 - [Defining Routes](#defining-routes)
     - [Closure Routes](#closure-routes)
     - [Controller Routes](#controller-routes)
+- [Route Parameters](#route-parameters)
+    - [Required Parameters](#required-parameters)
 - [Route Attributes](#route-attributes)
-    - [Name](#route-name)
-    - [Middleware](#route-middleware)
+    - [Route Name](#route-name)
+    - [Route Middleware](#route-middleware)
 - [Route Groups](#route-groups)
     - [Group Prefix](#group-prefix)
     - [Nested Groups](#nested-groups)
     - [Group Name](#group-name)
-    - [Group Middlware](#group-middleware)
+    - [Group Middleware](#group-middleware)
+- [Named Middleware Group](#named-middleware-group)
 - [Guarded Routes](#guarded-routes)
     - [Authorized](#authorized-routes)
     - [Guest](#guest-routes)
+- [Form Method Spoofing](#spoofing)
+- [Route Helpers](#route-helpers)
+    - [Template Helpers](#template-helpers)
+    - [Controller Helpers](#controller-helpers)
+    - [Alpas Command](#alpas-command)
 
 <a name="routes-registration"></a>
 ### [Routes Registration](#routes-registration)
@@ -46,7 +54,7 @@ fun Router.addRoutes() {
 #### [Controller Routes](#controller-routes)
 
 If your code for responding to an HTTP call is more complex, you could pass in the class name of a controller as the
-second parameter and the name of the method to be called as the third parameter.
+second parameter, and the name of the method to be called as the third parameter.
 
 ```kotlin
 fun Router.addRoutes() {
@@ -74,11 +82,31 @@ fun Router.addRoutes() {
 }
 ```
 
+<a name="route-parameters"></a>
+### [Route Parameters](#route-parameters)
+
+<a name="required-parameters"></a>
+#### [Required Parameters](#required-parameters)
+
+If you want to capture parameters within your route, you could do so by wrapping a parameter name with angle 
+brackets `<>`. You can access the captured values for all your parameters by calling `HttpCall#param()` method from 
+your controller.
+
+```kotlin
+fun Router.addRoutes() {
+    // page is a required parameter
+    get("/docs/<page>", DocsController::class)
+
+    // both post_id and comment_id are required parameters
+    get("/posts/<post_id>/comments/<comment_id>", PostController::class)
+}
+```
+
 <a name="route-attributes"></a>
 ### [Route Attributes](#route-attributes)
 
 <a name="route-name"></a>
-#### [Name](#route-name)
+#### [Route Name](#route-name)
 
 You can set a name for your routes that makes it easy to refer to these routes esp. while generating URLs. Once you
 refer a route by its name, it gives you the flexibility of changing the path of your routes without having to refactor
@@ -109,7 +137,7 @@ fun index(call: HttpCall) {
 ```
 
 <a name="route-middleware"></a>
-#### [Middleware](#route-middleware)
+#### [Route Middleware](#route-middleware)
 
 If you want to apply a middleware or a list of middleware to a route, you can pass the class name of a middleware
 by calling `middleware()` method on the route.
@@ -209,6 +237,39 @@ fun Router.addRoutes() {
 }
 ```
 
+<a name="named-middleware-group"></a>
+### [Named Middleware Group](#named-middleware-group)
+Instead of assigning a list of middleware to a group or to a route, sometimes it is more convenient to make a list of
+middleware, give it a name, and then assign this name instead. This allows you to uniformly assign a list of middleware
+to different routes and routes groups. 
+
+To do this, first register your middleware group inside `HttpKernel#registerRouteMiddlewareGroups()` method
+and call `middlewareGroup()` on your routes or your route groups by passing the middleware group name.
+
+```kotlin
+
+// HttpKernel.kt
+override fun registerRouteMiddlewareGroups(groups: HashMap<String, List<KClass<out Middleware<HttpCall>>>>) {
+    groups["secret"] = listOf(SecretMiddleware::class, SuperSecretMiddleware::class)
+}
+
+// routes.kt
+fun Router.addRoutes() {
+    group("/admin/profile") {
+        // all the middleware defined under key 'secret' 
+        // will be applied to this route
+        get("/secret", AdminProfileController::class)
+    }.middlewareGroup("secret")
+
+    group("/user/profile") {
+        // all the middleware defined under key 'secret' 
+        // will be applied to this route as well
+        get("/secret", UserProfileController::class)
+    }.middlewareGroup("secret")
+}
+```
+
+
 <a name="guarded-routes"></a>
 ### [Guarded Routes](#guarded-routes)
 
@@ -225,3 +286,75 @@ either on a route or on a route group.
 Similarly, if you want a route to be accessible only if a user is not authenticated, such as a login route, you can
 either apply `GuestOnlyMiddleware` middleware or call `mustBeGuest()` method on a route or a route group.
 
+<a name="spoofing"></a>
+### [Form Method Spoofing](#spoofing)
+
+HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DELETE**. To use these methods 
+in your form so that the correct route gets matched, you need to spoof that method by passing a hidden field 
+named `_method` with your form.
+
+```html
+<form action="/docs" method="post">
+    <input type="hidden" name="_method" value="delete"/>
+    <button>Delete</button>
+ </form>
+```
+
+<a name="route-helpers"></a>
+### [Route Helpers](#route-helpers)
+
+<a name="template-helpers"></a>
+#### [Template Helpers](#template-helpers)
+
+<div class="sublist">
+
+* `route(name, params)`: Creates a full URL for a route of `name`.
+
+```twig
+<a name="{{ route('docs.show', {'page': 'routing'}) }}">
+    Show Routing Docs
+</a>
+```
+* `hasRoute(name)`: Checks if a route `name` exists.
+
+* `routeIs(name)`: Checks if the current request route matches a `name`.
+
+* `routeIsOneOf(names)`: Checks if the current route matches any of the `names`.
+
+```twig
+{% if routeIsOneOf(['docs.index', 'docs.toc']) %}
+    <h1>Hello Index and TOC!</h1>
+ {% endif %}
+```
+
+```twig
+{% if not routeIsOneOf(['docs.index', 'docs.toc']) %}
+    <h1>Hello, page!</h1>
+ {% endif %}
+```
+</div>
+
+<a name="controller-helpers"></a>
+#### [Controller Helpers](#controller-helpers)
+
+<div class="sublist">
+
+* `route(name: String, params: Map<String, Any>? = null, absolute: Boolean = true)` 
+
+Creates a full URL for route of 
+`name`. Set `absolute` to false if you want to get a relative URL to server's address i.e. `/docs/toc` instead of 
+`https://alpas.dev/docs/toc`.
+
+> /tip/<span> All the controller route helper methods are also available on `HttpCall` object.<span/>
+
+</div>
+
+<a name="alpas-command"></a>
+#### [Alpas Command](#alpas-command)
+
+<div class="sublist">
+
+* `alpas route:list` : Lists all your app's routes with some important route attributes such as *method name*, *path*, 
+*route name*, *actual handler*, *guard type* etc.
+
+</div>
