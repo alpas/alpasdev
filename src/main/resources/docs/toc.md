@@ -11,3 +11,4 @@
  - #### Basics
     - [Routing](/docs/routing)
     - [Middleware](/docs/middleware)
+    - [Controllers](/docs/controllers)
