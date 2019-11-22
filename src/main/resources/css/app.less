@@ -163,9 +163,16 @@ ul li {
 .docs_toc {
   ul {
     li {
+    @apply mb-4;
 
       h4 {
-      @apply uppercase text-gray-800 font-bold text-sm;
+      @apply uppercase text-gray-600 font-bold text-sm;
+      }
+
+      ul {
+        li {
+        @apply mb-1;
+        }
       }
 
       a {

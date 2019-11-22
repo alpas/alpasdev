@@ -5,10 +5,10 @@
       {
         "languages": [
           "javascript",
-          "kotlin"
-        ],
-        "plugins": [
-          "line-numbers"
+          "kotlin",
+          "html",
+          "twig",
+          "bash"
         ],
         "theme": "default",
         "css": true

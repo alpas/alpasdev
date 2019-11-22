@@ -296,7 +296,7 @@ named `_method` with your form.
 ```html
 <form action="/docs" method="post">
     <input type="hidden" name="_method" value="delete"/>
-    <button>Delete</button>
+    <button type="submit">Delete</button>
  </form>
 ```
 
@@ -311,7 +311,7 @@ named `_method` with your form.
 * `route(name, params)`: Creates a full URL for a route of `name`.
 
 ```twig
-<a name="{{ route('docs.show', {'page': 'routing'}) }}">
+<a href="{{ route('docs.show', {'page': 'routing'}) }}">
     Show Routing Docs
 </a>
 ```
