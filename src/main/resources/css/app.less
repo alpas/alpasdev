@@ -68,6 +68,10 @@ html {
     .alert .icon svg path {
       fill: red;
     }
+
+    .power .icon svg path {
+      fill: #6A1B9A;
+    }
   }
 
   h1 + ul li {
@@ -130,6 +134,10 @@ html {
           content: "⸗ ";
         @apply text-gray-600;
         }
+
+        h4 {
+          display: inline-block;
+        }
       }
     }
   }
@@ -138,7 +146,7 @@ html {
 ul li {
 @apply mb-2;
 
-  a::before {
+  > a::before {
     content: "⸗ ";
   @apply text-blue-600 text-xl;
   }

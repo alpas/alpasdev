@@ -89,3 +89,5 @@ debugging.
 Alpas makes it really easy to serve your web app over an IP address. To do so add `SERVE_EXTERNALLY=true` in your 
 `.env` file. Build and re-serve your app and it should be available from both `http://localhost:<port>` and 
 `http://<local-device-ip>:<port>`.
+
+> /power/ <span>Alpas is powered by [Jetty Web Server](https://www.eclipse.org/jetty/).

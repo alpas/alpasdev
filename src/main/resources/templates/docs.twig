@@ -1,4 +1,6 @@
 {% extends "layout/app.twig" %}
+{% block title %} {{ title }} {% endblock %}
+
 {% block content %}
     <div class="flex h-full ">
         <aside class="bg-gray-100 docs_toc flex h-screen overflow-visible py-5 sticky top-0 w-1/4 flex-col">
@@ -14,9 +16,9 @@
                     <span> {{ env('APP_NAME') }} </span>
                 </a>
             </div>
-            <div class="mt-8 pl-10">
+            <nav class="mt-8 pl-10 sticky overflow-auto">
                 {{ toc | raw }}
-            </div>
+            </nav>
         </aside>
         <section class="py-5 flex flex-1 justify-center docs_content w-3/4">
             <div class="w-4/5 flex flex-col">

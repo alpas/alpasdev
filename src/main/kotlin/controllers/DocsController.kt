@@ -5,6 +5,7 @@ import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
 import dev.alpas.ResourceLoader
+import dev.alpas.extensions.toTitleCase
 import dev.alpas.http.HttpCall
 import dev.alpas.lodestar.orAbort
 import dev.alpas.make
@@ -18,7 +19,7 @@ class DocsController : Controller() {
         val doc = Documentation(call.make())
         val content = doc.get(page)
         val toc = doc.toc()
-        val title = page.replace("-", " ")
+        val title = page.replace("-", " ").toTitleCase()
         call.render("docs", mapOf("content" to content, "title" to title, "toc" to toc))
     }
 
