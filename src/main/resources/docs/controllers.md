@@ -32,6 +32,8 @@ alpas make:controller admin/AdminController
 alpas make:controller DocsController HomeController
 ```
 
+<span class="line-numbers" data-start="7">
+
 ```kotlin
 class DocsController : Controller() {
     fun show(call: HttpCall) {
@@ -39,16 +41,21 @@ class DocsController : Controller() {
     }
 }
 ```
+</span>
 
 <a name="using-controllers"></a>
 ### [Using Controllers](#using-controllers)
 
 You should never create an instance of a controller but should only refer it as a `KClass` in your routes.
 
+<span class="line-numbers" data-start="3">
+
 ```kotlin
 fun Router.addRoutes() {
     get("/docs", DocsController::class, "show")
 }
 ```
+
+</span>
 
 All the controller's handler methods receive an `HttpContext` object as an argument.

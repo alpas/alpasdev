@@ -4,7 +4,7 @@
 {% block content %}
     <div class="flex h-full ">
         <aside class="bg-gray-100 docs_toc flex h-screen overflow-visible py-5 sticky top-0 w-1/4 flex-col">
-            <div class="flex justify-center mt-5">
+            <div class="flex justify-center mt-10">
                 <a href="/" class="text-4xl font-medium flex">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="42" width="42"
                          class="self-center">
@@ -16,7 +16,7 @@
                     <span> {{ env('APP_NAME') }} </span>
                 </a>
             </div>
-            <nav class="mt-8 pl-10 sticky overflow-auto">
+            <nav class="mt-16 pl-10 sticky overflow-auto ml-16">
                 {{ toc | raw }}
             </nav>
         </aside>

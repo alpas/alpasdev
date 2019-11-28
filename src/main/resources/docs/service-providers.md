@@ -26,6 +26,8 @@ The core of Alpas framework itself is built with many service providers.
 
 A service provider is just a class that implements `dev.alpas.ServiceProvider` interface:
 
+<span class="line-numbers" data-start="3">
+
 ```kotlin
 class ExceptionReportingServiceProvider : ServiceProvider {
     override fun register(app: Application) {
@@ -45,6 +47,8 @@ class ExceptionReportingServiceProvider : ServiceProvider {
     }
 }
 ```
+
+</span>
 
 > /tip/ <span> `register` and `boot` methods are passed the global app instance, which is an 
 > [IoC Container](/docs/ioc-container). Use this app instance to register your bindings or to resolve dependencies.
@@ -82,6 +86,8 @@ any view related services available in console mode.
 Let's see a complete example of writing a service provider. Say we want to have an error reporter service that we
 can call whenever we want to log an exception. Also, let's assume that it provides a console command `error:send` that
 sends any cached errors immediately.
+
+<span class="line-numbers" data-start="15">
 
 ```kotlin
 class ErrorReportingServiceProvider : ServiceProvider {
@@ -137,3 +143,5 @@ class HttpKernel : HttpKernel() {
     }
 }
 ```
+
+</span>

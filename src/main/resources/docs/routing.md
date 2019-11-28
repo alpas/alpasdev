@@ -42,6 +42,8 @@ Alpas routing supports all the routes that respond to any HTTP verbs: `get`, `po
 At the very basic, you can register a route where the first parameter is the path and the second parameter is a closure
 that receives an [`HttpCall`](/docs/request-response#httpcall) instance.
 
+<span class="line-numbers" data-start="3">
+
 ```kotlin
 fun Router.addRoutes() {
     get("/") { call ->
@@ -50,11 +52,15 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="controller-routes"></a>
 #### [Controller Routes](#controller-routes)
 
 If your code for responding to an HTTP call is more complex, you could pass in the class name of a controller as the
 second parameter, and the name of the method to be called as the third parameter.
+
+<span class="line-numbers" data-start="3">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -64,10 +70,14 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 The name of the method is actually optional. Alpas follows some conventions to determine what controller method to 
 call on when a path matches -- **index()** method is called for a `get` request, **store()** method is invoked for a
 `post` request, **delete** method is called for a `delete` request, and finally **update** method is invoked for a 
 `patch` request.
+
+<span class="line-numbers" data-start="4">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -82,6 +92,8 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="route-parameters"></a>
 ### [Route Parameters](#route-parameters)
 
@@ -91,6 +103,8 @@ fun Router.addRoutes() {
 If you want to capture parameters within your route, you could do so by wrapping a parameter name with angle 
 brackets `<>`. You can access the captured values for all your parameters by calling `HttpCall#param()` method from 
 your controller.
+
+<span class="line-numbers" data-start="5">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -102,6 +116,8 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="route-attributes"></a>
 ### [Route Attributes](#route-attributes)
 
@@ -112,16 +128,22 @@ You can set a name for your routes that makes it easy to refer to these routes e
 refer a route by its name, it gives you the flexibility of changing the path of your routes without having to refactor
 it everywhere. Specifying a name for a route is done by calling `name()` method on the route.
 
+<span class="line-numbers" data-start="2">
+
 ```kotlin
 fun Router.addRoutes() {
     get("/docs", DocsController::class).name("docs.show")
 }
 ```
 
+</span>
+
 Once a name is set, you can call this route from anywhere using the name instead of the path.
 
+<span class="line-numbers" data-start="7">
+
 ```kotlin
-// in controllers
+// in a controller
 fun index(call: HttpCall) {
     // get the url
     val url = route("docs.show")
@@ -131,16 +153,24 @@ fun index(call: HttpCall) {
 }
 ```
 
+</span>
+
+<span class="line-numbers" data-start="20">
+
 ```twig
 // in templates
 <a name="{{ route('docs.show') }}">Docs</a>
 ```
+
+</span>
 
 <a name="route-middleware"></a>
 #### [Route Middleware](#route-middleware)
 
 If you want to apply a middleware or a list of middleware to a route, you can pass the class name of a middleware
 by calling `middleware()` method on the route.
+
+<span class="line-numbers" data-start="5">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -149,6 +179,8 @@ fun Router.addRoutes() {
         .middleware(MyMiddleware::class, AnotherMiddleware::class)
 }
 ```
+
+</span>
 
 <a name="route-groups"></a>
 ### [Route Groups](#route-groups)
@@ -160,6 +192,8 @@ readable and maintainable.
 <a name="group-prefix"></a>
 #### [Group Prefix](#group-prefix)
 You can set a prefix for a group. The prefix gets prepended to each routes as if it was a path.
+
+<span class="line-numbers" data-start="5">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -174,10 +208,14 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="nested-groups"></a>
 #### [Nested Route Groups](#nested-groups)
 Not just a route, but you could nest groups within another route group. Each route receives all the merged attributes
 from its parents as well as the grand parents.
+
+<span class="line-numbers" data-start="5">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -190,9 +228,13 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="group-name"></a>
 #### [Group Name](#group-name)
 You can give route group a name that will get prepended to a route's name with a dot (.) in between.
+
+<span class="line-numbers" data-start="6">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -210,6 +252,8 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="group-middleware"></a>
 #### [Group Middleware](#group-middleware)
 Just like assigning middleare to a route, you could assign middleware to a group. The middleware gets applied to all
@@ -217,6 +261,8 @@ the routes under it as well as under any other child groups.
 
 > /alert/ <span> The order of middleware really matters when passing an HttpCall through all the assigned middleware 
 > to a route. The middleware are applied in the following order: *inside-out* and *left to right*.</span>
+
+<span class="line-numbers" data-start="6">
 
 ```kotlin
 fun Router.addRoutes() {
@@ -237,6 +283,8 @@ fun Router.addRoutes() {
 }
 ```
 
+</span>
+
 <a name="named-middleware-group"></a>
 ### [Named Middleware Group](#named-middleware-group)
 Instead of assigning a list of middleware to a group or to a route, sometimes it is more convenient to make a list of
@@ -246,13 +294,20 @@ to different routes and routes groups.
 To do this, first register your middleware group inside `HttpKernel#registerRouteMiddlewareGroups()` method
 and call `middlewareGroup()` on your routes or your route groups by passing the middleware group name.
 
-```kotlin
+<span class="line-numbers" data-start="15">
 
+```kotlin
 // HttpKernel.kt
 override fun registerRouteMiddlewareGroups(groups: HashMap<String, List<KClass<out Middleware<HttpCall>>>>) {
     groups["secret"] = listOf(SecretMiddleware::class, SuperSecretMiddleware::class)
 }
+```
 
+</span>
+
+<span class="line-numbers" data-start="5">
+
+```kotlin
 // routes.kt
 fun Router.addRoutes() {
     group("/admin/profile") {
@@ -268,6 +323,8 @@ fun Router.addRoutes() {
     }.middlewareGroup("secret")
 }
 ```
+
+</span>
 
 
 <a name="guarded-routes"></a>
@@ -293,12 +350,16 @@ HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DEL
 in your form so that the correct route gets matched, you need to spoof that method by passing a hidden field 
 named `_method` with your form.
 
+<span class="line-numbers" data-start="20">
+
 ```html
 <form action="/docs" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <button type="submit">Delete</button>
  </form>
 ```
+
+</span>
 
 <a name="route-helpers"></a>
 ### [Route Helpers](#route-helpers)
@@ -310,16 +371,23 @@ named `_method` with your form.
 
 * `route(name, params)`: Creates a full URL for a route of `name`.
 
+<span class="line-numbers" data-start="10">
+
 ```twig
 <a href="{{ route('docs.show', {'page': 'routing'}) }}">
     Show Routing Docs
 </a>
 ```
+
+</span>
+
 * `hasRoute(name)`: Checks if a route `name` exists.
 
 * `routeIs(name)`: Checks if the current request route matches a `name`.
 
 * `routeIsOneOf(names)`: Checks if the current route matches any of the `names`.
+
+<span class="line-numbers" data-start="10">
 
 ```twig
 {% if routeIsOneOf(['docs.index', 'docs.toc']) %}
@@ -327,11 +395,17 @@ named `_method` with your form.
  {% endif %}
 ```
 
+</span>
+
+<span class="line-numbers" data-start="10">
+
 ```twig
 {% if not routeIsOneOf(['docs.index', 'docs.toc']) %}
     <h1>Hello, page!</h1>
  {% endif %}
 ```
+</span>
+
 </div>
 
 <a name="controller-helpers"></a>

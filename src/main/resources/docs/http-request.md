@@ -57,10 +57,14 @@ keys.
 * `paramsExcept(key: String, vararg keys: String): Map<String, Any?>` - returns a map of values for everything but the
 specified keys.
 
+<span class="line-numbers" data-start="8">
+
 ```kotlin
 val only = call.onlyParams("username", "email", "phone")
  val except = call.paramsExcept("password", "password_confirm")
 ```
+
+</span>
 
 * `routeParams(key: String) : List<Any>?` - returns all the route parameter values for the given key.
 * `queryParams(key: String) : List<Any>?` - returns all the query parameter values for the given key.
@@ -97,12 +101,16 @@ the given key, it returns the first value.
 
 You read the cookies from an incoming request, use the `cookie` method on the `HttpCall` object.
 
+<span class="line-numbers" data-start="8">
+
 ```kotlin
 call.cookie("username")
 ```
 
-> /info/ <span> Alpas encrypts and signs all your outgoing cookies and decrypts them when it receives a request. 
-> If the cookies are changed by the client, they will be invalidated and removed automatically as well.
+</span>
+
+> /info/ <span> Alpas encrypts and signs almost all of your outgoing cookies and decrypts them when it receives a 
+> request. If the cookies are changed by the client, they will be invalidated and removed automatically as well.
 
 <a name="spoofing"></a>
 ### [Form Method Spoofing](#spoofing)
@@ -111,9 +119,13 @@ HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DEL
 in your form so that the correct route gets matched, you need to spoof that method by passing a hidden field 
 named `_method` with your form.
 
+<span class="line-numbers" data-start="16">
+
 ```html
 <form action="/docs" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <button type="submit">Delete</button>
  </form>
 ```
+
+</span>

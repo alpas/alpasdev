@@ -21,6 +21,8 @@ to load it. You could then later ask for a singleton copy of your config class u
 
 Here is an example of how you could create your own config class and then how to access the configs from a controller:
 
+<span class="line-numbers" data-start="5">
+
 ```kotlin
 // src/main/kotlin/configs/AdminConfig.kt
 class AdminConfig(env: Environment) : Config {
@@ -34,6 +36,8 @@ class AdminController : Controller() {
     }
 }
 ```
+
+</span>
 
 > /tip/ <span> Instead of hard coding configurable variables that you use in different parts of your app, we highly 
 > recommend that you use a config class instead. It's strongly typed, gets loaded automatically, and, if you want, you 
@@ -50,6 +54,8 @@ to change.
 Let's say you want to change the default extension of your view templates from `.twig`, which is set in 
 `dev.alpas.view.ViewConfig` class, to `.j2`. To do this first create a new class folder and override the value like so:
 
+<span class="line-numbers" data-start="5">
+
 ```kotlin
 // src/main/kotlin/configs/ViewConfig.kt
 class ViewConfig(env: Environment) : dev.alpas.view.ViewConfig(env) {
@@ -60,6 +66,8 @@ class ViewConfig(env: Environment) : dev.alpas.view.ViewConfig(env) {
     val layoutFilename = "app.j2"
 }
 ```
+
+</span>
 
 > /info/ Just like with custom config classes, these extended config classes are loaded by Alpas automatically for you.
 > So don't worry about how to load them; just declare and forget!
@@ -130,6 +138,8 @@ environment variables through an `env` object.
 
 Here is an example of how you could access an environment variable named `SSO_SHARED_SECRET` from your controller:
 
+<span class="line-numbers" data-start="6">
+
 ```kotlin
 // src/main/kotlin/controllers/AdminController.kt
 class SsoLoginController : Controller() {
@@ -140,6 +150,8 @@ class SsoLoginController : Controller() {
     }
 }
 ```
+
+</span>
 
 <a name="view-env-variables"></a>
 #### [Accessing from View Templates](#view-env-variables)

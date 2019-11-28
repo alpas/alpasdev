@@ -10,6 +10,9 @@
           "twig",
           "bash"
         ],
+        "plugins": [
+          "line-numbers"
+        ],
         "theme": "default",
         "css": true
       }
