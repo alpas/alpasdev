@@ -51,10 +51,10 @@ form params, and route params.
 * `routeParams : Map<String, List<Any>?>?` - gives you the values of just the route parameters.
 * `queryParams : Map<String, List<Any>?>?` - gives you the values of just the query parameters.
 
-* `params(key: String) : List<Any>?` - returns all the values for the given key as a nullable list.
-* `onlyParams(key: String, vararg keys: String): Map<String, Any?>` - returns a map of values for only the specified 
+* `fun params(key: String) : List<Any>?` - returns all the values for the given key as a nullable list.
+* `fun onlyParams(key: String, vararg keys: String): Map<String, Any?>` - returns a map of values for only the specified 
 keys.
-* `paramsExcept(key: String, vararg keys: String): Map<String, Any?>` - returns a map of values for everything but the
+* `fun paramsExcept(key: String, vararg keys: String): Map<String, Any?>` - returns a map of values for everything but the
 specified keys.
 
 <span class="line-numbers" data-start="8">
@@ -66,17 +66,17 @@ val only = call.onlyParams("username", "email", "phone")
 
 </span>
 
-* `routeParams(key: String) : List<Any>?` - returns all the route parameter values for the given key.
-* `queryParams(key: String) : List<Any>?` - returns all the query parameter values for the given key.
+* `fun routeParams(key: String) : List<Any>?` - returns all the route parameter values for the given key.
+* `fun queryParams(key: String) : List<Any>?` - returns all the query parameter values for the given key.
 
-* `param(key: String) : Any?` - returns the value of the given key if it exists otherwise returns null.
-* `routeParam(key: String) : Any?` - returns the route parameter value of the given key.
-* `queryParam(key: String) : Any?` - returns the query parameter value of the given key.
+* `fun param(key: String) : Any?` - returns the value of the given key if it exists otherwise returns null.
+* `fun routeParam(key: String) : Any?` - returns the route parameter value of the given key.
+* `fun queryParam(key: String) : Any?` - returns the query parameter value of the given key.
 
-* `paramAsKey(key: String) : String?` - returns the value of the given key as a nullable string.
-* `paramAsInt(key: String) : Int?` - returns the value of the given key as a nullable int.
-* `paramAsLong(key: String) : Long?` - returns the value of the given key as a nullable long.
-* `paramAsBool(key: String) : Long?` - returns the value of the given key as a nullable bool.
+* `fun paramAsKey(key: String) : String?` - returns the value of the given key as a nullable string.
+* `fun paramAsInt(key: String) : Int?` - returns the value of the given key as a nullable int.
+* `fun paramAsLong(key: String) : Long?` - returns the value of the given key as a nullable long.
+* `fun paramAsBool(key: String) : Long?` - returns the value of the given key as a nullable bool.
 
 
 > /alert/<span>The `params(key: String, vararg keys: String)` returns only the values for the keys that actually 
@@ -89,10 +89,10 @@ val only = call.onlyParams("username", "email", "phone")
 
 <div class="sublist">
 
-* `header(key: String) ? String?` - returns the header value for a given key if exists. If multiple values exist for
+* `fun header(key: String) ? String?` - returns the header value for a given key if exists. If multiple values exist for
 the given key, it returns the first value.
 
-* `headers(key: String) ? List<String>?` - returns all the header values for the given key if exists. 
+* `fun headers(key: String) ? List<String>?` - returns all the header values for the given key if exists. 
 
 </div>
 
