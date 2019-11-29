@@ -13,3 +13,4 @@
     - [Middleware](/docs/middleware)
     - [Controllers](/docs/controllers)
     - [Http Request](/docs/http-request)
+    - [Http Response](/docs/http-response)
