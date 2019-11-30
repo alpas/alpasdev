@@ -8,10 +8,12 @@
           "kotlin",
           "html",
           "twig",
-          "bash"
+          "bash",
+          "toml"
         ],
         "plugins": [
-          "line-numbers"
+          "line-numbers",
+          "normalize-whitespace"
         ],
         "theme": "default",
         "css": true

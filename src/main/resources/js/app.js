@@ -7,7 +7,10 @@ jQuery(function ($) {
         const parent = $(this)
         parent.children('pre.line-numbers').attr('data-start', parent.attr('data-start'))
     }).promise().done(function () {
-        Prism.highlightAll(true)
+        try {
+            Prism.highlightAll()
+        } catch (e) {
+        }
     })
 
     $('.docs_content blockquote p').each(function () {
@@ -40,6 +43,4 @@ jQuery(function ($) {
             $(this).addClass(word)
         }
     })
-
-    // Prism.highlightAll(true)
 })

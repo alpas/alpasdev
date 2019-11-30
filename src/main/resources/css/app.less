@@ -2,9 +2,13 @@
 @tailwind components;
 
 html {
-  font-family: 'Quicksand', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+  font-family: 'Muli', -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
   font-size: 1em;
   font-weight: 500;
+}
+
+br {
+  @apply my-4;
 }
 
 .hover-controller .hover-target {
@@ -34,7 +38,7 @@ html {
 
 
   p {
-  @apply mb-5 text-gray-800;
+  @apply mb-5;
   }
 
   blockquote {
@@ -75,6 +79,10 @@ html {
     }
   }
 
+  h1 {
+    @apply text-gray-700;
+  }
+
   h1 + ul li {
     a {
     @apply text-gray-800 font-semibold;
@@ -95,7 +103,7 @@ html {
   }
 
   h3 {
-  @apply font-medium text-xl text-blue-600 mb-2;
+  @apply font-medium text-2xl text-blue-600 mb-2;
 
     a {
     @apply text-blue-500;
@@ -103,10 +111,10 @@ html {
   }
 
   h4 {
-  @apply font-bold mb-3;
+  @apply font-bold mb-3 text-lg;
 
     a {
-    @apply text-black;
+    @apply text-gray-800;
     }
   }
 
@@ -195,7 +203,7 @@ ul li {
     @apply mb-4;
 
       h4 {
-      @apply uppercase text-gray-600 font-bold text-sm;
+      @apply uppercase text-gray-600 font-bold text-lg;
       }
 
       ul {
