@@ -191,7 +191,7 @@ You can forget/ clear a cookie by calling `forgetCookie()` method and passing th
 clear. Optionally, you can also pass the cookie's `path` and/or the `domain`.
 
 <a name="redirects"></a>
-### [Redirects](#redirects):
+### [Redirects](#redirects)
 
 The `HttpCall#redirect()` method returns an implementation of `dev.alpas.http.Redirectable`, which has everything
 you'd need to redirect a call to somewhere else — either internal or external.
@@ -242,3 +242,7 @@ A convenient method that redirects a call to a route named **home**, if exists. 
 Redirects a call to the given external url.
 
 </div>
+
+> /alert/ <span>Some of the redirects methods such as `back()`, `intended()` etc. depend on [sessions](/docs/sessionn) 
+> and hence they are only available for the routes that have `SessionStart` middleware applied — either applied 
+> individually or using `web` [middleware group](/docs/routing#named-middleware-group).</span>

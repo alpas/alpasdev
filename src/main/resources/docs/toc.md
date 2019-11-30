@@ -12,5 +12,6 @@
     - [Routing](/docs/routing)
     - [Middleware](/docs/middleware)
     - [Controllers](/docs/controllers)
-    - [Http Request](/docs/http-request)
-    - [Http Response](/docs/http-response)
+    - [Request](/docs/http-request)
+    - [Response](/docs/http-response)
+    - [Sessions](/docs/sessions)
