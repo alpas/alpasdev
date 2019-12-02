@@ -60,8 +60,10 @@ specified keys.
 <span class="line-numbers" data-start="8">
 
 ```kotlin
+
 val only = call.onlyParams("username", "email", "phone")
- val except = call.paramsExcept("password", "password_confirm")
+val except = call.paramsExcept("password", "password_confirm")
+
 ```
 
 </span>
@@ -78,9 +80,12 @@ val only = call.onlyParams("username", "email", "phone")
 * `fun paramAsLong(key: String) : Long?` - returns the value of the given key as a nullable long.
 * `fun paramAsBool(key: String) : Long?` - returns the value of the given key as a nullable bool.
 
-
 > /alert/<span>The `params(key: String, vararg keys: String)` returns only the values for the keys that actually 
-> exist on the request.
+> exist on the request.</span>
+
+> /info/<span>Alpas **doesn't** merge the JSON body of a request with other parameters and **doesn't** make them 
+> available through one of the above `paramX()` methods. Instead, you need to get the `jsonBody` property and then 
+> extract the param you want yourself.</span>
 
 </div>
 
@@ -104,7 +109,9 @@ You read the cookies from an incoming request, use the `cookie` method on the `H
 <span class="line-numbers" data-start="8">
 
 ```kotlin
+
 call.cookie("username")
+
 ```
 
 </span>
@@ -122,10 +129,12 @@ named `_method` with your form.
 <span class="line-numbers" data-start="16">
 
 ```html
+
 <form action="/docs" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <button type="submit">Delete</button>
- </form>
+</form>
+
 ```
 
 </span>

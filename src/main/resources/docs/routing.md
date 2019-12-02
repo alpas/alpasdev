@@ -356,7 +356,7 @@ named `_method` with your form.
 <form action="/docs" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <button type="submit">Delete</button>
- </form>
+</form>
 ```
 
 </span>
@@ -392,7 +392,7 @@ named `_method` with your form.
 ```twig
 {% if routeIsOneOf(['docs.index', 'docs.toc']) %}
     <h1>Hello Index and TOC!</h1>
- {% endif %}
+{% endif %}
 ```
 
 </span>
@@ -402,7 +402,7 @@ named `_method` with your form.
 ```twig
 {% if not routeIsOneOf(['docs.index', 'docs.toc']) %}
     <h1>Hello, page!</h1>
- {% endif %}
+{% endif %}
 ```
 </span>
 

@@ -10,7 +10,7 @@ directories and files/classes as you wish.
 
 A standard Alpas project structure look something like this:
 
-```
+```config
 
 ├── src/
     ├── main/

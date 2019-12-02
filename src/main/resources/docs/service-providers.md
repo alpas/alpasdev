@@ -133,12 +133,12 @@ class AdminController : Controller() {
 class HttpKernel : HttpKernel() {
     override fun serviceProviders(app: Application): Iterable<KClass<out ServiceProvider>> {
         return listOf(
-            // ...,
-            // ...,
-            // ...,
+            ...,
+            ...,
+            ...,
             ErrorReportingServiceProvider::class,
-            // ...,
-            // ...
+            ...,
+            ...
         )
     }
 }

@@ -113,6 +113,7 @@ to attach multiple headers to an outgoing response. You can call these multiple 
 <span class="line-numbers" data-start="7">
 
 ```kotlin
+
 fun index(call: HttpCall) {
     call.apply {
         addHeader("Content-Type", "application/json")
@@ -120,6 +121,7 @@ fun index(call: HttpCall) {
         addHeader("X-H2", "Some Value")
     }.reply("Headers Galore!")
  }
+
 ```
 
 </span>
@@ -136,16 +138,17 @@ fun index(call: HttpCall) {
 <span class="line-numbers" data-start="7">
 
 ```kotlin
+
 fun index(call: HttpCall) {
     val content = mapOf("say" to "Hello, Json!").toJson()
     call.reply(content).asJson()   
     // alternatively
     call.replyAsJson(content)
  }
+
 ```
 
 </span>
-
 </div>
 
 <a name="cookies"></a>
@@ -226,9 +229,11 @@ Redirects a call to a route that matches the given **name**. **params** is a map
 <span class="line-numbers" data-start="7">
 
 ```kotlin
+
 fun index(call: HttpCall) {
     call.redirect().toRouteNamed("docs.showPage", mapOf("page" to "http-response"))
- }
+}
+
 ```
 
 </span>
