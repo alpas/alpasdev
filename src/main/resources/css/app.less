@@ -8,7 +8,7 @@ html {
 }
 
 br {
-  @apply my-4;
+@apply my-4;
 }
 
 .hover-controller .hover-target {
@@ -36,9 +36,13 @@ br {
   @apply bg-gray-100 font-mono px-2 py-1 rounded-sm text-sm text-red-600;
   }
 
+  pre > code {
+  @apply px-0;
+  }
+
 
   p {
-  @apply mb-5;
+  @apply mb-5 pr-10;
   }
 
   blockquote {
@@ -80,7 +84,7 @@ br {
   }
 
   h1 {
-    @apply text-gray-700;
+  @apply text-gray-700;
   }
 
   h1 + ul li {
@@ -133,9 +137,10 @@ br {
       list-style: none;
 
       & + p {
-        @apply pb-6 pt-2;
+      @apply pb-6 pt-2;
+
         & + p {
-          @apply -mt-4;
+        @apply -mt-4;
         }
       }
 

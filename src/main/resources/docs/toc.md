@@ -15,3 +15,4 @@
     - [Request](/docs/http-request)
     - [Response](/docs/http-response)
     - [Sessions](/docs/sessions)
+    - [Validation](/docs/validation)

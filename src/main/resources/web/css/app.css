@@ -936,8 +936,14 @@ br {
   color: #e53e3e;
 }
 
+.docs_content pre > code {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .docs_content p {
   margin-bottom: 1.25rem;
+  padding-right: 2.5rem;
 }
 
 .docs_content blockquote {
