@@ -1,11 +1,31 @@
-### Introduction
+- [Introduction](#introduction)
+- [Validation Rules](#validation-rules)
+    - [Failing Fast](#failing-fast)
+- [Validation Guard](#validation-guard)
+- [Bundled Validation Rules](#bundled-validation-rules)
+    - [Ignoring Uniqueness Validation](#ignoring-uniqueness)
+- [Custom Rules](#custom-rules)
+- [Customizing Error Messages](#customizing-error-messages)
+- [JSON Validation](#json-validation)
+    - [Checking in JSON Body](#json-body)
+    - [JSON Field Rules](#json-field-rules)
+- [Errors Management](#errors-management)
+    - [Intercepting Validation Errors](#intercepting-validation-errors)    
+    - [Rendering Validation Errors](#rendering-validation-errors)
+    - [Displaying Errors and Old Values](#displaying-errors-and-old-values)
+
+<br/>
+
+<a name="introduction"></a>
+### [Introduction](#introduction)
 
 When handling a request and especially when handling user input you'd want to make sure that the incoming data is
 valid and as expected. If it is not, you'd want to send appropriate error messages back to the user. You'd then want
 to have the error messages available in your templates to format and display them nicely. All these need a lot of
 wiring. Fortunately, Alpas supports all these out of the box!
 
-### Validation Rules
+<a name="validation-rules"></a>
+### [Validation Rules](#validation-rules)
 
 The simplest and quickest way to validate an `HttpCall` is by applying some validation rules on it for each of the 
 input params you want to validate.
@@ -57,7 +77,8 @@ fun create(call: HttpCall) {
 
 </span>
 
-#### Failing Fast
+<a name="failing-fast"></a>
+#### [Failing Fast](#failing-fast)
 
 Sometimes you may wish to not continue with the validation after the first validation fails. To achieve this, set
 `failfast` to `true` when applying your rules.
@@ -107,7 +128,8 @@ fun create(call: HttpCall) {
 
 </span>
 
-### Validation Guard
+<a name="validation-guard"></a>
+### [Validation Guard](#validation-guard)
 
 The in-place validation within your controller may be good enough for simpler validation rules, it is desirable to 
 better organize your validation rules to make them more manageable. You may want to do more within the rules, such as 
@@ -165,8 +187,8 @@ fun create(call: HttpCall) {
 
 </span>
 
-
-### Bundled Validation Rules
+<a name="bundled-validation-rules"></a>
+### [Bundled Validation Rules](#bundled-validation-rules)
 
 Alpas comes bundled with some validation rules out of the box.
 
@@ -242,7 +264,8 @@ call.applyRules("ssn") {
 
 </span>
 
-#### Ignoring uniqueness validation for a value
+<a name="ignoring-uniqueness"></a>
+#### [Ignoring uniqueness validation for a value](#ignoring-uniqueness)
 
 Sometimes you may require to ignore a given value under a column during the unique validation check. Think of creating 
 a user profile with an **email** column vs updating that profile later. When creating the profile, you want to make 
@@ -296,7 +319,8 @@ matches for any other row then the validation fails.
 
 </div>
 
-### Custom Rules
+<a name="custom-rules"></a>
+### [Custom Rules](#custom-rules)
 
 If none of the rules that come bundled with Alpas satisfy your needs, you can easily create your own. Use
 `alpas make:rule` command to quickly create a new rule and modify it as per your need.
@@ -362,8 +386,8 @@ fun create(call: HttpCall) {
 > /tip/ <span> If you need more power and flexibility in your custom validation rule, override 
 > `check(attribute: String, call: HttpCall): Boolean` method instead.
 
-
-### Customizing Error Messages
+<a name="customizing-error-messages"></a>
+### [Customizing Error Messages](#customizing-error-messages)
 
 All the rules that come bundled with Alpas have some sensible error messages set for each validation rule. If you want
 to customize it, you can easily do so by passing a callback for the `message` parameter while applying a rule.
@@ -386,10 +410,11 @@ call.applyRules("username") {
 
 </span>
 
+<a name="json-validation"></a>
+### [JSON Validation](#json-validation)
 
-### JSON Validation
-
-#### Checking in JSON body
+<a name="json-body"></a>
+#### [Checking in JSON Body](#json-body)
 
 Alpas doesn't merge a JSON body with the request parameters but instead makes it available as a `jsonBody` property.
 While validating, by default, Alpas looks in the query + form + route parameters. If you want to validate a field 
@@ -424,8 +449,8 @@ fun create(call: HttpCall) {
 
 </span>
 
-
-#### JSON Field Rules
+<a name="json-field-rules"></a>
+#### [JSON Field Rules](#json-field-rules)
 
 Alpas also provides a `JSONField` rule class that takes a list of rules for which you want to check the values in 
 the JSON body. This is more convenient when applying a map of rules to a call or when returning a map of rules from
@@ -454,9 +479,11 @@ class CreatePageGuard : ValidationGuard() {
 
 </span>
 
-### Errors Management
+<a name="errors-management"></a>
+### [Errors Management](#errors-management)
 
-#### Intercepting Validation Errors
+<a name="intercepting-validation-errors"></a>
+#### [Intercepting Validation Errors](#intercepting-validation-errors)
 
 By default, when validation fails, Alpas throws a `ValidationException`. If for some reason you want to customize 
 this behavior, `ValidationGuard` has an open method of signature: `handleError(errorBag: ErrorBag): Boolean` that you
@@ -482,7 +509,8 @@ override fun handleError(errorBag: ErrorBag): Boolean {
 
 </span>
 
-#### Rendering Validation Errors
+<a name="rendering-validation-errors"></a>
+#### [Rendering Validation Errors](#rendering-validation-errors)
 
 Alpas internally catches the `ValidationException` thrown and renders it appropriately based on the whether the call 
 wants a JSON response or not.If it wants a JSON response then all the generated validation errors are returned as a 
@@ -494,7 +522,8 @@ You can get the old inputs from the previous request by calling `old()` method a
 `errors()` method on [HttpCall's session object](/docs/sessions#retrieving-data). These are also available from within
 your view templates.
 
-#### Displaying Errors and Old Values
+<a name="displaying-errors-and-old-values"></a>
+#### [Displaying Errors and Old Values](#displaying-errors-and-old-values)
 
 For an improved user experience, you'd want to display all the validation errors from user's previous request. You'd
 also want to pre-fill all the fields with previous values so not to frustrate users by making them fill the form again.
