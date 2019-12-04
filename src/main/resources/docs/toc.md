@@ -16,3 +16,4 @@
     - [Response](/docs/http-response)
     - [Sessions](/docs/sessions)
     - [Validation](/docs/validation)
+    - [Error Handling](/docs/error-handling)
