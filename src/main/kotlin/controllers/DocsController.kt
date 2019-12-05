@@ -10,7 +10,6 @@ import dev.alpas.http.HttpCall
 import dev.alpas.lodestar.orAbort
 import dev.alpas.make
 import dev.alpas.routing.Controller
-import java.io.File
 import java.nio.file.Paths
 
 class DocsController : Controller() {
@@ -32,15 +31,17 @@ class Documentation(private val resourceLoader: ResourceLoader) {
     private fun docsPath(page: String) = Paths.get("docs", page)
 
     fun get(page: String): String {
-        val path = resourceLoader.load(docsPath("$page.md").toString())?.toURI().orAbort("Page $page not found!")
-        val markdown = File(path).readText()
-        return Markdown.render(markdown)
+        return Markdown.render(readSource(page))
     }
 
     fun toc(): String {
-        val path = resourceLoader.load(docsPath("toc.md").toString())?.toURI().orAbort()
-        val markdown = File(path).readText()
-        return Markdown.render(markdown)
+        return Markdown.render(readSource("toc"))
+    }
+
+    private fun readSource(page: String): String {
+        return resourceLoader.load(docsPath("$page.md").toString())
+            ?.readText()
+            .orAbort("Page $page not found!")
     }
 }
 
