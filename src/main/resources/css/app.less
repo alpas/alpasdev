@@ -228,4 +228,36 @@ ul li {
   }
 }
 
+@media screen and (max-width: 1280px) {
+  @menu-width-small: 440px;
+
+  .menu {
+    width: @menu-width-small;
+    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
+    transform: translate3d(-@menu-width-small, 0, 0);
+    transition: all 0.3s ease-in-out;
+
+    .smartphone-menu-trigger {
+      background-image: url(/images/toc.svg);
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      left: 100%;
+    @apply bg-red-500;
+    }
+
+    &:focus {
+      transform: translate3d(0, 0, 0);
+      box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
+
+      .smartphone-menu-trigger {
+        pointer-events: none;
+      }
+    }
+  }
+}
+
 @tailwind utilities;
