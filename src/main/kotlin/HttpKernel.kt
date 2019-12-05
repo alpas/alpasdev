@@ -21,7 +21,7 @@ class HttpKernel : HttpKernel() {
             ViewServiceProvider::class,
             EncryptionServiceProvider::class,
             HashServiceProvider::class,
-            OzoneProvider::class,
+//            OzoneProvider::class,
             SessionServiceProvider::class
         )
     }
