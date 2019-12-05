@@ -17,3 +17,4 @@
     - [Sessions](/docs/sessions)
     - [Validation](/docs/validation)
     - [Error Handling](/docs/error-handling)
+    - [Logging](/docs/logging)
