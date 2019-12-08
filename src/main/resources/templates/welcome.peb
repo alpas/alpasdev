@@ -75,16 +75,16 @@
 
 <div id="app" class="container">
     <div class="topbar links">
-        {% if hasRoute('login') %}
-            {% auth %}
-                <a href="/home">Home</a>
-                {% else %}
-                <a href="{{ route('login') }}">Log in</a>
-                {% if hasRoute('register') %}
-                    <a href="{{ route('register') }}"><strong>Register</strong> </a>
-                {% endif %}
-            {% endauth %}
-        {% endif %}
+    {% if hasRoute('login') %}
+    {% auth %}
+        <a href="/home">Home</a>
+    {% else %}
+        <a href="{{ route('login') }}">Log in</a>
+    {% if hasRoute('register') %}
+        <a href="{{ route('register') }}"><strong>Register</strong> </a>
+    {% endif %}
+    {% endauth %}
+    {% endif %}
     </div>
     <div class="content">
         <div>
