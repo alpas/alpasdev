@@ -18,3 +18,6 @@
     - [Validation](/docs/validation)
     - [Error Handling](/docs/error-handling)
     - [Logging](/docs/logging)
+
+- #### Frontend
+    - [Pebble Templates](/docs/pebble-templates)
