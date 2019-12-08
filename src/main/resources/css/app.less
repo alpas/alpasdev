@@ -25,15 +25,15 @@ br {
   }
 
   a {
-  @apply text-red-600;
+  @apply border-b-2 border-gray-500 border-dotted pb-1;
 
     &:hover {
-    @apply text-orange-600;
+    @apply text-orange-600 border-orange-500;
     }
   }
 
   code {
-  @apply bg-gray-100 font-mono px-2 py-1 rounded-sm text-sm text-red-600;
+  @apply bg-gray-300 font-mono px-2 py-1 rounded text-sm text-indigo-800;
   }
 
   pre > code {
@@ -89,13 +89,13 @@ br {
 
   h1 + ul li {
     a {
-    @apply text-gray-800 font-semibold;
+    @apply text-gray-800 font-semibold border-none;
     }
 
     ul {
       li {
         a {
-        @apply text-gray-800 font-normal;
+        @apply text-gray-800 font-normal border-none;
         }
       }
     }
@@ -110,7 +110,7 @@ br {
   @apply font-medium text-2xl text-blue-600 mb-2;
 
     a {
-    @apply text-blue-500;
+    @apply text-blue-500 border-none;
     }
   }
 
@@ -118,7 +118,7 @@ br {
   @apply font-bold mb-3 text-lg;
 
     a {
-    @apply text-gray-800;
+    @apply text-gray-800 border-none;
     }
   }
 
@@ -177,12 +177,29 @@ br {
   }
 }
 
+ol {
+@apply list-none;
+
+  &:first-of-type {
+    counter-reset: item;
+  }
+
+  li {
+    counter-increment: item;
+  }
+
+  li:before {
+    content: counter(item);
+  @apply bg-gray-400 inline-block text-indigo-800 rounded-full mr-3 h-8 w-8 text-center ml-8;
+  }
+}
+
 ul li {
 @apply mb-2;
 
   > a::before {
     content: "⸗ ";
-  @apply text-blue-600 text-xl;
+  @apply text-gray-500 text-xl font-light;
   }
 
   a {
@@ -206,6 +223,11 @@ ul li {
   ul {
     li {
     @apply mb-4;
+
+      > a::before {
+        content: "⸗ ";
+      @apply text-red-500 text-xl font-extrabold;
+      }
 
       h4 {
       @apply uppercase text-gray-600 font-bold text-lg;
