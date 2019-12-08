@@ -37,7 +37,7 @@ alpas make:controller DocsController HomeController
 ```kotlin
 class DocsController : Controller() {
     fun show(call: HttpCall) {
-        call.render("docs", mapOf("content" to "Hello, World!"))
+        call.reply("Hello, Visitor!")
     }
 }
 ```

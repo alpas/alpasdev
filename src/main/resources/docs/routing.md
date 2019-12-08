@@ -369,23 +369,39 @@ named `_method` with your form.
 
 <div class="sublist">
 
-* `route(name, params)`: Creates a full URL for a route of `name`.
+* `route(name, params)`
+
+Creates a full URL for a route of `name`. `params` is a map of paramters expressed as 
+if like a JSON object. 
+
+All [required path parameters](#/docs/routing#required-parameters) for the route are first extracted and set 
+*and then* any remaining values from the map are passed as query parameters.
 
 <span class="line-numbers" data-start="10">
 
 ```twig
-<a href="{{ route('docs.show', {'page': 'routing'}) }}">
+
+<!-- the url will be something like: https://example.com/docs/routing?ver=2 -->
+
+<a href="{{ route('docs.show', {'page': 'routing', 'ver': '2'}) }}">
     Show Routing Docs
 </a>
+
 ```
 
 </span>
 
-* `hasRoute(name)`: Checks if a route `name` exists.
+* `hasRoute(name)`
 
-* `routeIs(name)`: Checks if the current request route matches a `name`.
+Checks if a route `name` exists.
 
-* `routeIsOneOf(names)`: Checks if the current route matches any of the `names`.
+* `routeIs(name)`
+
+Checks if the current request route matches a `name`.
+
+* `routeIsOneOf(names)`
+
+Checks if the current route matches any of the `names`.
 
 <span class="line-numbers" data-start="10">
 
