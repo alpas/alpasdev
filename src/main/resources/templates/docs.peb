@@ -24,7 +24,7 @@
                 Draft <span class="text-gray-600">{{ env('DOC_VERSION') }}</span>
             </div>
         </div>
-        <nav id="menu" class="outline-none docs_toc flex h-screen overflow-visible py-5 flex-col" tabindex="0">
+        <nav id="menu" class="outline-none docs_toc flex overflow-visible py-5 flex-col" tabindex="0">
             <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-10">
             {{ toc | raw }}
             </div>
