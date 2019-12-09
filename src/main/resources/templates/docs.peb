@@ -2,11 +2,10 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<div class="flex h-full ">
-    <nav class="menu outline-none xl:w-1/4 fixed xl:relative top-0 left-0 z-10" tabindex="0">
-        <div class="smartphone-menu-trigger"></div>
-        <aside class="bg-gray-100 docs_toc flex h-screen overflow-visible py-5 sticky top-0 flex-col">
-            <div class="flex justify-center mt-5 lg:mt-10">
+<div id="sidebar" class="bg-gray-100 pb-20">
+    <div class="inner fixed overflow-y-auto">
+        <div>
+            <div class="flex justify-center mt-5 xl:mt-10">
                 <a href="/" class="text-4xl font-medium flex">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="42" width="42"
                          class="self-center">
@@ -21,20 +20,24 @@
                     [alpha]
                 </div>
             </div>
-
             <div class="text-center mt-4">
                 Draft <span class="text-gray-600">{{ env('DOC_VERSION') }}</span>
             </div>
-            <div class="sticky overflow-auto leading-relaxed pl-5 ml-5 lg:ml-8 xl:pl-10 xl:ml-16 mt-4 lg:mt-10 ">
+        </div>
+        <nav id="menu" class="outline-none docs_toc flex h-screen overflow-visible py-5 flex-col" tabindex="0">
+            <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-10">
             {{ toc | raw }}
             </div>
-        </aside>
-    </nav>
-    <section class="py-5 flex flex-1 justify-center docs_content">
-        <div class="px-10 xl:w-4/5 flex flex-col leading-relaxed">
-            <h1 class="text-3xl my-10 font-bold uppercase">{{ title }}</h1>
+        </nav>
+    </div>
+</div>
+
+<div id="main">
+    <div class="inner">
+        <div class="px-10 flex flex-col leading-relaxed docs_content">
+            <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
             {{ content | raw }}
         </div>
-    </section>
+    </div>
 </div>
 {% endblock %}
