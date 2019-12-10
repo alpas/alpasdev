@@ -1,23 +1,18 @@
 package dev.alpas.alpasdev.controllers
 
-import com.vladsch.flexmark.ext.autolink.AutolinkExtension
-import com.vladsch.flexmark.html.HtmlRenderer
-import com.vladsch.flexmark.parser.Parser
-import com.vladsch.flexmark.util.data.MutableDataSet
-import dev.alpas.ResourceLoader
+import dev.alpas.alpasdev.actions.Documentation
 import dev.alpas.extensions.toTitleCase
 import dev.alpas.http.HttpCall
-import dev.alpas.lodestar.orAbort
 import dev.alpas.make
 import dev.alpas.routing.Controller
-import java.nio.file.Paths
 
 class DocsController : Controller() {
     fun show(call: HttpCall) {
         val page = call.paramAsString("page") ?: "installation"
-        val doc = Documentation(call.make())
+        val doc = call.make<Documentation>()
         val content = doc.get(page)
         val toc = doc.toc()
+
         val title = page.replace("-", " ").toTitleCase()
         call.render("docs", mapOf("content" to content, "title" to title, "toc" to toc))
     }
@@ -27,42 +22,9 @@ class DocsController : Controller() {
     }
 }
 
-class Documentation(private val resourceLoader: ResourceLoader) {
-    private fun docsPath(page: String) = Paths.get("docs", page)
 
-    fun get(page: String): String {
-        return Markdown.render(readSource(page))
-    }
-
-    fun toc(): String {
-        return Markdown.render(readSource("toc"))
-    }
-
-    private fun readSource(page: String): String {
-        return resourceLoader.load(docsPath("$page.md").toString())
-            ?.readText()
-            .orAbort("Page $page not found!")
-    }
-}
-
-class Markdown {
-    private val options by lazy {
-        MutableDataSet().apply {
-            set(Parser.EXTENSIONS, listOf(AutolinkExtension.create()))
-            set(HtmlRenderer.HARD_BREAK, "<br />\n")
-        }
-    }
-    private val parser: Parser by lazy { Parser.builder(options).build() }
-    private val renderer: HtmlRenderer by lazy { HtmlRenderer.builder(options).build() }
-
-    companion object {
-        fun render(markdown: String?): String {
-            return Markdown().convert(markdown)
-        }
-    }
-
-    private fun convert(markdown: String?): String {
-        val document = parser.parse(markdown.orEmpty())
-        return renderer.render(document)
-    }
+private inline fun <R> executeAndMeasureTimeMillis(block: () -> R): Pair<R, Long> {
+    val start = System.currentTimeMillis()
+    val result = block()
+    return result to (System.currentTimeMillis() - start)
 }
