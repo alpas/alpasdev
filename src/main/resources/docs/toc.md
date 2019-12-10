@@ -21,3 +21,4 @@
 
 - #### Frontend
     - [Pebble Templates](/docs/pebble-templates)
+    - [Mixing Assets](/docs/mixing-assets)
