@@ -48,7 +48,8 @@ br {
   }
 
   a {
-  @apply border-b-2 border-gray-500 border-dotted pb-1;
+  @apply border-b-2 border-gray-500 border-dotted;
+    padding-bottom: .2rem;
 
     &:hover {
     @apply text-orange-600 border-orange-500;
@@ -94,7 +95,7 @@ br {
     }
 
     .info .icon svg path {
-      fill: cornflowerblue;
+      fill: darkkhaki;
     }
 
     .alert .icon svg path {
@@ -107,7 +108,7 @@ br {
   }
 
   h1 {
-  @apply text-gray-700;
+  @apply text-gray-800;
   }
 
   h1 + ul li {
@@ -255,7 +256,7 @@ ul li {
       }
 
       h4 {
-      @apply uppercase text-gray-600 font-bold text-lg;
+      @apply uppercase text-gray-600 font-bold text-sm;
       }
 
       ul {
@@ -296,7 +297,7 @@ ul li {
 }
 
 #main > .inner {
-  padding: 0 6em 0.1em 6em;
+  padding: 0;
   margin: 0 auto;
   max-width: 110em;
 }
@@ -358,7 +359,8 @@ ul li {
   background-position: center;
   width: 48px;
   height: 48px;
-  @apply bg-white mt-2 rounded-r;
+@apply bg-white mt-2 rounded-r rounded-sm;
+  box-shadow: 2px 2px 0px 1px rgba(0, 0, 0, .1), 0 1px 5px 0 rgba(0, 0, 0, .06);
 }
 
 #sidebar.inactive {
@@ -367,12 +369,12 @@ ul li {
 
 @media screen and (min-width: 1281px) {
   #sidebar {
-    width: 26em;
+    width: 24em;
   }
 
   #sidebar > .inner {
     padding: 0;
-    width: 26em;
+    width: 24em;
   }
 
   #sidebar > .inner > .alt {
@@ -382,7 +384,7 @@ ul li {
   }
 
   #sidebar .toggle {
-    left: 26em;
+    left: 24em;
     display: none;
   }
 
@@ -391,7 +393,7 @@ ul li {
   }
 
   #sidebar.inactive {
-    margin-left: -26em;
+    margin-left: -24em;
   }
 }
 

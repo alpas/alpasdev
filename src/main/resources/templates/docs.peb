@@ -2,8 +2,9 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<div id="sidebar" class="bg-gray-100 pb-20">
-    <div class="inner fixed overflow-y-auto">
+
+<div id="sidebar" class="bg-gray-100 pb-20 pt-5">
+    <div class="inner fixed h-screen flex flex-col">
         <div>
             <div class="flex justify-center mt-5 xl:mt-10">
                 <a href="/" class="text-4xl font-medium flex">
@@ -24,8 +25,8 @@
                 Draft <span class="text-gray-600">{{ env('DOC_VERSION') }}</span>
             </div>
         </div>
-        <nav id="menu" class="outline-none docs_toc flex overflow-visible py-5 flex-col" tabindex="0">
-            <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-10">
+        <nav id="menu" class="outline-none docs_toc flex py-5 flex-col h-screen overflow-y-auto" tabindex="0">
+            <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-10 xl:pl-32">
             {{ toc | raw }}
             </div>
         </nav>
@@ -34,7 +35,7 @@
 
 <div id="main">
     <div class="inner">
-        <div class="px-10 flex flex-col leading-relaxed docs_content">
+        <div class="px-10 flex flex-col leading-relaxed docs_content xl:px-20">
             <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
             {{ content | raw }}
         </div>

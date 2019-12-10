@@ -192,7 +192,6 @@ within a controller, or from within the [ValidationGuard](/docs/validation) etc.
 // anywhere where a call is accessible
 call.shareWithView("valuation", 25000000)
 
-
 // you can append additional context data from your controller when calling render
 call.render("index", mapOf("name" to "John"))
 
