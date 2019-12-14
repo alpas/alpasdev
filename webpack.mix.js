@@ -6,7 +6,7 @@ const resources = 'src/main/resources'
 mix
     .setPublicPath(publicPath)
     .js([`${resources}/js/app.js`, `${resources}/js/sidebar.js`], 'js')
-    .less(`${resources}/css/app.less`, 'css/app.css')
+    .less(`${resources}/css/docs.less`, 'css/docs.css')
     .options({
         postCss: [
             tailwindcss('./tailwind.config.js'),

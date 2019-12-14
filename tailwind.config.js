@@ -16,6 +16,9 @@ module.exports = {
                     '800': '#173276',
                     '900': '#112456'
                 }
+            },
+            lineHeight: {
+                chill: 1.8
             }
         }
     },

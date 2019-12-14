@@ -73,7 +73,7 @@ fun Router.addRoutes() {
 </span>
 
 The name of the method is actually optional. Alpas follows some conventions to determine what controller method to 
-call on when a path matches -- **index()** method is called for a `get` request, **store()** method is invoked for a
+call on when a path matches — **index()** method is called for a `get` request, **store()** method is invoked for a
 `post` request, **delete** method is called for a `delete` request, and finally **update** method is invoked for a 
 `patch` request.
 
