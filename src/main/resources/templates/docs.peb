@@ -1,4 +1,4 @@
-{% extends "layout/app_doc.peb" %}
+{% extends "layout/app_docs.peb" %}
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}

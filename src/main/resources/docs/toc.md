@@ -26,3 +26,4 @@
 - #### Security
     - [Introduction](/docs/security)
     - [Authentication](/docs/authentication)
+    - [Auth Scaffolding](/docs/authentication-scaffolding)
