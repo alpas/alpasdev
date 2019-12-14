@@ -6,7 +6,7 @@ import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
 import dev.alpas.Environment
 import dev.alpas.ResourceLoader
-import dev.alpas.lodestar.orAbort
+import dev.alpas.ozone.orAbort
 import redis.clients.jedis.JedisPool
 import java.nio.file.Paths
 
@@ -30,7 +30,7 @@ class Documentation(
         }
 
         return jedisPool.resource.use { jedis ->
-            return jedis.get(page) ?: make().also { jedis.set(page, it) }
+            return jedis.hget("docs", page) ?: make().also { jedis.hset("docs", page, it) }
         }
     }
 
