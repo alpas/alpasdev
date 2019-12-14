@@ -14,7 +14,7 @@ Controllers are an integral part of an Alpas web app and go hand-in-hand with [r
 Not just for organizing your handler logic, controllers also come with some handy helper function to make it easier
 to handle an `HttpCall`.
 
-> /tip/ <span>All your app controllers are stored under `/src/main/kotlin/controllers` by default. You can organize 
+> /tip/ <span>All your app controllers are stored under `controllers` folder by default. You can organize 
 > your controllers in subfolders. We actually highly recommend that you do so.</span>
 
 
@@ -25,10 +25,10 @@ You could manually create a controller by creating a class and then extending `d
 you could use `alpas make:controller` Alpas command to make one or multiple controllers in one shot.
 
 ```bash
-# creates AdminController.kt file under src/main/kotlin/controllers/admin folder
+# creates AdminController.kt file under controllers/admin folder
 alpas make:controller admin/AdminController
 
-# creates DocsController.kt and HomeController.kt files under src/main/kotlin/controllers folder
+# creates DocsController.kt and HomeController.kt files under controllers folder
 alpas make:controller DocsController HomeController
 ```
 

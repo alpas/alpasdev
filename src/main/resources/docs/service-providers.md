@@ -129,7 +129,7 @@ class AdminController : Controller() {
 }
 
 // Register the service provider
-// src/main/kotlin/HttpKernel.kt
+// HttpKernel.kt
 class HttpKernel : HttpKernel() {
     override fun serviceProviders(app: Application): Iterable<KClass<out ServiceProvider>> {
         return listOf(

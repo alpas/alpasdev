@@ -30,7 +30,7 @@ When you scaffold a new Alpas web app, two error templates for the most common H
 are created for you. They look great out of the box! However, you are more than welcome to modify it to make it fit
 more with your app's branding.
 
-These templates are under `src/main/resources/errors` directory. Feel free to change it to your heart's content!
+These templates are under `resources/errors` directory. Feel free to change it to your heart's content!
 
 > /alert/ <span>**Do not** change the filenames of the default error templates.</span>
 
@@ -60,7 +60,7 @@ as a warning or as an error.
 
 ```kotlin
 
-// src/main/kotlin/exceptions/ExceptionHandler.kt
+// exceptions/ExceptionHandler.kt
 class ExceptionHandler : dev.alpas.exceptions.ExceptionHandler() {
     override fun report(exception: HttpException, call: HttpCall) {
         when (exception) {
@@ -86,7 +86,7 @@ want to render a template for an exception, this is the place to do it. In fact,
 
 ```kotlin
 
-// src/main/kotlin/exceptions/ExceptionHandler.kt
+// exceptions/ExceptionHandler.kt
 class ExceptionHandler : dev.alpas.exceptions.ExceptionHandler() {
     override fun render(exception: HttpException, call: HttpCall) {
         when (exception) {
@@ -110,7 +110,7 @@ reports and renders it accordingly.
 </div>
 
 > /tip/ <span> Your custom `ExceptionHandler` class could live anywhere in your package but we recommend putting it 
-> under `src/main/kotlin/exceptions` directory. Don't worry about loading this class. Alpas will automatically 
+> under `exceptions` directory. Don't worry about loading this class. Alpas will automatically 
 > discover, load, and use this class for you!
 
 <br/>

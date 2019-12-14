@@ -45,7 +45,7 @@ templating engine.
 <a name="templates-location"></a>
 ### [Templates Location](#templates-location)
 
-By default, templates should be kept under `src/main/resources/templates` folder and must end with `.twig` extension.
+By default, templates should be kept under `resources/templates` folder and must end with `.twig` extension.
 If you wish, you could configure both the location and the extension [by overriding](/docs/configuration#core-configs) 
 `templatesDirectory` and `templateExtension` properties of `dev.alpas.view.ViewConfig` class. Unless you have a good 
 reason to do so, we highly recommend using the default values.
@@ -62,7 +62,7 @@ Here is an example of what a typical layout template looks like in Alpas.
 <span class="line-numbers" data-start="1">
 
 ```twig
-<!-- src/main/resources/templates/layout/app.twig -->
+<!-- resources/templates/layout/app.twig -->
 
 <!doctype html>
 <html lang="en">
@@ -99,7 +99,7 @@ And this is what a child template looks like:
 <span class="line-numbers" data-start="1">
 
 ```twig
-<!-- src/main/resources/templates/welcome.twig -->
+<!-- resources/templates/welcome.twig -->
 
 {% extends "layout/app.twig" %}
 {% block title %} Welcome Page  {% endblock %}
@@ -138,7 +138,7 @@ encourage you to organize your templates within sub-directories. There are no pe
 sub-directories. When rendering these nested templates, you need to reference them using either a **/** "slash"
 notation (recommended) or a **.** "dot" notation.
 
-Let's say we have a template `src/main/resources/templates/docs/latest/toc.twig`. You can reference this template from
+Let's say we have a template `resources/templates/docs/latest/toc.twig`. You can reference this template from
 a controller like so:
  
  `call.render("docs/latest/toc")` Or, alternatively, `call.render("docs.latest.toc")`.
@@ -595,7 +595,7 @@ class MyViewServiceProvider : dev.alpas.view.ViewServiceProvider() {
 
 ```kotlin
 
-// src/main/kotlin/HttpKernel.kt
+// HttpKernel.kt
 class HttpKernel : HttpKernel() {
     override fun serviceProviders(app: Application): Iterable<KClass<out ServiceProvider>> {
         return listOf(

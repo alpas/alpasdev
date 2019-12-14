@@ -24,13 +24,15 @@ You create a middleware by extending `dev.alpas.Middleware<T>` class and overrid
 alpas make:middleware AdminOnlyMiddleware
 ```
 
-This command will create a new `AdminOnlyMiddleware` middleware class under `src/main/kotlin/Middleware` folder. Let's
+This command will create a new `AdminOnlyMiddleware` middleware class under `middleware` folder. Let's
 say this middleware checks if the logged in user is actually an admin. If the checks passes it forwards the call but 
 if not, throws an `AuthenticationException` exception.
 
 <span class="line-numbers" data-start="8">
 
 ```kotlin
+
+// middleware/AdminOnlyMiddleware.kt
 class AdminOnlyMiddleware : Middleware<HttpCall>() {
     override fun invoke(call: HttpCall, forward: Handler<HttpCall>) {
         if (call.user.isAdmin()) {
@@ -40,6 +42,7 @@ class AdminOnlyMiddleware : Middleware<HttpCall>() {
         }
     }
 }
+
 ```
 
 </span>
@@ -51,6 +54,8 @@ Here's another example of a middleware that just does some logging.
 <span class="line-numbers" data-start="7">
 
 ```kotlin
+
+// middleware/LoginMiddleware.kt
 class LoggingMiddleware : Middleware<HttpCall>() {
     val logger: Logger = Logger()
 
@@ -59,6 +64,7 @@ class LoggingMiddleware : Middleware<HttpCall>() {
         forward(call)
     }
 }
+
 ```
 
 </span>
@@ -76,6 +82,7 @@ any chunks of code after `forward(call)` gets called after the call has been han
 <span class="line-numbers" data-start="7">
 
 ```kotlin
+
 class LoggingMiddleware : Middleware<HttpCall>() {
     val logger: Logger = Logger()
 
@@ -85,6 +92,7 @@ class LoggingMiddleware : Middleware<HttpCall>() {
         logger.info("This runs after handling the call. Bye!")
     }
 }
+
 ```
 
 </span>
@@ -110,10 +118,13 @@ middleware to the list passed.
 <span class="line-numbers" data-start="18">
 
 ```kotlin
+
+// HttpKernel.kt
 override fun registerServerEntryMiddleware(middleware: MutableList<KClass<out Middleware<HttpCall>>>) {
     middleware.add(SecretServerMiddleware::class)
     middleware.add(SuperSecretServerMiddleware::class)
 }
+
 ```
 
 </span>

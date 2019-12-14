@@ -24,12 +24,12 @@ Here is an example of how you could create your own config class and then how to
 <span class="line-numbers" data-start="5">
 
 ```kotlin
-// src/main/kotlin/configs/AdminConfig.kt
+// configs/AdminConfig.kt
 class AdminConfig(env: Environment) : Config {
     val adminEmail = env("admin_email", "admin@example.com")
 }
 
-// src/main/kotlin/controllers/AdminController.kt
+// controllers/AdminController.kt
 class AdminController : Controller() {
     fun show(call: HttpCall) {
         val email = call.make<AdminConfig>().adminEmail
@@ -57,7 +57,7 @@ Let's say you want to change the default extension of your view templates from `
 <span class="line-numbers" data-start="5">
 
 ```kotlin
-// src/main/kotlin/configs/ViewConfig.kt
+// configs/ViewConfig.kt
 class ViewConfig(env: Environment) : dev.alpas.view.ViewConfig(env) {
     // change existing config
     override val templateExtension = ".twig"
@@ -141,7 +141,7 @@ Here is an example of how you could access an environment variable named `SSO_SH
 <span class="line-numbers" data-start="6">
 
 ```kotlin
-// src/main/kotlin/controllers/AdminController.kt
+// controllers/AdminController.kt
 class SsoLoginController : Controller() {
     fun login(call: HttpCall) {
         val ssoSecret:String? = call.env('SSO_SHARED_SECRET')

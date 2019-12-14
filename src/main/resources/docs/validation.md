@@ -141,7 +141,7 @@ To create a `ValidationGuard` class, you could use the `make:guard` Alpas comman
 
 ```bash
 
-# creates CreatePageGuard.kt class under src/main/kotlin/guards folder
+# creates CreatePageGuard.kt class under guards folder
 alpas make:guard CreatePageGuard
 
 ```
@@ -327,7 +327,7 @@ If none of the rules that come bundled with Alpas satisfy your needs, you can ea
 
 ```bash
 
-# creates Above.kt class under src/main/kotlin/rules folder
+# creates Above.kt class under rules folder
 alpas make:rule above
 
 ```

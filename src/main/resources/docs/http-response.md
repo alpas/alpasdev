@@ -65,7 +65,7 @@ Instead of returning a string or a `JsonSerializable`, you can render a template
 - `render(templateName: String, args: Map<String, Any?>? = null, statusCode: Int = HttpStatus.OK_200)`
 
 Render a template of the given name with optionally some arguments for the template. The location of the template, by 
-default, is under `/src/main/resources/templates`. You could override the location by 
+default, is under `resources/templates`. You could override the location by 
 [extending](/docs/configuration#core-configs) the `dev.alpas.view.ViewConfig` class.
 
 </div>

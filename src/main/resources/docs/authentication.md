@@ -194,7 +194,7 @@ class AdminApiAuthChannel(private val call: HttpCall) : AuthChannel {
 
 ```kotlin
 
-// src/main/kotlin/configs/AuthConfig.kt
+// configs/AuthConfig.kt
 class AuthConfig(env: Environment) : BaseConfig(env) {
     init {
         addChannel("session") { call -> AdminApiAuthChannel(call) }
@@ -242,7 +242,7 @@ fun Router.addRoutes() {
 
 ```kotlin
 
-// src/main/kotlin/configs/AuthConfig.kt
+// configs/AuthConfig.kt
 class AuthConfig(env: Environment) : BaseConfig(env) {
     init {
         addChannel("session") { call -> SessionAuthChannel(call, Users) }

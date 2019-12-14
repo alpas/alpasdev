@@ -30,7 +30,7 @@ automatically:
 <span class="line-numbers" data-start="3">
 
 ```kotlin
-// src/main/kotlin/configs/AdminConfig.kt
+// configs/AdminConfig.kt
 class AdminConfig(env: Environment) : Config {
     val adminEmail = env("admin_email", "admin@example.com")
 }
@@ -45,7 +45,7 @@ resolving dependencies.
 <span class="line-numbers" data-start="6">
 
 ```kotlin
-// src/main/kotlin/controllers/AdminController.kt
+// controllers/AdminController.kt
 class AdminController : Controller() {
     fun show(call: HttpCall) {
         val adminConfig = call.make<AdminConfig>()
@@ -267,7 +267,7 @@ wired.
 <span class="line-numbers" data-start="6">
 
 ```kotlin
-// src/main/kotlin/controllers/SubscriptionController.kt
+// controllers/SubscriptionController.kt
 class SubscriptionController : Controller() {
     fun show(call: HttpCall) {
         val processor = call.make<PaymentProcessor>()
