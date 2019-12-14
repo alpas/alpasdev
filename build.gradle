@@ -36,6 +36,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "com.vladsch.flexmark:flexmark:$flexmark_version"
     implementation "com.vladsch.flexmark:flexmark-ext-autolink:$flexmark_version"
+    implementation 'redis.clients:jedis:3.1.0'
 
     testImplementation("dev.alpas:pulsar:$alpas_version")
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'

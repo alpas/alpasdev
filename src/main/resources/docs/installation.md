@@ -12,7 +12,7 @@
 ### [Server Requirements](#server-requirements)
 
 Alpas has only few system requirements. The requirements vary based on whether you want to setup a machine for
-development or for production. Obviously, there are more system requirements for a dev machine than for a prod machine.
+development or for production. 
  
 <a name="development"></a>
 #### [Development](#development)
@@ -25,48 +25,56 @@ development or for production. Obviously, there are more system requirements for
 </div>
 
 > /info/ <span>You need a GitHub account to create your project based on Alpas's framework template. Once created, you 
-> can host your git project anywhere you'd like.</span>
+> can host your project anywhere you would like.</span>
 
-> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different versions of system 
+> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different versions of Alpas's system 
 > requirements.</span>
 
 <a name="production"></a>
 #### [Production](#production)
 
-If you have created a fat jar file for serving your app, the only requirement is Java Runtime `jre`. If you intend to
- run some alpas command, such as `alpas migrate` then you can setup your prod machine as if it was your dev machine
-  (see the Development section).
+If you have created a fat jar file for serving your app, the only requirement is the Java Runtime `jre`. If you 
+intend to run some alpas command, such as `alpas migrate` then you can setup your prod machine as if it was your 
+[dev machine](#development).
   
 <a name="installation"></a>
 ### [Installation](#installation)
 
-After you have set up your machine, it only takes few steps to have your new Alpas app up and running:
+After you have set up your machine, it only takes a few steps to have your new Alpas app up and running:
 
 <a name="creating-new-project"></a>
 #### [Creating New Project](#creating-new-project)
 
-<div class="sublist">
+<div class="ordered-list">
 
-1. Visit Alpas's framework repo on GitHub: https://github.com/ashokgelal/framework
-2. Click the green `Use this template` button and name your repo.
-3. Once the repo is created, clone this repo on your local machine and cd into it from your terminal.
-4. The default project comes with a script named `alpas`. Make this script executable: `chmod +x ./alpas`
-5. Initialize your new project using the full package name: `./alpas init com.example.myapp`
+1. Visit [Alpas app repo on GitHub](https://github.com/ashokgelal/framework).
+2. Click the green **Use this template** button and give it a name.
+3. Once the repo is created, clone your new repo on your local machine.
+4. At the root of the project there is a script named `alpas`; make it executable:
+
+```bash
+    chmod +x ./alpas
+```
+
+5. Initialize your new project using the full package name:
+
+```bash
+    ./alpas init com.example.myapp
+```
+
+6. Import your new project in IntelliJ IDEA.
 
 </div>
 
-> /tip/ <span>If you are not a fan of typing `./alpas` with every alpas command, you could add `.` to your system 
-> path.</span>
+
+> /tip/ <span>If you don't want to type `./` with every Alpas command, you could append `.` to your `$PATH`
+> variable.</span>
 
 <a name="configuring"></a>
 #### [Configuring](#configuring)
 
-Once the new app is initialized, you can start configuring your app. Start with `.env` file that is automatically
- created under the root directory for you during the initialization. You should at least configure the database
- settings to be able to run your app.
-
-> /tip/ <span>If your project doesn't depend on a database, or you just want to initially not worry about it, open 
-> `DatabaseConfig.kt` class and comment out all the default connections inside the `init` function. </span>
+Once the new app is initialized, you can start [configuring your app](/docs/configuration). Start with the `.env` file 
+that is automatically created under the project's root directory during the initialization. 
 
 <a name="serving-locally"></a>
 #### [Serving Locally](#serving-locally)
@@ -82,9 +90,9 @@ You can serve your app from the command line or import it in IntellJ IDEA and th
 #### [Serving Externally](#serving-locally)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is convenient to 
-have your web app accessible from within a different device within the same network. This is very helpful while 
-developing esp. if you are trying to access your web app from your mobile device for, say, some layout related 
-debugging.
+have your web app accessible from a different device on the same network. This is very helpful during 
+development esp. if you are trying to access your web app from a mobile device for, say, testing and debugging 
+the app's UI.
 
 Alpas makes it really easy to serve your web app over an IP address. To do so add `SERVE_EXTERNALLY=true` in your 
 `.env` file. Build and re-serve your app and it should be available from both `http://localhost:<port>` and 

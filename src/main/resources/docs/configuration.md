@@ -51,8 +51,8 @@ to change the default values, or you want to add new values to one of the core c
 To change a core config, create a new config class that extends the core config and override the value(s) that you want
 to change.
 
-Let's say you want to change the default extension of your view templates from `.twig`, which is set in 
-`dev.alpas.view.ViewConfig` class, to `.j2`. To do this first create a new class folder and override the value like so:
+Let's say you want to change the default extension of your view templates from `.peb`, which is set in 
+`dev.alpas.view.ViewConfig` class, to `.twig`. To do this first create a new class folder and override the value like so:
 
 <span class="line-numbers" data-start="5">
 
@@ -60,10 +60,10 @@ Let's say you want to change the default extension of your view templates from `
 // src/main/kotlin/configs/ViewConfig.kt
 class ViewConfig(env: Environment) : dev.alpas.view.ViewConfig(env) {
     // change existing config
-    override val templateExtension = ".j2"
+    override val templateExtension = ".twig"
 
     // add new config
-    val layoutFilename = "app.j2"
+    val layoutTemplate = "layouts/app"
 }
 ```
 

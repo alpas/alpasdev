@@ -237,6 +237,7 @@ You can give route group a name that will get prepended to a route's name with a
 <span class="line-numbers" data-start="6">
 
 ```kotlin
+
 fun Router.addRoutes() {
     group("/docs") {
          // will be available as "docs.show"
@@ -250,6 +251,7 @@ fun Router.addRoutes() {
         }.name("profile")
     }.name("admin")
 }
+
 ```
 
 </span>
@@ -361,6 +363,10 @@ named `_method` with your form.
 
 </span>
 
+Method spoofing is enabled by default. You can disable method spoofing setting `allowMethodSpoofing` property in your
+own `AppConfig` class.
+
+
 <a name="route-helpers"></a>
 ### [Route Helpers](#route-helpers)
 
@@ -444,7 +450,9 @@ Creates a full URL for route of
 
 <div class="sublist">
 
-* `alpas route:list` : Lists all your app's routes with some important route attributes such as *method name*, *path*, 
-*route name*, *actual handler*, *guard type* etc.
+* `alpas route:list` 
+
+Lists all your app's routes with some important route attributes such as *method name*, *path*, *route name*, 
+*actual handler*, *guard type* etc.
 
 </div>

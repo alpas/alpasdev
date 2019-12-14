@@ -245,7 +245,7 @@ name of the attribute will be used for the column.
 
 ```kotlin
 
-...
+// ...
 
 // Validates that `ssn` is unique in `users` table.
 call.applyRules("ssn") {
@@ -258,7 +258,7 @@ call.applyRules("ssn") {
     unique("users")
 }.validate()
 
-...
+// ...
 
 ```
 
@@ -276,14 +276,14 @@ like:
 
 ```kotlin
 
-...
+// ...
 
 call.applyRules("email") {
     required()
     unique("users")
 }.validate()
 
-...
+// ...
 
 ```
 
@@ -301,14 +301,14 @@ the `ignore` parameter in the format `<column_name>:<value>`. Your rule for this
 
 ```kotlin
 
-...
+// ...
 
 call.applyRules("email") {
     required()
     unique("users", ignore="id:4")
 }.validate()
 
-...
+// ...
 
 ```
 
@@ -398,13 +398,13 @@ that takes two parameters, the name of the attribute and the actual value—and 
 
 ```kotlin
 
-...
+// ...
 call.applyRules("username") {
     max(32) { attr, value ->
         "$attr should be no more than 32 characters long. It is ${value?.toString()?.length} character long."
     }.validate()
 }
-...
+// ...
 
 ```
 

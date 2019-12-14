@@ -599,11 +599,12 @@ class MyViewServiceProvider : dev.alpas.view.ViewServiceProvider() {
 class HttpKernel : HttpKernel() {
     override fun serviceProviders(app: Application): Iterable<KClass<out ServiceProvider>> {
         return listOf(
-            ...,
-            ...,
-            ...,
+            // ...,
+            // ...,
+            // ...,
             MyViewServiceProvider::class,
-            ...,
+            // ...,
+
             // Don't forget to remove the following
             // ViewServiceProvider::class
         )
@@ -633,12 +634,12 @@ One great advantage of Pebble being a sub-set of Twig templating engine is that 
 auto-completion, live templates etc. for your Pebble templates. To apply this plugin, your templates must end 
 with a `.twig` extension and IntelliJ IDEA will pick it up automatically.
 
-Unfortunately, this plugin is only available for the Ultimate version of InteliJ IDEA and not for the free
+Unfortunately, this plugin is only available for the Ultimate Edition of InteliJ IDEA and not for the free
 community version. Fortunately, there is another free extension that is equally good but is totally free and 
-open-source and made specifically for Pebble. The plugin is aptly named Pebble IntelliJ and is available on 
-[GitHub](https://github.com/bjansen/pebble-intellij).
+open-source and made specifically for Pebble. The plugin, aptly named Pebble IntelliJ, is available on 
+[GitHub](https://github.com/bjansen/pebble-intellij) for free.
 
 To apply this plugin, your templates must end with a `.peb` extension. Make sure to read the 
 [official doc](https://github.com/bjansen/pebble-intellij/blob/master/README.md) on how to set it up properly.
 
-> /power/ <span>Alpas's templating engine is proudly powered by [Pebble Templates](https://pebbletemplates.io/).
+> /power/ <span>Alpas's templating is proudly powered by [Pebble Templates](https://pebbletemplates.io/).

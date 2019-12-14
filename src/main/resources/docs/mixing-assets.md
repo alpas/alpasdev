@@ -3,7 +3,6 @@
 - [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
 - [Setting Environment Variables](#setting-environment-variables)
 
-
 <a name="introduction"></a>
 ### [Introduction](#introduction)
 
