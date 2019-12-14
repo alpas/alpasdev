@@ -13,6 +13,20 @@
     <script src="/js/breakpoints.min.js" defer></script>
     <script src="/js/browser.min.js" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    {% prod %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-5531338-11');
+    </script>
+    {% endprod %}
 </head>
 
 <body class="antialiased bg-gray-200 h-full text-lg text-gray-800 is-preload">
