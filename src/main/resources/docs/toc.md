@@ -22,3 +22,7 @@
 - #### Frontend
     - [Pebble Templates](/docs/pebble-templates)
     - [Mixing Assets](/docs/mixing-assets)
+    
+- #### Security
+    - [Introduction](/docs/security)
+    - [Authentication](/docs/authentication)
