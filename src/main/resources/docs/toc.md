@@ -29,3 +29,6 @@
     - [Auth Scaffolding](/docs/authentication-scaffolding)
     - [Password Reset](/docs/password-reset)
     - [Email Verification](/docs/email-verification)
+
+- #### Database
+    - [Redis](/docs/redis)

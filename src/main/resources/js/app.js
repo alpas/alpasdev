@@ -1,7 +1,7 @@
 window.jQuery = window.$ = require('jquery')
 import Prism from 'prismjs'
 
-(function ($) {
+jQuery(function ($) {
     // copy line numbers start offset from parent to child
     $('span.line-numbers').each(function () {
         const parent = $(this)
@@ -43,4 +43,4 @@ import Prism from 'prismjs'
             $(this).addClass(word)
         }
     })
-})(jQuery)
+})
