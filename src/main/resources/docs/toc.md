@@ -28,3 +28,4 @@
     - [Authentication](/docs/authentication)
     - [Auth Scaffolding](/docs/authentication-scaffolding)
     - [Password Reset](/docs/password-reset)
+    - [Email Verification](/docs/email-verification)
