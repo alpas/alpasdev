@@ -1,13 +1,7 @@
-- [Introduction](#introduction)
 - [Default Error Templates](#default-error-templates)
 - [Handling Exceptions](#handling-exceptions)
 - [Throwing HTTP Exceptions](#throwing-http-exceptions)
 - [Stacktrace Dump](#stacktrace-dump)
-
-<br/>
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 When your web application throws an exception, whether user initiated or not, Alpas tries its best to handle it
 gracefully.

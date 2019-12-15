@@ -1,12 +1,9 @@
-- [Introduction](#introduction)
 - [Creating Middleware](#creating-middleware)
 - [Before/After Middleware](#before-after)
 - [Registering Middleware](#registering-middleware)
     - [Route Entry Middleware](#route-entry-middleware)
     - [Server Entry Middleware](#server-entry-middleware)
 
-<a name="introduction"></a>
-### [Introduction](#introduction)
 A Middleware, as the name implies, sits in the middle of a request lifecycle and lets you introspect an incoming request 
 and act on it. Think of middleware as like filters that an `HttpCall` must pass through. 
 

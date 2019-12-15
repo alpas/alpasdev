@@ -1,12 +1,8 @@
-- [Introduction](#introduction)
 - [Writing Service Providers](#writing-service-providers)
     - [The `register` method](#register)
     - [The `boot` method](#boot)
     - [The `commands` method](#commands)
     - [Registering Service Provider](#registering)
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 Service providers are like Lego blocks that come all together to bootstrap your Alpas web app.
 

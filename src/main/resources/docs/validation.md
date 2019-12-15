@@ -1,4 +1,3 @@
-- [Introduction](#introduction)
 - [Validation Rules](#validation-rules)
     - [Failing Fast](#failing-fast)
 - [Validation Guard](#validation-guard)
@@ -13,11 +12,6 @@
     - [Intercepting Validation Errors](#intercepting-validation-errors)    
     - [Rendering Validation Errors](#rendering-validation-errors)
     - [Displaying Errors and Old Values](#displaying-errors-and-old-values)
-
-<br/>
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 When handling a request and especially when handling user input you'd want to make sure that the incoming data is
 valid and as expected. If it is not, you'd want to send appropriate error messages back to the user. You'd then want

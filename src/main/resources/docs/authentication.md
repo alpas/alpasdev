@@ -1,11 +1,17 @@
+- [Auth Channels and User Providers](#auth-channels-providers)
+    - [Auth Channel](#authchannel)
+    - [User Provider](#userprovider)
+    - [Auth Channel Registration](#auth-channel-registration)
+- [HttpCall and Authentication](#httpcall-and-authentication)
+- [Custom Auth Channel](#custom-auth-channel)
+- [Route Auth Channels](#route-auth-channels)
+- [Authentication Middleware](#authentication-middleware)
 
 > /info/ This section contains some advanced concepts and many times dives deeper into some internal workings of Alpas.
 > This is done intentionally to teach how authentication works to those who are unfamiliar with it as well as talk about
 > Alpas internal implementation for the curious among us. It is okay if you get overwhelmed and or get confused. Just
 > read it once, take a break, and come back again again when you feel like it and read it again. Eventually it will 
 > click!
-
-### [Introduction](#introduction)
 
 Alpas comes with authentication setup right out-of-box and requires you to do the absolute minimal work when it 
 comes to adding authentication to your app. It is easy to get started with just one simple Alpas command.
@@ -17,7 +23,8 @@ authenticated. And that's it!
 However, there are few moving parts that make this magic work. Before we get into scaffolding an authentication 
 boilerplate, let's talk about some core concepts that you need to understand about authentication first.
 
-### [Auth Channels and User Providers]()
+<a name="auth-channels-providers"></a>
+### [Auth Channels and User Providers](#auth-channels-providers)
 
 
 At the core, Alpas's authentication is divided into two parts - `auth channels` and `user providers`. Channels define 
@@ -29,7 +36,7 @@ to know more about the user as well. This is where providers come into play. The
 user information from a persistent storage such as database. Alpas ships with a `UserProvider` class already wired
 to retrieve user info from a database.
 
-
+<a name="authchannel"></a>
 #### [Auth Channel](#authchannel)
 
 Each `HttpCall` gets its own instance of an `AuthChannel` that you could use for authentication 
@@ -80,6 +87,7 @@ and **do not** touch the current session after logging out as the session is no 
 
 </div>
 
+<a name="userprovider"></a>
 #### [User Provider](#userprovider)
 
 A concrete implementation of `UserProvider` is responsible for fetching a user from a persistent store.
@@ -104,7 +112,8 @@ database but for most of the apps it is.
 
 </div>
 
-#### Auth Channel Registration
+<a name="auth-channel-registration"></a>
+#### [Auth Channel Registration](#auth-channel-registration)
 
 You can configure what `AuthChannel` to use by default in multiple ways. 
 
@@ -127,8 +136,8 @@ by setting `AUTH_CHANNEL` variable in your `.env` file. If you didn't set any, A
 default. This is the reason why when registering an auth channel in `AuthConfig`, we named it `session` because 
 that's the default!
 
-
-### HttpCall and Authentication
+<a name="httpcall-and-authentication"></a>
+### [HttpCall and Authentication](#httpcall-and-authentication)
 
 For most of the apps you'll never have to deal with all the concepts we talked about upto this point. Most of the 
 times you are just concerned about whether the current user is authenticated or not and if authenticated who is
@@ -160,7 +169,8 @@ Returns the current user if the call is authenticated. If not, aborts the call b
 
 </div>
 
-### Custom Auth Channel
+<a name="custom-auth-channel"></a>
+### [Custom Auth Channel](#custom-auth-channel)
 
 To create a custom auth channel, you just need to implement `AuthChannel` interface and override couple of things.
 The most important one being `check()` method.
@@ -207,7 +217,8 @@ class AuthConfig(env: Environment) : BaseConfig(env) {
 
 Now all `AdminApiAuthChannel` will be used for authentication.
 
-### Route Auth Channels
+<a name="route-auth-channels"></a>
+### [Route Auth Channels](#route-auth-channels)
 
 You may want to have multiple auth channels for your app depending on different routes. For an example, while
 `SessionAuthChannel` may be appropriate for web routes, it may not be appropriate for API routes. API routes will 
@@ -256,3 +267,17 @@ class AuthConfig(env: Environment) : BaseConfig(env) {
 
 > /tip/ <span> `alpas route:list` command shows more information about all your routes in a nicely formatted table.
 > It also shows auth channel applied to each authorized only routes.</span>
+
+<a name="authentication-middleware"></a>
+### [Authentication Middleware](#authentication-middleware)
+
+You need to assign `AuthOnlyMiddleware` to each of your routes that you want to have [accessible only to authorized 
+users](/docs/routing#guarded-routes). If you want some of the routes to be accessible only for guests and not for 
+authorized users then you need to apply `GuestOnlyMiddleware` instead.
+
+`AuthConfig`'s `ifUnauthorizedRedirectToPath` property decides where to redirect unauthorized users trying to 
+access authorized only routes. This is set to `/login` by default.
+
+Similarly, `AuthConfig`'s `ifAuthorizedRedirectToPath` property decides where to redirect users who are already 
+authorized but trying to access guests only routes. This is set to `/` by default. You are more than welcome to 
+change these properties to fit your needs.

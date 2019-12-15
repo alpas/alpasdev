@@ -1,9 +1,5 @@
-- [Introduction](#introduction)
 - [Creating Controllers](#creating-controllers)
 - [Using Controllers](#using-controllers)
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 You need to set a handler for when a request matches one of your routes. While closure is a quick way to handle a call,
 it becomes messy once your handling logic becomes more complex. In such a situation you need a place to put and organize

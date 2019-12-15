@@ -1,11 +1,7 @@
-- [Introduction](#introduction)
 - [Configuration](#configuration)
 - [HttpCall Logger](#httpcall-logger)
 - [Dedicated Logger](#dedicated-logger)
     - [Configuring a Dedicated Logger](#configuring-a-dedicated-logger)
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 Alpas uses Simple Logging Facade, [SLF4J](http://www.slf4j.org/), internally for capturing log messages. This allows 
 you to use any implementation of SLF4J of your choice in your own web app. The log files are kept under `storage/logs` 

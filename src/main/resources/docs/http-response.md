@@ -1,4 +1,3 @@
-- [Introduction](#introduction)
 - [Returning Response Payload](#response-payload)
 - [Rendering Templates](#rendering-templates)
 - [Aborting Calls](#abort)
@@ -10,13 +9,8 @@
     - [Forgetting Cookies](#forgetting-cookies)
 - [Redirects](#redirects)
 
-<a name="introduction"></a>
-### [Introduction](#introduction)
-
 Just like [HTTP request](/docs/http-request), `HttpCall` object is what you'd use for sending responses back to 
 a client.
-
-<br/>
 
 <a name="reesponse-payload"></a>
 ### [Returning Response Payload](#response-payload)
@@ -53,8 +47,6 @@ Use this method if you want to set/change the status code of your response *afte
 
 </div>
 
-<br/>
-
 <a name="rendering-templates"></a>
 ### [Rendering Templates](#rendering-templates)
 
@@ -69,8 +61,6 @@ default, is under `resources/templates`. You could override the location by
 [extending](/docs/configuration#core-configs) the `dev.alpas.view.ViewConfig` class.
 
 </div>
-
-<br/>
 
 <a name="abort"></a>
 ### [Aborting Calls](#abort)
@@ -98,8 +88,6 @@ Aborts the call if the given condition is `true`.
 > control over the exception being thrown when aborting a call. </span>
 
 </div>
-
-<br/>
 
 <a name="headers"></a>
 ### [Headers](#headers)
@@ -172,8 +160,6 @@ Send a cookie back to the client by calling one of `addCookie()` methods.
 
 - `fun addCookie(name: String, value: String?, lifetime: Duration, path: String?, domain: String?, secure: Boolean, httpOnly: Boolean)`
 
-    <br/>
-    
     - **name** - The name of the cookie. Must not be empty.
     - **value** - The payload of the cookie.
     - **lifetime** - Maximum age for this cookie. Default is -1 second. A negative duration means this cookie will be

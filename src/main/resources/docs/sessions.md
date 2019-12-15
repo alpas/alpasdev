@@ -1,4 +1,3 @@
-- [Introduction](#introduction)
 - [Session Drivers](#session-drivers)
     - [Store Drivers](#store-drivers)
     - [Cache Drivers](#cache-drivers)
@@ -10,11 +9,6 @@
     - [Deleting Data](#deleting-data)
 - [Flashing Data](#flashing-data)
     - [Flash Template Helpers](#flash-template-helpers)
-
-<br/>
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 HTTP apps are stateless. Once a response has been sent for a request, the connection is closed and server has no 
 knowledge of the request. If there was no way to link subsequent requests from the same user then it would soon
@@ -44,8 +38,6 @@ Alpas supports File store and Memory cache driver out of the box.
 
 - `memory` - Caches sessions in memory.
 - `skip` - Doesn't cache any sessions.
-
-<br />
 
 <a name="configuring-sessions"></a>
 ### [Configuring Sessions](#configuring-sessions)

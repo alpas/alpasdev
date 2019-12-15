@@ -5,9 +5,6 @@
 - [Retrieving Cookies](#retrieving-cookies)
 - [Form Method Spoofing](#spoofing)
 
-<a name="introduction"></a>
-### [Introduction](#introduction)
-
 Alpas wraps every request that hits your app to an `HttpCall` object. `HttpCall` is no doubt the most powerful object
 in Alpas. It has everything you need to get any data and operations you need out of a request.
 

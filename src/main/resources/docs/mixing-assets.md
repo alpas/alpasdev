@@ -1,10 +1,6 @@
-- [Introduction](#introduction) 
 - [Configuration](#configuration) 
 - [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
 - [Setting Environment Variables](#setting-environment-variables)
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 If you have got any experience with frontend and esp. with bundling your assets such as vanilla JS, stylesheets,
 images, frontend libraries such as VueJS etc., you know that mixing them is not a trivial task and needs a lot of

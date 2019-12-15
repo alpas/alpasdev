@@ -1,4 +1,3 @@
-- [Introduction](#introduction)
 - [Binding Dependencies](#binding)
     - [Simple Bindings](#simple-bindings)
     - [Singleton Bindings](#singleton-bindings)
@@ -9,9 +8,6 @@
     - [Constructor Injection](#constructor-injection)
     - [Requesting Dependency using `make`](#make-resolve)
 - [HttpCall DI Container](#httpcall-container)
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 Dependency Injection allows you to manage your dependencies in a much cleaner way than creating and wiring them 
 yourself. Once you have setup the bindings, you could have the dependencies injected into your class via the 

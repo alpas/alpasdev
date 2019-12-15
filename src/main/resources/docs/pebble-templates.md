@@ -1,4 +1,3 @@
-- [Introduction](#introduction)
 - [Templates Location](#templates-location)
 - [The Template](#the-template)
     - [Nested Templates](#nested-templates)
@@ -17,11 +16,6 @@
 - [Extending Pebble](#extending-pebble)
 - [Global Variables](#global-variables)
 - [Syntax Highlighting](#syntax-highlighting)
-
-<br/>
-
-<a name="introduction"></a>
-### [Introduction](#introduction)
 
 Alpas uses [Pebble](https://pebbletemplates.io/) as its templating engine. Pebble is a modern, very powerful templating 
 engine with great features such as Template inheritance (`layout`, `extends`, `partials` etc.), Macros, built-in 

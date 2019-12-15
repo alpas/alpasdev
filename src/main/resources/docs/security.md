@@ -1,3 +1,8 @@
+- [Form Method Spoofing](#form-method-spoofing)
+- [Session Security](#session-security)
+    - [Cookies Encryption](#cookies-encryption)
+    - [Session Config](#session-config)
+
 Your app, by the virtue of being a public facing web application, needs to be secure. As a web developer you should 
 be aware of the most, if not all, the security measures that you need to take to minimize the risk of it getting 
 compromised as much as possible. While this is true, the reality is that it is a daunting task to know all the
@@ -13,7 +18,8 @@ security and focus on delivering an app that your users love and trust.
 Let's talk about some of the ways you could keep your app more secure and some of the things that you just need to
 be aware of.
 
-### Form Method Spoofing
+<a name="form-method-spoofing"></a>
+### [Form Method Spoofing](#form-method-spoofing)
 
 HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DELETE**. To use these methods 
 in your form so that the correct route gets matched, you need to spoof that method by passing a hidden field 
@@ -22,10 +28,12 @@ named `_method` with your form.
 <span class="line-numbers" data-start="20">
 
 ```html
+
 <form action="/docs" method="post">
     <input type="hidden" name="_method" value="delete"/>
     <button type="submit">Delete</button>
 </form>
+
 ```
 
 </span>
@@ -33,13 +41,15 @@ named `_method` with your form.
 Method spoofing is enabled by default but for only if the original HTTP method is `POST`. You can disable method 
 spoofing setting `allowMethodSpoofing` property in your own `AppConfig` class.
 
-### Session Security
+<a name="session-security"></a>
+### [Session Security](#session-security)
 
 Session is a very critical component of any web application in both terms of the functionality it brings to the table
 and the security risk that gets tagged along with it. Session is the magic sauce behind making the stateless nature of 
 web work as if it not stateless.
 
-#### Cookies Encryption
+<a name="cookies-encryption"></a>
+#### [Cookies Encryption](#cookies-encryption)
 
 When a browser makes a request, your web app makes a session and attaches an id to the response it sends back. This
 id is saved by the browser as a cookie and sends back to the server in the subsequent requests. The web app uses
@@ -56,7 +66,8 @@ running `alpas make:key` command.
 Although we don't recommend it, you could skip encrypting of a specific cookie by returning a list of cookies' names
 from `SessionConfig`'s `encryptExcept` property.
 
-#### Session Config
+<a name="session-config"></a>
+#### [Session Config](#session-config)
 
 You could extend `dev.alpas.SessionConfig` and tweak it as per your requirements. The default values are set 
 conservatively preferring security over generosity. Consider the following suggestions when making the changes:

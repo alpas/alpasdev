@@ -27,3 +27,4 @@
     - [Introduction](/docs/security)
     - [Authentication](/docs/authentication)
     - [Auth Scaffolding](/docs/authentication-scaffolding)
+    - [Password Reset](/docs/password-reset)
