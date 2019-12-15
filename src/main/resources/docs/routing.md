@@ -14,8 +14,9 @@
     - [Group Middleware](#group-middleware)
 - [Named Middleware Group](#named-middleware-group)
 - [Guarded Routes](#guarded-routes)
-    - [Authorized](#authorized-routes)
-    - [Guest](#guest-routes)
+    - [Authorized Users Only](#authorized-routes)
+    - [Guest Only](#guest-routes)
+    - [Verified Users Only](#verified-routes)
 - [Form Method Spoofing](#spoofing)
 - [Route Helpers](#route-helpers)
     - [Template Helpers](#template-helpers)
@@ -72,7 +73,7 @@ fun Router.addRoutes() {
 
 </span>
 
-The name of the method is actually optional. Alpas follows some conventions to determine what controller method to 
+The name of the method is actually optional. Alpas follows some convenntions to determine what controller method to 
 call on when a path matches — **index()** method is called for a `get` request, **store()** method is invoked for a
 `post` request, **delete** method is called for a `delete` request, and finally **update** method is invoked for a 
 `patch` request.
@@ -344,6 +345,31 @@ either on a route or on a route group.
 
 Similarly, if you want a route to be accessible only if a user is not authenticated, such as a login route, you can
 either apply `GuestOnlyMiddleware` middleware or call `mustBeGuest()` method on a route or a route group.
+
+<a name="verified-routes"></a>
+#### [Verified Users Only](#verified-routes)
+
+If you want a route to be accessible only if a user is [verified](/docs/email-verification), you can either 
+apply `VerifiedEmailOnlyMiddleware` middleware or call `mustBeVerified()` method on a route or a route group.
+
+<span class="line-numbers" data-start="5">
+
+```kotlin
+
+fun Router.addRoutes() {
+    // anyone can access this route
+    get("/", WelcomeController::class)
+    // only guests can access this route
+    get("/docs", DocsController::class).mustBeGuest()
+    // only logged in users can access this route
+    get("/profile", UserController::class).mustBeAuthenticated()
+    // only authenticated users who have verified their email addresses can access this route
+    get("/admin", AdminController::class).mustBeAuthenticated().mustBeVerified()
+}
+
+```
+
+</span>
 
 <a name="spoofing"></a>
 ### [Form Method Spoofing](#spoofing)

@@ -1,88 +1,91 @@
-- [The Way it Works](#the-way-it-works)
 - [Database Setup](#database-setup)
 - [Debugging Reset Emails](#debugging-reset-emails)
 - [Customization](#customization)
-    - [Not Sending Emails](#not-sending-emails)
+    - [Reset Notification](#reset-notification)
     - [Tweaking Email's Look-&-Feel](#tweaking-emails-look-feel)
     - [Redirecting User After Sending Link](#redirecting-user-after-sending-link)
     - [Disabling Password Reset](#disabling-password-reset)
 
-Users forgetting their password and wanting to reset them is a very common thing that happens with an authentication
-enabled web app. Alpas provides all the views, controllers, and everything else needed for supporting this feature
-without very minimal efforts on your side.
 
-<a name="the-way-it-works"></a>
-### [The Way it Works](#the-way-it-works)
+Allowing users to reset their forgotten passwords is a feature provided by pretty much every app that allows accounts
+registration with a password. Alpas provides all the views, controllers, and everything else an app needs for 
+supporting password reset feature with almost no efforts from your side.
 
-Password reset feature of Alpas works by creating a secure token in the database whenever user requests a password
-reset email. Any previous tokens will first be removed. After a token is saved in the database, an email is sent to the
-user containing a link. When the user clicks this link, they are redirected to `auth/passwords/reset` page, which
-asks the user to enter their email address and a password. If the token is not expired and all the user's inputs are
-valid, user's record will be updated with a hashed version of the new password, the token is delted, user is logged in,
-and then redirected to `/` route.
+Alpas creates a secure timeboxed token and saves it in the database whenever user requests a password reset email. 
+Any previous tokens will first be removed. After the token is saved, an email is sent to the reset email address 
+containing a link. When the user clicks this link, they are redirected to `auth/passwords/reset` page, which asks
+the user to enter their email address and a password. If the token has not yet expired and all the user's inputs 
+are valid, user's record is updated with a hashed version of the new password, the token is deleted, user is logged 
+in and then redirected to `/` route.
 
-> /tip/ <span> The password reset token is set to expire in 2 hours by default, which you can extend by overriding 
-> `AuthConfig#passwordResetTokenExpiration` property. We recommend keeping it to a low expiration duration for
-> security resons. </span>
+> /tip/ <span> The password reset token expires in 2 hours by default, which you can change by overriding 
+> `AuthConfig#passwordResetTokenExpiration` property. We recommend keeping it to a small expiration duration for
+> security reasons. </span>
 
 <a name="database-setup"></a>
 ### [Database Setup](#database-setup)
 
-As evident by [The way it works](/docs/password-reset/#the-way-it-works) section, we need to secure a password
-reset token in the database and we need a table for it. When you scaffolded your project, a migration for creating
-both `users` table and `password_reset_tokens` table is created for you. If you have run the migration already,
-this table should already exist in the table. If not, you need to migrate your tables using `db:migrate` command.
+We need to store the password reset token in the database and we need a table for it. When you scaffolded your project, 
+a migration for creating both `users` table and `password_reset_tokens` table is created for you under 
+`database/migrations` folder. If you have run the migration already, this table should already exist in the table. 
+If not, you need to migrate your tables using `db:migrate` command.
 
 ```bash
 alpas db:migrate
 ```
+
 <a name="debugging-reset-emails"></a>
 ### [Debugging Reset Emails](#debugging-reset-emails)
 
-The sending of the reset email to the user is done via `SmtpDriver` by default. During development, it is more 
-convenient to save email messages locally. Alpas supports saving all your email address to `storage/mails` folder
-by using `LocalMailDriver`. To use this driver, set the value of `MAIL_DRIVER` to `local` in your `.env` file.
+During development, it is very convenient to save email messages locally. Alpas supports saving all your email 
+messages to `storage/mails` folder by using `LocalMailDriver`. To use this driver, make sure the value of 
+`MAIL_DRIVER` is set to `local` in your `.env` file.
 
 <a name="customization"></a>
 ### [Customization](#customization)
 
-<a name="not-sending-emails"></a>
-#### [Not Sending Emails](#not-sending-emails) 
+<a name="reset-notification"></a>
+#### [Reset Notification](#reset-notification) 
 
 By default, after a token is created, a `ResetPassword` notification is dispatched. This notification is responsible
-for composing a mail and sending it to the user. If you rather deliver the reset notification by a different means,
+for composing an email and sending it to the user. If you rather deliver the reset notification by a different means,
 say, SMS, then you can override `sendPasswordResetNotification()` method in `ForgotPasswordController` class.
 
 <a name="tweaking-emails-look-feel"></a>
 #### [Tweaking Email's Look-&-Feel](#tweaking-emails-look-feel)
 
-`resources/templates/auth/emails/reset.peb` template is what gets rendered and then gets sent as an HTML email to the
-user. Feel free to tweak this template according to your needs.
+`resources/templates/auth/emails/reset.peb` template is what gets rendered and sent as an HTML email to the user. 
+Feel free to tweak this template according to your needs.
 
 <a name="redirecting-user-after-sending-link"></a>
 #### [Redirecting User After Sending Link](#redirecting-user-after-sending-link)
 
 After sending an email with a link, the user is redirected back to same password reset request page with a flash
-notification. If you rather want to take them to somewhere else, override 
-`fun afterResetLinkSentRedirectTo(call: HttpCall): String?` method and return the proper route.
+notification. If you want to redirect them somewhere else, override 
+`fun afterResetLinkSentRedirectTo(call: HttpCall): String?` method and return the route you want.
 
 <a name="disabling-password-reset"></a>
 #### [Disabling Password Reset](#disabling-password-reset)
 
 If you do not want to allow your users to reset their password for whatever reasons, you can disable it completely 
-by passing `supportPasswordReset = false` flag while calling `authRoutes()` method.
+by passing `allowPasswordReset = false` flag while calling `authRoutes()` method.
+
+<span class="line-numbers" data-start="3">
 
 ```kotlin
 
 // routes.kt
-
 fun Router.addRoutes() = apply {
     webRoutes()
-    // no password reset related routes will be added by setting supportPasswordReset to false
-    authRoutes(supportPasswordReset = false)
+    // No password reset related routes will be added 
+    authRoutes(allowPasswordReset = false)
 }
 
 ```
 
-> /alert/ <span> Setting `supportPasswordReset` flag to `false` only takes care of the routes, it's your 
-> responsibility to remove any references to one of the reset routes from your templates and controllers.</span>
+</span>
+
+> /alert/ <span> Setting `allowPasswordReset` flag to `false` only makes sure the reset routes are not added 
+> but doesn't remove links from templates and controllers. Make sure to go through all your templates and 
+> controllers and remove any links to password reset route. There should be one such link in 
+> `resources/templates/auth/login.peb`.
