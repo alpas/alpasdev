@@ -35,7 +35,7 @@
 
 <div id="main">
     <div class="inner flex justify-center">
-        <div class="px-10 leading-relaxed docs_content lg:max-w-5xl md:max-w-4xl">
+        <div class="md:pr-10 pl-16 pr-5 leading-relaxed docs_content md:max-w-4xl w-full xl:max-w-5xl">
             <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
             {{ content | raw }}
         </div>
