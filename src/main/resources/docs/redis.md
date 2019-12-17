@@ -1,5 +1,5 @@
 Alpas doesn't bundle Redis or any Redis client, but it is really easy to integrate and use a Redis client
-library like [Jedis](https://github.com/xetorthio/jedis) in your app.
+library, like [Jedis](https://github.com/xetorthio/jedis), in your app.
 
 Let's see how we can easily integrate Jedis client in an app using a service provider.
 
@@ -60,4 +60,4 @@ fun get(page: String, markdown: Markdown): String {
 
 </div>
 
-**That's all there it is!**
+**That's all there is!**

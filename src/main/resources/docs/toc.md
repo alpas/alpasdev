@@ -32,3 +32,5 @@
 
 - #### Database
     - [Redis](/docs/redis)
+- #### Advanced
+    - [Mail](/docs/mail)
