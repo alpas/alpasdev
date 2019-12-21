@@ -98,4 +98,4 @@ Alpas makes it really easy to serve your web app over an IP address. To do so ad
 `.env` file. Build and re-serve your app and it should be available from both `http://localhost:<port>` and 
 `http://<local-device-ip>:<port>`.
 
-> /power/ <span>Alpas runs on [Jetty Web Server](https://www.eclipse.org/jetty/).
+> /power/ <span>Alpas runs on an embedded [Jetty Web Server](https://www.eclipse.org/jetty/).

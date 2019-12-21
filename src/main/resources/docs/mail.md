@@ -5,8 +5,9 @@
 - [Debugging Emails](#debugging-emails)
 - [Custom Mail Driver](#custom-mail-driver)
 
-Alpas uses [SimpleMail]() library and sprinkles it with some of its own APIs to make it easy for you to send emails
-from within your app. You can start with an SMTP driver or a local file driver or write one of your own drivers.
+Alpas uses [Simple Java Mail](https://github.com/bbottema/simple-java-mail) library and sprinkles it with some of 
+its own APIs to make it easy for you to send emails from within your app. You can start with an SMTP driver or a 
+local file driver or write one of your own drivers.
 
 <a name="available-drivers"></a>
 ### [Available Drivers](#available-drivers)
