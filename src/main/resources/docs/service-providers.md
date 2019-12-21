@@ -1,14 +1,14 @@
-- [Writing Service Providers](#writing-service-providers)
-    - [The `register` method](#register)
-    - [The `boot` method](#boot)
-    - [The `commands` method](#commands)
-    - [Registering Service Provider](#registering)
+- [Getting Started](#getting-started)
+    - [`register()`](#register)
+    - [`boot()`](#boot)
+    - [`commands()`](#commands)
+- [Registering Service Provider](#registering)
 
-Service providers are like Lego blocks that come all together to bootstrap your Alpas web app.
+At its core, service providers are nothing more than just classes that allow you to register and boot your services
+in a more controlled way in one central place. They have few lifecycle methods that you can hook into to register
+and bootstrap your bindings.
 
-At its core service providers are nothing more than just classes that allow you to register and boot your services 
-in a more controlled way in one central place. They have few lifecycle methods that are used to register and bootstrap 
-your bindings. Your service provider class is also where you return a list of commands available to be run from the
+Your service provider class is also where you declare Alpas console commands that are meant be to run from the
 command line.
 
 The core of Alpas framework itself is built with many service providers.
@@ -17,75 +17,86 @@ The core of Alpas framework itself is built with many service providers.
 > framework. It's upto you to register your service providers in either one or both of `HttpKernel` and `ConsoleKernel`.
 
 
-<a name="writing-service-providers"></a>
-### [Writing Service Providers](#writing-service-providers)
+<a name="getting-started"></a>
+### [Getting Started](#getting-started)
 
 A service provider is just a class that implements `dev.alpas.ServiceProvider` interface:
 
 <span class="line-numbers" data-start="3">
 
 ```kotlin
+
+// providers/ExceptionReportingServiceProvider.kt
 class ExceptionReportingServiceProvider : ServiceProvider {
     override fun register(app: Application) {
         // Register a service.
-        // not all the service providers are registered yet.
+        // Not all service providers are registered yet.
     }
 
     override fun boot(app: Application) {
         // Boot a service.
-        // All the service providers are registered.
+        // All service providers are registered.
     }
 
     override fun commands(app: Application): List<Command> {
         // Return a list of Alpas console commands.
-        // Called right after the register method.
+        // Called right after the Register method.
         // Not all the service providers are registered yet.
     }
 }
+
 ```
 
 </span>
 
-> /tip/ <span> `register` and `boot` methods are passed the global app instance, which is an 
-> [IoC Container](/docs/ioc-container). Use this app instance to register your bindings or to resolve dependencies.
-></span>
+> /tip/ <span> All service provider methods receives the global app instance, which is an
+[IoC Container](/docs/ioc-container). Use this app instance to register your bindings
+or to resolve dependencies.</span>
+
+<div class="sublist">
 
 <a name="register"></a>
-#### [The `register` method](#register)
+- `register()`
 
-The `register` method is where you should register your bindings into the [IoC Container](/docs/ioc-container). Since
-not all the service providers are necessarily registered by the time this register method is called, you shouldn't
-try to use any other bindings inside this method.
+The `register` method is where you should register your bindings with the [IoC Container](/docs/ioc-container).
+Since not all the service providers are necessarily registered by the time this register method is called,
+you shouldn't try to use any other bindings inside this method.
 
 <a name="boot"></a>
-#### [The `boot` method](#boot)
+- `boot()`
 
 The `boot` method is called when all the providers have been registered (but not necessarily booted). You should be
-able to use any other bindings provided by other service providers.
+able to use any other bindings provided by other service providers inside this method.
 
 <a name="commands"></a>
-#### [The `commands` method](#commands)
+- `commands()`
 
-You service providers may have some commands that are available through the Alpas console. The `commands` method is the
-perfect place to return a list of all those commands. This method is called right after the `register` method for
-this service provider is called and so not all the service providers are registered yet.
+You service providers may have some Alpas console commands. The `commands` method is the perfect place
+to return a list of all those commands. This method is called right after the `register` method so
+not all the service providers are registered yet.
+
+</div>
 
 <a name="registering"></a>
-#### [Registering Service Provider](#registering)
+### [Registering Service Provider](#registering)
 
-Register your service provider by appending it to a list of service providers returned by `serviceProviders()` method
-in either one or both of `HttpKernel` or 'ConsoleKernel' classes. Whether to register your service provider in one or
-both the kernels depends on in what mode you want your service provider to be available. For an example, by default
-`ViewServiceProvider` class is added to only `HttpKernel` and not to `ConsoleKernel` as it doesn't make sense to have
-any view related services available in console mode.
+Once you have created a service provider, you must register it by appending it to the list of service providers
+returned by `serviceProviders()` method in either one or both of `HttpKernel` or `ConsoleKernel` classes.
+
+Whether to register your service provider in one or both the kernels depends on in what mode you want your service
+provider to be available in. For an example, by default `ViewServiceProvider` class is added to only
+`HttpKernel` and not to `ConsoleKernel` as it doesn't make sense to have any view related
+services available in console mode.
 
 Let's see a complete example of writing a service provider. Say we want to have an error reporter service that we
 can call whenever we want to log an exception. Also, let's assume that it provides a console command `error:send` that
 sends any cached errors immediately.
 
-<span class="line-numbers" data-start="15">
+<span class="line-numbers" data-start="1">
 
 ```kotlin
+
+// providers/ErrorReportingServiceProvider.kt
 class ErrorReportingServiceProvider : ServiceProvider {
     override fun register(app: Application) {
         app.bind(RemoteErrorReporter())
@@ -100,6 +111,7 @@ class ErrorReportingServiceProvider : ServiceProvider {
     }
 }
 
+// RemoteErrorReporter.kt
 class RemoteErrorReporter {
     fun report(e: Exception) {
         // sends the error somehow
@@ -110,21 +122,19 @@ class RemoteErrorReporter {
     }
 }
 
-class SendAndClearErrors : Command(name = "error:send")
+// console/commands/SendAndClearErrorsCommand.kt
+class SendAndClearErrorsCommand : Command(name = "error:send")
 
-// Use the registered service
-class AdminController : Controller() {
-    fun all(call: HttpCall) {
-        if (!call.isAuthenticated) {
-            call.make<RemoteErrorReporter>()
-                .report(AuthenticationException("Suspicious activity 😱"))
-            return
-        }
-        call.reply("Hello, Admin!")
-    }
-}
+```
 
-// Register the service provider
+</span>
+
+Register the service provider
+
+<span class="line-numbers" data-start="8">
+
+```kotlin
+
 // HttpKernel.kt
 class HttpKernel : HttpKernel() {
     override fun serviceProviders(app: Application): Iterable<KClass<out ServiceProvider>> {
@@ -138,6 +148,31 @@ class HttpKernel : HttpKernel() {
         )
     }
 }
+
 ```
 
 </span>
+
+Use the registered service
+
+<span class="line-numbers" data-start="6">
+
+```kotlin
+
+// controllers/AdminController.kt
+class AdminController : Controller() {
+    fun greet(call: HttpCall) {
+        if (!call.isAuthenticated) {
+            val ex = AuthenticationException("Suspicious activity 😱")
+            call.make<RemoteErrorReporter>().report(ex)
+            call.abort()
+        } else {
+            call.reply("Hello, Admin!")
+        }
+    }
+}
+
+```
+
+</span>
+
