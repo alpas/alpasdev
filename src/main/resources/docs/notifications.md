@@ -30,25 +30,21 @@ The quickest way to creating a notification is to use `make:notification` Alpas 
 notification that implements one or multiple notification types and put it under `notifications` folder.
 
 ```bash
-alpas make:notification PostLiked --mail --slack
+alpas make:notification PostLiked
 ```
 
 <span class="line-numbers" data-start="1">
 
 ```kotlin
 
-class PostLiked : MailableNotification<User>, SlackNotification<User> {
-    override fun channels(notifiable: User): List<KClass<out NotificationChannel>> {
+class PostLiked : MailableNotification<User> {
+    override fun channels(notifiable: Authenticatable): List<KClass<out NotificationChannel>> {
         // return a list of channels appropriate for the given notifiable object
-        return listOf(MailChannel::class, SlackChannel::class)
+        return listOf(MailChannel::class)
     }
 
-    override fun toMail(notifiable: User): MailMessage {
+    override fun toMail(notifiable: Authenticatable): MailMessage {
         TODO("Return a mail message")
-    }
-
-    override fun toSlack(notifiable: User): SlackMessage {
-        TODO("Return a slack message")
     }
 }
 

@@ -12,7 +12,6 @@ class DocsController : Controller() {
         val doc = call.make<Documentation>()
         val content = doc.get(page)
         val toc = doc.toc()
-
         val title = page.replace("-", " ").toTitleCase()
         call.render("docs", mapOf("content" to content, "title" to title, "toc" to toc))
     }
@@ -20,11 +19,4 @@ class DocsController : Controller() {
     fun index(call: HttpCall) {
         call.redirect().toRouteNamed("docs.show", mapOf("page" to "installation"))
     }
-}
-
-
-private inline fun <R> executeAndMeasureTimeMillis(block: () -> R): Pair<R, Long> {
-    val start = System.currentTimeMillis()
-    val result = block()
-    return result to (System.currentTimeMillis() - start)
 }
