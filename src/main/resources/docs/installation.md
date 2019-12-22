@@ -11,7 +11,7 @@
 <a name="server-requirements"></a>
 ### [Server Requirements](#server-requirements)
 
-Alpas has only few system requirements. The requirements vary based on whether you want to setup a machine for
+Alpas has only few system requirements. The requirements vary based on whether you want to set up a machine for
 development or for production. 
  
 <a name="development"></a>
@@ -22,21 +22,21 @@ development or for production.
 * JDK >= 9.0
 * Gradle >= 5.6
 
+> /info/ <span>You need a GitHub account to create your project based on [Alpas's project template][template].
+Once created, you can host your project anywhere you would like.</span>
+
 </div>
-
-> /info/ <span>You need a GitHub account to create your project based on Alpas's framework template. Once created, you 
-> can host your project anywhere you would like.</span>
-
-> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different versions of Alpas's system 
-> requirements.</span>
 
 <a name="production"></a>
 #### [Production](#production)
 
-If you have created a fat jar file for serving your app, the only requirement is the Java Runtime `jre`. If you 
-intend to run some alpas command, such as `alpas migrate` then you can setup your prod machine as if it was your 
-[dev machine](#development).
+If you have created a [fat JAR ](https://stackoverflow.com/questions/19150811/what-is-a-fat-jar) file for serving your
+app, the only requirement is the Java Runtime `jre`. If you intend to run some Alpas console commands, such as
+`alpas migrate`, then you can set up your prod machine as if it was your [dev machine](#development).
   
+> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different versions of
+Alpas's system requirements.</span>
+
 <a name="installation"></a>
 ### [Installation](#installation)
 
@@ -47,7 +47,7 @@ After you have set up your machine, it only takes a few steps to have your new A
 
 <div class="ordered-list">
 
-1. Visit [Alpas app repo on GitHub](https://github.com/ashokgelal/framework).
+1. Visit [Alpas app repo on GitHub][template].
 2. Click the green **Use this template** button and give it a name.
 3. Once the repo is created, clone your new repo on your local machine.
 4. At the root of the project there is a script named `alpas`; make it executable:
@@ -67,35 +67,38 @@ After you have set up your machine, it only takes a few steps to have your new A
 </div>
 
 
-> /tip/ <span>If you don't want to type `./` with every Alpas command, you could append `.` to your `$PATH`
-> variable.</span>
+> /tip/ <span>If you don't want to type `./` with every Alpas commands, you could append `.`
+to your `$PATH` variable.</span>
 
 <a name="configuring"></a>
 #### [Configuring](#configuring)
 
-Once the new app is initialized, you can start [configuring your app](/docs/configuration). Start with the `.env` file 
-that is automatically created under the project's root directory during the initialization. 
+Once the new app is initialized, you can start [configuring your app](/docs/configuration). Start with the 
+`.env` file that is automatically created under the project's root directory during the initialization. 
 
 <a name="serving-locally"></a>
 #### [Serving Locally](#serving-locally)
 
-You can serve your app from the command line or import it in IntellJ IDEA and then run it from within the IDE. To
- serve it from the command line, use: `./alpas serve`. If everything goes well, your web app will be available at
-  `http://localhost:8080`
+You can serve your app from the command line or import it in IntellJ IDEA and then run it from within the IDE.
+To serve it from the command line, use: `./alpas serve`. If everything goes well, your web app will be
+available at `http://localhost:8080`
 
-> /info/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error if the port 
-> is already in use. If you want to use a different port, change the `APP_PORT` value in your `.env` file.</span>
+> /info/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
+if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
+your `.env` file.</span>
 
 <a name="serving-externally"></a>
 #### [Serving Externally](#serving-locally)
 
-By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is convenient to 
-have your web app accessible from a different device on the same network. This is very helpful during 
-development esp. if you are trying to access your web app from a mobile device for, say, testing and debugging 
-the app's UI.
+By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
+convenient to have your web app accessible from a different device on the same network. This is
+very helpful during development esp. if you are trying to access your web app from a mobile
+device for, say, testing and debugging the app's UI.
 
-Alpas makes it really easy to serve your web app over an IP address. To do so add `SERVE_EXTERNALLY=true` in your 
-`.env` file. Build and re-serve your app and it should be available from both `http://localhost:<port>` and 
-`http://<local-device-ip>:<port>`.
+Alpas makes it really easy to serve your web app over an IP address. To do so add `SERVE_EXTERNALLY=true`
+in your `.env` file. Build and re-serve your app and it should be available from both
+`http://localhost:<port>` and `http://<local-device-ip>:<port>`.
 
 > /power/ <span>Alpas runs on an embedded [Jetty Web Server](https://www.eclipse.org/jetty/).
+
+[template]: https://github.com/ashokgelal/framework
