@@ -25,7 +25,7 @@
     "prismjs": "^1.17.1",
     "resolve-url-loader": "^3.1",
     "tailwindcss": "^1.1",
-    "vue": "^2.5",
+    "vue": "^2.6",
     "vue-template-compiler": "^2.6"
   }
 }
