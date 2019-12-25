@@ -32,6 +32,9 @@
 
 - #### Database
     - [Redis](/docs/redis)
+    
 - #### Advanced
     - [Mail](/docs/mail)
     - [Notifications](/docs/notifications)
+
+- [Troubleshooting](/docs/troubleshooting)
