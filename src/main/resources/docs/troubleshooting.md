@@ -12,8 +12,12 @@ available by running `alpas help` first. </span>
 Check `ConsoleKernel.kt` file and make sure the service provider is actually registered. If it is not register
 it, and then run `alpas build`. The commands should be available now. </span>
 
-- **I'm stuck. I'm having other issues. I need to ask something else.**
-> /help/ <span>Please [join our Slack channel][alpas-slack] and let us know. </span>
+- **`alpas migrate` doesn't run new migrations.**
+> /help/ <span> Most probably because you haven't built the app after adding a new migration. Run `alpas build`
+to build the app first and then run the migration. </span>
+
+- **I'm stuck. I'm having other issues. I need to ask something else. I just want to hangout with cool Alpas devs.**
+> /help/ <span>Please [join our Slack channel][alpas-slack] and say hi. </span>
 >
 - **I found a bug. I've a feature request.**
 > /help/ <span> If you found a security related bug, please email us. For other issues and feature/enhancement

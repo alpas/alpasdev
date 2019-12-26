@@ -36,5 +36,6 @@
 - #### Advanced
     - [Mail](/docs/mail)
     - [Notifications](/docs/notifications)
+    - [Queues](/docs/queues)
 
 - [Troubleshooting](/docs/troubleshooting)

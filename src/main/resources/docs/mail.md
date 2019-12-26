@@ -12,7 +12,7 @@ local file driver or write one of your own drivers.
 <a name="available-drivers"></a>
 ### [Available Drivers](#available-drivers)
 
-Currently, Alpas comes bundled with two drivers:
+Currently, Alpas comes bundled with 2 mail drivers:
 
 <div class="sublist">
 
