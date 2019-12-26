@@ -1,5 +1,4 @@
 - [Registering Queue Connections](#registering-queue-connections)
-- [Queuing Jobs](#queuing-jobs)
 - [Jobs](#jobs)
     - [Creating](#creating-jobs)
     - [Queuing](#queuing-jobs)
@@ -9,6 +8,10 @@
     - [Pass-through](#passthrough)
     - [Database](#database)
     - [ActiveMQ](#activemq)
+- [Running Queue](#running-queue)
+    - [Setting Connection](#setting-connection)
+    - [Selecting Queues](#selecting-queues)
+    - [Waiting for Jobs](#waiting-for-jobs)
 
 Alpas makes it easy to defer time-consuming tasks to a queue for processing it later. You could choose one of the
 many queues bundled with Alpas or create one of your own. No matter what you choose, it abstracted them away
@@ -19,6 +22,7 @@ The backends for queues are called `connections` in Alpas such as `DatabaseQueue
 could have multiple queues that you could selectively use for queuing different tasks most possibly
 based on their priorities such as *high priority queue*, *low priority queue* etc.
 
+<a name="registering-queue-connections"></a>
 ### [Registering Queue Connections](#registering-queue-connections)
 
 If you open `configs/Queue.kt`, you'll notice that Alpas has lazily registered three queue connections for you.
@@ -30,9 +34,10 @@ Once you are happy with your queue connections, make sure to register `QueueServ
 by [adding it to the list of service providers](/docs/service-providers#registering) in both of
 the kernel classes—`HttpKernel` and `ConsoleKernel`.
 
-
+<a name="jobs"></a>
 ### [Jobs](#jobs)
 
+<a name="creating-jobs"></a>
 #### [Creating Jobs](#creating-jobs)
 
 A job is just a serializable task with some metadata that you wish to process later. The metadata is used during
@@ -41,6 +46,7 @@ the processing of the task once it is dequeued from the backend.
 Here's a real example of a job that is used when [sending a mail](/docs/mail) such as when
 [resetting passwords](/docs/password-reset).
 
+<span class="line-numbers" data-start="2">
 
 ```kotlin
 
@@ -56,6 +62,8 @@ class SendMailJob(val mail: MailMessage) : Job() {
 
 ```
 
+</span>
+
 You can create a job by extending `dev.alpas.queue.job.Job` class and overriding `invoke()` method, which will
 be called after it is retrieved from the queue for actually processing the job. The easiest way to create a
 job is by using `make:job` Alpas console command. The jobs will be placed under `jobs` folder.
@@ -65,6 +73,8 @@ job is by using `make:job` Alpas console command. The jobs will be placed under 
 $ alpas make:job SendInvoice
 
 ```
+
+<span class="line-numbers" data-start="2">
 
 ```kotlin
 
@@ -77,10 +87,15 @@ class SendInvoice : Job() {
 
 ```
 
+</span>
+
+<a name="queuing-jobs"></a>
 #### [Queuing Jobs](#queuing-jobs)
 
 You can queue a job by asking a container for a `QueueDispatcher` instance and then calling `dispatch()`
 method on it.
+
+<span class="line-numbers" data-start="10">
 
 ```kotlin
 
@@ -92,9 +107,13 @@ container.make<QueueDispatcher>.dispatch(MailInvoice(), "high")
 
 ```
 
+</span>
+
 Conveniently, since most of the times you'd want to queue a job from within a controller, you can call base
 controller's `queue()` method.
 
+
+<span class="line-numbers" data-start="6">
 
 ```kotlin
 
@@ -102,10 +121,15 @@ fun sendInvoice(call: HttpCall){
     queue(MailInvoice(), "medium")
 }
 
+
 ```
+
+</span>
 
 If you want to queue a job on a non-default connection, you can pass the name of the connection as a third
 parameter:
+
+<span class="line-numbers" data-start="10">
 
 ```kotlin
 
@@ -113,18 +137,30 @@ parameter:
 container.make<QueueDispatcher>.dispatch(MailInvoice(), "high", "database")
 // ...
 
+```
+
+</span>
+
+<span class="line-numbers" data-start="5">
+
+```kotlin
+
 fun sendInvoice(call: HttpCall){
     queue(MailInvoice(), "medium", "database")
 }
 
 ```
 
+</span>
+
+<a name="delaying-job-processing"></a>
 #### [Delaying Job Processing](#delaying-job-processing)
 
 If you would like to delay the processing of a queued job after you have dispatched it, you can do so
 by overriding `delayInSeconds` property of the job. It is set to **1 second** by default, which
 means it will be available to be processed within approx. 1 second of adding it to the queue.
 
+<a name="retrying-failed-jobs"></a>
 #### [Retrying Failed Jobs](#retrying-failed-jobs)
 
 Although undesirable, your job might fail during processing for one reason or the other. Usually when that
@@ -138,6 +174,7 @@ be serializable along with all its properties and dependencies. Also, make sure 
 via primary constructor are not private otherwise the job will fail to deserialize, and it won't be
 processed. </span>
 
+<a name="available-drivers"></a>
 ### [Available Drivers](#available-drivers)
 
 Alpas comes bundled with 3 queue drivers:
@@ -146,6 +183,7 @@ Alpas comes bundled with 3 queue drivers:
 - [Database (*database*)](#database)
 - [ActiveMQ (*activemq*)](#activemq)
 
+<a name="passthrough"></a>
 #### [Pass-through](#passthrough)
 
 A `passthrough` driver simply invokes the job without holding it off. This is useful if you want to quickly debug
@@ -154,6 +192,7 @@ or test your jobs without having to go through them a queue as it needs some cer
 > /alert/ <span> Keep in mind that since the jobs are invoked right away with the `passthrough` driver, it
 completely ignores both `tries` and `delayInSeconds` properties.
 
+<a name="database"></a>
 #### [Database](#database)
 
 You can put your jobs in a database by setting `QUEUE_CONNECTION` value in your `.env` file to `database`. In order
@@ -175,6 +214,7 @@ $ alpas migrate
 
 ```
 
+<a name="activemq"></a>
 #### [Active MQ](#activemq)
 
 For a more robust, flexible, and cross-platform queuing, you can use [ActiveMQ][activemq], which Alpas supports
@@ -242,20 +282,26 @@ $ mybroker/bin/artemis run
 
 ```
 
-5. We would like to create queues on-demand rather than pre-configuring them before we use them. To be
-able to do that, you need to open `mybroker/etc/broker.xml` file and set `auto-delete-queues` to
-`false` and `default-address-routing-type` to `ANYCAST`:
+5. We would like to create queues on-demand rather than pre-configuring them before we use them. To be able
+to do that, you need to open `mybroker/etc/broker.xml` file and set `auto-delete-queues` to `false`
+and `default-address-routing-type` to `ANYCAST` under `<address-setting match="#">` element:
+
+<span class="line-numbers" data-start="18">
 
 ```xml
 
+<!-- ... -->
 <address-setting match="#">
     <!-- ... -->
     <!-- ... -->
     <auto-delete-queues>false</auto-delete-queues>
     <default-address-routing-type>ANYCAST</default-address-routing-type>
 </address-setting>
+<!-- ... -->
 
 ```
+
+</span>
 
 </div>
 
@@ -266,7 +312,8 @@ you'll be able to see all of your queued jobs and introspect them.
 app will throw an exception and you will lose the job that was supposed to be put in a queue. Make
 sure that the broker is running before serving your app.
 
-### [Running Queue]()
+<a name="running-queue"></a>
+### [Running Queue](#running-queue)
 
 One of the ways you can process a job is by using `queue:work` Alpas command. When you run it, Alpas
 basically starts a new console app instance, dequeues and deserializes a job from a connection
@@ -282,7 +329,8 @@ alpas queue:work
 jobs as they come in. Since the app is compiled and loaded once when you run `queue:work` command, you
 must rebuild your app and then restart the process whenever your code changes.</span>
 
-#### Setting Connection
+<a name="setting-connection"></a>
+#### [Setting Connection](#setting-connection)
 
 Queue worker selects the default queue connection specified in your `.env` file when dequeueing jobs from
 a driver. You can specify which queue connection to pick by passing the name of the connection as an
@@ -295,7 +343,8 @@ alpas queue:work database
 
 ```
 
-#### Selecting Queues
+<a name="selecting-queues"></a>
+#### [Selecting Queues](#selecting-queues)
 
 Not just the connection, you can also pick what queues you want to process by specifying `--queue` option
 to `queue:work` command.
@@ -307,7 +356,8 @@ alpas queue:work database --queue=invoices
 
 ```
 
-#### Sleeping 
+<a name="waiting-for-jobs"></a>
+#### [Waiting for Jobs](#waiting-for-jobs)
 
 When you have no jobs available on your queue, then you don't want to bombard the driver checking for jobs
 availability. To be easy on your system, you might want the worker to sleep for some time before probing
