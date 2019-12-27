@@ -34,6 +34,7 @@
     - [Redis](/docs/redis)
     
 - #### Advanced
+    - [Alpas Console](/docs/alpas-console)
     - [Mail](/docs/mail)
     - [Notifications](/docs/notifications)
     - [Queues](/docs/queues)

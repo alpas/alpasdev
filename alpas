@@ -13,10 +13,6 @@ install() {
   fi
 }
 
-build() {
-    install "$@"
-}
-
 buildJar() {
   cecholn "YELLOW" "Building jar..."
   if ./gradlew shadowJar >/dev/null 2>&1; then
@@ -26,22 +22,17 @@ buildJar() {
   fi
 }
 
-checkBinAndWarn() {
-  # fixme: We cannot just count on the presence of $APP_BIN_PATH to determine whether we need to build or not
-  if [ ! -f "$APP_BIN_PATH" ]; then
-    cecholn "YELLOW" "Looks like we need to build your project first. This is going to take few seconds..."
-    cecholn "RED" "To speed things up we highly recommend that during development you run 'alpas watch' in another terminal."
-    printf "\n\n"
-    build --quiet >/dev/null 2>&1
-  fi
+installQuietly() {
+   install --quiet >/dev/null 2>&1
 }
 
 run_app() {
-  if checkBinAndWarn; then
+  if installQuietly; then
     MY_PATH=$(dirname "$0")
     MY_PATH=$( (cd "$MY_PATH" && pwd))
     APP_PATH="${MY_PATH}"
 
+    export foobar="zsh"
     export alpas_run_mode="console"
     export alpas_root_dir="$APP_PATH"
 
@@ -84,7 +75,7 @@ if [[ $# -eq 1 ]]; then
     java -jar ${APP_NAME}.jar
     ;;
   build)
-    build
+    install
     ;;
   serve)
     ./gradlew shadowJar >/dev/null 2>&1
@@ -131,7 +122,7 @@ elif [[ $1 == *"init"* ]]; then
     cecholn "GREEN" " Building your app. This will take few seconds."
 
     gradle build --quiet >/dev/null 2>&1
-    build --quiet >/dev/null 2>&1
+    install --quiet >/dev/null 2>&1
 
     cecholn "GREEN" " ✓ You app is crafted. Let's build something awesome!"
   fi
