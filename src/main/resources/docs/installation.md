@@ -1,11 +1,13 @@
 - [Server Requirements](#server-requirements)
-  - [Development](#development)
-  - [Production](#production)
-  - [Setup](#setup)
+    - [Development](#development)
+    - [Production](#production)
+    - [Setup](#setup)
+        - [Using `brew`](#using-brew)
+        - [Using `sdkman`](#using-sdkman)
 - [Installation](#installation)
-  - [Creating New Project](#creating-new-project)
-  - [Configuring](#configuring)
-  - [Serving](#serving)
+    - [Creating New Project](#creating-new-project)
+    - [Configuring](#configuring)
+- [Serving](#serving)
     - [Locally](#serving-locally)
     - [Externally](#serving-externally)
 
@@ -38,43 +40,47 @@ If you have created a [fat JAR ](https://stackoverflow.com/questions/19150811/wh
 app, the only requirement is the Java Runtime `jre`. If you intend to run some Alpas console commands, such as
 `alpas migrate`, then you can set up your prod machine as if it was your [dev machine](#development).
 
-> /tip/ <span>We highly recommend using [sdkman](https://sdkman.io/) for managing different versions of
-> Alpas’s system requirements.</span>
-
 <a name=“setup”></a>
+### [Setup](#setup)
 
-#### [Setup](#setup)
+<a name=“using-brew></a>
+#### [Using Brew](#using-brew)
 
-For Mac users, you can setup via brew or sdkman, both are covered below:
+If you are a Mac user and prefer installing dependencies using [brew](), you can follow the following steps:
 
-## [Using Brew]
+<div class="ordered-list"> 
 
-Run the following commands in the sequence listed below:
+1. Update your brew and prepare for the needed installations: `brew update`
+2. Install the latest version of Gradle: `brew install gradle`
+3. Install the latest version of Java: `brew cask install java`
 
-- Type `brew update` to update your brew and prepare for the needed installations.
-- To install the latest version of Gradle type `brew install gradle`
-- To install the latest version of Java type `brew cask install java`
+</div>
 
-## [Using sdkman]
+<a name=“using-sdkman></a>
+#### [Using sdkman]($using-sdkman)
 
-Run the following commands in the sequence listed below:
+A much better way to install and manage Java dependencies and something that we highly recommend is using
+[sdkman](https://sdkman.io/install)
 
-- `curl -s “https://get.sdkman.io” | bash` to install sdkman on your mac.
-- Run `sdk version` to ensure that installation succeeded.
-- Run `sdk install java 9.0.7-zulu` to install Java 9. Remember the lowest version of JDK needed is 9.0
-- Run `sdk install gradle 5.6.4` to install the lowest version of Gradle needed for the application to work.
+<div class="ordered-list"> 
+
+1. Install sdkman: `curl -s “https://get.sdkman.io” | bash`
+2. Restart the terminal or just source the sdk: `source "$HOME/.sdkman/bin/sdkman-init.sh"`
+2. Check the version to be sure: `sdk version`
+3. Install the minimum version of Java required: `sdk install java 9.0.7-zulu`
+4. Install the minimum version of gradle required: `sdk install gradle 5.6.4`
+
+</div>
 
 <a name=“installation”></a>
-
 ### [Installation](#installation)
 
 After you have set up your machine, it only takes a few steps to have your new Alpas app up and running:
 
 <a name=“creating-new-project”></a>
-
 #### [Creating New Project](#creating-new-project)
 
-<div class=“ordered-list”>
+<div class="ordered-list"> 
 
 1. Visit [Alpas app repo on GitHub][template].
 2. Click the green **Use this template** button and give it a name.
@@ -91,7 +97,7 @@ After you have set up your machine, it only takes a few steps to have your new A
     ./alpas init com.example.myapp
 ```
 
-6. Import your new project in IntelliJ IDEA.
+6. Import your new project in IntelliJ IDEA. **Optional but highly recommended!**
 
 </div>
 
@@ -99,14 +105,12 @@ After you have set up your machine, it only takes a few steps to have your new A
 > to your `$PATH` variable.</span>
 
 <a name=“configuring”></a>
-
 #### [Configuring](#configuring)
 
 Once the new app is initialized, you can start [configuring your app](/docs/configuration). Start with the
 `.env` file that is automatically created under the project’s root directory during the initialization.
 
 <a name=“serving-locally”></a>
-
 #### [Serving Locally](#serving-locally)
 
 You can serve your app from the command line or import it in IntellJ IDEA and then run it from within the IDE.
@@ -118,7 +122,6 @@ available at `http://localhost:8080`
 > your `.env` file.</span>
 
 <a name=“serving-externally”></a>
-
 #### [Serving Externally](#serving-locally)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
