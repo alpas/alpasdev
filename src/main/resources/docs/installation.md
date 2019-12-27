@@ -46,7 +46,7 @@ app, the only requirement is the Java Runtime `jre`. If you intend to run some A
 <a name=“using-brew></a>
 #### [Using Brew](#using-brew)
 
-If you are a Mac user and prefer installing dependencies using [brew](), you can follow the following steps:
+If you are a Mac user and prefer installing dependencies using [brew](https://brew.sh/), you can follow these steps:
 
 <div class="ordered-list"> 
 
@@ -60,7 +60,7 @@ If you are a Mac user and prefer installing dependencies using [brew](), you can
 #### [Using sdkman]($using-sdkman)
 
 A much better way to install and manage Java dependencies and something that we highly recommend is using
-[sdkman](https://sdkman.io/install)
+[sdkman](https://sdkman.io/install):
 
 <div class="ordered-list"> 
 
