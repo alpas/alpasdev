@@ -43,6 +43,14 @@ br {
 }
 
 .docs_content {
+  pre[data-file]::before {
+    content: attr(data-file);
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    color: lightslategray;
+  }
+
   :not(pre) > code[class*="language-"], pre[class*="language-"] {
   @apply bg-gray-100 m-6 p-6 shadow text-sm;
   }
@@ -74,7 +82,7 @@ br {
   @apply bg-gray-100 m-6 p-6 self-center shadow-lg;
 
     &.help {
-      @apply shadow-none rounded;
+    @apply shadow-none rounded;
     }
 
     code {
@@ -118,8 +126,9 @@ br {
 
   h1 {
   @apply text-gray-800;
+
     + ul {
-      @apply mb-16;
+    @apply mb-16;
     }
   }
 
@@ -262,7 +271,8 @@ ul li {
 }
 
 .docs_toc {
-  @apply text-base;
+@apply text-base;
+
   ul {
     li {
     @apply mb-4;

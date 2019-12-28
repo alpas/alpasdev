@@ -5,7 +5,7 @@ jQuery(function ($) {
     // copy line numbers start offset from parent to child
     $('span.line-numbers').each(function () {
         const parent = $(this)
-        parent.children('pre.line-numbers').attr('data-start', parent.attr('data-start'))
+        parent.children('pre.line-numbers').attr('data-start', parent.attr('data-start')).attr('data-file', parent.attr('data-file'))
     }).promise().done(function () {
         try {
             Prism.highlightAll()
