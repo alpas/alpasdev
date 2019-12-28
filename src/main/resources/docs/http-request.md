@@ -1,15 +1,15 @@
 - [Introduction](#introduction)
-- [Retrieving Request Properties](#retrieving-properties)
-- [Retrieving Request Parameters](#retrieving-parameters)
-- [Retrieving Headers](#retrieving-headers)
-- [Retrieving Cookies](#retrieving-cookies)
+- [Retrieving Request Properties](#properties)
+- [Retrieving Request Parameters](#parameters)
+- [Retrieving Headers](#headers)
+- [Retrieving Cookies](#cookies)
 - [Form Method Spoofing](#spoofing)
 
 Alpas wraps every request that hits your app to an `HttpCall` object. `HttpCall` is no doubt the most powerful object
 in Alpas. It has everything you need to get any data and operations you need out of a request.
 
-<a name="retrieving-properties"></a>
-### [Retrieving Request Properties](#retrieving-properties)
+<a name="properties"></a>
+### [Retrieving Request Properties](#properties)
 
 <div class="sublist">
 
@@ -38,8 +38,8 @@ has explicitly mentioned that it wants a Json response **or** if the request is 
 
 <br/>
 
-<a name="retrieving-parameters"></a>
-### [Retrieving Request Parameters](#retrieving-parameters)
+<a name="parameters"></a>
+### [Retrieving Request Parameters](#parameters)
 
 <div class="sublist">
 
@@ -86,8 +86,8 @@ val except = call.paramsExcept("password", "password_confirm")
 
 </div>
 
-<a name="retrieving-headers"></a>
-### [Retrieving Headers](#retrieving-headers)
+<a name="headers"></a>
+### [Retrieving Headers](#headers)
 
 <div class="sublist">
 
@@ -98,8 +98,8 @@ the given key, it returns the first value.
 
 </div>
 
-<a name="retrieving-cookies"></a>
-### [Retrieving Cookies](#retrieving-cookies)
+<a name="cookies"></a>
+### [Retrieving Cookies](#cookies)
 
 You read the cookies from an incoming request, use the `cookie` method on the `HttpCall` object.
 
