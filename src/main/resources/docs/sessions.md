@@ -204,7 +204,7 @@ There are a few flash related helpers available in your [Pebble templates](/docs
 
 - `flash(key, default)`
 
-Retrieve a flash payload for the given **key**. If it doesn't exist then return the given **default** value.
+Retrieve a flash payload for the given `key`. If it doesn't exist then return the given `default` value.
 
 <span class="line-numbers" data-start="14">
 
@@ -218,7 +218,7 @@ Retrieve a flash payload for the given **key**. If it doesn't exist then return 
 
 - `hasFlash(key)`
 
-Checks if a flash item for the given **key** exists.
+Checks if a flash item for the given `key` exists.
 
 <span class="line-numbers" data-start="14">
 

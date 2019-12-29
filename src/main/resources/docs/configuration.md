@@ -157,11 +157,13 @@ environment and query some of its properties.
 
 <div class="sublist">
 
+<a name="production"></a>
 * `isProduction`
  
 Check if your app is running in production mode. If `APP_LEVEL` environment variable is set to one of **prod**,
 **production**, or **live** then it is considered to be in production mode.
 
+<a name="dev"></a>
 * `isDev`
 
 Check if your app is in development mode. If `APP_LEVEL` environment variable is set to one of **dev**, **debug**,
