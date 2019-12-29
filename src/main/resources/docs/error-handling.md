@@ -106,8 +106,6 @@ catch-all `InternalServerException` and reports and renders it accordingly.
 >recommend putting it under `exceptions` directory. Don't worry about loading this class.
 >Alpas will automatically discover, load, and use this class for you!</span>
 
-<br/>
-
 <a name="throwing-http-exceptions"></a>
 ### [Throwing HTTP Exceptions](#throwing-http-exceptions)
 
@@ -116,14 +114,14 @@ Use `HttpCall`'s one of many [abort()](/docs/http-response#abort) methods to thr
 <a name="stacktrace-dump"></a>
 ### [Stacktrace Dump](#stacktrace-dump)
 
-When rendering an `InternalServerException`, if your app environment is set to dev mode, it dumps the stacktrace
-to your web page. This makes it easy to just see what's going on without having to resort to your IDE's
-console.
+When rendering an `InternalServerException`, if your app environment is set to [dev mode](/docs/configuration#dev),
+it dumps the stacktrace to your web page. This makes it easy to just see what's going on without having to
+resort to your IDE's console.
 
 You can control whether the stacktrace gets dumped to your web page or not by setting a proper value for
-`APP_LEVEL` variable in your `.env` file. Setting it to one of **dev**, **debug**, or **local** dumps
-the stacktrace but setting it to one of **prod**, **production**, or **live** doesn't.
+`APP_LEVEL` variable in your `.env` file. Setting it to [development](/docs/configuration#dev) dumps
+the stacktrace but setting it to [production](/docs/configuration#production) doesn't.
 
->/alert/ <span>Make sure to set `APP_LEVEL` to one of **prod**, **production**, or **live** once your app is
->deployed before it goes live to avoid exposing any internal data through a dumped stacktrace.</span>
+>/alert/ <span>Make sure to set your app's level to production, before your app goes live to avoid
+>exposing any internal data through a dumped stacktrace.</span>
 

@@ -111,5 +111,5 @@ You could configure this logger by doing something like the following in `app_lo
 With the above configuration, the error log messages will be printed to `stdout` and warnings
 are appended to the `storage/logs/alpas.log` file.
 
-> /power/ <span>Under the hood, Alpas utilizes [kotlin-logging](https://github.com/MicroUtils/kotlin-logging),
->a very performant logging library that wraps slf4j with Kotlin extensions. 
+> /power/ <span>Under the hood, Alpas utilizes [kotlin-logging](https://github.com/MicroUtils/kotlin-logging)—a
+>very performant logging library that wraps slf4j with Kotlin extensions. 

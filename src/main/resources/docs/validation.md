@@ -140,7 +140,7 @@ alpas make:guard CreatePageGuard
 
 ```
 
-If you open the newly generated guard class you'll see that a `rules()` method is already overriden
+When you open the newly generated guard class you'll see that a `rules()` method is already overriden
 for you. All you need to do is to return a map of rules where the key is the name of the field,
 and the value is a list of rule objects for the field.
 
