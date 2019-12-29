@@ -11,15 +11,13 @@
     - [Locally](#serving-locally)
     - [Externally](#serving-externally)
 
-<a name=“server-requirements”></a>
-
+<a name="server-requirements"></a>
 ### [Server Requirements](#server-requirements)
 
 Alpas has only few system requirements. The requirements vary based on whether you want to set up a machine for
 development or for production.
 
-<a name=“development”></a>
-
+<a name="development"></a>
 #### [Development](#development)
 
 <div class=“sublist”>
@@ -32,19 +30,18 @@ development or for production.
 
 </div>
 
-<a name=“production”></a>
-
+<a name="production"></a>
 #### [Production](#production)
 
 If you have created a [fat JAR ](https://stackoverflow.com/questions/19150811/what-is-a-fat-jar) file for serving your
 app, the only requirement is the Java Runtime `jre`. If you intend to run some Alpas console commands, such as
 `alpas migrate`, then you can set up your prod machine as if it was your [dev machine](#development).
 
-<a name=“setup”></a>
+<a name="setup"></a>
 ### [Setup](#setup)
 
-<a name=“using-brew></a>
-#### [Using Brew](#using-brew)
+<a name="using-brew"></a>
+#### [Using Brew (MacOS only)](#using-brew)
 
 If you are a Mac user and prefer installing dependencies using [brew](https://brew.sh/), you can follow these steps:
 
@@ -56,8 +53,8 @@ If you are a Mac user and prefer installing dependencies using [brew](https://br
 
 </div>
 
-<a name=“using-sdkman></a>
-#### [Using sdkman]($using-sdkman)
+<a name="using-sdkman"></a>
+#### [Using sdkman](#using-sdkman)
 
 A much better way to install and manage Java dependencies and something that we highly recommend is using
 [sdkman](https://sdkman.io/install):
@@ -72,45 +69,33 @@ A much better way to install and manage Java dependencies and something that we 
 
 </div>
 
-<a name=“installation”></a>
+<a name="installation"></a>
 ### [Installation](#installation)
 
 After you have set up your machine, it only takes a few steps to have your new Alpas app up and running:
 
-<a name=“creating-new-project”></a>
+<a name="creating-new-project"></a>
 #### [Creating New Project](#creating-new-project)
 
 <div class="ordered-list"> 
 
-1. Visit [Alpas app repo on GitHub][template].
-2. Click the green **Use this template** button and give it a name.
-3. Once the repo is created, clone your new repo on your local machine.
-4. At the root of the project there is a script named `alpas`; make it executable:
-
-```bash
-    chmod +x ./alpas
-```
-
-5. Initialize your new project using the full package name:
-
-```bash
-    ./alpas init com.example.myapp
-```
-
-6. Import your new project in IntelliJ IDEA. **Optional but highly recommended!**
+1. Visit [Alpas app repo on GitHub][template] and click the green **Use this template** button
+2. Give it a name. Once done, clone your new repo on your local machine.
+4. At the root of the project there is a script named `alpas`. Make it executable: `chmod +x ./alpas`
+5. Initialize your new project using the full package name: `./alpas init com.example.myapp`
+6. Once done, run `./alpas serve` to [serve your app](#serving-locally).
+6. Open your new project in IntelliJ IDEA. **Optional but very highly recommended!**
 
 </div>
 
-> /tip/ <span>If you don’t want to type `./` with every Alpas commands, you could append `.`
-> to your `$PATH` variable.</span>
-
-<a name=“configuring”></a>
+<a name="configuring"></a>
 #### [Configuring](#configuring)
 
 Once the new app is initialized, you can start [configuring your app](/docs/configuration). Start with the
 `.env` file that is automatically created under the project’s root directory during the initialization.
 
-<a name=“serving-locally”></a>
+<a name="serving"></a>
+<a name="serving-locally"></a>
 #### [Serving Locally](#serving-locally)
 
 You can serve your app from the command line or import it in IntellJ IDEA and then run it from within the IDE.
@@ -121,7 +106,7 @@ available at `http://localhost:8080`
 > if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
 > your `.env` file.</span>
 
-<a name=“serving-externally”></a>
+<a name="serving-externally"></a>
 #### [Serving Externally](#serving-locally)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
