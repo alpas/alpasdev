@@ -450,7 +450,6 @@ in your form so that the correct route gets matched, you need to spoof it by pas
 Method spoofing is enabled by default. But you can disable it by setting `allowMethodSpoofing`
 property to `false` in your `AppConfig` class.
 
-
 <a name="route-helpers"></a>
 ### [Route Helpers](#route-helpers)
 
