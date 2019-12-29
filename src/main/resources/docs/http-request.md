@@ -37,10 +37,12 @@ Tells you whether the request is a [Pjax](https://github.com/defunkt/jquery-pjax
 
 Tells you whether the request content is of type 'application/json' or not.
 
+<a name="wants-json"></a>
 - `wantsJson` 
 
 Tells you whether the request wants a JSON response or not.
 
+<a name="expects-json"></a>
 - `expectsJson` 
 
 Tells you whether the request is "expecting" a JSON response or not. This is true if the request has

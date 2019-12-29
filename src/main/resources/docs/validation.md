@@ -13,16 +13,16 @@
     - [Rendering Validation Errors](#rendering-validation-errors)
     - [Displaying Errors and Old Values](#displaying-errors-and-old-values)
 
-When handling a request and especially when handling user input you'd want to make sure that the incoming data is
-valid and as expected. If it is not, you'd want to send appropriate error messages back to the user. You'd then want
-to have the error messages available in your templates to format and display them nicely. All these need a lot of
-wiring. Fortunately, Alpas supports all these out of the box!
+When handling a request, and especially when handling user input, you want to make sure that the incoming data is
+valid and as per your expectation. If it is not, you want to send appropriate error messages back to the user.
+You want to have the error messages available in your templates to format and display them nicely. All
+these need a lot of wiring. Fortunately, Alpas supports all these out-of-the-box!
 
 <a name="validation-rules"></a>
 ### [Validation Rules](#validation-rules)
 
-The simplest and quickest way to validate an `HttpCall` is by applying some validation rules on it for each of the 
-input params you want to validate.
+The simplest and quickest way to validate an `HttpCall` is by applying some validation rules on it for
+each of the input params you want to validate.
 
 <span class="line-numbers" data-start="15">
 
@@ -32,13 +32,11 @@ fun create(call: HttpCall) {
     call.applyRules("username") {
         required()
         min(8)
-        max(32) { attr, value ->
-            "$attr cannot be more than 32 characters long. It is ${value?.toString()?.length} character long."
-        }
+        max(32)
     }
 
     call.applyRules("email") {
-        required() { _, _ -> "Email field is required to receive payment reminders." }
+        required()
         email()
     }
 
@@ -53,8 +51,8 @@ fun create(call: HttpCall) {
 
 </span>
 
-Instead of applying multiple rules, you could also pass a map of rules where the key is the name of the field and 
-the value is a list of rule objects for the field.
+Instead of applying multiple rules, you could also pass a map of rules where the key is the
+name of the field, and the value is a list of *rule objects* for the field.
 
 <span class="line-numbers" data-start="15">
 
@@ -74,8 +72,8 @@ fun create(call: HttpCall) {
 <a name="failing-fast"></a>
 #### [Failing Fast](#failing-fast)
 
-Sometimes you may wish to not continue with the validation after the first validation fails. To achieve this, set
-`failfast` to `true` when applying your rules.
+Sometimes you may wish to not continue with the validation after the first validation fails i.e.—bail
+on the first error. To achieve this, set `failfast` to `true` when applying your rules.
 
 <span class="line-numbers" data-start="15">
 
@@ -95,8 +93,8 @@ fun create(call: HttpCall) {
 
 </span>
 
-If, for whatever reason, you want to run all the validation rules for an attribute and then only continue validating
-the next attribute, you could just call `validate()` after each set of rules.
+If you want to apply and validate rules attribute-by-attribute, continuing to the next attribute only
+after each attribute passes a rule set, you can just call `validate()` after each set of rules.
 
 <span class="line-numbers" data-start="15">
 
@@ -107,7 +105,7 @@ fun create(call: HttpCall) {
         required()
         min(8)
         max(32)
-    }.validate() // this validates your call right away and only proceeds if all the validations pass
+    }.validate() // validates your call right away and only proceeds if the validation passes
 
     // username should be valid at this point
     call.applyRules("email") {
@@ -125,28 +123,31 @@ fun create(call: HttpCall) {
 <a name="validation-guard"></a>
 ### [Validation Guard](#validation-guard)
 
-The in-place validation within your controller may be good enough for simpler validation rules, it is desirable to 
-better organize your validation rules to make them more manageable. You may want to do more within the rules, such as 
-caching an expensive database lookup to retrieve later, or share the rules easily with other controllers. You 
-definitely don't want all these complex logic scattered all over the places in your controller. To facilitate this 
-Alpas allows you to validate your call using a dedicated `ValidationGuard` class.
+Although the in-place application of validation rules within a controller may be good enough for simple
+validation rules, it is desirable to better organize validation rules to make them more manageable.
+You may also want to do more within the rules, such as caching an expensive database lookup to be
+retrieved later, or reuse the validation rules from other places.
 
-To create a `ValidationGuard` class, you could use the `make:guard` Alpas command:
+You definitely don't want all these complex logic scattered all over the places in your controller.
+To facilitate this, Alpas allows you to validate a call using a dedicated `ValidationGuard` class.
+
+To create a `ValidationGuard` class, you can use the `make:guard` Alpas command. This creates
+a new validation guard class under `guards` folder.
 
 ```bash
 
-# creates CreatePageGuard.kt class under guards folder
 alpas make:guard CreatePageGuard
 
 ```
 
-If you open the newly generated guard class you'll see that a `rules()` method is already overriden for you. All you
-need to do now is to return a map of rules where the key is the name of the field and the value is a list of rule 
-objects for the field.
+If you open the newly generated guard class you'll see that a `rules()` method is already overriden
+for you. All you need to do is to return a map of rules where the key is the name of the field,
+and the value is a list of rule objects for the field.
 
-<span class="line-numbers" data-start="3">
+<span class="line-numbers" data-start="2" data-file="guards/CreatePageGuard.kt">
 
 ```kotlin
+
 import dev.alpas.validation.*
 
 class CreatePageGuard : ValidationGuard() {
@@ -157,11 +158,12 @@ class CreatePageGuard : ValidationGuard() {
         )
     }
 
-    // feel free to add any additional functions as per your need
-    fun logSuccess() {
+    // feel free to add any additional methods and properties your need
+    internal fun logSuccess() {
         call.logger.debug { "Validation was a success!" }
     }
 }
+
 ```
 
 </span>
@@ -173,6 +175,8 @@ All that is needed now is to validate a call using this guard.
 ```kotlin
 
 fun create(call: HttpCall) {
+    //...
+
     call.validateUsing(CreatePageGuard::class).logSuccess()
     call.reply("Everything is good!")
 }
@@ -190,11 +194,11 @@ Alpas comes bundled with some validation rules out of the box.
 
 - `Max(var length: Int)`
 
-The value of the attribute under validation must be less than or equal to the given *length*.
+The value of the attribute under validation must be less than or equal to the given `length`.
 
 - `Min(length: Int)`
 
-The value of the attribute must be greater than or equal to the given *length*.
+The value of the attribute must be greater than or equal to the given `length`.
 
 - `Required`
 
@@ -214,26 +218,27 @@ The value must be of type `String`.
 
 - `MatchesRegularExpression(expression: String)`
 
-The value must match the given regular expression format.
+The value must match the given regular `expression` format.
 
 - `Email`
 
-The value must be a properly formatted RFC compliant e-mail address. Alpas uses 
-[email-rfc2822-validator](https://github.com/bbottema/email-rfc2822-validator) for validating the e-mail address using
-RFC 2822 compliant criteria.
+The value must be a properly formatted RFC compliant e-mail address.
+
+Alpas uses [email-rfc2822-validator](https://github.com/bbottema/email-rfc2822-validator)
+for validating an e-mail address using RFC 2822 compliant criteria.
 
 - `Confirm`
 
 Validates that there exists a matching *confirm* field and that the value matches the value of this attribute.
 
-For example, if the attribute under validation is `password`, there must existing an attribute, either 
-`password_confirm` **or** `confirm_password` , and the value of it matches the value of `password`. The value of the 
-*confirm* field can neither be `null` nor `blank`.
+For example, if the attribute under validation is `password`, there must existing an attribute,
+either `password_confirm` **or** `confirm_password`, and the value of it must match the value
+of `password`. The value of the *confirm* field can neither be `null` nor `blank`.
 
 - `Unique(table: String, column: String? = null, ignore: String? = null)`
 
-The value must not exists in the given database **table** for the given **column**. If the **column** is null, the 
-name of the attribute will be used for the column.
+The value must not exists in the given database *table* for the given *column*.
+If the *column* is null, the name of the attribute will be used for the column.
 
 <span class="line-numbers" data-start="8">
 
@@ -261,10 +266,10 @@ call.applyRules("ssn") {
 <a name="ignoring-uniqueness"></a>
 #### [Ignoring uniqueness validation for a value](#ignoring-uniqueness)
 
-Sometimes you may require to ignore a given value under a column during the unique validation check. Think of creating 
-a user profile with an **email** column vs updating that profile later. When creating the profile, you want to make 
-sure that no other user exists in the database with the same email address. Your rule for this would look something 
-like:
+Sometimes you may require to ignore a given value under a column during the unique validation check.
+Think of creating a user profile with an `email` column **vs** updating that same profile later.
+When creating the profile, you want to make sure no other user exists in the database with
+the same email address. Your validation rule for this would look something like:
 
 <span class="line-numbers" data-start="8">
 
@@ -283,13 +288,15 @@ call.applyRules("email") {
 
 </span>
 
-On the other hand, when updating the profile, you want to let the user update her profile **with** or **without**
-updating the **email** address field. If the user only wants to update, say, the name field and **not** the email field,
-you do not want to apply email uniqueness validation for this user. Otherwise, the validation would fail every time and
-the user won't be able to update her name without also updating her email address.
+On the other hand, when updating the profile, you want to let the user update their profile **with**or
+**without** updating the `email` address field. If the user only wants to update, say, the `name`
+field and **not** the `email` field, you do not want to apply email uniqueness validation rule
+for this user. Otherwise, validation would fail every time, and the user would't be able to
+update their name without also updating their email address.
 
-In this case, you'd want to ignore the uniqueness check but only against this user's id. You could do this by setting 
-the `ignore` parameter in the format `<column_name>:<value>`. Your rule for this would look something like:
+In this case, you need to ignore the uniqueness check but only against the user's id. You
+can achieve this by setting the `ignore` parameter in the format `<column_name>:<value>`.
+Your rule for this would look something like:
 
 <span class="line-numbers" data-start="10">
 
@@ -306,8 +313,8 @@ call.applyRules("email") {
 
 ```
 
-In the above example, the email's uniqueness check is ignored for the row where `id` is *4*. If the email
-matches for any other row then the validation fails.
+In the above example, the uniqueness check for user's email is ignored for the row where `id` is *4*.
+But if them email matches for any other rows then the validation fails.
 
 </span>
 
@@ -316,20 +323,19 @@ matches for any other row then the validation fails.
 <a name="custom-rules"></a>
 ### [Custom Rules](#custom-rules)
 
-If none of the rules that come bundled with Alpas satisfy your needs, you can easily create your own. Use
-`alpas make:rule` command to quickly create a new rule and modify it as per your need.
+If none of the rules that come bundled with Alpas satisfy your needs, you can easily create your own.
+To start quickly, use `alpas make:rule` command to create a new rule under `rules` folder.
 
 ```bash
 
-# creates Above.kt class under rules folder
 alpas make:rule above
 
 ```
 
-Let's say that our new `Above` rule makes sure that the attribute under validation is a number and that it is above 
-the given threshold.
+Let's say that our new `Above` rule makes sure that the attribute under validation is
+a number and that it is above a given threshold.
 
-<span class="line-numbers" data-start="3">
+<span class="line-numbers" data-start="3" data-file="rules/Above.kt">
 
 ```kotlin
 
@@ -377,16 +383,17 @@ fun create(call: HttpCall) {
 
 </span>
 
-> /tip/ <span> If you need more power and flexibility in your custom validation rule, override 
-> `check(attribute: String, call: HttpCall): Boolean` method instead.
+> /tip/ <span> If you need more power and flexibility in your custom validation rule,
+>override `check(attribute: String, call: HttpCall): Boolean` method instead.
 
 <a name="customizing-error-messages"></a>
 ### [Customizing Error Messages](#customizing-error-messages)
 
-All the rules that come bundled with Alpas have some sensible error messages set for each validation rule. If you want
-to customize it, you can easily do so by passing a callback for the `message` parameter while applying a rule.
-The message is of type `ErrorMessage`, which is a typealias for `((String, Any?) -> String)?`— a function
-that takes two parameters, the name of the attribute and the actual value—and returns the actual error message.
+All the rules that come bundled with Alpas have some sensible error messages set for each validation rule.
+If you want to customize a message, you can easily do so by passing a callback for the `message`
+parameter when applying a rule. The message is of type `ErrorMessage`, which is a typealias
+for `((String, Any?) -> String)?`. It is a function that takes two parameters—the name
+of the attribute and the actual value—and returns an error message.
 
 <span class="line-numbers" data-start="16">
 
@@ -395,7 +402,8 @@ that takes two parameters, the name of the attribute and the actual value—and 
 // ...
 call.applyRules("username") {
     max(32) { attr, value ->
-        "$attr should be no more than 32 characters long. It is ${value?.toString()?.length} character long."
+        val length = value?.toString()?.length
+        "$attr is $length characters long. It should be no more than 32."
     }.validate()
 }
 // ...
@@ -411,8 +419,8 @@ call.applyRules("username") {
 #### [Checking in JSON Body](#json-body)
 
 Alpas doesn't merge a JSON body with the request parameters but instead makes it available as a `jsonBody` property.
-While validating, by default, Alpas looks in the query + form + route parameters. If you want to validate a field 
-that is within the JSON body, you can easily do so by wrapping your rules in `inJsonBody()` instead.
+During validation, by default, Alpas looks in the query + form + route parameters. If you want to validate a
+field that is within the JSON body, you can do so by wrapping your rules in `inJsonBody()` instead.
 
 <span class="line-numbers" data-start="15">
 
@@ -446,13 +454,14 @@ fun create(call: HttpCall) {
 <a name="json-field-rules"></a>
 #### [JSON Field Rules](#json-field-rules)
 
-Alpas also provides a `JSONField` rule class that takes a list of rules for which you want to check the values in 
-the JSON body. This is more convenient when applying a map of rules to a call or when returning a map of rules from
-a `ValidationGuard` class.
+Alpas also provides a `JSONField` rule class that takes a list of rules for which you want to check the
+values in the JSON body. This is more convenient when applying a map of rules to a call or when
+returning a map of rules from a `ValidationGuard` class.
 
-<span class="line-numbers" data-start="3">
+<span class="line-numbers" data-start="3" data-file="guards/CreatePageGuard.kt">
 
 ```kotlin
+
 import dev.alpas.validation.*
 
 class CreatePageGuard : ValidationGuard() {
@@ -469,6 +478,7 @@ class CreatePageGuard : ValidationGuard() {
         )
     }
 }
+
 ```
 
 </span>
@@ -479,25 +489,30 @@ class CreatePageGuard : ValidationGuard() {
 <a name="intercepting-validation-errors"></a>
 #### [Intercepting Validation Errors](#intercepting-validation-errors)
 
-By default, when validation fails, Alpas throws a `ValidationException`. If for some reason you want to customize 
-this behavior, `ValidationGuard` has an open method of signature: `handleError(errorBag: ErrorBag): Boolean` that you
-could override and handle error the way you want it.
+By default, when validation fails, Alpas throws a `ValidationException`. If you want to customize this behavior,
+`ValidationGuard` has an open method with signature: `handleError(errorBag: ErrorBag): Boolean` that you can
+override and handle error the way you want it.
 
-If you return a `true` or `Nothing` that means you handled the error and thus Alpas will continue. Returning `false` 
-means you want Alpas to do what it usually does after validation fails—throwing an exception.
+From this method, returning a `true` or `Nothing` means you handled the error and thus Alpas will continue.
+Returning `false` means you want Alpas to do what it usually does after validation fails—throwing a
+validation exception.
 
-<span class="line-numbers" data-start="3">
+<span class="line-numbers" data-start="3" data-file="guards/CreatePageGuard.kt">
 
 ```kotlin
 
+//...
+
 override fun handleError(errorBag: ErrorBag): Boolean {
-    // let's say we don't want to redirect back to previous location with errors 
-    // but just want to tell the user that we couldn't find the page.
+    // Let's say we do not want to redirect the user back to previous location 
+    // with errors but just want to tell them that we couldn't find the page.
 
     // `abort()` throws an exception and so returns `nothing`.
     // That's why we don't need to return `true` here.
     call.abort(404)
 }
+
+//...
 
 ```
 
@@ -506,29 +521,32 @@ override fun handleError(errorBag: ErrorBag): Boolean {
 <a name="rendering-validation-errors"></a>
 #### [Rendering Validation Errors](#rendering-validation-errors)
 
-Alpas internally catches the `ValidationException` thrown and renders it appropriately based on the whether the call 
-wants a JSON response or not.If it wants a JSON response then all the generated validation errors are returned as a 
-JSON object with a status code of **422**. If JSON response is not wanted, it flashes both the validation errors and
-the inputs—except for critical fields such as `password`, `confirm_password`, `password_confirm` etc.—and redirects
-the user back to the previous page.
+Alpas internally catches the `ValidationException` thrown and [renders it](/docs/error-handling#handling-exceptions)
+appropriately based on whether the caller [wants a JSON response](/docs/http-request#wants-json) or not.
 
-You can get the old inputs from the previous request by calling `old()` method and the validation errors by calling 
-`errors()` method on [HttpCall's session object](/docs/sessions#retrieving-data). These are also available from within
-your view templates.
+If it wants a JSON response, the validation errors are returned as a JSON object with **422** status code.
+If JSON response is not wanted, it flashes both the validation errors and the current inputs—except for
+critical fields such as `password`, `confirm_password`, `password_confirm` etc.—and
+[redirects the user back](/docs/http-response/#redirect-back) to the previous page.
+
+You can get the old inputs from the previous request by calling `old()` method and the validation errors
+by calling `errors()` method on [HttpCall's session object](/docs/sessions#retrieving-data). These are
+also available from your [Pebble templates](/docs/pebble-templates).
 
 <a name="displaying-errors-and-old-values"></a>
 #### [Displaying Errors and Old Values](#displaying-errors-and-old-values)
 
-For an improved user experience, you'd want to display all the validation errors from user's previous request. You'd
-also want to pre-fill all the fields with previous values so not to frustrate users by making them fill the form again.
-Alpas comes bundled with some great template helpers to make this a cinch and hassle-free for you!
+For an improved user experience, you would want to display all the validation errors from the user's
+previous request. You'd also want to pre-fill all the fields with previous values so not to punish
+users by making them fill the form again. Alpas comes bundled with some great template helpers
+to make this a cinch and hassle-free for you!
 
 <div class="sublist">
 
 - `old(key, default)`
 
-If exists, returns an old input value for the given *key*. If not, returns the given *default* value. If multiple 
-values exist for the given *key*, it returns a list of values.
+If exists, returns an old input value for the given `key`. If not, returns the given `default` value.
+If multiple values exist for the given `key`, it returns a list of all values.
 
 <span class="line-numbers" data-start="16">
 
@@ -547,21 +565,21 @@ values exist for the given *key*, it returns a list of values.
 
 - `errors(key, default)`
 
-If exists, returns an error or a list of errors for the given *key*. If not, returns the given *default* value. `key`
-is optional when calling this function. If you don't pass the *key*, it just returns the *errors* map.
+If exists, returns an error or a list of errors for the given `key`. If not, returns the given `default` value.
+`key` is optional when calling this function. If you don't pass it, it just returns the *errors* map.
 
 - `firstError(key, default)`
 
-If exists, returns the first error for the given *key*. If not, return the given *default* value. Unlike the `errors()` 
-method, the `key` here is required.
+If exists, returns the first error for the given `key`. If not, return the given `default` value.
+Unlike the `errors()` method, the `key` here is required.
 
 - `hasError(key)`
 
-Returns `true` if an error exists for the given *key*. Otherwise, returns `false`.
+Returns `true` if an error exists for the given `key`. Otherwise, returns `false`.
 
 - `whenError(key, value, default)`
 
-If an error exists for the given *key*, it returns the given *value*. If not, it returns the given *default* value.
+If an error exists for the given `key`, it returns the given `value`. If not, it returns the `default` value.
 
 </div>
 
