@@ -98,8 +98,6 @@ if(mix.inProduction()) {
 
 </span>
 
-<br/>
-
 Applying versioning means, to simplify, renaming your assets to some random strings. Which means
 you need a consistent way to refer to these assets from your templates so that you don't have
 to manually change the referenced filenames every time. For this you need to use Alpas's
