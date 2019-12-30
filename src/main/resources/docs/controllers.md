@@ -22,10 +22,10 @@ Or you can use `alpas make:controller` Alpas command to create one or multiple c
 ```bash
 
 # creates AdminController.kt file under controllers/admin folder
-alpas make:controller admin/AdminController
+$ alpas make:controller admin/AdminController
 
 # creates DocsController.kt and HomeController.kt files under controllers folder
-alpas make:controller DocsController HomeController
+$ alpas make:controller DocsController HomeController
 
 ```
 

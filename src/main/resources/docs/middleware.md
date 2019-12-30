@@ -21,7 +21,7 @@ it under `middleware` folder.
 
 ```bash
 
-alpas make:middleware AdminOnlyMiddleware
+$ alpas make:middleware AdminOnlyMiddleware
 
 ```
 

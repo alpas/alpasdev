@@ -34,7 +34,7 @@ in the table. If not, you need to migrate your tables using `db:migrate` command
 
 ```bash
 
-alpas db:migrate
+$ alpas db:migrate
 
 ```
 
