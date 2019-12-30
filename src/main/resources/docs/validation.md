@@ -136,7 +136,7 @@ a new validation guard class under `guards` folder.
 
 ```bash
 
-alpas make:guard CreatePageGuard
+$ alpas make:guard CreatePageGuard
 
 ```
 
@@ -328,7 +328,7 @@ To start quickly, use `alpas make:rule` command to create a new rule under `rule
 
 ```bash
 
-alpas make:rule above
+$ alpas make:rule above
 
 ```
 

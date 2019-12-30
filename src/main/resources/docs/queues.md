@@ -13,10 +13,10 @@
     - [Selecting Queues](#selecting-queues)
     - [Waiting for Jobs](#waiting-for-jobs)
 
-Alpas makes it easy to defer time-consuming tasks to a queue for processing it later. You could choose one of the
-many queues bundled with Alpas or create one of your own. No matter what you choose, it abstracted them away
-behind a cohesive set of APIs. You can easily switch between different queue backends without having to
-change your code.
+Alpas makes it easy to defer time-consuming tasks to a queue for processing it later. You can choose
+one of the many queues bundled with Alpas or create one of your own. No matter what you choose,
+Alpas abstracts them away behind a cohesive set of APIs. You can easily switch between
+different queue backends without having to change your code.
 
 The backends for queues are called `connections` in Alpas such as `DatabaseQueueConnection`. Each connection
 could have multiple queues that you could selectively use for queuing different tasks most possibly
@@ -27,12 +27,13 @@ based on their priorities such as *high priority queue*, *low priority queue* et
 
 If you open `configs/Queue.kt`, you'll notice that Alpas has lazily registered three queue connections for you.
 Each connection is registered with a name. Alpas uses this key to pick one of these connections based on
-the value of `QUEUE_CONNECTION` in your `.env` file. This is set to `passthrough` by default. Feel free
-to register more queue connections or remove the ones that you know for sure you would't use.
+the value of `QUEUE_CONNECTION` in your `.env` file. This is set to `passthrough` by default.
+
+Feel free to register more queue connections or remove the ones that you know for sure you would't use.
 
 Once you are happy with your queue connections, make sure to register `QueueServiceProvider::class` 
-by [adding it to the list of service providers](/docs/service-providers#registering) in both of
-the kernel classes—`HttpKernel` and `ConsoleKernel`.
+by [adding it to the list of service providers](/docs/service-providers#registering) in both
+kernel classes—`HttpKernel` and `ConsoleKernel`.
 
 <a name="jobs"></a>
 ### [Jobs](#jobs)
@@ -40,8 +41,8 @@ the kernel classes—`HttpKernel` and `ConsoleKernel`.
 <a name="creating-jobs"></a>
 #### [Creating Jobs](#creating-jobs)
 
-A job is just a serializable task with some metadata that you wish to process later. The metadata is used during
-the processing of the task once it is dequeued from the backend.
+A job is just a serializable task with some metadata that you want to process later. The
+metadata is used during the processing of the task once it is de-queued from the backend.
 
 Here's a real example of a job that is used when [sending a mail](/docs/mail) such as when
 [resetting passwords](/docs/password-reset).
@@ -65,8 +66,8 @@ class SendMailJob(val mail: MailMessage) : Job() {
 </span>
 
 You can create a job by extending `dev.alpas.queue.job.Job` class and overriding `invoke()` method, which will
-be called after it is retrieved from the queue for actually processing the job. The easiest way to create a
-job is by using `make:job` Alpas console command. The jobs will be placed under `jobs` folder.
+be called after it is retrieved from the queue for actual processing of the job. The easiest way to create
+a job is by using `make:job` Alpas console command. The jobs will be placed under `jobs` folder.
 
 ```bash
 
@@ -74,11 +75,10 @@ $ alpas make:job SendInvoice
 
 ```
 
-<span class="line-numbers" data-start="2">
+<span class="line-numbers" data-start="2" data-file="jobs/SendMailJob.kt">
 
 ```kotlin
 
-// jobs/SendInvoice.kt
 class SendInvoice : Job() {
     override fun invoke(container: Container) {
         // make and send the actual invoice
@@ -92,26 +92,26 @@ class SendInvoice : Job() {
 <a name="queuing-jobs"></a>
 #### [Queuing Jobs](#queuing-jobs)
 
-You can queue a job by asking a container for a `QueueDispatcher` instance and then calling `dispatch()`
-method on it.
+You can queue a job by asking a container for a `QueueDispatcher` instance and then calling its `dispatch()` method.
 
 <span class="line-numbers" data-start="10">
 
 ```kotlin
 
 // ...
+
 // Enqueue MailInvoice job to be processed by the default
 // queue connection from the queue name called "high"
 container.make<QueueDispatcher>.dispatch(MailInvoice(), "high")
+
 // ...
 
 ```
 
 </span>
 
-Conveniently, since most of the times you'd want to queue a job from within a controller, you can call base
-controller's `queue()` method.
-
+Conveniently, since most of the times you would be queueing a job from within a controller,
+you can call base controller's `queue()` method.
 
 <span class="line-numbers" data-start="6">
 
@@ -121,20 +121,20 @@ fun sendInvoice(call: HttpCall){
     queue(MailInvoice(), "medium")
 }
 
-
 ```
 
 </span>
 
-If you want to queue a job on a non-default connection, you can pass the name of the connection as a third
-parameter:
+If you want to queue a job on a non-default connection, you can pass the name of the connection as a third parameter:
 
 <span class="line-numbers" data-start="10">
 
 ```kotlin
 
 // ...
+
 container.make<QueueDispatcher>.dispatch(MailInvoice(), "high", "database")
+
 // ...
 
 ```
@@ -164,15 +164,15 @@ means it will be available to be processed within approx. 1 second of adding it 
 #### [Retrying Failed Jobs](#retrying-failed-jobs)
 
 Although undesirable, your job might fail during processing for one reason or the other. Usually when that
-happens you would want to give few chances for that job to process again. You can do so by overriding
-`tries` property of the job. It is set to **3 tries** by default. If the job keeps failing even
-after the number of tries set in the job, it will be added to a failed job queue for you to
-do further introspection.
+happens you would want to give few chances for that job to be processed again. You can do so by
+overriding `tries` property of the job. It is set to **3 tries** by default. If the job keeps
+failing even after the number of tries set in the job, it will be added to a failed job
+queue for you to do further introspection.
 
-> /alert/ <span> A job instance gets serialized as a JSON before putting it in a queue. This means a job must
-be serializable along with all its properties and dependencies. Also, make sure that the values injected
-via primary constructor are not private otherwise the job will fail to deserialize, and it won't be
-processed. </span>
+> /alert/ <span>A job instance gets serialized as a JSON before putting it in a queue. This means a job must
+>be serializable along with all its properties and dependencies. Also, make sure that the values injected
+>via primary constructor are not private otherwise the job will fail to deserialize, and it won't be
+>processed.</span>
 
 <a name="available-drivers"></a>
 ### [Available Drivers](#available-drivers)
@@ -186,8 +186,8 @@ Alpas comes bundled with 3 queue drivers:
 <a name="passthrough"></a>
 #### [Pass-through](#passthrough)
 
-A `passthrough` driver simply invokes the job without holding it off. This is useful if you want to quickly debug
-or test your jobs without having to go through them a queue as it needs some ceremonies to run a queue worker.
+A `passthrough` driver simply invokes the job without holding it in queue. This is useful if you want to quickly debug
+or test your jobs without having to have them go through a queue, as it needs some ceremonies to run a queue worker.
 
 > /alert/ <span> Keep in mind that since the jobs are invoked right away with the `passthrough` driver, it
 completely ignores both `tries` and `delayInSeconds` properties.
@@ -217,15 +217,18 @@ $ alpas migrate
 <a name="activemq"></a>
 #### [Active MQ](#activemq)
 
-For a more robust, flexible, and cross-platform queuing, you can use [ActiveMQ][activemq], which Alpas supports
-out of the box. It requires a small ceremony to set up a messaging server, called a broker, but once that is
-done, you get the one of the most popular messaging server for holding your jobs. Checkout the
-[official ActiveMQ website][activemq] for more information of plethora of other features it
-provides out-of-the-box.
+For a more robust, flexible, and cross-platform queuing, you can use [ActiveMQ][activemq], which Alpas
+supports out-of-the-box. It requires a small ceremony to set up a messaging server, called a broker,
+but once that is done, you get the one of the most popular messaging servers for queueing your jobs.
 
-Since Alpas abstracts away the intricacies of interacting with different queue drivers, nothing changes as far as
-the process of queueing, de-queueing, and processing of jobs is concerned. You do need to set few values in
-you `.env` file:
+Checkout the [official ActiveMQ website][activemq] for more information of plethora
+of other features it provides out-of-the-box.
+
+Since Alpas abstracts away the intricacies of interacting with different queue drivers, nothing
+changes as far as queueing, de-queueing, and processing of jobs is concerned. You do need
+to set few values in you `.env` file:
+
+<span data-file=".env">
 
 ```toml
 
@@ -245,6 +248,8 @@ ACTIVEMQ_DEFAULT_QUEUE_NAME=default
 ACTIVEMQ_FAILED_QUEUE_NAME=failed
 
 ```
+
+</span>
 
 Now all that remains is to set up an ActiveMQ broker either on your local machine or on a remote server.
 
@@ -277,7 +282,7 @@ using `artemis-service start` command. Let's run the broker before moving to the
 $ mybroker/bin/artemis run
 
 # You should now have access to a full management console dashboard at your 
-# disposal at, by default, # http://localhost:8161/. We were not kidding when
+# disposal at, by default, http://localhost:8161/. We were not kidding when
 # we said ActiveMQ is an enterprise grade messaging queue!
 
 ```
@@ -286,17 +291,19 @@ $ mybroker/bin/artemis run
 to do that, you need to open `mybroker/etc/broker.xml` file and set `auto-delete-queues` to `false`
 and `default-address-routing-type` to `ANYCAST` under `<address-setting match="#">` element:
 
-<span class="line-numbers" data-start="18">
+<span class="line-numbers" data-start="18" data-file="mybroker/etc/broker.xml">
 
 ```xml
 
 <!-- ... -->
+
 <address-setting match="#">
     <!-- ... -->
     <!-- ... -->
     <auto-delete-queues>false</auto-delete-queues>
     <default-address-routing-type>ANYCAST</default-address-routing-type>
 </address-setting>
+
 <!-- ... -->
 
 ```
@@ -305,23 +312,23 @@ and `default-address-routing-type` to `ANYCAST` under `<address-setting match="#
 
 </div>
 
-Now your ActiveMQ broker is ready to accept your jobs and queue them. If you go to the ActiveMQ dashboard,
-you'll be able to see all of your queued jobs and introspect them.
+Now your ActiveMQ broker is ready to accept your jobs and queue them. If you go to the ActiveMQ
+dashboard, you'll be able to see all of your queued jobs and introspect them.
 
-> /alert/ <span> To be able to queue jobs using ActiveMQ driver, the broker must be running. If not, the
-app will throw an exception and you will lose the job that was supposed to be put in a queue. Make
-sure that the broker is running before serving your app.
+>/alert/ <span> To be able to queue jobs using ActiveMQ driver, the broker must be running. If not, the
+>app will throw an exception and you will lose the job that was supposed to be put in a queue. Make
+>sure that the broker is running before serving your app.
 
 <a name="running-queue"></a>
 ### [Running Queue](#running-queue)
 
-One of the ways you can process a job is by using `queue:work` Alpas command. When you run it, Alpas
-basically starts a new console app instance, dequeues and deserializes a job from a connection
-one-by-one, and processes them.
+One of the ways you can process a job is by using `queue:work` Alpas command. When you run it,
+Alpas basically starts a new console app instance, de-queues and deserializes a job from
+a connection one-by-one, and processes them.
 
 ```bash
 
-alpas queue:work
+$ alpas queue:work
 
 ```
 
@@ -332,42 +339,42 @@ must rebuild your app and then restart the process whenever your code changes.</
 <a name="setting-connection"></a>
 #### [Setting Connection](#setting-connection)
 
-Queue worker selects the default queue connection specified in your `.env` file when dequeueing jobs from
+Queue worker selects the default queue connection specified in your `.env` file when de-queueing jobs from
 a driver. You can specify which queue connection to pick by passing the name of the connection as an
 argument to `queue:work` command.
 
 ```bash
 
 # this command will process jobs from the 'database' connection
-alpas queue:work database
+$ alpas queue:work database
 
 ```
 
 <a name="selecting-queues"></a>
 #### [Selecting Queues](#selecting-queues)
 
-Not just the connection, you can also pick what queues you want to process by specifying `--queue` option
-to `queue:work` command.
+Not just the connection, you can also pick what queues you want to process by specifying
+`--queue` option to `queue:work` command.
 
 ```bash
 
 # this command will process jobs from 'invoices' queue on 'database' connection
-alpas queue:work database --queue=invoices
+$ alpas queue:work database --queue=invoices
 
 ```
 
 <a name="waiting-for-jobs"></a>
 #### [Waiting for Jobs](#waiting-for-jobs)
 
-When you have no jobs available on your queue, then you don't want to bombard the driver checking for jobs
-availability. To be easy on your system, you might want the worker to sleep for some time before probing
-for jobs again. You can do this by passing `--sleep` option and specifying the number of seconds
-the worker will sleep if there are no new jobs available.
+When you have no jobs available on your queue, then you don't want to bombard the driver checking for
+jobs availability. To be easy on your system, you might want the worker to sleep for some time
+before probing for jobs again. You can do this by passing `--sleep` option and specifying
+the number of seconds the worker will sleep if there are no new jobs available.
 
 ```bash
 
 # The worker will sleep for 5 seconds if there are no new jobs available
-alpas queue:work --sleep=5
+$ alpas queue:work --sleep=5
 
 ```
 
@@ -375,10 +382,10 @@ If you don't pass a value for the `sleep` option, each driver uses its own timeo
 long to sleep. For ActiveMQ, it is 30 seconds and for a database queue it is 3 seconds. You can tweak
 the value for each connection individually while registering them in your `QueueConfig` class.
 
-> /info/ <span>Keep in mind that different drivers "sleep" differently. Database driver, for an example, just
-makes the worker thread go to sleep by calling `Thread.sleep()` method. On the other hand, ActiveMQ
-driver passes the sleep time as a parameter to `receive()` method as it is waiting for the next
-job to arrive. While Passthrough driver ignores this and doesn't sleep at all!</span>
+>/info/<span>Keep in mind that different drivers "sleep" differently. Database driver, for an example, just
+>makes the worker thread go to sleep by calling `Thread.sleep()` method. On the other hand, ActiveMQ
+>driver passes the sleep time as a parameter to `receive()` method as it is waiting for the next
+>job to arrive. While the `passthrough` driver ignores this and doesn't sleep at all!</span>
 
 - [activemq]: https://activemq.apache.org/
 - [artemis]: https://activemq.apache.org/components/artemis/

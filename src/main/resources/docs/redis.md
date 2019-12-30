@@ -8,7 +8,9 @@ Let's see how we can easily integrate Jedis client in an app using a service pro
 1. Crate a new service provider using `make:provider` Alpas command:
 
 ```bash
-alpas make:provider JedisServiceProvider
+
+$ alpas make:provider JedisServiceProvider
+
 ```
 
 2. Register an instance of `JedisPool` in the new created `JedisServiceProvider` class making sure that the pool 
