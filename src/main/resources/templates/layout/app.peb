@@ -7,12 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
-          rel="stylesheet">
+{#    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"#}
+{#          rel="stylesheet">#}
 
-    <script src="/js/breakpoints.min.js" defer></script>
-    <script src="/js/browser.min.js" defer></script>
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
+
     {% prod %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
     <script>
@@ -29,9 +28,9 @@
     {% endprod %}
 </head>
 
-<body class="antialiased bg-gray-200 h-full text-lg text-gray-800 is-preload">
+<body class="antialiased h-full">
 
-<div id="wrapper">
+<div>
 {% block content %} {% endblock %}
 </div>
 </body>

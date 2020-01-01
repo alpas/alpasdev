@@ -5,6 +5,6 @@ import dev.alpas.routing.Controller
 
 class WelcomeController : Controller() {
     fun index(call: HttpCall) {
-        call.redirect().toRouteNamed("docs.index")
+        call.render("home")
     }
 }

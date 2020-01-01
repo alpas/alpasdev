@@ -1,0 +1,215 @@
+<style>
+    .section-1 {
+        background: rgb(59, 44, 153);
+        background: linear-gradient(45deg, rgba(59, 44, 153, 1) 0%, rgba(7, 17, 51, 1) 100%);
+        max-height: 1000px;
+    }
+
+    .particles {
+        background-image: url('/images/home/particles.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        max-height: 1040px;
+    }
+
+    .smoke {
+        background-image: url('/images/home/smoke.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: left -20px;
+        max-height: 1040px;
+    }
+
+    .section-2 {
+        background: rgb(13, 12, 117);
+        background: linear-gradient(90deg, rgba(13, 12, 117, 0.06) 0%, rgba(203, 203, 203, 0.06) 100%);
+    }
+
+    .heavenly-bodies {
+        background-image: url('/images/home/heavenly-bodies.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        max-height: 1040px;
+    }
+
+    .section-3 {
+        background: #12367D;
+    }
+
+    .particles2 {
+        background-image: url('/images/home/particles2.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        max-height: 1040px;
+    }
+
+    .section-4 {
+        background: #1F2121;
+    }
+
+    .shapes {
+        background-image: url('/images/home/shapes.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        max-height: 1040px;
+    }
+</style>
+{% extends 'layout/app.peb' %}
+
+{% block title %} Alpas - Delightful Web Development {% endblock %}
+
+{% block content %}
+
+<div class="">
+    <div class="section-1 ml-48">
+        <div class="particles">
+            <div class="smoke">
+                <div class="py-48 pl-20 flex flex-col max-w-3xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="180.012" height="38.871"
+                         viewBox="0 0 180.012 38.871">
+                        <defs>
+                            <style>.a {
+                                fill: #244db7;
+                            }</style>
+                        </defs>
+                        <g transform="translate(-354.988 -231.934)">
+                            <path class="a"
+                                  d="M383.055,256.527l-8.2-18.621-8.2,18.621-1.9,4.344-4.18,9.5h-5.592l17.209-38h5.375l17.264,38h-5.7l-4.18-9.5Z"/>
+                            <path class="a"
+                                  d="M491.735,256.527l-8.2-18.621-8.2,18.621-1.9,4.344-4.18,9.5h-5.591l17.209-38h5.375l17.263,38h-5.7l-4.18-9.5Z"/>
+                            <path class="a" d="M400.479,232.368h5.429v33.279h20.576v4.723H400.479Z"/>
+                            <path class="a"
+                                  d="M463.4,245.614c0,8.252-5.972,13.248-15.853,13.248h-9.392V270.37h-5.429v-38h14.821C457.426,232.368,463.4,237.363,463.4,245.614Zm-5.429,0c0-5.429-3.637-8.522-10.586-8.522h-9.23v17.046h9.23C454.332,254.138,457.969,251.043,457.969,245.614Z"/>
+                            <path class="a"
+                                  d="M505.738,266.028l2.01-4.235a19.555,19.555,0,0,0,12.54,4.4c6.569,0,9.392-2.553,9.392-5.865,0-9.283-23.018-3.419-23.018-17.534,0-5.864,4.561-10.858,14.55-10.858a22.353,22.353,0,0,1,12.214,3.366l-1.791,4.343a19.622,19.622,0,0,0-10.423-3.1c-6.462,0-9.23,2.715-9.23,6.026,0,9.284,23.018,3.475,23.018,17.427,0,5.81-4.669,10.8-14.712,10.8C514.48,270.8,508.778,268.851,505.738,266.028Z"/>
+                            <path class="a" d="M371.383,267a3.431,3.431,0,0,1,3.529-3.42,3.4,3.4,0,1,1-3.529,3.42Z"/>
+                        </g>
+                    </svg>
+
+                    <h1 class="text-5xl max-w-md mt-20 font-semibold leading-snug" style="color: #24305E">
+                        Delightful web development
+                    </h1>
+                    <div class="max-w-md text-xl leading-relaxed mt-10">
+                        <p class="">
+                            Alpas is all batteries included web framework for Kotlin with a strong focus on developers
+                            and
+                            their productivity.
+                        </p>
+                        <p class="mt-5">
+                            The main goal of Alpas is to get developers start quick and
+                            enable them to move faster while allowing them to enjoy the art of crafting a delightful
+                            web app.
+                        </p>
+                        <p class="mt-5">
+                            Alpas is all about rapid and gratifying web development!
+                        </p>
+                    </div>
+
+                    <div class="align-bottom self-start mt-20">
+                        <a href="{{ route('docs.index') }}"
+                           class="bg-blue-500 font-semibold px-6 py-4 rounded-full text-lg text-purple-100 text-white tracking-wide hover:bg-blue-600">Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-2">
+        <div class="heavenly-bodies">
+            <div class="py-24 pl-20 flex justify-around">
+                <div class="self-center">
+                    <h1 class="text-5xl max-w-md mt-20 font-semibold leading-snug" style="color: #24305E">
+                        Simple, Elegant, Yet Powerful
+                    </h1>
+                    <div class="max-w-md text-xl leading-relaxed mt-10">
+                        <p class="">
+                            Alpas strives to be simple and elegant and wants to serve even to those who have never
+                            written any JVM based web apps before—there is no xml or properties files to be configured,
+                            no scattered annotations to memorize, and yet there is no huge learning curve to get
+                            started.
+                        </p>
+                        <p class="mt-5">
+                            Alpas comes bundled with most of what you need to write a modern web app—authentication,
+                            mail, queues, notifications, fast routing engine,
+                            templating—and yet it remains flexible for you to extend it making it more powerful than it
+                            already is.
+                        </p>
+                    </div>
+                </div>
+                <div class="self-end">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="320" viewBox="0 0 437.796 417.515">
+                        <g transform="translate(-1131.778 -1437)">
+                            <path d="M1484.684,1803.941l22.255,50.574h62.635l-42.316-93.148Z" fill="#244db7"/>
+                            <path d="M1379.9,1437h-59.054l-189.07,417.515h61.432l45.926-104.369,20.872-47.721,90.066-204.585,46.039,104.578,40.526-40.526Z"
+                                  fill="#244db7"/>
+                            <path d="M1350.671,1779.955c-22.066,0-38.765,16.7-38.765,37.581s16.7,36.979,38.765,36.979c22.667,0,38.774-16.7,38.774-38.172C1389.445,1796.063,1372.746,1779.955,1350.671,1779.955Z"
+                                  fill="#162e9a"/>
+                            <path d="M1436.639,1561.893l-40.526,40.526,44.027,100.007,20.872,47.721,23.671,53.795,42.574-42.574Z"
+                                  fill="#244db7"/>
+                            <path d="M1436.639,1561.893l-40.526,40.526,44.027,100.007,20.872,47.721,23.671,53.795,42.574-42.574Z"
+                                  opacity="0.4" style="mix-blend-mode:overlay;isolation:isolate"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section-3">
+        <div class="particles2">
+            <div class="py-24 pl-20 flex justify-around flex-row-reverse">
+                <div class="self-center">
+                    <h1 class="text-5xl max-w-md mt-20 font-semibold leading-snug text-white">
+                        Who is Alpas for?
+                    </h1>
+                    <div class="max-w-md text-xl leading-relaxed mt-10 text-gray-100">
+                        <p class="">
+                            If you are just someone who is looking to learn some dynamic web development, Alpas is for
+                            you. If you are tired of the complexities of a dynamic web
+                            programming ecosystem, Alpas is for you. If you are tired of gigantic "enterprisey" web
+                            frameworks, Alpas is for you. If you are a seasoned Java EE web developer looking for some
+                            fresh air, Alpas is for you. If you are someone who wants just wants be enjoy writing a web
+                            app using a "happy programming language", and a framework that has everything you need but
+                            still gets out of your way, Alpas is for you.
+                        </p>
+                    </div>
+                </div>
+                <div class="self-center">
+                    <img src="/images/home/astro.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-4">
+        <div class="shapes">
+            <div class="py-24 pl-20 flex justify-around">
+                <div class="self-center">
+                    <h1 class="text-5xl max-w-md mt-20 font-semibold leading-snug text-white">
+                        Learning Alpas
+                    </h1>
+                    <div class="max-w-md text-xl leading-relaxed mt-10 text-gray-100">
+                        <p class="">
+                            Alpas is extensively, thoroughly, and proudly documented; and we are not talking about code
+                            comments! We have put as much effort writing and updating the documentation as we have spent
+                            time crafting the framework. The Alpas documentation site has everything you need to get
+                            started and get going—including two full tutorials that show you how to write web apps from
+                            start to finish with Alpas.
+                        </p>
+                    </div>
+                </div>
+                <div class="self-center">
+                    <img src="/images/home/cube.png" alt="" width="300px">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
