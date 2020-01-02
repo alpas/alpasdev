@@ -28,46 +28,47 @@
     <div class="section-intro">
         <div class="intro-bg mb-32">
             <div class="hero-content flex flex-row justify-between">
-                <div class="hero-content-left flex flex-col py-20 px-32">
+                <div class="hero-content-left flex flex-col py-6 lg:py-10 md:py-20 px-10 md:px-16 xl:px-32 mt-10">
                     <div class="text-gray-100">
                     {% include '_alpas.peb' with {"width": "222px"} %}
                     </div>
 
-                    <h1 class="text-5xl mt-20 text-indigo-200 font-semibold leading-snug max-w-2xl">
+                    <h1 class="text-3xl md:text-4xl xl:text-5xl mt-16 xl:mt-20 text-indigo-200 font-semibold leading-snug max-w-2xl">
                         The Rapid and Delightful Kotlin Web Framework
                     </h1>
-                    <div class="max-w-2xl text-2xl mt-20 text-white leading-chill">
+                    <div class="max-w-2xl text-xl md:text-2xl mt-16 xl:mt-20 text-white leading-chill">
                         <p>
                             Alpas is batteries included web framework for Kotlin with a very strong focus on developers’
                             productivity.
                         </p>
                         <p class="mt-5">
-                            The main goal of Alpas is to get you started quick and enable you to move faster while letting
+                            The main goal of Alpas is to get you started quick and enable you to move faster while
+                            letting
                             you enjoy doing what you are the best at - crafting a delightful web app.
                         </p>
                     </div>
-                    <div class="align-bottom self-start py-24">
+                    <div class="align-bottom self-start pt-10 md:py-24">
                         <a href="{{ route('docs.index') }}"
                            class="bg-red-600 font-semibold px-6 py-4 rounded-full text-lg text-red-100 hover:text-red-200 tracking-wide hover:bg-red-700">Documentation</a>
                     </div>
                 </div>
-                <div class="hero-content-right self-center flex-1 justify-center self-center flex">
-                    <div class="mt-20 ml-20 mr-10">
+                <div class="hero-content-right self-center flex-grow justify-center self-center flex lg:flex hidden">
+                    <div class="mt-10 ml-20 mr-10">
                         <img src="/images/landing/rocket.svg" alt="">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="intro-clouds h-64">
+        <div class="intro-clouds lg:h-64 h-40">
         </div>
     </div>
     <div class="section-simple">
-        <div class="px-10 flex flex-col">
-            <h2 class="text-4xl text-indigo-700 font-semibold self-center uppercase">
+        <div class="px-4 lg:px-6 xl:px-10 flex flex-col">
+            <h2 class="text-3xl lg:text-4xl text-indigo-700 font-semibold self-center uppercase leading-snug">
                 Simple, Elegant, Yet Powerful
             </h2>
             <div class="self-center max-w-3xl">
-                <p class="text-xl mt-10">
+                <p class="text-xl mt-4 lg:mt-10">
                     Alpas strives to be simple and elegant and wants to serve whether you have written JVM based
                     web apps before or not—there is no xml or properties files to be configured, no scattered
                     annotations to memorize—and yet, there is no huge learning curve to
@@ -80,13 +81,13 @@
         </div>
     </div>
 
-    <div class="section-bundling mt-24 py-20 bg-gray-100">
-        <div class="px-20 container mx-auto">
+    <div class="section-bundling mt-24 py-10 lg:py-16 xl:py-20 bg-gray-100">
+        <div class="px-4 md:px-10 lg:px-16 xl:px-20 container mx-auto">
             <div class="flex flex-row-reverse">
-                <div class="w-full flex-grow self-center">
+                <div class="w-full flex-grow self-center px-10 lg:block hidden">
                     <img src="/images/landing/bundle.svg" alt="">
                 </div>
-                <div class="mr-20">
+                <div class="lg:mr-10 xl:mr-20">
                     <h3 class="text-3xl text-blue-500 font-semibold leading-snug">
                         BUNDLING DONE ENOUGH, BUNDLING DONE RIGHT
                     </h3>
@@ -111,13 +112,13 @@
         </div>
     </div>
 
-    <div class="section-learning py-20 bg-white">
-        <div class="px-20 container mx-auto">
+    <div class="section-learning py-10 lg:py-16 xl:py-20 bg-white">
+        <div class="px-4 md:px-10 lg:px-16 xl:px-20 container mx-auto">
             <div class="flex flex-row">
-                <div class="w-full flex-grow self-center px-10">
+                <div class="w-full flex-grow self-center px-10 lg:block hidden">
                     <img src="/images/landing/learning.svg" alt="">
                 </div>
-                <div class="pl-10">
+                <div class="lg:pl-10">
                     <h3 class="text-3xl text-blue-500 font-semibold leading-snug">
                         LEARNING ALPAS
                     </h3>
@@ -140,15 +141,15 @@
         </div>
     </div>
 
-    <div class="section-be-part py-20 bg-gray-800 flex">
-        <div class="px-10 self-center">
+    <div class="section-be-part py-10 lg:py-16 xl:py-20 bg-gray-800 flex">
+        <div class="px-4 md:px-10 self-center">
             <div class="flex flex-row-reverse">
-                <div class="flex-grow self-center px-20">
-                    <img src="/images/landing/ship.svg" alt="">
+                <div class="self-center xl:px-20 lg:block hidden">
+                    <img src="/images/landing/ship.svg" alt="Let's Alpas" class="xl:max-w-lg">
                 </div>
-                <div class="px-40">
+                <div class="md:px-10 xl:px-40">
                     <h3 class="text-3xl text-gray-100 font-semibold leading-snug">
-                        BECOME A PART
+                        BE A PART
                     </h3>
                     <div class="mt-10 text-xl text-yellow-100">
                         <p class="">
@@ -164,7 +165,6 @@
                             help you is by joining our official Slack and asking questions. Please join us!
                         </p>
                     </div>
-
                     <div class="flex mt-10">
                         <a href="https://join.slack.com/t/alpasdev/shared_invite/enQtODcwMjE1MzMxODQ3LTJjZWMzOWE5MzBlYzIzMWQ2MTcxN2M2YjU3MTQ5ZDE4NjBmYjY1YTljOGIwYmJmYWFlYjc4YTcwMDFmZDIzNDE"
                            class="text-gray-100 hover:text-gray-500" title="Join our Slack" target="_alpas-slack">
