@@ -6,4 +6,13 @@ html {
   font-size: 1em;
 }
 
+a.landing {
+@apply border-b-2 border-gray-500 border-dotted font-semibold;
+  padding-bottom: .2rem;
+
+  &:hover {
+  @apply text-red-600 border-red-500;
+  }
+}
+
 @tailwind utilities;
