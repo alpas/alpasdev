@@ -4,7 +4,7 @@
     - [Instance Bindings](#instance-bindings)
     - [Abstract Bindings](#abstract-bindings)
     - [Factory Bindings](#factory-bindings)
-- [Resolving Dependencies](#resolving)
+- [Resolving Dependencies](#resolving-dependencies)
     - [Constructor Injection](#constructor-injection)
     - [Using `make()`](#make-resolve)
 - [HttpCall DI Container](#httpcall-container)
