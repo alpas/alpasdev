@@ -1,6 +1,6 @@
 - [Getting Started](#getting-started)
 - [Defining Routes](#defining-routes)
-    - [Closure Routes](#closure-routes)
+    - [Lambda Routes](#lambda-routes)
     - [Controller Routes](#controller-routes)
 - [Route Parameters](#route-parameters)
     - [Required Parameters](#required-parameters)
@@ -38,19 +38,24 @@ Alpas routing supports all the routes that respond to any HTTP verbs: `get`, `po
 <a name="defining-routes"></a>
 ### [Defining Routes](#defining-routes)
 
-<a name="closure-routes"></a>
-#### [Closure Routes](#closure-routes)
+<a name="lambda-routes"></a>
+#### [Lambda Routes](#lambda-routes)
 
 At the very minimum, you can register a route where the first parameter is a path, and the second
-parameter is a closure that receives an [`HttpCall`](/docs/request-response#httpcall) instance.
+parameter is a [function literal](https://kotlinlang.org/docs/reference/lambdas.html#function-literals-with-receiver)
+with [`HttpCall`](/docs/request-response#httpcall) as the receiver.
 
 <span class="line-numbers" data-start="3" data-file="routes.kt">
 
 ```kotlin
 
 fun Router.addRoutes() {
-    get("/") { call ->
-        call.reply("Hello, World!")
+    get("/") { 
+        reply("Hello, World!")
+    }
+
+    post("/ping") {
+        reply("pong")
     }
 }
 
