@@ -82,9 +82,9 @@
                             <a class="landing" href="/docs/queues">queues</a>,
                             <a class="landing" href="/docs/notifications">notifications</a>,
                             <a class="landing" href="/docs/routing">fast and intuitive routing</a>,
-                            <a class="landing" href="/docs/pebble-templates">powerful templating engine</a>—and yet it
-                            remains flexible for you to extend it to make it more powerful and delightful than it
-                            already is
+                            <a class="landing" href="/docs/pebble-templates">powerful templating engine</a>—and yet,
+                            it remains flexible for you to <a class="landing" href="/docs/service-providers">extend
+                            it</a> to make it more powerful than it already is.
                         </p>
                         <p class="mt-5">
                             We have sweated picking the good parts, so you don’t have to!
