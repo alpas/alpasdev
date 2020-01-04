@@ -8,7 +8,7 @@
     <div class="section-intro">
         <div class="intro-bg bg-contain bg-no-repeat bg-center">
             <div class="hero-content flex flex-row justify-between xxl:justify-center">
-                <div class="hero-content-left flex flex-col py-6 lg:py-10 md:py-20 px-10 md:px-16 xl:px-32 mt-10">
+                <div class="hero-content-left flex flex-col py-6 lg:py-10 px-10 md:px-16 xl:px-32 mt-10">
                     <div class="text-gray-100">
                     {% include '_alpas.peb' with {"width": "222px"} %}
                     </div>
@@ -28,9 +28,9 @@
                             you enjoy doing what you are the best at — crafting a delightful web app.
                         </p>
                     </div>
-                    <div class="align-bottom self-start pt-10 md:py-24">
+                    <div class="align-bottom self-start pt-16 pb-8">
                         <a href="{{ route('docs.index') }}"
-                           class="bg-red-600 font-semibold px-6 py-4 rounded-full text-lg text-red-100
+                           class="bg-red-600 md:px-6 px-4 py-3 md:py-4 rounded-full text-base md:text-xl text-white
                            hover:text-red-200 tracking-wide hover:bg-red-700">Documentation</a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="intro-clouds lg:h-64 h-40i bg-cover bg-no-repeat"></div>
+        <div class="intro-clouds h-20 lg:h-56 md:h-32 bg-cover bg-no-repeat"></div>
     </div>
 
     <div class="section-simple">
