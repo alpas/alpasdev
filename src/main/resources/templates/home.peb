@@ -138,15 +138,19 @@
                         <p class="">
                             Alpas is for you if you are looking to learn some dynamic web development. If you are
                             tired of the complexities of a dynamic web programming ecosystem, Alpas is for you.
-                            If you just want to enjoy writing a web app using a <a class="landing"
-                                                                                   href="https://medium.com/signal-v-noise/kotlin-makes-me-a-happier-better-programmer-1fc668724563">"Happy
+                            If you just want to enjoy writing a web app using a <a
+                                class="text-blue-100 hover:text-blue-200" target="_happy"
+                                href="https://medium.com/signal-v-noise/kotlin-makes-me-a-happier-better-programmer-1fc668724563">"Happy
                             Programming Language"</a> (spoiler alert, it's Kotlin) with a framework that has everything
                             you need but still gets out of your way, then Alpas is definitely for you!
                         </p>
                         <p class="mt-5">
                             We want you to enjoy writing a web app in Alpas. If you are not, please let us know, and
                             we'll keep it improving until it is just right for all of us. The best way to let us
-                            help you is by joining our official Slack and asking questions. Please join us!
+                            help you is by <a
+                                class="landing"
+                                href="https://join.slack.com/t/alpasdev/shared_invite/enQtODcwMjE1MzMxODQ3LTJjZWMzOWE5MzBlYzIzMWQ2MTcxN2M2YjU3MTQ5ZDE4NjBmYjY1YTljOGIwYmJmYWFlYjc4YTcwMDFmZDIzNDE">joining
+                            our official Slack</a> and asking questions. Please do!
                         </p>
                     </div>
                     <div class="flex mt-10">
