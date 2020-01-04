@@ -14,7 +14,7 @@
             <stop stop-color="#FBE9F5" offset="100%"></stop>
         </linearGradient>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.6">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.3">
         <g id="Bg" transform="translate(-58.000000, -1.000000)">
             <g id="Planets" transform="translate(538.882000, 0.957000)" opacity="0.6" stroke="#FFFFFF">
                 <g id="Jupiter" style="mix-blend-mode: overlay;" transform="translate(278.444000, 473.195000)">

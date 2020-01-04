@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="hero-content-right self-center justify-center self-center flex lg:flex hidden">
-                    <div class="mt-10 ml-20 mr-40">
+                    <div class="mt-10 ml-20 lg:mr-32 xxl:mr-0">
                         <img src="/images/landing/rocket.svg" alt="">
                     </div>
                 </div>
