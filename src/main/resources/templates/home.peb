@@ -6,8 +6,8 @@
 
 <div class="leading-loose">
     <div class="section-intro">
-        <div class="intro-bg mb-32">
-            <div class="hero-content flex flex-row justify-between">
+        <div class="intro-bg bg-contain bg-no-repeat bg-center">
+            <div class="hero-content flex flex-row justify-between xxl:justify-center">
                 <div class="hero-content-left flex flex-col py-6 lg:py-10 md:py-20 px-10 md:px-16 xl:px-32 mt-10">
                     <div class="text-gray-100">
                     {% include '_alpas.peb' with {"width": "222px"} %}
@@ -34,17 +34,16 @@
                            hover:text-red-200 tracking-wide hover:bg-red-700">Documentation</a>
                     </div>
                 </div>
-                <div class="hero-content-right self-center flex-grow justify-center self-center flex lg:flex hidden">
-                    <div class="mt-10 ml-20 mr-10">
+                <div class="hero-content-right self-center justify-center self-center flex lg:flex hidden">
+                    <div class="mt-10 ml-20 mr-40">
                         <img src="/images/landing/rocket.svg" alt="">
                     </div>
                 </div>
-                <div class="flex-grow spacer xl:block hidden"></div>
             </div>
         </div>
-        <div class="intro-clouds lg:h-64 h-40">
-        </div>
+        <div class="intro-clouds lg:h-64 h-40i bg-cover bg-no-repeat"></div>
     </div>
+
     <div class="section-simple">
         <div class="px-4 lg:px-6 xl:px-10 flex flex-col">
             <h2 class="text-3xl lg:text-4xl text-indigo-700 font-semibold self-center uppercase leading-snug">
@@ -55,7 +54,7 @@
                     Alpas strives to be simple and elegant and wants to serve you whether you have written any JVM
                     based web apps before or not. There is no xml or properties files to be configured, no scattered
                     annotations to memorize, and the best of all — there is no huge learning curve to
-                    <a class="landing" href="{{ route('docs.index', ['installation']) }}">get started</a>!
+                    <a class="primary" href="{{ route('docs.index', ['installation']) }}">get started</a>!
                 </p>
             </div>
             <div class="mt-10 self-center pr-10 shadow-2xl">
@@ -76,14 +75,14 @@
                     </h3>
                     <div class="mt-10 text-xl">
                         <p class="">
-                            Alpas comes bundled with most of what you need to write modern web apps—<a class="landing"
+                            Alpas comes bundled with most of what you need to write modern web apps—<a class="primary"
                                                                                                        href="/docs/authentication">authentication</a>,
-                            <a class="landing" href="/docs/mail">mail</a>,
-                            <a class="landing" href="/docs/queues">queues</a>,
-                            <a class="landing" href="/docs/notifications">notifications</a>,
-                            <a class="landing" href="/docs/routing">fast and intuitive routing</a>,
-                            <a class="landing" href="/docs/pebble-templates">powerful templating engine</a>—and yet,
-                            it remains flexible for you to <a class="landing" href="/docs/service-providers">extend
+                            <a class="primary" href="/docs/mail">mail</a>,
+                            <a class="primary" href="/docs/queues">queues</a>,
+                            <a class="primary" href="/docs/notifications">notifications</a>,
+                            <a class="primary" href="/docs/routing">fast and intuitive routing</a>,
+                            <a class="primary" href="/docs/pebble-templates">powerful templating engine</a>—and yet,
+                            it remains flexible for you to <a class="primary" href="/docs/service-providers">extend
                             it</a> to make it more powerful than it already is.
                         </p>
                         <p class="mt-5">
@@ -113,7 +112,7 @@
                             documentation as we have spent time crafting the framework, and we are proud of it!
                         </p>
                         <p class="mt-5">
-                            The <a class="landing" href="/docs">Alpas documentation</a> has everything you need to get
+                            The <a class="primary" href="/docs">Alpas documentation</a> has everything you need to get
                             started and get going—including two full featured tutorials showing you how to write web
                             apps
                             from start to finish.
@@ -148,7 +147,7 @@
                             We want you to enjoy writing a web app in Alpas. If you are not, please let us know, and
                             we'll keep it improving until it is just right for all of us. The best way to let us
                             help you is by <a
-                                class="landing"
+                                class="primary"
                                 href="https://join.slack.com/t/alpasdev/shared_invite/enQtODcwMjE1MzMxODQ3LTJjZWMzOWE5MzBlYzIzMWQ2MTcxN2M2YjU3MTQ5ZDE4NjBmYjY1YTljOGIwYmJmYWFlYjc4YTcwMDFmZDIzNDE">joining
                             our official Slack</a> and asking questions. Please do!
                         </p>

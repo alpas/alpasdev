@@ -17,6 +17,9 @@ module.exports = {
                     '900': '#112456'
                 },
             },
+            screens: {
+                'xxl': '1921px',
+            },
             lineHeight: {
                 chill: 1.8
             }
