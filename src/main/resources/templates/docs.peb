@@ -7,7 +7,7 @@
     <div class="inner fixed h-screen flex flex-col">
         <div>
             <div class="flex justify-center mt-5 xl:mt-10">
-                <a href="/" class="text-4xl font-medium flex text-indigo-600">
+                <a href="/" class="text-4xl font-medium flex text-gray-700">
                     {% include '_alpas.peb' with {"width": "122px"} %}
                 </a>
                 <div class="italic ml-2">

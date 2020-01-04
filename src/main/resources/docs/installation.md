@@ -2,14 +2,13 @@
     - [Development](#development)
     - [Production](#production)
     - [Setup](#setup)
-        - [Using `brew`](#using-brew)
         - [Using `sdkman`](#using-sdkman)
 - [Installation](#installation)
     - [Creating New Project](#creating-new-project)
     - [Configuring](#configuring)
 - [Serving](#serving)
     - [Locally](#serving-locally)
-    - [Externally](#serving-externally)
+    - [Over Network](#serving-over-network)
 
 <a name="server-requirements"></a>
 ### [Server Requirements](#server-requirements)
@@ -40,29 +39,16 @@ app, the only requirement is the Java Runtime `jre`. If you intend to run some A
 <a name="setup"></a>
 ### [Setup](#setup)
 
-<a name="using-brew"></a>
-#### [Using Brew (MacOS only)](#using-brew)
-
-If you are a Mac user and prefer installing dependencies using [brew](https://brew.sh/), you can follow these steps:
-
-<div class="ordered-list"> 
-
-1. Update your brew and prepare for the needed installations: `brew update`
-2. Install the latest version of Gradle: `brew install gradle`
-3. Install the latest version of Java: `brew cask install java`
-
-</div>
-
 <a name="using-sdkman"></a>
 #### [Using sdkman](#using-sdkman)
 
-A much better way to install and manage Java dependencies and something that we highly recommend is using
-[sdkman](https://sdkman.io/install):
+You can install Alpas system requirements anyway you want. However, because of its simplicity and being able
+to manage multiple versions, we highly recommend using [sdkman](https://sdkman.io/install).
 
 <div class="ordered-list"> 
 
 1. Install sdkman: `curl -s “https://get.sdkman.io” | bash`
-2. Restart the terminal or just source the sdk: `source "$HOME/.sdkman/bin/sdkman-init.sh"`
+2. Restart the terminal or just source the sdk: `source ~/.sdkman/bin/sdkman-init.sh`
 2. Check the version to be sure: `sdk version`
 3. Install the minimum version of Java required: `sdk install java 9.0.7-zulu`
 4. Install the minimum version of gradle required: `sdk install gradle 5.6.4`
@@ -79,7 +65,7 @@ After you have set up your machine, it only takes a few steps to have your new A
 
 <div class="ordered-list"> 
 
-1. Visit [Alpas app repo on GitHub][template] and click the green **Use this template** button
+1. Visit [Alpas starter repo on GitHub][template] and click the green **Use this template** button.
 2. Give it a name. Once done, clone your new repo on your local machine.
 4. At the root of the project there is a script named `alpas`. Make it executable: `chmod +x ./alpas`
 5. Initialize your new project using the full package name: `./alpas init com.example.myapp`
@@ -106,18 +92,18 @@ available at `http://localhost:8080`
 > if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
 > your `.env` file.</span>
 
-<a name="serving-externally"></a>
-#### [Serving Externally](#serving-locally)
+<a name="serving-over-network"></a>
+#### [Serving Over Network](#serving-over-network)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
-convenient to have your web app accessible from a different device on the same network. This is
-very helpful during development esp. if you are trying to access your web app from a mobile
+very convenient to have your web app accessible from a different device on the same network. This
+is very helpful during development esp. if you are trying to access your web app from a mobile
 device for, say, testing and debugging the app’s UI.
 
-Alpas makes it really easy to serve your web app over an IP address. To do so add `SERVE_EXTERNALLY=true`
-in your `.env` file. Build and re-serve your app and it should be available from both
+Alpas makes it really easy to serve your web app over an IP address. To do so set `ENABLE_NETWORK_SHARE`
+to `true` in your `.env` file. Build and re-serve your app and it should be available from both
 `http://localhost:<port>` and `http://<local-device-ip>:<port>`.
 
 > /power/ <span>Alpas runs on an embedded [Jetty Web Server](https://www.eclipse.org/jetty/).
 
-[template]: https://github.com/ashokgelal/framework
+[template]: https://github.com/alpas/starter
