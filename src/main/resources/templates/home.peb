@@ -57,8 +57,10 @@
                     <a class="primary" href="{{ route('docs.index', ['installation']) }}">get started</a>!
                 </p>
             </div>
-            <div class="mt-10 self-center pr-10 shadow-2xl">
-                <img src="/images/landing/alpas-code-light.png" alt="" width="875px">
+            <div class="mt-10 self-center pr-5 shadow-2xl">
+                <a href="/images/landing/alpas-code-light@4x.png" target="_alpas-code">
+                    <img src="/images/landing/alpas-code-light.png" alt="Alpas Code" width="875px">
+                </a>
             </div>
         </div>
     </div>
@@ -145,7 +147,7 @@
                         </p>
                         <p class="mt-5">
                             We want you to enjoy writing a web app in Alpas. If you are not, please let us know, and
-                            we'll keep it improving until it is just right for all of us. The best way to let us
+                            we'll keep improving it until it is just right for all of us. The best way to let us
                             help you is by <a
                                 class="primary"
                                 href="https://join.slack.com/t/alpasdev/shared_invite/enQtODcwMjE1MzMxODQ3LTJjZWMzOWE5MzBlYzIzMWQ2MTcxN2M2YjU3MTQ5ZDE4NjBmYjY1YTljOGIwYmJmYWFlYjc4YTcwMDFmZDIzNDE">joining
