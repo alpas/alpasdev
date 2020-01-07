@@ -8,7 +8,7 @@
         <div>
             <div class="flex justify-center mt-5 xl:mt-10">
                 <a href="/" class="text-4xl font-medium flex text-gray-700">
-                    {% include '_alpas.peb' with {"width": "122px"} %}
+                {% include '_alpas.peb' with {"width": "122px"} %}
                 </a>
                 <div class="italic ml-2">
                     [alpha]
@@ -18,7 +18,7 @@
                 Draft <span class="text-gray-600">{{ env('DOC_VERSION') }}</span>
             </div>
             <div class="flex justify-center mt-5">
-                {% include '_social.peb' %}
+            {% include '_social.peb' %}
             </div>
         </div>
         <nav id="menu" class="outline-none docs_toc flex py-5 flex-col h-screen overflow-y-auto" tabindex="0">
@@ -37,4 +37,5 @@
         </div>
     </div>
 </div>
+
 {% endblock %}
