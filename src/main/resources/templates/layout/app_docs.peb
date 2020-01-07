@@ -13,6 +13,7 @@
     <script src="/js/breakpoints.min.js" defer></script>
     <script src="/js/browser.min.js" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
     {% prod %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
     <script>
@@ -34,5 +35,8 @@
 <div id="wrapper">
 {% block content %} {% endblock %}
 </div>
+    <script type="text/javascript">
+        new ClipboardJS('.clipboard');
+    </script>
 </body>
 </html>

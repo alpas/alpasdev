@@ -43,6 +43,10 @@ br {
 }
 
 .docs_content {
+  span.clipboard {
+    content: url('/images/clipboard.svg');
+    @apply w-3 ml-1;
+  }
   span[data-file]::before {
     content: attr(data-file);
     @apply text-gray-600 text-base float-right px-3 py-2 bg-gray-100 shadow;

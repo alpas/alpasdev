@@ -24,7 +24,7 @@ development or for production.
 - JDK >= 9.0
 - Gradle >= 5.6
 
-> /info/ <span>You need a GitHub account to create your project based on [Alpas’s project template][template].
+> /info/ <span>You need a GitHub account to create your project based on [Alpas’s starter template][template].
 > Once created, you can host your project anywhere you would like.</span>
 
 </div>
@@ -47,11 +47,11 @@ to manage multiple versions, we highly recommend using [sdkman](https://sdkman.i
 
 <div class="ordered-list"> 
 
-1. Install sdkman: `curl -s “https://get.sdkman.io” | bash`
-2. Restart the terminal or just source the sdk: `source ~/.sdkman/bin/sdkman-init.sh`
-2. Check the version to be sure: `sdk version`
-3. Install the minimum version of Java required: `sdk install java 9.0.7-zulu`
-4. Install the minimum version of gradle required: `sdk install gradle 5.6.4`
+1. Install sdkman: `curl -s "https://get.sdkman.io" | bash` <span class="clipboard" data-clipboard-text='curl -s "https://get.sdkman.io" | bash'></span>
+2. Restart the terminal or just source the sdk: `source ~/.sdkman/bin/sdkman-init.sh` <span class="clipboard" data-clipboard-text='source ~/.sdkman/bin/sdkman-init.sh'></span>
+2. Check the version to be sure: `sdk version` <span class="clipboard" data-clipboard-text='sdk version'></span>
+3. Install the minimum version of Java required: `sdk install java 9.0.7-zulu` <span class="clipboard" data-clipboard-text='sdk install java 9.0.7-zulu'></span>
+4. Install the minimum version of gradle required: `sdk install gradle 5.6.4` <span class="clipboard" data-clipboard-text='sdk install gradle 5.6.4'></span>
 
 </div>
 
@@ -67,9 +67,9 @@ After you have set up your machine, it only takes a few steps to have your new A
 
 1. Visit [Alpas starter repo on GitHub][template] and click the green **Use this template** button.
 2. Give it a name. Once done, clone your new repo on your local machine.
-4. At the root of the project there is a script named `alpas`. Make it executable: `chmod +x ./alpas`
-5. Initialize your new project using the full package name: `./alpas init com.example.myapp`
-6. Once done, run `./alpas serve` to [serve your app](#serving-locally).
+4. At the root of the project there is a script named *alpas*. Make it executable: `chmod +x ./alpas` <span class="clipboard" data-clipboard-text='chmod +x ./alpas'></span>
+5. Initialize your new project using the full package name: `./alpas init com.example.myapp` <span class="clipboard" data-clipboard-text='./alpas init com.example.myapp'></span>
+6. Once done, to [serve your app](#serving-locally), do: `./alpas serve` <span class="clipboard" data-clipboard-text='./alpas serve'></span>
 6. Open your new project in IntelliJ IDEA. **Optional but very highly recommended!**
 
 </div>
