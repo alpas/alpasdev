@@ -31,11 +31,11 @@
                     <div class="align-bottom self-start pt-16 pb-8">
                         <a href="{{ route('docs.index') }}"
                            class="bg-red-600 md:px-6 px-4 py-3 md:py-4 rounded-full text-base md:text-xl text-white
-                           hover:text-red-200 tracking-wide hover:bg-red-700">Documentation</a>
+                           hover:text-red-200 tracking-wide hover:bg-red-700">Get Started &rarr;</a>
                     </div>
                 </div>
                 <div class="hero-content-right self-center justify-center self-center flex lg:flex hidden">
-                    <div class="mt-10 ml-20 lg:mr-32 xxl:mr-0">
+                    <div class="mt-10 ml-20 lg:mr-32 xxlparkmr-0">
                         <img src="/images/landing/rocket.svg" alt="">
                     </div>
                 </div>

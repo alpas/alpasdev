@@ -2,6 +2,13 @@ window.jQuery = window.$ = require('jquery')
 import Prism from 'prismjs'
 
 jQuery(function ($) {
+    $(document).keyup(function (e) {
+        if (e.keyCode === 191) {
+            var input = $("#algolia")
+            input.text = ''
+            input.focus()
+        }
+    });
     // copy line numbers start offset from parent to child
     $('span.line-numbers').each(function () {
         const parent = $(this)
@@ -47,4 +54,5 @@ jQuery(function ($) {
             $(this).parent().addClass(word)
         }
     })
+
 })
