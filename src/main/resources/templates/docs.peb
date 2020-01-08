@@ -30,7 +30,31 @@
 </div>
 
 <div id="main">
-    <div class="inner flex justify-center">
+    <div class="inner flex justify-center flex-col">
+        <div class="pl-16 md:max-w-4xl w-full xl:max-w-5xl mt-8">
+            <div class="relative">
+                <input id="algolia"
+                       class="transition bg-gray-200 mt-4 focus:outline-none placeholder-gray-600 py-2 pr-4 pl-10 py-3 block w-full appearance-none leading-normal border-b border-gray-400 focus:border-gray-800"
+                       type="text"
+                       placeholder="Search the docs"
+                       autocomplete="off"
+                       spellcheck="false"
+                       role="combobox"
+                       aria-autocomplete="list"
+                       aria-expanded="false"
+                       aria-label="search input"
+                       aria-owns="algolia-autocomplete-listbox-0"
+                       dir="auto"
+                       style="position: relative; vertical-align: top;">
+
+                <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center pt-3">
+                    <svg class="fill-current pointer-events-none text-gray-800 w-4 h-4"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
         <div class="md:pr-10 pl-16 pr-5 leading-relaxed docs_content md:max-w-4xl w-full xl:max-w-5xl">
             <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
             {{ content | raw }}
