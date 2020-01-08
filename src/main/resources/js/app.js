@@ -2,11 +2,15 @@ window.jQuery = window.$ = require('jquery')
 import Prism from 'prismjs'
 
 jQuery(function ($) {
-    $(document).keyup(function (e) {
-        if (e.keyCode === 191) {
-            var input = $("#algolia")
-            input.text = ''
-            input.focus()
+    $(document).keydown(function (e) {
+        const _target = $(e.target);
+        const _focused = $(document.activeElement);
+        const _inputting = _focused.get(0).tagName.toLowerCase() === "textarea" || _focused.get(0).tagName.toLowerCase() === "input";
+
+        // / (forward slash) key = search
+        if (!_inputting && e.keyCode === 191) {
+            e.preventDefault();
+            $("#algolia").focus();
         }
     });
     // copy line numbers start offset from parent to child
