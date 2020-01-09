@@ -43,7 +43,7 @@ br {
 }
 
 .algolia-autocomplete {
-  @apply w-full;
+@apply w-full;
 }
 
 .docs_content {
@@ -51,9 +51,10 @@ br {
     content: url('/images/clipboard.svg');
     @apply w-3 ml-1;
   }
+
   span[data-file]::before {
     content: attr(data-file);
-    @apply text-gray-600 text-base float-right px-3 py-2 bg-gray-100 shadow;
+  @apply text-gray-600 text-base float-right px-3 py-2 bg-gray-100 shadow;
   }
 
   pre[class*="language"] {
@@ -386,7 +387,7 @@ ul li {
   outline: 0;
   overflow: hidden;
   position: absolute;
-  top: 0;
+  bottom: 0.2em;
   z-index: 10000;
   background-image: url(/images/hamburger.svg);
   background-size: 50%;
