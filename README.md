@@ -24,4 +24,4 @@ To contribute to the documentation of Alpas, please follow the following steps:
 6. Send a PR.
 
 
-Thank you for help for making Alpas better!
+Thank you for making Alpas better!
