@@ -31,6 +31,9 @@
     - [Email Verification](/docs/email-verification)
 
 - #### Database
+    - [Getting Started](/docs/database-getting-started)
+    - [Ozone](/docs/ozone)
+    - [Migrations](/docs/migrations)
     - [Redis](/docs/redis)
     
 - #### Advanced
