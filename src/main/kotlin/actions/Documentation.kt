@@ -50,6 +50,7 @@ class Markdown {
         MutableDataSet().apply {
             set(Parser.EXTENSIONS, listOf(AutolinkExtension.create()))
             set(HtmlRenderer.HARD_BREAK, "<br />\n")
+            set(HtmlRenderer.RENDER_HEADER_ID, true)
         }
     }
     private val parser: Parser by lazy { Parser.builder(options).build() }
