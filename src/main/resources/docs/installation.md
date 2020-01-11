@@ -1,4 +1,4 @@
-- [Server Requirements](#server-requirements)
+- [System Requirements](#system-requirements)
     - [Development](#development)
     - [Production](#production)
     - [Setup](#setup)
@@ -10,24 +10,29 @@
     - [Locally](#serving-locally)
     - [Over Network](#serving-over-network)
 
-<a name="server-requirements"></a>
-### [Server Requirements](#server-requirements)
+<a name="system-requirements"></a>
+### [System Requirements](#system-requirements)
 
-Alpas has only few system requirements. The requirements vary based on whether you want to set up a machine for
-development or for production.
+Alpas has only few system requirements. The requirements vary based on whether you
+want to set up a machine for development or for production.
 
 <a name="development"></a>
-#### [Development](#development)
+### [Development](#development)
 
-<div class=“sublist”>
+Alpas is easy to get started with Alpas on any *nix based machines; all you need is a JDK. Windows is supported
+but only under [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
+<div class="sublist">
+
+- macOS or Linux (Windows support is only available with WSL)
 - JDK >= 9.0
 - Gradle >= 5.6
+- [IntelliJ IDEA Community or Ultimate][intellij] (Optional, but highly recommended)
+
+</div>
 
 > /info/ <span>You need a GitHub account to create your project based on [Alpas’s starter template][template].
 > Once created, you can host your project anywhere you would like.</span>
-
-</div>
 
 <a name="production"></a>
 #### [Production](#production)
@@ -107,3 +112,4 @@ to `true` in your `.env` file. Build and re-serve your app and it should be avai
 > /power/ <span>Alpas runs on an embedded [Jetty Web Server](https://www.eclipse.org/jetty/).
 
 [template]: https://github.com/alpas/starter
+[intellij]: https://www.jetbrains.com/idea/download
