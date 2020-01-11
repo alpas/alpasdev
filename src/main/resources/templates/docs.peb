@@ -1,65 +1,108 @@
-{% extends "layout/app_docs.peb" %}
-{% block title %} {{ title }} {% endblock %}
+<!doctype html>
+<html lang="en">
 
-{% block content %}
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> {{ title }} - {{ env('APP_NAME') }} - The Rapid and Delightful Kotlin Web Framework</title>
+    <link rel="stylesheet" href="{{ mix('css/docs.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+          rel="stylesheet">
 
-<div id="sidebar" class="bg-gray-100 pb-20 pt-5">
-    <div class="inner fixed h-screen flex flex-col">
-        <div>
-            <div class="flex justify-center mt-5 xl:mt-10">
-                <a href="/" class="text-4xl font-medium flex text-gray-700">
-                {% include '_alpas.peb' with {"width": "122px"} %}
-                </a>
-                <div class="italic ml-2">
-                    [alpha]
+    <script src="/js/breakpoints.min.js" defer></script>
+    <script src="/js/browser.min.js" defer></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    {% prod %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-5531338-11');
+    </script>
+    {% endprod %}
+</head>
+
+<body class="antialiased bg-gray-200 h-full text-lg text-gray-800 is-preload">
+
+<div id="wrapper">
+    <div id="sidebar" class="bg-gray-100 pb-20 pt-5">
+        <div class="inner fixed h-screen flex flex-col">
+            <div>
+                <div class="flex justify-center mt-5 xl:mt-10">
+                    <a href="/" class="text-4xl font-medium flex text-gray-700">
+                    {% include '_alpas.peb' with {"width": "122px"} %}
+                    </a>
+                    <div class="italic ml-2">
+                        [alpha]
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    Draft <span class="text-gray-600">{{ env('DOC_VERSION') }}</span>
+                </div>
+                <div class="flex justify-center mt-5">
+                {% include '_social.peb' %}
                 </div>
             </div>
-            <div class="text-center mt-4">
-                Draft <span class="text-gray-600">{{ env('DOC_VERSION') }}</span>
+            <nav id="menu" class="outline-none docs_toc flex py-5 flex-col h-screen overflow-y-auto" tabindex="0">
+                <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-10 xl:pl-32">
+                {{ toc | raw }}
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div id="main">
+        <div class="inner flex justify-center flex-col">
+            <div class="pl-16 md:max-w-4xl w-full xl:max-w-5xl mt-8">
+                <div class="relative">
+                    <input id="algolia"
+                           class="transition bg-gray-200 mt-4 focus:outline-none placeholder-gray-600 py-2 pr-4 pl-10 py-3 block w-full appearance-none leading-normal border-b border-gray-400 focus:border-gray-800"
+                           type="text"
+                           placeholder="Search the docs"
+                           autocomplete="off"
+                           spellcheck="false"
+                           role="combobox"
+                           aria-autocomplete="list"
+                           aria-expanded="false"
+                           aria-label="search input"
+                           aria-owns="algolia-autocomplete-listbox-0"
+                           dir="auto"
+                           style="position: relative; vertical-align: top;">
+
+                    <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center pt-3">
+                        <svg class="fill-current pointer-events-none text-gray-800 w-4 h-4"
+                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                        </svg>
+                    </div>
+                </div>
             </div>
-            <div class="flex justify-center mt-5">
-            {% include '_social.peb' %}
+            <div class="md:pr-10 pl-16 pr-5 leading-relaxed docs_content md:max-w-4xl w-full xl:max-w-5xl">
+                <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
+                {{ content | raw }}
             </div>
         </div>
-        <nav id="menu" class="outline-none docs_toc flex py-5 flex-col h-screen overflow-y-auto" tabindex="0">
-            <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-10 xl:pl-32">
-            {{ toc | raw }}
-            </div>
-        </nav>
     </div>
 </div>
 
-<div id="main">
-    <div class="inner flex justify-center flex-col">
-        <div class="pl-16 md:max-w-4xl w-full xl:max-w-5xl mt-8">
-            <div class="relative">
-                <input id="algolia"
-                       class="transition bg-gray-200 mt-4 focus:outline-none placeholder-gray-600 py-2 pr-4 pl-10 py-3 block w-full appearance-none leading-normal border-b border-gray-400 focus:border-gray-800"
-                       type="text"
-                       placeholder="Search the docs"
-                       autocomplete="off"
-                       spellcheck="false"
-                       role="combobox"
-                       aria-autocomplete="list"
-                       aria-expanded="false"
-                       aria-label="search input"
-                       aria-owns="algolia-autocomplete-listbox-0"
-                       dir="auto"
-                       style="position: relative; vertical-align: top;">
-
-                <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center pt-3">
-                    <svg class="fill-current pointer-events-none text-gray-800 w-4 h-4"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <div class="md:pr-10 pl-16 pr-5 leading-relaxed docs_content md:max-w-4xl w-full xl:max-w-5xl">
-            <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
-            {{ content | raw }}
-        </div>
-    </div>
-</div>
-
-{% endblock %}
+<script type="text/javascript">
+    new ClipboardJS('.clipboard');
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+    apiKey: 'e017bb0b99fe3193f750d48a4e7d441e',
+    indexName: 'alpas',
+    inputSelector: '#algolia',
+    debug: false
+});
+</script>
+</body>
+</html>

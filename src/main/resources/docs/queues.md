@@ -26,7 +26,7 @@ based on their priorities such as *high priority queue*, *low priority queue* et
 ### [Registering Queue Connections](#registering-queue-connections)
 
 If you open `configs/Queue.kt`, you'll notice that Alpas has lazily registered three queue connections for you.
-Each connection is registered with a name. Alpas uses this key to pick one of these connections based on
+Each connection is regestered with a name. Alpas uses this key to pick one of these connections based on
 the value of `QUEUE_CONNECTION` in your `.env` file. This is set to `passthrough` by default.
 
 Feel free to register more queue connections or remove the ones that you know for sure you would't use.

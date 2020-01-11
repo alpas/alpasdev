@@ -13,6 +13,8 @@ jQuery(function ($) {
             $("#algolia").focus();
         }
     });
+    // hide clipboards on small screens
+    $('span.clipboard').addClass('hidden md:inline-block')
     // copy line numbers start offset from parent to child
     $('span.line-numbers').each(function () {
         const parent = $(this)
