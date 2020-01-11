@@ -49,7 +49,7 @@ br {
 .docs_content {
   span.clipboard {
     content: url('/images/clipboard.svg');
-    @apply w-3 ml-1;
+  @apply w-3 ml-1;
   }
 
   span[data-file]::before {
@@ -143,6 +143,11 @@ br {
   }
 
   h1 + ul li {
+    > a::before {
+      content: "⸗ ";
+    @apply text-red-500 text-xl;
+    }
+
     a {
     @apply text-gray-800 font-semibold border-none;
     }
@@ -162,7 +167,7 @@ br {
   }
 
   h3 {
-  @apply font-medium text-2xl text-blue-600 mb-2 mt-8;
+  @apply font-medium text-xl text-blue-600 mb-2 mt-8;
 
     a {
     @apply text-blue-500 border-none;
@@ -258,10 +263,6 @@ br {
 ul li {
 @apply mb-2;
 
-  > a::before {
-    content: "⸗ ";
-  @apply text-gray-500 text-xl font-light;
-  }
 
   a {
   @apply text-gray-800 font-semibold;
