@@ -100,10 +100,10 @@ much anywhere you need.
 > /info/ <span>When you initialize your app using `alpas init` command, an `.env` file with some defaults is
 automatically created for you.</span>
 
-It is very important that you don't commit this `.env` file in the app's source control for mainly two reason
-— first, this file could contain some secret API keys that you don't want to accidentally make available
-for everyone. Secondly, different developers on your team might want to use different environment
-configurations. This is true for different servers as well. 
+It is very important that you don't commit this `.env` file in the app's source control for mainly two
+reasons—first, this file could contain some secret API keys that you don't want to accidentally
+make available for everyone. Secondly, different developers on your team might want to use
+different environment configurations. This is true for different servers as well. 
 
 When you need to share some configurations with your team, the convention is to use `.env.example` file that
 usually contains the same keys but with different placeholder values.
