@@ -6,7 +6,7 @@ import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
 import dev.alpas.Environment
 import dev.alpas.ResourceLoader
-import dev.alpas.ozone.orAbort
+import dev.alpas.orAbort
 import redis.clients.jedis.JedisPool
 import java.nio.file.Paths
 
@@ -21,18 +21,17 @@ class Documentation(
     private val markdown by lazy { Markdown() }
 
     fun get(page: String): String {
-        fun make(): String {
-            return markdown.convert(readSource(page))
-        }
 
-        if (env.isDev) {
-            return make()
-        }
-
-        return jedisPool.resource.use { jedis ->
-            return jedis.hget("docs", page) ?: make().also { jedis.hset("docs", page, it) }
+        return if (env.isDev) {
+            convert(page)
+        } else {
+            jedisPool.resource.use { jedis ->
+                return jedis.hget("docs", page) ?: convert(page).also { jedis.hset("docs", page, it) }
+            }
         }
     }
+
+    private fun convert(page: String) = markdown.convert(readSource(page))
 
     fun toc(): String {
         return get("toc")
