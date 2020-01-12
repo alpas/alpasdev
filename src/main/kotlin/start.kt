@@ -1,5 +1,5 @@
 package dev.alpas.alpasdev
 
-import dev.alpas.AlpasApp
+import dev.alpas.Alpas
 
-fun main(args: Array<String>) = AlpasApp(args).ignite()
+fun main(args: Array<String>) = Alpas(args).routes { addRoutes() }.ignite()
