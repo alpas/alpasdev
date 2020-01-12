@@ -15,8 +15,8 @@ jobs:
         with:
           java-version: '9.0.4'
 
-      - name: Download Gradle Wrapper
-        run: gradle wrapper
+#      - name: Download Gradle Wrapper
+#        run: gradle wrapper
 
       - name: Build Jar
         run: ./gradlew shadowJar
