@@ -17,8 +17,10 @@ forward to interacting with your database and making SQL queries like a pro.
 <a name="registering-database-connections"></a>
 ### [Registering Database Connections](#registering-database-connections)
 
-If you open `configs/DatabaseConfig.kt` file, you'll notice that Alpas has registered one database connection
-for you already. The default connection is a MySQL database connection and should be registered as `mysql`.
+If you open the `configs/DatabaseConfig.kt` file, you'll notice that Alpas has registered one database connection
+for you already. If `addConnections()` call is commented out, make sure to uncomment it out as the first thing.
+
+The default connection is a MySQL database connection and should be registered as `mysql`.
 However, it could be any of number of other supported database dialects.
 
 <div class="sublist">
@@ -44,6 +46,10 @@ the kernel classes-`HttpKernel` and `ConsoleKernel`.
 You can create your own database connection by implementing `dev.alpas.ozone.DatabaseConnection` interface.
 To help you get started without much fuss and fear, Alpas comes bundled with two such
 connections—`MySqlConnection` and `SqliteConnection`.
+
+>/alert/<span>Most of the database related features are disabled unless there exists at least
+>one database connection. Make sure you have a `DatabaseConfig` class defined and that
+>`addConnections()` method is called from the `init{}` block.</span>
 
 <a name="multiple-database-connections"></a>
 #### [Multiple Database Connections](#multiple-database-connections)
@@ -80,6 +86,8 @@ class DatabaseConfig(env: Environment) : DatabaseConfig(env) {
 Once these connections are added, you can easily connect to the database of your
 choice by calling `connect()` method on an instance of `DatabaseConfig`.
 
+<span class="line-numbers" data-start="6">
+
 ```kotlin
 
 fun index(call: HttpCall){
@@ -94,6 +102,8 @@ fun index(call: HttpCall){
 }
 
 ```
+
+</span>
 
 <a name="transactions"></a>
 ### [Transactions](#transactions)
