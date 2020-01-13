@@ -3,6 +3,7 @@
 - [Ozone Data Access Object (DAO)](#dao)
     - [Ozone Entity](#ozone-entity)
 - [Creating Tables and Entities](#creating-tables-and-entities)
+- [Logs](#logs)
     
 Ozone is a thin layer on top of the excellent [Exposed ORM library](https://github.com/JetBrains/Exposed).
 Ozone makes setting up and interacting with Exposed seamless and simple. It also adds few other
@@ -232,7 +233,36 @@ object Invoices : LongIdTable("invoices") {
 
 `make:entity` also takes a `-m` flag that creates a [migration](/docs/migrations) file for the entity.
 
+
+### [Logs](#logs)
+
+One major downside of using a database framework like Ozone is that the SQL queries that actually get
+run on your database are opaque to you. You may be making a small innocent mistake like lazy loading
+a relation instead of eagerly loading and running into the trap of [N+1 query problem][n+1].
+
+Once quick way to see behind-the-scenes database queries is by logging them, which, fortunately,
+is already done for you. All you need to do is print out the actual queries that was run by
+adding the following 3 lines in your [logging configuration files][log-config].
+
+<span class="line-numbers" data-start="32" data-file="app_log_config.xml">
+
+```xml
+
+<!-- ... -->
+
+<logger name="Exposed" level="debug">
+    <appender-ref ref="STDOUT"/>
+</logger>
+
+<!-- ... -->
+
+```
+
+</span>
+
 > /power/ <span>Ozone is powered by [Exposed](https://github.com/JetBrains/Exposed).
 
 [kotlin-object]: https://kotlinlang.org/docs/tutorials/kotlin-for-py/objects-and-companion-objects.html#object-declarations
 [dsl-advanced]: https://github.com/JetBrains/Exposed/wiki/DSL#where-expression
+[n+1]: https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping
+[log-config]: /docs/logging#configuration
