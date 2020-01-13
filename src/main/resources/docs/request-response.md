@@ -1,7 +1,7 @@
 - [Lifecycle](#lifecycle)
 - [HttpCall](#httpcall)
     
-**Request ⇄ Response** chain is at the core of every web applications — a browser makes a request that gets
+**Request ⇄ Response** chain is at the core of every web application — a browser makes a request that gets
 received by your web app, which in turn sends back a response based on what the request was. 
 
 As simple as this sounds on the surface, a lot of things have to happen in the correct order to successfully
