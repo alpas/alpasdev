@@ -8,7 +8,7 @@
 <a name="configs"></a>
 ### [Configs](#configs)
 
-Alpas uses strongly typed config classes for configuring the framework. All these configs live under `configs` folder.
+Alpas uses strongly typed config classes for configuring the framework. All these configs live under the `configs` folder.
 
 <a name="custom-configs"></a>
 #### Custom Configs
@@ -78,8 +78,8 @@ class ViewConfig(env: Environment) : dev.alpas.view.ViewConfig(env) {
 > /info/ Just like custom config classes, once declared, Alpas automatically loads these extended config classes
 instead of the parent core config classes. So don't worry about how to load them; just declare and forget!
 
-> /tip/ <span>Instead of extending core config classes, you might be able to change the values of by simply
-setting appropriate variables in your `.env` file.</span>
+> /tip/ <span>Depending on what you are trying to accomplish, you may be able to avoid extending core config classes by simply
+setting the appropriate variables in your `.env` file.</span>
 
 <a name="env"></a>
 ### [Environment](#env)
@@ -90,11 +90,10 @@ you, for an example, to set values based on whether you are developing your app 
 You also don't want these configs to be compiled with your app as you want to easily deploy your app without
 having to recompile a deployment copy after changing some configurations.
 
-Also, if you are using some third-party API keys/secrets, you don't want to hard code these and push it to
-your version control. This is very risky from a security standpoint.
+Also, if you are using some third-party API keys/secrets, you don't want to hard code these and include them in version control. This is very risky from a security standpoint.
 
 To make this flexible, Alpas allows you to configure values in an `.env` file that lives in the root of
-your project. The variables in this file gets loaded automatically and is available for you in pretty
+your project. The variables in this file get loaded automatically and are available for you in pretty
 much anywhere you need.
 
 > /info/ <span>When you initialize your app using `alpas init` command, an `.env` file with some defaults is
@@ -105,7 +104,7 @@ reasons—first, this file could contain some secret API keys that you don't wan
 make available for everyone. Secondly, different developers on your team might want to use
 different environment configurations. This is true for different servers as well. 
 
-When you need to share some configurations with your team, the convention is to use `.env.example` file that
+When you need to share some configurations with your team, the convention is to use an `.env.example` file that
 usually contains the same keys but with different placeholder values.
 
 > /alert/ <span>You must have an `.env` file in your root project during development and right next to your
@@ -117,8 +116,8 @@ allows you to have the flexibility of running tests with a different set of conf
 <a name="system-env-variables"></a>
 #### [System Environment Variables](#system-env-variables)
 
-Not just the variables defined in your `.env` file, Alpas loads all your system wide environment variables and
-makes them available in the same manner as well. In fact, system wide environment variables take precedence
+In addition to the variables defined in your `.env` file, Alpas loads all your system wide environment variables and
+makes them available in the same manner. In fact, system wide environment variables take precedence
 over the variables defined in your `.env` file.
 
 > /tip/ <span>We highly recommend using system wide environment variables for more critical configurations
@@ -127,7 +126,7 @@ such as secret keys and API keys rather than defining them in your `.env` file.<
 <a name="accessing-variables"></a>
 #### [Accessing Variables](#accessing-variables)
 
-In some places, such as the config classes, if you ask for it as a constructor parameter, Alpas automatically
+In some places, such as the config classes, if you ask for an environment variable as a constructor parameter, Alpas automatically
 injects an instance of `dev.alpas.Environment`. In other places, such as your controllers, you can access
 any available environment variables through an `env` object. 
 

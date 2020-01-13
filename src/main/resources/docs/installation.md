@@ -13,14 +13,14 @@
 <a name="system-requirements"></a>
 ### [System Requirements](#system-requirements)
 
-Alpas has only few system requirements. The requirements vary based on whether you
+Alpas has only a few system requirements. The requirements vary based on whether you
 want to set up a machine for development or for production.
 
 <a name="development"></a>
 ### [Development](#development)
 
-Alpas is easy to get started with Alpas on any *nix based machines; all you need is a JDK. Windows is supported
-but only under [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+Alpas is easy to get started with on any *nix based machines; all you need is a JDK. Windows is supported
+but only under the [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 <div class="sublist">
 
