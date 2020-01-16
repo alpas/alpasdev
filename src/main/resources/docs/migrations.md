@@ -1,3 +1,4 @@
+- [Preparing for Migration](#preparing-migrations)
 - [Creating Migrations](#creating-migrations)
 - [Migration Structure](#migration-structure) 
 - [Migrating](#migrating)
@@ -16,20 +17,23 @@ far as the schema is concerned, being able to quickly iterate on a database desi
 With Alpas's built-in migration support, you can take advantages of all the above benefits of
 migrations without breaking a sweat.
 
+<a name="prepareing-migrations"></a>
+### [Preparing for Migration](#preparing-migrations)
+
+Your [Ozone table](/docs/ozone#ozone-table) must extend from `MigratingTable` instead of just `Table` to support
+migration. Once it extends from `MigratingTable`, you can further [customize](#customizing-columns) the
+table's columns such as marking it nullable, setting the size of a varchar column etc.
+
 <a name="creating-migrations"></a>
 ### [Creating Migrations](#creating-migrations)
 
-You can create a migration by using `make:migration` Alpas command. It takes the name of the
-migration, and the action you want to perform—either `create` or `modify`, which takes the
-name of the [table](/docs/ozone#ozone-table) to crate or modify.
+You can create a migration by using `make:migration` Alpas command. It takes the name of the migration,
+and the [Ozone table instance](/docs/ozone#ozone-table) to create.
 
 ```bash
 
 # Create a migration for creating a table
 $ alpas make:migration create_receipts_table --create=receipts
-
-# Create a migration for modifying a table
-$ alpas make:migration modify_receipts_table --modify=receipts
 
 ```
 
@@ -37,8 +41,8 @@ $ alpas make:migration modify_receipts_table --modify=receipts
 ### [Migration Structure](#migration-structure)
 
 Migrations work by tracking your migration files under `database/migrations` folders in a database
-table called `migrations`. Migrations files are named as the time when these files are created.
-These helps to keep track of them easily as well as to sort them chronologically.
+table called `migrations`. Migrations files are named after the time when these files are created.
+This helps to keep track of them easily as well as to sort them chronologically.
 
 When a migration is run, it checks if any of migration files are already migrated or not. All the
 outstanding migrations are then run in one batch, which is numbered. When performing the
@@ -110,10 +114,7 @@ $ alpas db:refresh
 #### [Creating Tables](#creating-tables)
 
 You can create a new table by calling the `createTable()` method and passing
-the [object instance of Ozone Table](/docs/ozone#ozone-table).
-
-You are not bound to creating only one table. You can pass multiple tables to `createTable()`
-method. You can also set `inBatch` to `true` to create all the tables in one go.
+the [object instance of an Ozone Table](/docs/ozone#ozone-table).
 
 <span class="line-numbers" data-start="6" data-file="database/migrations/2020_01_01_123456_create_orders_tables.kt">
 
@@ -121,7 +122,33 @@ method. You can also set `inBatch` to `true` to create all the tables in one go.
 
 class CreateOrdersTables : Migration() {
     override fun up() {
-        createTable(Receipts, Orders, Products, inBatch = true)
+        createTable(Receipts)
+        createTable(Orders)
+        createTable(Products)
+    }
+}
+
+```
+
+</span>
+
+
+<a name="customizing-tables"></a>
+#### [Customizing Tables](#customizing-tables)
+
+`createTable()` takes a lambda to let you further customize your table. This is usually helpful to add some indices
+to your table.
+
+<span class="line-numbers" data-start="6" data-file="database/migrations/2020_01_01_123456_create_orders_tables.kt">
+
+```kotlin
+
+class CreateOrdersTables : Migration() {
+    override fun up() {
+        createTable(Receipts) {
+            // add an index to email column
+            addIndex("email")
+        }
     }
 }
 
@@ -141,7 +168,9 @@ in one call and in one pass by setting `inBatch` to `true`.
 
 class CreateOrdersTables : Migration() {
     override fun down() {
-        dropTable(Products, Orders, Receipts, inBatch = true)
+        dropTable(Products)
+        dropTable(Orders)
+        dropTable(Receipts)
     }
 }
 
@@ -149,26 +178,60 @@ class CreateOrdersTables : Migration() {
 
 </span>
 
-<a name="modifying-tables"></a>
-#### [Modifying Tables](#modifying-tables)
 
-When you add new columns to a table, you can call `modifyTable()` method by passing the name of a table or multiple
-tables to auto-actualize the database schema. This will create any missing tables and adds missing columns
-as long as the new columns are nullable or have default values. While this may not be enough for all
-your table modification use cases, it is still helpful with new tables and missing columns.
+<a name="migrating-table-columns"></a>
+### [Migrating Table Columns](#migrating-table-columns)
+A subclass of `MigratingTable` adds more columns for your convenience further allows customization of your table's columns as you are declaring them.
 
-<span class="line-numbers" data-start="6" data-file="database/migrations/2020_01_01_123456_modify_users_table.kt">
+<a name="extra-columns"></a>
+#### [Extra Columns](#extra-columns)
+
+Here are some more column types it adds on top of the [default ones](/docs/ozone#column-types).
+
+| Function Name   | Ozone Type             | Comments                                               |
+| --------------- | ---------------------- | ------------------------------------------------------ |
+| increments()    | int()                  | An auto-incrementing unsigned integer primary key.     |
+| bigIncrements() | long()                 | An auto-incrementing unsigned integer primary key.     |
+| string()        | text()                 | A varchar column that accepts a size (255 by default). |
+
+<a name="customizing-columns"></a>
+#### [Customizing Columns](#customizing-columns)
+
+You can further customize a column by chaining a number of convenience methods on a column.
+
+| Function Name       | Available On               | Comments                                                  |
+| ------------------- | -------------------------- | --------------------------------------------------------- |
+| size(Int)           | Any column of type string. |  Set the size of a string column.                         |
+| default(Any)        | Any column type.           | Set the default value of a column.                        |
+| useCurrent()        | Any `Temporal` column.     | Use the current timestamp as a default value.             |
+| unsigned()          | Any column of type number. | Set the column type as unsigned.                          |
+| autoIncrement()     | Any column of type number. | Set the column type as as auto-incrementing.              |
+| nullable()          | Any column type.           | Set the column type is nullable.                          |
+| precision(Int, Int) | Any column of type number. | Set the total precision and the number of decimal places. |
+| unique()            | Any column type.           | Add a UNIQUE constraint on the column.                    |
+| index()             | Any column type.           | Create an index on the column.                            |
+
+<br/>
+
+Here is an example of column customization. 
+
+<span class="line-numbers" data-start="21">
 
 ```kotlin
 
-class CreateOrdersTables : Migration() {
-    override fun up() {
-        modifyTable(Users)
-    }
+object Users : MigratingTable<User>("users") {
+    val id by bigIncrements("id")
+    val pin by smallInt("pin").unsigned()
+    val email by varchar("email").index().unique()
+    val password by varchar("password").size(100)
+    val name by varchar("name").index().nullable()
+    val emailIsVerified by boolean("email_verified").default(false)
+    val createdAt by timestamp("created_at").useCurrent()
 }
 
 ```
 
 </span>
 
->/info/ Alpas current doesn't support deleting or modifying existing columns from a database.
+>/info/ <span>Alpas currently doesn't currently support adding, deleting, or modifying existing columns
+>of a table.</span>
