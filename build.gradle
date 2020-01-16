@@ -2,7 +2,7 @@ buildscript {
     ext.kotlin_version = '1.3.50'
     ext.ktorm_version = '2.5'
     ext.flexmark_version = '0.50.40'
-    ext.alpas_version = '0.10.11'
+    ext.alpas_version = '0.10.12'
 }
 
 plugins {
@@ -18,7 +18,7 @@ startScripts {
 mainClassName = 'dev.alpas.alpasdev.StartKt'
 
 group 'dev.alpas.alpasdev'
-version '0.13.0'
+version '0.14.0'
 
 repositories {
     jcenter()
@@ -34,6 +34,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "com.vladsch.flexmark:flexmark:$flexmark_version"
     implementation "com.vladsch.flexmark:flexmark-ext-autolink:$flexmark_version"
+    implementation "com.vladsch.flexmark:flexmark-ext-tables:$flexmark_version"
     implementation 'redis.clients:jedis:3.1.0'
 
     testImplementation("dev.alpas:pulsar:$alpas_version")

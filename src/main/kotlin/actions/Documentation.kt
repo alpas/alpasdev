@@ -1,6 +1,7 @@
 package dev.alpas.alpasdev.actions
 
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension
+import com.vladsch.flexmark.ext.tables.TablesExtension
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
@@ -47,9 +48,10 @@ class Documentation(
 class Markdown {
     private val options by lazy {
         MutableDataSet().apply {
-            set(Parser.EXTENSIONS, listOf(AutolinkExtension.create()))
+            set(Parser.EXTENSIONS, listOf(AutolinkExtension.create(), TablesExtension.create()))
             set(HtmlRenderer.HARD_BREAK, "<br />\n")
             set(HtmlRenderer.RENDER_HEADER_ID, true)
+            set(TablesExtension.CLASS_NAME, "pure-table pure-table-striped")
         }
     }
     private val parser: Parser by lazy { Parser.builder(options).build() }

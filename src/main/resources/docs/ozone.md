@@ -237,7 +237,41 @@ object Invoices : MigratingTable<Receipt>("invoices") {
 
 `make:entity` also takes a `-m` flag that creates a [migration](/docs/migrations) file for the entity.
 
+<a name="column-types"></a>
+### [Column Types](#column-types)
 
+Your table can define different types of out-of-the-box supported columns.
+
+| Function Name   | Kotlin Type             | Underlying SQL Type |
+| --------------- | ----------------------- | ------------------- |
+| boolean()       | kotlin.Boolean          | boolean             |
+| int()           | kotlin.Int              | int                 |
+| tinyInt()       | kotlin.Int              | tinyint             |
+| smallInt()      | kotlin.Int              | smallint            |
+| bigInt()        | kotlin.Long             | bigInt              |
+| long()          | kotlin.Long             | bigint              |
+| float()         | kotlin.Float            | float               |
+| double()        | kotlin.Double           | double              |
+| decimal()       | java.math.BigDecimal    | decimal             |
+| varchar()       | kotlin.String           | varchar             |
+| text()          | kotlin.String           | text                |
+| mediumText()    | kotlin.String           | mediumtext          |
+| longText()      | kotlin.String           | longtext            |
+| char()          | kotlin.String           | char                |
+| blob()          | kotlin.ByteArray        | blob                |
+| bytes()         | kotlin.ByteArray        | bytes               |
+| jdbcTimestamp() | java.sql.Timestamp      | timestamp           |
+| jdbcDate()      | java.sql.Date           | date                |
+| jdbcTime()      | java.sql.Time           | time                |
+| timestamp()     | java.time.Instant       | timestamp           |
+| datetime()      | java.time.LocalDateTime | datetime            |
+| date()          | java.time.LocalDate     | date                |
+| time()          | java.time.Time          | time                |
+| monthDay()      | java.time.MonthDay      | varchar             |
+| yearMonth()     | java.time.YearMonth     | varchar             |
+| year()          | java.time.Year          | int                 |
+
+<a name="logs"></a>
 ### [Logs](#logs)
 
 One major downside of using a database framework like Ozone is that the SQL queries that actually get
