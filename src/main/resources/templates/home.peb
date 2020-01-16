@@ -52,7 +52,7 @@
             <div class="self-center max-w-3xl">
                 <p class="text-xl mt-4 lg:mt-10">
                     Alpas strives to be simple and elegant and wants to serve you whether you have written any JVM
-                    based web apps before or not. There is no xml or properties files to be configured, no scattered
+                    based web apps before or not. There is no xml or properties files to configure, no scattered
                     annotations to memorize, and best of all — there is no huge learning curve to
                     <a class="primary" href="{{ route('docs.index', ['installation']) }}">get started</a>!
                 </p>
