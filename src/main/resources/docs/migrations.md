@@ -6,9 +6,12 @@
 - [Refreshing Database](#refreshing-database)
 - [Tables](#tables)
     - [Creating Tables](#creating-tables)
+    - [Customizing Tables](#customizing-tables)
     - [Dropping Tables](#dropping-tables)
-    - [Modifying Tables](#modifying-tables)
-    
+- [Migrating-Table Columns](#migrating-table-columns)
+    - [Extra Columns](#extra-columns)
+    - [Customizing Columns](#customizing-columns)
+
 Migrations are like version control for your database. There are many advantages of using migrations—
 being able to easily create a database with ease, being able to share the same database schema with
 a team, being able to recreate a production database that is exactly like the development one as
@@ -178,38 +181,37 @@ class CreateOrdersTables : Migration() {
 
 </span>
 
-
 <a name="migrating-table-columns"></a>
-### [Migrating Table Columns](#migrating-table-columns)
+### [Migrating-Table Columns](#migrating-table-columns)
 A subclass of `MigratingTable` adds more columns for your convenience further allows customization of your table's columns as you are declaring them.
 
 <a name="extra-columns"></a>
 #### [Extra Columns](#extra-columns)
 
-Here are some more column types it adds on top of the [default ones](/docs/ozone#column-types).
+Here are some more column types it adds on top of the [default ones](/docs/ozone#default-column-types).
 
-| Function Name   | Ozone Type             | Comments                                               |
-| --------------- | ---------------------- | ------------------------------------------------------ |
-| increments()    | int()                  | An auto-incrementing unsigned integer primary key.     |
-| bigIncrements() | long()                 | An auto-incrementing unsigned integer primary key.     |
-| string()        | text()                 | A varchar column that accepts a size (255 by default). |
+| Function Name     | Ozone Type               | Comments                                               |
+| ----------------- | ------------------------ | ------------------------------------------------------ |
+| `increments()`    | `int()`                  | An auto-incrementing unsigned integer primary key.     |
+| `bigIncrements()` | `long()`                 | An auto-incrementing unsigned integer primary key.     |
+| `string()`        | `text()`                 | A varchar column that accepts a size (255 by default). |
 
 <a name="customizing-columns"></a>
 #### [Customizing Columns](#customizing-columns)
 
 You can further customize a column by chaining a number of convenience methods on a column.
 
-| Function Name       | Available On               | Comments                                                  |
-| ------------------- | -------------------------- | --------------------------------------------------------- |
-| size(Int)           | Any column of type string. |  Set the size of a string column.                         |
-| default(Any)        | Any column type.           | Set the default value of a column.                        |
-| useCurrent()        | Any `Temporal` column.     | Use the current timestamp as a default value.             |
-| unsigned()          | Any column of type number. | Set the column type as unsigned.                          |
-| autoIncrement()     | Any column of type number. | Set the column type as as auto-incrementing.              |
-| nullable()          | Any column type.           | Set the column type is nullable.                          |
-| precision(Int, Int) | Any column of type number. | Set the total precision and the number of decimal places. |
-| unique()            | Any column type.           | Add a UNIQUE constraint on the column.                    |
-| index()             | Any column type.           | Create an index on the column.                            |
+| Function Name         | Available On               | Comments                                                  |
+| --------------------- | -------------------------- | --------------------------------------------------------- |
+| `size(Int)`           | Any column of type string. |  Set the size of a string column.                         |
+| `default(Any)`        | Any column type.           | Set the default value of a column.                        |
+| `useCurrent()`        | Any `Temporal` column.     | Use the current timestamp as a default value.             |
+| `unsigned()`          | Any column of type number. | Set the column type as unsigned.                          |
+| `autoIncrement()`     | Any column of type number. | Set the column type as as auto-incrementing.              |
+| `nullable()`          | Any column type.           | Set the column type is nullable.                          |
+| `precision(Int, Int)` | Any column of type number. | Set the total precision and the number of decimal places. |
+| `unique()`            | Any column type.           | Add a UNIQUE constraint on the column.                    |
+| `index()`             | Any column type.           | Create an index on the column.                            |
 
 <br/>
 
