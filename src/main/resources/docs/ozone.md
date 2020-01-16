@@ -3,7 +3,8 @@
 - [Ozone Data Access Object (DAO)](#dao)
     - [Ozone Entity](#ozone-entity)
 - [Creating Tables and Entities](#creating-tables-and-entities)
-- [Logs](#logs)
+- [Default Column Types](#default-column-types)
+- [Query Logging](#query-logging)
     
 Ozone is a thin layer on top of the excellent [Ktorm library][ktorm-github] by Vincent Lau.
 
@@ -237,42 +238,42 @@ object Invoices : MigratingTable<Receipt>("invoices") {
 
 `make:entity` also takes a `-m` flag that creates a [migration](/docs/migrations) file for the entity.
 
-<a name="column-types"></a>
-### [Column Types](#column-types)
+<a name="default-column-types"></a>
+### [Default Column Types](#default-column-types)
 
 Your table can define different types of out-of-the-box supported columns.
 
-| Function Name   | Kotlin Type             | Underlying SQL Type |
-| --------------- | ----------------------- | ------------------- |
-| boolean()       | kotlin.Boolean          | boolean             |
-| int()           | kotlin.Int              | int                 |
-| tinyInt()       | kotlin.Int              | tinyint             |
-| smallInt()      | kotlin.Int              | smallint            |
-| bigInt()        | kotlin.Long             | bigInt              |
-| long()          | kotlin.Long             | bigint              |
-| float()         | kotlin.Float            | float               |
-| double()        | kotlin.Double           | double              |
-| decimal()       | java.math.BigDecimal    | decimal             |
-| varchar()       | kotlin.String           | varchar             |
-| text()          | kotlin.String           | text                |
-| mediumText()    | kotlin.String           | mediumtext          |
-| longText()      | kotlin.String           | longtext            |
-| char()          | kotlin.String           | char                |
-| blob()          | kotlin.ByteArray        | blob                |
-| bytes()         | kotlin.ByteArray        | bytes               |
-| jdbcTimestamp() | java.sql.Timestamp      | timestamp           |
-| jdbcDate()      | java.sql.Date           | date                |
-| jdbcTime()      | java.sql.Time           | time                |
-| timestamp()     | java.time.Instant       | timestamp           |
-| datetime()      | java.time.LocalDateTime | datetime            |
-| date()          | java.time.LocalDate     | date                |
-| time()          | java.time.Time          | time                |
-| monthDay()      | java.time.MonthDay      | varchar             |
-| yearMonth()     | java.time.YearMonth     | varchar             |
-| year()          | java.time.Year          | int                 |
+| Function Name     | Kotlin Type             | Underlying SQL Type |
+| ----------------- | ----------------------- | ------------------- |
+| `boolean()`       | kotlin.Boolean          | boolean             |
+| `int()`           | kotlin.Int              | int                 |
+| `tinyInt()`       | kotlin.Int              | tinyint             |
+| `smallInt()`      | kotlin.Int              | smallint            |
+| `bigInt()`        | kotlin.Long             | bigInt              |
+| `long()`          | kotlin.Long             | bigint              |
+| `float()`         | kotlin.Float            | float               |
+| `double()`        | kotlin.Double           | double              |
+| `decimal()`       | java.math.BigDecimal    | decimal             |
+| `varchar()`       | kotlin.String           | varchar             |
+| `text()`          | kotlin.String           | text                |
+| `mediumText()`    | kotlin.String           | mediumtext          |
+| `longText()`      | kotlin.String           | longtext            |
+| `char()`          | kotlin.String           | char                |
+| `blob()`          | kotlin.ByteArray        | blob                |
+| `bytes()`         | kotlin.ByteArray        | bytes               |
+| `jdbcTimestamp()` | java.sql.Timestamp      | timestamp           |
+| `jdbcDate()`      | java.sql.Date           | date                |
+| `jdbcTime()`      | java.sql.Time           | time                |
+| `timestamp()`     | java.time.Instant       | timestamp           |
+| `datetime()`      | java.time.LocalDateTime | datetime            |
+| `date()`          | java.time.LocalDate     | date                |
+| `time()`          | java.time.Time          | time                |
+| `monthDay()`      | java.time.MonthDay      | varchar             |
+| `yearMonth()`     | java.time.YearMonth     | varchar             |
+| `year()`          | java.time.Year          | int                 |
 
-<a name="logs"></a>
-### [Logs](#logs)
+<a name="query-logging"></a>
+### [Query Logging](#query-logging)
 
 One major downside of using a database framework like Ozone is that the SQL queries that actually get
 run on your database are opaque to you. You may be making a small innocent mistake like lazy loading
