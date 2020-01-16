@@ -5,7 +5,8 @@
 - [Creating Tables and Entities](#creating-tables-and-entities)
 - [Logs](#logs)
     
-Ozone is a thin layer on top of the excellent [Exposed ORM library](https://github.com/JetBrains/Exposed).
+Ozone is a thin layer on top of the excellent [Ktorm library][ktorm-github] by Vincent Lau.
+
 Ozone makes setting up and interacting with Exposed seamless and simple. It also adds few other
 features on top of Exposed such as [entity commands](#creating-tables-and-entities),
 [migrations](/docs/migrations), database pool configuration etc.
@@ -24,38 +25,17 @@ you to make and run SQL statements in a very type safe way, as it should!
 #### [Ozone Table](#ozone-table)
 
 To start using DSL for your CRUD SQL statements, you need a table that is mapped to an actual table in the database.
-You create this "virtual" table by extending `Table` class and defining all your columns. Since there is only
-one table of the given name in the database, it makes sense to only have one such instance of table in your
-code as well. You can do so by representing the table with an [`object`][kotlin-object] instead of a `class`.
+You create this "virtual" table by extending `Table` class and defining all your columns.
 
 <span class="line-numbers" data-start="5" data-file="tables/Users.kt">
 
 ```kotlin
 
-object Users : Table("users") {
-    val id = long("id").autoIncrement().primaryKey()
-    val email = varchar("email", 255).uniqueIndex()
-    val name = varchar("name", 255).nullable()
-    val createdAt = timestamp("created_at").nullable()
-}
-
-```
-
-</span>
-
-If your table has a primary auto-incrementing column named `id`, you can make your interactions
-with the table much easier by extending it from and `IdTable` instead of `Table`.
-
-<span class="line-numbers" data-start="5">
-
-```kotlin
-
-object Users : LongIdTable("users") {
-    // the following is no more needed
-    // val id = long("id").autoIncrement().primaryKey()
-
-    //...
-    //...
+object Users : Table<Nothing>("users") {
+   val id by long("id").primaryKey()
+   val email by varchar("email")
+   val name by varchar("name")
+   val createdAt by timestamp("created_at")
 }
 
 ```
@@ -70,23 +50,27 @@ Once the table object is defined, you can start running your CRUD operations on 
 
 //...
 
-transaction {
-    // Create a new user
-    val id = Users.insertAndGetId {
-        it[name] = "Jane Doe"
-        it[email] = "jane@example.com"
-        it[createdAt] = ZonedDateTime.now().toInstant()
+// Create a new user
+val id = Users.insertAndGenerateKey {
+    it.name to "Jane Doe"
+    it.email to "jane@example.com"
+    it.createdAt to ZonedDateTime.now().toInstant()
+}.toString().toLong()
+
+// Retrieve users and "extract" their email addresses
+val emails = Users.select()
+    .where { Users.name eq "Jane Doe" }.map { row -> row[Users.email] }
+
+// Update users
+Users.update {
+    it.name to "Jane M. Doe"
+    where {
+        Users.id eq id
     }
-
-    // Retrieve users and "extract" their email addresses
-    val emails = Users.select { Users.name eq "Jane Doe" }.map { it[email] }
-
-    // Update users
-    Users.update({ Users.id eq id }) { it[name] = "Jane M. Doe" }
-
-    // Delete users
-    Users.deleteWhere { Users.id eq id }
 }
+
+// Delete users
+Users.delete { it.id eq id }
 
 //...
 
@@ -94,21 +78,25 @@ transaction {
 
 </span>
 
-For advanced usage, please [checkout the DSL wiki](https://github.com/JetBrains/Exposed/wiki/DSL).
+>/info/<span>Since there is only one table of a given name in the database, it makes sense to only have one such
+>instance of table in your code as well. You do so by representing the table as an [`object`][kotlin-object]
+>instead of a `class`. However, this is not a strict requirement. There are certainly few cases where having
+>multiple instances makes sense—for an example if there are two tables with an identical schema.</span>
+
+For advanced usage, please [checkout the DSL wiki](https://ktorm.liuwj.me/en/schema-definition.html).
 
 <a name="dao"></a>
 ### [Ozone Data Access Object (DAO)](#dao)
 
-DSL is very powerful for running queries and doing [advanced operations][dsl-advanced] but it is very convenient to
+DSL is very powerful for running queries and doing [advanced queries][dsl-advanced] but it is very convenient to
 map a result to an actual object and interact with it directly. Ozone DAO APIs allows you to do exactly that.
 
 <a name="ozone-entity"></a>
 #### [Ozone Entity](#ozone-entity)
 
 If you want to interact with your database in more of an ORM way than using SQL statements then you need
-to define a class that extends the `Entity` class, "connect" it with its corresponding table object,
-and map its properties with that of the table's columns. Keep in mind that the properties of the
-entity should be mutable i.e. they should be **var**s and not **val**s.
+to define an interface that extends the `Entity` class, "connect" a [table object](#ozone-table) with
+this entity, and bind the table's properties with that of the entity's columns.
 
 Once you have set up an entity, every row in the table is mapped to an instance of this entity.
 
@@ -116,22 +104,31 @@ Once you have set up an entity, every row in the table is mapped to an instance 
 
 ```kotlin
 
-class User(id: EntityID<Long>) : LongEntity(id) {
-    // "connect" this entity with its table using a companion object
-    companion object : LongEntityClass<User>(Users)
+interface User : Entity<User> {
+    val id: Long
+    val email: String
+    val name: String
+    val createdAt: Instant?
+    
+    // this allows us to create an instance of User interface
+    companion object : Entity.Factory<User>()
+}
 
-    // make sure the properties are mutable
-    var email by Users.email
-    var name by Users.name
-    var createdAt by Users.createdAt
+
+// Don't forget to bind the corresponding table to the entity
+
+object Users : Table<User>("users") {
+    val id by long("id").primaryKey().bindTo { it.id }
+    val email by varchar("email").bindTo { it.email }
+    val name by varchar("name").bindTo { it.name }
+    val createdAt by timestamp("created_at").bindTo { it.createdAt }
 }
 
 ```
 
 </span>
 
-Now that you have both the entity and its corresponding table set up, you can run CRUD
-operations using by interacting with an instance of the entity directly.
+Let's see how we can interact with the entity and its table.
 
 <span class="line-numbers" data-start="7">
 
@@ -139,25 +136,28 @@ operations using by interacting with an instance of the entity directly.
 
 //...
 
-transaction {
-    // Create a new user
-    val user = User.new {
-        name = "Jane Doe"
-        email = "jane@example.com"
-        createdAt = ZonedDateTime.now().toInstant()
-    }
-
-    // Retrieve users
-    val users = User.find { Users.name eq "Jane Doe" }
-    // or find a user
-    val jane = User.findById(user.id)
-
-    // Update users (will be committed at the end of the transaction)
-    user.name = "Jane M. Doe"
-
-    // Delete a user
-    user.delete()
+// Create a new user
+val user = User {
+    name = "Jane Doe"
+    email = "jane@example.com"
+    createdAt = ZonedDateTime.now().toInstant()
 }
+
+// insert it
+Users.add(user)
+
+// Retrieve users
+val users = User.find { Users.name eq "Jane Doe" }
+// or find a user
+val jane = User.findById(5)
+
+// Update users and flush the changes
+user.name = "Jane M. Doe"
+user.email = "janemdoe@example.com"
+user.flushChanges()
+
+// Delete a user
+user.delete()
 
 //...
 
@@ -165,7 +165,7 @@ transaction {
 
 </span>
 
-For advanced usage, please [checkout the DAO wiki](https://github.com/JetBrains/Exposed/wiki/DAO).
+For advanced usage, please [checkout the DAO wiki](https://ktorm.liuwj.me/en/entities-and-column-binding.html).
 
 <a name="creating-tables-and-entities"></a>
 ### [Creating Tables and Entities](#creating-tables-and-entities)
@@ -184,16 +184,18 @@ $ alpas make:entity Activity
 
 ```kotlin
    
-class Activity(id: EntityID<Long>) : LongEntity(id) {
-   companion object : LongEntityClass<Activity>(Activities)
+interface Activity : Entity<Activity> {
+    val id: Long
+    val createdAt: Instant?
+    val updatedAt: Instant?
 
-   val createdAt by Activities.createdAt
-   val updatedAt by Activities.updatedAt
+    companion object : Entity.Factory<Activity>()
 }
 
-object Activities : LongIdTable("activities") {
-   val createdAt = timestamp("created_at")
-   val updatedAt = timestamp("updated_at")
+object Activities : MigratingTable<Activity>("activities") {
+    val id by bigIncrements("id").bindTo { it.id }
+    val createdAt by timestamp("created_at").nullable().bindTo { it.createdAt }
+    val updatedAt by timestamp("updated_at").nullable().bindTo { it.updatedAt }
 }
 
 ```
@@ -213,16 +215,18 @@ $ alpas make:entity Receipt --table=invoices
 
 ```kotlin
    
-class Receipt(id: EntityID<Long>) : LongEntity(id) {
-    companion object : LongEntityClass<Receipt>(Invoices)
+interface Receipt : Entity<Receipt> {
+    val id: Long
+    val createdAt: Instant?
+    val updatedAt: Instant?
 
-    val createdAt by Invoices.createdAt
-    val updatedAt by Invoices.updatedAt
+    companion object : Entity.Factory<Receipt>()
 }
 
-object Invoices : LongIdTable("invoices") {
-    val createdAt = timestamp("created_at")
-    val updatedAt = timestamp("updated_at")
+object Invoices : MigratingTable<Receipt>("invoices") {
+    val id by bigIncrements("id").bindTo { it.id }
+    val createdAt by timestamp("created_at").nullable().bindTo { it.createdAt }
+    val updatedAt by timestamp("updated_at").nullable().bindTo { it.updatedAt }
 }
    
 ```
@@ -242,7 +246,7 @@ a relation instead of eagerly loading and running into the trap of [N+1 query pr
 
 Once quick way to see behind-the-scenes database queries is by logging them, which, fortunately,
 is already done for you. All you need to do is print out the actual queries that was run by
-adding the following 3 lines in your [logging configuration files][log-config].
+adding the following 2 lines in your [logging configuration files][log-config].
 
 <span class="line-numbers" data-start="32" data-file="app_log_config.xml">
 
@@ -250,8 +254,7 @@ adding the following 3 lines in your [logging configuration files][log-config].
 
 <!-- ... -->
 
-<logger name="Exposed" level="debug">
-    <appender-ref ref="STDOUT"/>
+<logger name="me.liuwj.ktorm.database.Database" level="debug">
 </logger>
 
 <!-- ... -->
@@ -260,9 +263,18 @@ adding the following 3 lines in your [logging configuration files][log-config].
 
 </span>
 
-> /power/ <span>Ozone is powered by [Exposed](https://github.com/JetBrains/Exposed).
+>/power/<span>Ozone is proudly supercharged by [Ktorm][ktorm].</span>
+
+>/info/<span>[Ktorm][ktorm] is not just a super fun ORM library, it is also superbly documented, including code
+>comments. And Vincent's support is top-notch! He is always willing to help people with any SQL related queries.
+>We also have a dedicated `#ktorm` [Slack channel][alpas-slack] where Vincent visits regularly to answer
+>questions and participate in Ktorm related discussions. Please join our [Slack channel][alpas-slack]
+>and say hi to him and thank him for his excellent work.</span>
 
 [kotlin-object]: https://kotlinlang.org/docs/tutorials/kotlin-for-py/objects-and-companion-objects.html#object-declarations
-[dsl-advanced]: https://github.com/JetBrains/Exposed/wiki/DSL#where-expression
+[dsl-advanced]: https://ktorm.liuwj.me/en/query.html
 [n+1]: https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping
 [log-config]: /docs/logging#configuration
+[alpas-slack]: https://join.slack.com/t/alpasdev/shared_invite/enQtODcwMjE1MzMxODQ3LTJjZWMzOWE5MzBlYzIzMWQ2MTcxN2M2YjU3MTQ5ZDE4NjBmYjY1YTljOGIwYmJmYWFlYjc4YTcwMDFmZDIzNDE
+[ktorm-github]: https://github.com/vincentlauvlwj/Ktorm
+[ktorm]: https://ktorm.liuwj.me/
