@@ -6,14 +6,15 @@
 - [Default Column Types](#default-column-types)
 - [Query Logging](#query-logging)
     
-Ozone is a thin layer on top of the excellent [Ktorm library][ktorm-github] by Vincent Lau.
+Ozone is a thin layer on top of the excellent [Ktorm][ktorm-github] library by Vincent Lau*.
 
-Ozone makes setting up and interacting with Exposed seamless and simple. It also adds few other
-features on top of Exposed such as [entity commands](#creating-tables-and-entities),
+Ozone makes setting up and interacting with Ktorm seamless and simple. It also adds few
+other features on top of Ktorm such as [entity commands](#creating-tables-and-entities),
 [migrations](/docs/migrations), database pool configuration etc.
 
-In this document, we'll talk mostly about the Ozone layer and won't go too much into the nitty-gritty details
-of Exposed. For that, we'd recommend going through its [wiki](https://github.com/JetBrains/Exposed/wiki).
+In this document, we'll talk mostly about the Ozone layer and won't go too much into the nitty-gritty
+technical details of Ktorm. For that, we'd recommend going through its thoroughly written
+[documentation][ktorm].
 
 <a name="dsl"></a>
 ### [Ozone Domain Specific Language (DSL)](#dsl)
@@ -25,8 +26,8 @@ you to make and run SQL statements in a very type safe way, as it should!
 <a name="ozone-table"></a>
 #### [Ozone Table](#ozone-table)
 
-To start using DSL for your CRUD SQL statements, you need a table that is mapped to an actual table in the database.
-You create this "virtual" table by extending `Table` class and defining all your columns.
+To start using DSL for your CRUD SQL statements, you need a table that is mapped to an actual table in the
+database. You create this "map" table—basically, a schema—by extending `Table` class and defining all your columns.
 
 <span class="line-numbers" data-start="5" data-file="tables/Users.kt">
 
@@ -117,7 +118,6 @@ interface User : Entity<User> {
 
 
 // Don't forget to bind the corresponding table to the entity
-
 object Users : Table<User>("users") {
     val id by long("id").primaryKey().bindTo { it.id }
     val email by varchar("email").bindTo { it.email }
@@ -171,9 +171,9 @@ For advanced usage, please [checkout the DAO wiki](https://ktorm.liuwj.me/en/ent
 <a name="creating-tables-and-entities"></a>
 ### [Creating Tables and Entities](#creating-tables-and-entities)
 
-As you may have noticed, creating an entity and table with Ozone requires a little boiler code. Rather than
-creating an entity and the corresponding table manually, you can use `make:entity` Alpas command.
-The created entity and its table will be put in one file under `entities` folder. 
+As you may have noticed, creating an entity and table with Ozone requires a little boilerplate code.
+Rather than creating an entity and the corresponding table by hand, you can use `make:entity`
+Alpas command. The entity and its table will be put in one file under `entities` folder. 
 
 ```bash
 
@@ -241,7 +241,7 @@ object Invoices : MigratingTable<Receipt>("invoices") {
 <a name="default-column-types"></a>
 ### [Default Column Types](#default-column-types)
 
-Your table can define different types of out-of-the-box supported columns.
+Your table can define different types of out-of-the-box supported column types.
 
 | Function Name     | Kotlin Type             | Underlying SQL Type |
 | ----------------- | ----------------------- | ------------------- |
@@ -275,8 +275,8 @@ Your table can define different types of out-of-the-box supported columns.
 <a name="query-logging"></a>
 ### [Query Logging](#query-logging)
 
-One major downside of using a database framework like Ozone is that the SQL queries that actually get
-run on your database are opaque to you. You may be making a small innocent mistake like lazy loading
+One major downside of using a database framework like Ozone/Ktorm is that the SQL queries that actually
+get run on your database are opaque to you. You may be making a small innocent mistake like lazy loading
 a relation instead of eagerly loading and running into the trap of [N+1 query problem][n+1].
 
 Once quick way to see behind-the-scenes database queries is by logging them, which, fortunately,
@@ -300,11 +300,17 @@ adding the following 2 lines in your [logging configuration files][log-config].
 
 >/power/<span>Ozone is proudly supercharged by [Ktorm][ktorm].</span>
 
->/info/<span>[Ktorm][ktorm] is not just a super fun ORM library, it is also superbly documented, including code
->comments. And Vincent's support is top-notch! He is always willing to help people with any SQL related queries.
->We also have a dedicated `#ktorm` [Slack channel][alpas-slack] where Vincent visits regularly to answer
->questions and participate in Ktorm related discussions. Please join our [Slack channel][alpas-slack]
->and say hi to him and thank him for his excellent work.</span>
+<span class="text-gray-600 text-base">
+
+*[Ktorm][ktorm] is not just a super fun ORM library, it is also superbly documented, including commented
+code. And Vincent's support on GitHub is top-notch! He is always willing to help people with any SQL related
+queries.
+
+We also have a dedicated `#ktorm` [Slack channel][alpas-slack] where Vincent visits regularly to
+answer questions and participate in Ktorm related discussions. Please join our [Slack channel][alpas-slack]
+and say hi to him and thank him for his excellent work with Ktorm.
+
+</span>
 
 [kotlin-object]: https://kotlinlang.org/docs/tutorials/kotlin-for-py/objects-and-companion-objects.html#object-declarations
 [dsl-advanced]: https://ktorm.liuwj.me/en/query.html
