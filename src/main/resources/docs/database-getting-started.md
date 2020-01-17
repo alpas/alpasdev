@@ -2,17 +2,19 @@
     - [Multiple Database Connections](#multiple-database-connections)
 - [Transactions](#transactions)
     - [Accessing Transaction Values](#accessing-transcation-values)
-    - [Nested Transactions](#nested-transaction)
     - [Different Database Connections](#different-database-connections)
     
-Instead of tiring you out with decision fatigue and confusing you with configurations and terminologies,
-we have carefully picked a SQL framework library and have done all the setup out-of-the-box for you
-to make interaction with a database as easy and as hassle-free as possible.
+Just like with any other libraries, Java and Kotlin ecosystem is very rich when it comes to interacting
+with databases. There are many choices for ORMs, connection pools, configurations, migrations etc.
 
-With an easy single or [multiple database connections](#multiple-database-connections) configuration, the
-[fastest JDBC database pool](https://github.com/brettwooldridge/HikariCP#jmh-benchmarks-checkered_flag)
-connection, [migrations](/docs/migrations), and the [Ozone SQL framework](/docs/ozone) all packed and
-ready to go, you'll be looking forward to interacting with your database and running queries like a pro.
+Instead of tiring you out with decision fatigue and confusing you with configurations and terminologies,
+we have done all the database setup out-of-the-box for you. This means, with Alpas, interaction
+with a database is as easy and as hassle-free as it can be.
+
+With a simple to configure single or [multiple database](#multiple-database-connections) connections, the
+[fastest JDBC database pool connection][hikari], [migrations](/docs/migrations), and the
+[Ozone SQL framework](/docs/ozone) all packed and ready to go, you'll be looking
+forward to interacting with your database and running queries like a pro.
 
 <a name="registering-database-connections"></a>
 ### [Registering Database Connections](#registering-database-connections)
@@ -20,8 +22,8 @@ ready to go, you'll be looking forward to interacting with your database and run
 If you open the `configs/DatabaseConfig.kt` file, you'll notice that Alpas has registered one database connection
 for you already. If `addConnections()` call is commented out, make sure to uncomment it out as the first thing.
 
-The default connection is a MySQL database connection and should be registered as `mysql`.
-However, it could be any of number of other supported database dialects.
+The default connection that is configured for you is a MySQL database connection and is registered
+as `mysql`. However, it could be any of number of other supported database dialects.
 
 <div class="sublist">
 
@@ -35,28 +37,28 @@ However, it could be any of number of other supported database dialects.
 
 </div>
 
-The connection name is important as this is what gets selected based on `DATABASE_CONNECTION` value
-in your `.env` file. As you can guess, this is set to `mysql` by default. You can
-[add more than one connection](#multiple-database-connections), of course!
+The database connection name in the config file is very important as this is what gets selected based
+on `DATABASE_CONNECTION` value in your `.env` file. As you might have guessed already, this is set to
+`mysql` by default. You can [add more than one connection](#multiple-database-connections), of course!
 
 You want to make sure that `OzoneServiceProvider::class` is added to the list of
 [service providers](/docs/service-providers#registering) in both
-the kernel classes-`HttpKernel` and `ConsoleKernel`.
+`HttpKernel` and `ConsoleKernel` classes
 
-You can create your own database connection by implementing `dev.alpas.ozone.DatabaseConnection` interface.
-To help you get started without any fuss or fear, Alpas comes bundled with two such
-connections—`MySqlConnection` and `SqliteConnection`.
+You can create your own database connection by implementing `dev.alpas.ozone.DatabaseConnection`
+interface. To help you get started without any fuss or fear, Alpas comes bundled with two
+such connections—`MySqlConnection` and `SqliteConnection`.
 
 >/alert/<span>Most of the database related features are disabled unless there exists at least
 >one database connection. Make sure you have a `DatabaseConfig` class defined and that
->`addConnections()` method is called from the `init{}` block.</span>
+>`addConnections()` method is called from within the `init{}` block.</span>
 
 <a name="multiple-database-connections"></a>
 #### [Multiple Database Connections](#multiple-database-connections)
 
-You can add multiple database connections under different names and use these names to connect to different databases
-during runtime. You are not restricted to creating multiple connections with only different database vendors or
-different databases. You can declare multiple connections even for the same vendor or even the same database.
+You can add multiple database connections under different names and use these names to connect or switch between
+them during runtime. You are not restricted to creating multiple connections with only different database vendors
+or different databases. You can declare multiple connections even for the same vendor or even the same database.
 This allows you to, for an example, run different types of database queries on different databases.
 
 You add multiple connections by declaring them in your `DatabaseConfig` class.
@@ -72,7 +74,7 @@ class DatabaseConfig(env: Environment) : DatabaseConfig(env) {
         addConnection( "mysql", lazy { MySqlConnection(env) } )
 
         // configure the connection config to connect to a different database
-        val readonlyConfig = ConnectionConfig(database = "myreadonlydb", host="192.168.1.11")
+        val readonlyConfig = ConnectionConfig(database = "myreadonlydb", host="192.168.1.1")
         addConnection("mysql-readonly", lazy { MySqlConnection(env, readonlyConfig) })
 
         addConnection("sqlite", lazy { SqliteConnection(env) })
@@ -91,10 +93,10 @@ choice by calling `connect()` method on an instance of `DatabaseConfig`.
 ```kotlin
 
 fun index(call: HttpCall){
-    val db = call.make<DatabaseConfig>().connect("mysql-readonly")
-    db {
-        // You can now use the db object to run SQL queries
-        // on the "mysql-readonly" database.
+    val readonlyDb = call.make<DatabaseConfig>().connect("mysql-readonly")
+    readonlyDb {
+        // You can now use the readonlyDb object to run SQL
+        // queries on the "mysql-readonly" database.
     }
 }
 
@@ -138,10 +140,10 @@ If you need to run some CRUD operations on a different connection, you can
 <a name="accessing-transcation-values"></a>
 #### [Accessing Transaction Values](#accessing-transcation-values)
 
-If you want to access some values of a `useTransaction` block outside the block, then you can declare some
-mutable **var**s outside the block and assign them inside the block. If this sounds awful then
-`useTransaction` block actually returns the value of the last expression in the block. You
-can assign this to a **val** and use it outside the block.
+If you want to access some values of a `useTransaction` block outside the block, then you can declare
+some mutable **var**s outside the block and assign them inside the block. If this sounds awful
+then `useTransaction` block actually returns the value of the last expression in the block.
+You can assign this to a **val** and use it outside the block.
 
 <span class="line-numbers" data-start="5">
 
@@ -160,23 +162,14 @@ val users = useTransaction {
 
 </span>
 
-<a name="nested-transaction"></a>
-#### [Nested Transactions](#nested-transaction)
-
-Transactions get committed automatically at the end. If an exception occurs before the
-transaction gets committed, it will perform an automatic rollback as well.
-
-If you need finer control over transactions, you can use nested transactions. If an exception is thrown
-within the nested transaction, only this transaction will rollback but not any of the outer
-transactions. 
-
 <a name="different-database-connections"></a>
 #### [Different Database Connections](#different-database-connections)
 
-By default, **any database operations runs on the last database that was connected**. In Alpas, the default database
-is loaded the first time your application starts. This means, a "naked" database operation runs in the context of
-this database. However, you can easily run SQL statements on a specific database by passing an instance
-of a database object obtained by calling [`connect()` method](#multiple-database-connections).
+By default, **CRUD operations run on the last database that was connected**. In Alpas, the default database
+is loaded the first time your application starts. This means, a "naked" database operation—operation
+outside a db block—runs in the context of this database. However, you can easily run SQL
+statements on a specific database by passing an instance of a database object
+obtained by calling [`connect()` method](#multiple-database-connections).
 
 ```kotlin
 
@@ -209,5 +202,7 @@ fun index(call: HttpCall){
 
 ```
 
->/alert/<span>Don't forget that the "naked" database operations are always run on the last connected database.
->This is the common source of bugs and confusion when working with multiple databases.
+>/alert/<span>Don't forget that the "naked" database operations are always run on the last connected
+>database. This is the common source of bugs and confusion when working with multiple databases.
+
+[hikari]: https://github.com/brettwooldridge/HikariCP#jmh-benchmarks-checkered_flag
