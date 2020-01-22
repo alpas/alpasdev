@@ -19,7 +19,8 @@
                     </h1>
                     <div class="max-w-2xl text-xl md:text-2xl mt-16 xl:mt-20 text-white leading-chill">
                         <p>
-                            Alpas is a batteries-included web framework for Kotlin with a very strong focus on developers’
+                            Alpas is a batteries-included web framework for Kotlin with a very strong focus on
+                            developers’
                             productivity.
                         </p>
                         <p class="mt-5">
@@ -114,9 +115,10 @@
                         </p>
                         <p class="mt-5">
                             The <a class="primary" href="/docs">Alpas documentation</a> has everything you need to get
-                            started and get going—including two full featured tutorials showing you how to write web
-                            apps
-                            from start to finish.
+                            started and get going—including a
+                            <a class="primary"
+                               href="https://dev.to/ashokgelal/let-s-build-a-web-app-from-scratch-to-finish-with-alpas-and-kotlin-29eo">full
+                                featured tutorial</a> showing you how to write web apps from start to finish.
                         </p>
                     </div>
                 </div>
