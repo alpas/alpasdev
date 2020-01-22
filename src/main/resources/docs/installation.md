@@ -20,11 +20,14 @@ want to set up a machine for development or for production.
 ### [Development](#development)
 
 Alpas is easy to get started with on any *nix based machines; all you need is a JDK. Windows is supported
-but only under the [WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+but only under the [WSL](https://www.youtube.com/watch?v=80pTki0iUsc&t=158s) or using
+[GitBash](https://www.youtube.com/watch?v=hFiFQcfT9U0).
 
 <div class="sublist">
 
-- macOS or Linux (Windows support is only available with WSL)
+- macOS or Linux
+- Windows support is only available with WSL ([watch how to](https://www.youtube.com/watch?v=80pTki0iUsc&t=158s))
+or GitBash ([watch how to](https://www.youtube.com/watch?v=hFiFQcfT9U0)).
 - JDK >= 9.0
 - Gradle >= 5.6
 - [IntelliJ IDEA Community or Ultimate][intellij] (Optional, but highly recommended)
