@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
 
+    {% include '_header_meta.peb' %}
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
 
     {% prod %}

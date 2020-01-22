@@ -7,13 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title> {{ title }} - {{ env('APP_NAME') }} - The Rapid and Delightful Kotlin Web Framework</title>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@alpasdev">
-    <meta name="twitter:title" content="Alpas - The Rapid and Delightful Kotlin Web Framework">
-    <meta name="twitter:description"
-          content="A batteries-included web framework for Kotlin with a very strong focus on developers’ productivity and letting you enjoy doing what you are the best at — crafting a delightful web app.">
-    <meta name="twitter:image"
-          content="https://res.cloudinary.com/practicaldev/image/fetch/s--qoNkG3pV--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--IsH8Tkq6--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://thepracticaldev.s3.amazonaws.com/i/vlq79kdvf0qouhbcmyfl.png">
+    {% include '_header_meta.peb' %}
 
     <link rel="stylesheet" href="{{ mix('css/docs.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
