@@ -42,7 +42,7 @@ class AdminController : Controller() {
 
 > /tip/ <span> Instead of hard coding configurable variables that you use in different parts of your app, we highly
 recommend that you use a config class instead. Configs are strongly typed, get loaded automatically, and, if
-you want, you can easily overwrite values using [environment variables](#env).</span>
+you want, can easily overwrite values using [environment variables](#env).</span>
 
 <a name="core-configs"></a>
 #### [Overriding Core Configs](#core-configs) 
@@ -55,7 +55,7 @@ To change a core config, create a new config class that extends the core config 
 properties you want to change.
 
 Let's say you want to change the default extension of your [view templates](/docs/pebble-templates) from `.peb`,
-which is set in `dev.alpas.view.ViewConfig` class, to `.twig`. To do this first create a new class
+which is set in `dev.alpas.view.ViewConfig` class, to `.twig`. To do this, first create a new class
 under `configs` folder and override the value like so:
 
 <span class="line-numbers" data-start="5">
@@ -100,8 +100,8 @@ much anywhere you need.
 automatically created for you.</span>
 
 It is very important that you don't commit this `.env` file in the app's source control for mainly two
-reasons—first, this file could contain some secret API keys that you don't want to accidentally
-make available for everyone. Secondly, different developers on your team might want to use
+reasons. First, this file could contain some secret API keys that you don't want to accidentally
+make available for everyone. Second, different developers on your team might want to use
 different environment configurations. This is true for different servers as well. 
 
 When you need to share some configurations with your team, the convention is to use an `.env.example` file that
@@ -151,7 +151,7 @@ class SsoLoginController : Controller() {
 <a name="checking-environment"></a>
 #### [Checking your environment](#checking-environment)
 
-The `dev.alpas.Environment` class has few more convenient properties that you could use to determine the current
+The `dev.alpas.Environment` class has a few more convenient properties that you could use to determine the current
 environment and query some of its properties.
 
 <div class="sublist">
@@ -160,18 +160,18 @@ environment and query some of its properties.
 * `isProduction`
  
 Check if your app is running in production mode. If `APP_LEVEL` environment variable is set to one of **prod**,
-**production**, or **live** then it is considered to be in production mode.
+**production**, or **live**, then it is considered to be in production mode.
 
 <a name="dev"></a>
 * `isDev`
 
 Check if your app is in development mode. If `APP_LEVEL` environment variable is set to one of **dev**, **debug**,
-or **local** then it is considered to be in development mode. 
+or **local**, then it is considered to be in development mode. 
 
 * `storagePath`
 
 The full path to a folder named `storage` where the "byproducts" created during the runtime such as logs, file
-sessions etc. are saved. This folder should always be at the root of your project during development and
+sessions, etc. are saved. This folder should always be at the root of your project during development and
 next to your jar file during production.
 
 </div>
