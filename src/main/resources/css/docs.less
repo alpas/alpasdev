@@ -20,6 +20,10 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-re
   transition: none !important;
 }
 
+.algolia-autocomplete {
+@apply w-full;
+}
+
 @media screen and (max-width: 480px) {
   html, body {
     min-width: 320px;
@@ -260,7 +264,7 @@ br {
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
-    @apply border-indigo-200 border;
+  @apply border-indigo-200 border;
   }
 
   .pure-table caption {
@@ -272,7 +276,7 @@ br {
 
   .pure-table td,
   .pure-table th {
-    @apply border-l border-indigo-200;
+  @apply border-l border-indigo-200;
     font-size: inherit;
     margin: 0;
     overflow: visible; /*to make ths where the title is really long work*/
@@ -296,13 +300,13 @@ br {
   }
 
   .pure-table-odd td {
-    @apply bg-gray-100;
- }
+  @apply bg-gray-100;
+  }
 
   /* nth-child selector for modern browsers */
 
   .pure-table-striped tr:nth-child(2n-1) td {
-    @apply bg-gray-100;
+  @apply bg-gray-100;
   }
 }
 
