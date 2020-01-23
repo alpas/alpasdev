@@ -5,12 +5,14 @@
     <meta charset="utf-8">
     <link rel="icon" href="/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
 
     {% include '_header_meta.peb' %}
 
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
     {% prod %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
@@ -31,7 +33,8 @@
 <body class="antialiased h-full">
 
 <div>
-{% block content %} {% endblock %}
+    {% block content %} {% endblock %}
 </div>
+{% include '_algolia_footer.peb' %}
 </body>
 </html>
