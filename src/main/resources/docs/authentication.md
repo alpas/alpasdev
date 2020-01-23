@@ -10,23 +10,23 @@
 > /info/ This section contains some advanced concepts, and many times dives deeper into some internal workings
 >of Alpas. This is done intentionally to teach how authentication works to those who are unfamiliar with
 >it as well as talk about Alpas's internal implementation for the curious among us. It is okay if you
->get overwhelmed and or get confused. Just read it once, take a break, and come back again when you
+>get overwhelmed and/or get confused. Just read it once, take a break, and come back again when you
 >feel like it and read it again. Eventually it will click!
 
-Alpas comes an authentication system setup right out-of-box and requires you to do the absolute minimal to integrate
+Alpas comes with an authentication system setup right out-of-box and requires you to do the absolute minimal to integrate
 it with your app. It is easy to get started with just one simple [Alpas command](/docs/authentication-scaffolding).
 
-Authentication sounds magical and complex but at the core mechanism is a very simple—you look for an
+Authentication sounds magical and complex. But, at the core mechanism, is a very simple — you look for an
 id, and you match the id. If the id matches, you fetch more information about that id and mark the
 current session being authenticated. That's it!
 
-However, there are few moving parts that make this magic work. Before we get into scaffolding an authentication
+However, there are a few moving parts that make this magic work. Before we get into scaffolding an authentication
 boilerplate, let's talk about some core concepts that you need to understand about authentication first.
 
 <a name="auth-channels-providers"></a>
 ### [Auth Channels and User Providers](#auth-channels-providers)
 
-At the core, Alpas's authentication is divided into two parts—`auth channels` and `user providers`. Channels define
+At the core, Alpas's authentication is divided into two parts — `auth channels` and `user providers`. Channels define
 how users are authenticated for each incoming request. `SessionAuthChannel` is an example of an authentication
 channel that determines whether a user is authenticated or not based on sessions and cookies.
 
@@ -50,10 +50,10 @@ Let's see them through the lens of `SessionAuthChannel` implementation.
 - `attempt(id: String, password: String): Boolean`
 
 Attempts to find a user with the given `id` and `password`. If the user is found by the `UserProvider`
-by matching the id then it matches the given password's hash with the hashed password saved by the
-`UserProvider`. If they match, it logs the user in and returns `true` otherwise returns `false`. 
+by matching the id, then it matches the given password's hash with the hashed password saved by the
+`UserProvider`. If they match, it logs the user in and returns `true`; otherwise, it returns `false`. 
 
-Use this method to login a user if you already know the *id* and the *password*. For an example,
+Use this method to login a user if you already know the *id* and the *password*. For example,
 the `LoginController` uses this method to login a user when the user signs in using a form.
 
 - `check(): Boolean`
@@ -63,7 +63,7 @@ an id in the current session and fetching a user by that id from the `UserProvid
 
 Use this method if you want to check if the current session matches with a valid user or not. For an example,
 `AuthOnlyMiddleware` uses this method to check the logged in user and forwards the call if session
-matches to an existing user in the `UserProvider` otherwise it throws an exception.
+matches to an existing user in the `UserProvider`; otherwise, it throws an exception.
 
 - `isLoggedIn(): Boolean`
 
@@ -96,10 +96,10 @@ A concrete implementation of `UserProvider` interface is responsible for fetchin
 When we were [talking about `AuthChannel`](#auth-channel), notice how we were careful not talking
 retrieving user from **a database**!
 
-While for most of the apps it is true that you would be fetching users from a database but that just the
+While for most apps it is true that you would be fetching users from a database; but, that is just the
 implementation details. `UserProvider`'s consumer doesn't care how you retrieve a user as long as you
 correctly retrieve it. In fact, you can write your own implementation of `UserProvider` that looks
-up a user in a hashmap if you want as long as your implementation provides following two methods:
+up a user in a hashmap if you want as long as your implementation provides the following two methods:
 
 <div class="sublist">
 
@@ -120,7 +120,7 @@ in your database but for most of the apps it is.
 
 You can configure what `AuthChannel` to use by default in multiple ways. 
 
-When scaffolding a new project, Alpas creates an `AuthConfig` class for your. If you open it, you'll see
+When scaffolding a new project, Alpas creates an `AuthConfig` class for you. If you open it, you'll see
 that it adds a new channel under `session` name. Notice how the value of the channel is **not** an
 instance of `SessionAuthChannel` but is a callback that creates the actual instance. 
 
@@ -144,8 +144,8 @@ it `session` because that's the default! We told you, it will click :)
 <a name="httpcall-and-authentication"></a>
 ### [HttpCall and Authentication](#httpcall-and-authentication)
 
-For most of the apps you'll never have to deal with all the concepts we talked about upto this point. Most of the
-times you are only concerned about whether the current user is authenticated or not and, if authenticated,
+For most apps, you'll never have to deal with all the concepts we talked about up until this point. Most of the
+times, you are only concerned about whether the current user is authenticated or not. And, if authenticated,
 who is authenticated. `HttpCall` proxies all these. All you need is to know the following properties:
 
 <div class="sublist">
@@ -181,7 +181,7 @@ To create a custom auth channel, you just need to implement `AuthChannel` interf
 override a couple of things. The most important one being the `check()` method.
 
 Let's say, hypothetically, we want to write an auth channel that checks **X-ADMIN-API-KEY**
-header of the incoming request and if it matches your API key then you consider this
+header of the incoming request and, if it matches your API key, then you consider this
 session to be authenticated. The user is then authorized as an admin.
 
 <span class="line-numbers" data-start="4" data-file="AdminApiAuthChannel.kt">
@@ -228,10 +228,10 @@ You may want to have multiple auth channels for your app depending on different 
 
 For an example, while `SessionAuthChannel` may be appropriate for web routes, it may
 not be appropriate for API routes. API routes will probably use some other ways of
-validating a user—such as checking a personal token in the header rather than
-checking the cookies—and you might want a dedicated auth channel for this.
+validating a user — such as checking a personal token in the header rather than
+checking the cookies — and you might want a dedicated auth channel for this.
 
-Alpas allows you to easily apply an auth channel for a specific route, or a route group
+Alpas allows you to easily apply an auth channel for a specific route or a route group
 by passing an auth channel name to `mustBeAuthenticated()` method.
 
 <span class="line-numbers" data-start="6" data-file="routes.kt">
@@ -277,7 +277,7 @@ class AuthConfig(env: Environment) : BaseConfig(env) {
 
 You need to assign `AuthOnlyMiddleware` to each of your routes that you want to be accessible only to
 [authorized users](/docs/routing#guarded-routes). If you want some routes to be accessible only by
-guests and not by authorized users then you need to apply `GuestOnlyMiddleware` instead.
+guests and not by authorized users, then you need to apply `GuestOnlyMiddleware` instead.
 
 `AuthConfig`'s `ifUnauthorizedRedirectToPath` property decides where to redirect unauthorized
 users trying to access authorized only routes. This is set to `/login` by default.
