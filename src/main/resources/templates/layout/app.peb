@@ -14,20 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    {% prod %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-5531338-11');
-    </script>
-    {% endprod %}
+    {% include '_ga.peb' %}
 </head>
 
 <body class="antialiased h-full">
