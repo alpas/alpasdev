@@ -17,21 +17,9 @@
     <script src="/js/breakpoints.min.js" defer></script>
     <script src="/js/browser.min.js" defer></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/docs.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
-    {% prod %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-5531338-11"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-
-        gtag('config', 'UA-5531338-11');
-    </script>
-    {% endprod %}
+    {% include '_ga.peb' %}
 </head>
 
 <body class="antialiased bg-gray-200 h-full text-lg text-gray-800 is-preload">
@@ -67,7 +55,9 @@
             <div class="pl-16 md:max-w-4xl w-full xl:max-w-5xl mt-8">
                 <div class="relative">
                     <input id="algolia"
-                           class="transition bg-gray-200 mt-4 focus:outline-none placeholder-gray-600 py-2 pr-4 pl-10 py-3 block w-full appearance-none leading-normal border-b border-gray-400 focus:border-gray-800"
+                           class="transition bg-gray-200 mt-4 focus:outline-none placeholder-gray-600 py-2
+                           pr-4 pl-10 block w-full appearance-none leading-normal border-b border-gray-400
+                           focus:border-gray-800"
                            type="text"
                            placeholder="Search the docs"
                            autocomplete="off"
@@ -99,13 +89,8 @@
 <script type="text/javascript">
     new ClipboardJS('.clipboard');
 </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
-<script type="text/javascript"> docsearch({
-    apiKey: 'e017bb0b99fe3193f750d48a4e7d441e',
-    indexName: 'alpas',
-    inputSelector: '#algolia',
-    debug: false
-});
-</script>
+
+{% include '_algolia_footer.peb' %}
+
 </body>
 </html>

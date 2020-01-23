@@ -6,13 +6,49 @@
 
 <div class="leading-loose">
     <div class="section-intro">
-        <div class="intro-bg bg-contain bg-no-repeat bg-center">
-            <div class="hero-content flex flex-row justify-between xxl:justify-center">
-                <div class="hero-content-left flex flex-col py-6 lg:py-10 px-10 md:px-16 xl:px-32 mt-10">
-                    <div class="text-gray-100">
-                    {% include '_alpas.peb' with {"width": "222px"} %}
-                    </div>
+        <div class="intro-bg bg-contain bg-no-repeat bg-center px-4 xl:px-0">
+            <nav class="flex container mx-auto pt-16 items-center">
+                <div class="flex-grow text-gray-100">
+                {% include '_alpas.peb' with {"width": "200px"} %}
+                </div>
+                <ul class="text-indigo-400 text-lg hidden md:inline-flex">
+                    <li class="font-semibold"><a href="/docs" class="hover:text-indigo-200">Documentation</a></li>
+                    <li class="font-semibold ml-8"><a href="{{ config('links.slack') }}"
+                                                      class="hover:text-indigo-200">Slack</a></li>
+                    <li class="font-semibold ml-8"><a href="{{ config('links.github') }}" class="hover:text-indigo-200">GitHub</a>
+                    </li>
+                    <li class="font-semibold ml-8"><a href="{{ config('links.twitter') }}" class="hover:text-indigo-200">Twitter</a>
+                    </li>
+                </ul>
+                <div class="ml-12">
+                    <div class="relative">
+                        <input id="algolia"
+                               class="relative align-top transition bg-transparent focus:outline-none text-lg
+                               placeholder-indigo-400 focus:placeholder-indigo-300 py-2 text-indigo-100
+                               pl-10 block appearance-none leading-normal
+                               border-b border-blue-500 focus:border-indigo-200"
+                               type="text"
+                               placeholder="Search the docs"
+                               autocomplete="off"
+                               spellcheck="false"
+                               role="combobox"
+                               aria-autocomplete="list"
+                               aria-expanded="false"
+                               aria-label="search input"
+                               aria-owns="algolia-autocomplete-listbox-0"
+                               dir="auto">
 
+                        <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+                            <svg class="fill-current pointer-events-none text-indigo-500 w-4 h-4"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="hero-content flex flex-row justify-between xxl:justify-center container mx-auto">
+                <div class="hero-content-left flex flex-col pb-10">
                     <h1 class="text-3xl md:text-4xl xl:text-5xl mt-16 xl:mt-20 text-indigo-200 font-semibold
                     leading-snug max-w-2xl">
                         The Rapid and Delightful Kotlin Web Framework
@@ -35,9 +71,9 @@
                            hover:text-red-200 tracking-wide hover:bg-red-700">Get Started &rarr;</a>
                     </div>
                 </div>
-                <div class="hero-content-right self-center justify-center self-center flex lg:flex hidden">
-                    <div class="mt-10 ml-20 lg:mr-32 xxlparkmr-0">
-                        <img src="/images/landing/rocket.svg" alt="">
+                <div class="hero-content-right self-center justify-end flex md:flex hidden">
+                    <div class="mt-10">
+                        <img src="/images/landing/rocket.svg" alt="" class="w-48 lg:w-56">
                     </div>
                 </div>
             </div>
@@ -46,7 +82,8 @@
     </div>
 
     <div class="section-simple">
-        <div class="px-4 lg:px-6 xl:px-10 flex flex-col">
+        <div class="px-4 lg:px-6 xl:px-10 flex flex-col container mx-auto">
+
             <h2 class="text-3xl lg:text-4xl text-indigo-700 font-semibold self-center uppercase leading-snug">
                 Simple, Elegant, Yet Powerful
             </h2>
@@ -156,7 +193,7 @@
                         </p>
                     </div>
                     <div class="flex mt-10">
-                        <a href="https://join.slack.com/t/alpasdev/shared_invite/enQtODcwMjE1MzMxODQ3LTJjZWMzOWE5MzBlYzIzMWQ2MTcxN2M2YjU3MTQ5ZDE4NjBmYjY1YTljOGIwYmJmYWFlYjc4YTcwMDFmZDIzNDE"
+                        <a href="{{ config('links.slack') }}"
                            class="text-gray-100 hover:text-gray-500" title="Join our Slack" target="_alpas-slack">
                             <svg class="w-5" aria-hidden="true" focusable="false" role="img"
                                  xmlns="http://www.w3.org/2000/svg"
@@ -166,8 +203,8 @@
                             </svg>
                         </a>
 
-                        <a href="https://github.com/alpas"
-                           class="ml-3 text-gray-100 hover:text-gray-500" title="Star us on GitHub"
+                        <a href="{{ config('links.github') }}"
+                           class="ml-6 text-gray-100 hover:text-gray-500" title="Star us on GitHub"
                            target="_alpas-github">
                             <svg class="w-6" aria-hidden="true" focusable="false" role="img"
                                  xmlns="http://www.w3.org/2000/svg"
@@ -177,8 +214,8 @@
                             </svg>
                         </a>
 
-                        <a href="https://twitter.com/alpasdev"
-                           class="ml-3 text-gray-100 hover:text-gray-500" title="Follow us on Twitter"
+                        <a href="{{ config('links.twitter') }}"
+                           class="ml-6 text-gray-100 hover:text-gray-500" title="Follow us on Twitter"
                            target="_alpas-twitter">
                             <svg class="w-6" aria-hidden="true" focusable="false" role="img"
                                  xmlns="http://www.w3.org/2000/svg"

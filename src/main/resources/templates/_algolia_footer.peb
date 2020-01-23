@@ -1,0 +1,9 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript">
+    docsearch({
+        apiKey: 'e017bb0b99fe3193f750d48a4e7d441e',
+        indexName: 'alpas',
+        inputSelector: '#algolia',
+        debug: false
+    });
+</script>

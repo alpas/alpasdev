@@ -5,7 +5,8 @@ const resources = 'src/main/resources'
 
 mix
     .setPublicPath(publicPath)
-    .js([`${resources}/js/app.js`, `${resources}/js/sidebar.js`], 'js')
+    .js([`${resources}/js/app.js`], 'js')
+    .js([`${resources}/js/docs.js`, `${resources}/js/sidebar.js`], 'js')
     .less(`${resources}/css/docs.less`, 'css/docs.css')
     .less(`${resources}/css/app.less`, 'css/app.css')
     .options({
