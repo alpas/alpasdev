@@ -2,8 +2,8 @@
 - [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
 - [Setting Environment Variables](#setting-environment-variables)
 
-If you have got any experience with frontend development and esp. with bundling your assets—vanilla JS, stylesheets,
-images, frontend libraries such as VueJS etc.—you know that mixing them is not a trivial task and needs a lot of
+If you have any experience with frontend development and especially with bundling your assets — vanilla JS, stylesheets,
+images, frontend libraries such as VueJS, etc. — you know that mixing them is not a trivial task and needs a lot of
 wiring and juggling. Webpack is currently the de-facto standard for bundling assets. However, it is complex
 and has a huge learning curve. 
 
@@ -13,7 +13,7 @@ your web app, Alpas comes set up with asset handling through Mix.
 
 >/info/ <span> Alpas uses Mix because it is simple to configure, it is fast, and it just works! However, Alpas
 >is not really tied to Mix. Feel free to use any bundler of your choice such as [Grunt](https://gruntjs.com/),
->[Gulp](https://gulpjs.com/), [Rollup](https://rollupjs.org/guide/en/) etc.
+>[Gulp](https://gulpjs.com/), [Rollup](https://rollupjs.org/guide/en/), etc.
 
 <a name="configuration"></a>
 ### [Configuration](#configuration)
@@ -23,7 +23,7 @@ This file is where you would configure your assets bundling pipeline. Alpas also
 file for you that lists some very basic npm packages to get you going. Feel free to add and remove
 dependencies as per your project requirements.
 
-To install the packages listed in the `package.json` file make sure you have the latest version of 
+To install the packages listed in the `package.json` file, make sure you have the latest version of 
 [nodejs](https://nodejs.org/en/) and [npm](https://www.npmjs.com/) installed and then simply run
 `npm install` from your terminal.
 
@@ -35,7 +35,7 @@ This location is where your final bundled assets will be put. On the other hand,
 `src/main/resources` folder, which is where your source files will be loaded from. Feel free to
 change these values as you wish.
 
-After finish configuring your `webpack.mix.js` file, you can run one of the following commands to bundle
+After you finish configuring your `webpack.mix.js` file, you can run one of the following commands to bundle
 your assets. All these commands come from the `package.json` file.
 
 <div class="sublist">
@@ -54,14 +54,14 @@ original source files but aren't easy to debug.
 - `npm run watch`
 
 Watches the asset files and automatically re-compiles them whenever a change is detected.
-This comes in very handy during development esp. when you are tweaking your assets.
+This comes in very handy during development, especially when you are tweaking your assets.
 
 >/alert/ <span> If you are serving your app, the recompilation of assets are not automatically
 >reflected in your browser. You have to recompile and reserve your app again.</span>
 
->/tip/ <span> Recompiling and re-serving your app after each small tweaking gets tiring and annoying very soon.
->If you are running your app from within IntelliJ IDEA then a much better approach is to just reloading your
->changed classes from `Run > Reload Changed Classes` menu. Once your assets are done compiling give it a
+>/tip/ <span> Recompiling and re-serving your app after each small tweak gets tiring and annoying very soon.
+>If you are running your app from within IntelliJ IDEA, then a much better approach is to just reload your
+>changed classes from `Run > Reload Changed Classes` menu. Once your assets are done compiling, give it a
 >couple of seconds before reloading the classes.</span>
 
 </div>
@@ -69,8 +69,8 @@ This comes in very handy during development esp. when you are tweaking your asse
 <a name="cache-busting-with-asset-fingerprinting"></a>
 ### [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
 
-Browsers usually cache assets for performance reasons. This is all good until you change the assets. Browsers would
-not know about the new changes and might continue to serve the old cached assets. To force browsers to load a
+Browsers usually cache assets for performance reasons. This is all good until you change the assets. Browsers might
+not know about the new changes and continue to serve the old cached assets. To force browsers to load a
 fresh copy of your assets, you can append a version number to each of your asset URLs for every new version,
 which is like fingerprinting your assets. This looks something like `app.css?ver=1.0`.
 
