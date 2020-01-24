@@ -8,10 +8,10 @@ As simple as this sounds on the surface, a lot of things have to happen in the c
 respond to a request call. There are many layers through which a request passes before returning a successful
 response to the client.
 
-"Successful response" doesn't always mean returning with a response that the client wants/expects. It could also
+"Successful response" doesn't always mean returning with a response that the client wants/expects. It can also
 mean an error message with a status code — something very different from what the client was asking for.
 
-Different frameworks implement this middle layers of converting request into a response differently. However, if you
+Different frameworks implement these middle layers of converting request into a response differently. However, if you
 are coming from a dynamic language framework like Laravel, one main difference that you have to understand is that
 with those dynamic frameworks every conversion of request to response means, to simplify, starting a new copy of your
 app and passing the request through the app to make a response out of it and then shutting down the app.
@@ -25,7 +25,7 @@ the server dies because of an unhandled exception.
 <a name="lifecycle"></a>
 ### [Request ⇄ Response Lifecycle](#lifecycle)
 
-At the high level this is what happens when your Alpas web app receives a request:
+At a high level this is what happens when your Alpas web app receives a request:
 
 ![Request Response Flow](/images/request-response.png)
 
@@ -35,9 +35,9 @@ At the high level this is what happens when your Alpas web app receives a reques
 Notice how Alpas wraps a request in an `HttpCall` object as soon as the application receives it. `HttpCall` is
 really the center character of the framework and the one you will interact with the most. It gets passed around
 pretty much everywhere and contains everything to [handle a request](/docs/http-request) — query parameters,
-headers, cookies, form request fields, [session](/docs/sessions) etc. `HttpCall` is also a
+headers, cookies, form request fields, [session](/docs/sessions), etc. `HttpCall` is also a
 [service container](/docs/ioc-container) and so you could ask it for any core dependencies or any other dependencies
 that you have set the bindings for.
 
 Not just the request, `HttpCall` is also where you would set a reply to an [outgoing response](/docs/http-response),
-headers, cookies etc.
+headers, cookies, etc.

@@ -4,15 +4,15 @@
     - [Session Config](#session-config)
 
 Your app, by the virtue of being a public facing web application, needs to be secure by default. As a web developer
-you should be aware of the most, if not all, the security measures that you need to take to minimize the risk
-of it getting your web apps compromised. While this is ideal, the reality is that it is a daunting
+you should be aware of most, if not all, security measures that you need to take to minimize the risk
+of getting your web apps compromised. While this is ideal, the reality is that it is a daunting
 task to know and implement all the security measures, even for a seasoned web developer.
 
-Alpas comes with many security measures to make sure you spend as less time as possible worrying
-about the security and focus on delivering an app that your users love and trust.
+Alpas comes with many security measures already in place to make sure you spend as less time as possible worrying
+about the security and so you can focus on delivering an app that your users love and trust.
 
 >/alert/<span>Alpas does its best to implement security measures out-of-the-box to make your web
->app as much secure as possible but eventually the responsibility lies on you to make sure
+>app as secure as possible. However, the responsibility lies on you to make sure
 >you have secured all the borders as far as the security of your app is concerned.</span>
 
 Let's talk about some ways you can keep your app more secure and few things that you just need to be aware of.
@@ -37,7 +37,7 @@ in your form so that the correct route gets matched, you need to spoof it by pas
 
 </span>
 
-Method spoofing is enabled by default. But you can disable it by setting `allowMethodSpoofing`
+Method spoofing is enabled by default. But, you can disable it by setting the `allowMethodSpoofing`
 property to `false` in your `AppConfig` class.
 
 <a name="session-security"></a>
@@ -51,9 +51,9 @@ making the stateless nature of web work as if it is not stateless.
 #### [Cookies Encryption](#cookies-encryption)
 
 When a browser makes a request, your web app makes a session and attaches an id to the response it sends back. This
-id is saved by the browser as a cookie and—as long as they are not expired or deleted—sends it back to the
+id is saved by the browser as a cookie and, as long as they are not expired or deleted, sends it back to the
 server in every subsequent requests. The web app uses this id to lookup the client's info and identifies
-the client as a guest or a "known" user.
+the client as a guest or as a "known" user.
 
 As you can imagine, a little mishandling of these sessions and cookies could leak your sessions and make your
 web app prone to [session hijacking](https://en.wikipedia.org/wiki/Session_hijacking) among other threats.
@@ -61,7 +61,7 @@ web app prone to [session hijacking](https://en.wikipedia.org/wiki/Session_hijac
 Alpas encrypts all your outgoing cookies by default and decrypts as soon as it receives them to make it totally
 transparent to you. The encryption is done using `APP_KEY` key defined in your `.env` file. You want to keep
 this key very secret by not sharing with anyone and definitely not pushing it to your version control
-system. All your members in your team can have their own unique app keys and the app will work
+system. All your team members can have their own unique app keys and the app will work
 just as fine.
 
 >/tip/ <span>You can quickly create a new app key by running `alpas make:key` command.</span>
@@ -85,9 +85,9 @@ to JavaScript's `Document.cookie` API. If you set it to `false`, your cookies wi
 be accessible via JavaScript using `document.cookie`.
 
 For a server side web app there are not many cases where you need your cookies to be accessible
-via JavaScript. So always set this to `true`, unless you have a very good reason not to.
+via JavaScript. Always set this to `true`, unless you have a very good reason not to.
 
-If you absolutely need a cookie to be accessible from JavaScript, remember that you could set
+If you absolutely need a cookie to be accessible from JavaScript, remember that you can set
 `httpOnly` flag to `false` for an individual cookie while appending it to a response.
 Prefer this over setting the global `httpOnly` to false for better security.
 

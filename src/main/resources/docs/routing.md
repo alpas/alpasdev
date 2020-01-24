@@ -26,11 +26,11 @@
 <a name="getting-started"></a>
 ### [Getting Started](#getting-started)
 
-Start by registering your app routes on an instance of `dev.alpas.routing.Router`. Although you could do this
-from anywhere, Alpas convention is to add them in the `routes.kt` file and then load them in
+Start by registering your app routes on an instance of `dev.alpas.routing.Router`. Although you can do this
+from anywhere, Alpas convention is to add them in the `routes.kt` file and then load them in the
 `providers/RouteServiceProvider.kt` class. When [scaffolding a project](/docs/installation),
 both of these files are created for you and are already wired to load your routes. All you
-need to do is add your routes in `routes.kt` file.
+need to do is add your routes in the `routes.kt` file.
 
 Alpas routing supports all the routes that respond to any HTTP verbs: `get`, `post`, `put`, `patch`, `delete`, and
 `options`.
@@ -41,7 +41,7 @@ Alpas routing supports all the routes that respond to any HTTP verbs: `get`, `po
 <a name="lambda-routes"></a>
 #### [Lambda Routes](#lambda-routes)
 
-At the very minimum, you can register a route where the first parameter is a path, and the second
+At the very minimum, you can register a route where the first parameter is a path and the second
 parameter is a [function literal](https://kotlinlang.org/docs/reference/lambdas.html#function-literals-with-receiver)
 with [`HttpCall`](/docs/request-response#httpcall) as the receiver.
 
@@ -192,7 +192,7 @@ fun index(call: HttpCall) {
 #### [Route Middleware](#route-middleware)
 
 If you want to apply a [middleware](/docs/middleware) to a route, you can pass the class name of the middleware
-by calling `middleware()` method on the route. If you want, you can also pass a list of middleware classes.
+by calling the `middleware()` method on the route. If you want, you can also pass a list of middleware classes.
 
 <span class="line-numbers" data-start="5" data-file="routes.kt">
 
@@ -212,7 +212,7 @@ fun Router.addRoutes() {
 ### [Route Groups](#route-groups)
 
 Instead of repeating common attributes, such as path prefix, name, middleware, etc., for each route, you can
-instead use route groups. Grouping routes also helps you better organize your routes making them more
+instead use route groups. Grouping routes helps you better organize your routes making them more
 readable and maintainable.
 
 <a name="group-prefix"></a>

@@ -13,7 +13,7 @@ $ alpas make:provider JedisServiceProvider
 
 ```
 
-2. Register an instance of `JedisPool` in the new created `JedisServiceProvider` class making sure that the pool 
+2. Register an instance of `JedisPool` in the newly created `JedisServiceProvider` class, making sure that the pool 
 gets closed when the app is stopped:
 
 <span class="line-numbers" data-start="8">
@@ -42,7 +42,7 @@ class JedisServiceProvider : ServiceProvider {
 
 </span>
 
-3. Ask the pool to create a Jedis client and use it to get or set any values in and out of Redis:
+3. Ask the pool to create a Jedis client and use it to get, or set, any values in and out of Redis:
 
 <span class="line-numbers" data-start="15">
 
