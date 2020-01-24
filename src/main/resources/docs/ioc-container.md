@@ -14,9 +14,9 @@ in a much cleaner way than the class itself creating and wiring them. Once you h
 have the dependencies injected via a constructor. The proper use of dependency injection frees you from the hassle
 of wiring all the dependencies. It also makes writing tests easier.
 
-The dependencies don't always need to be get injected in your class via a constructor. If you have access to the
+The dependencies don't always need to be injected in your class via a constructor. If you have access to the
 container that holds all the bindings, you could simply ask for instances of the dependencies. Depending on how
-you have set up the bindings, you could either get a new copy every time you ask or could get a singleton
+you have set up the bindings, you could either get a new copy every time you ask or get a singleton
 instance of a dependency.
 
 Here is an example of a [config class](/docs/configuration) where a singleton instance of `Environment` class is
@@ -36,7 +36,7 @@ class AdminConfig(env: Environment) : Config {
 </span>
 
 In the following example, nothing gets injected in the constructor. Instead, we ask `HttpCall` to make an instance
-of `AdminConfig`. This is possible because `HttpCall` is a container and hence it is very capable of resolving
+of `AdminConfig`. This is possible because `HttpCall` is a container and hence is very capable of resolving
 dependencies.
 
 <span class="line-numbers" data-start="6">
@@ -139,7 +139,7 @@ A singleton dependency gets resolved only once.
 If you already have an object instance and want to bind that instance, you could just use container's 
 `bind` method for binding it. This instance will always be returned when asked for it. In a way this
 is like a [singleton binding](#singleton-bindings) but without auto-injecting the dependencies of
-this instance that you are binding, which is upto you now.
+this instance that you are binding, which is up to you now.
 
 
 <span class="line-numbers" data-start="8">
@@ -163,7 +163,7 @@ this instance that you are binding, which is upto you now.
 
 Instead of binding a concrete class, you can also bind a concrete implementation to its abstract class or its
 interface. This way you don't have to depend on a specific implementation of a class but only on the *APIs*
-that you need from a class. When resolving you would refer to the abstraction instead of the concrete
+that you need from a class. When resolving, you will refer to the abstraction instead of the concrete
 implementation, of course!
 
 <span class="line-numbers" data-start="10">
@@ -197,7 +197,7 @@ implementation, of course!
 
 </span>
 
-> /tip/ <span>Even with interface bindings you could either do [Simple Bindings](#simple-bindings),
+> /tip/ <span>Even with interface bindings you can either do [Simple Bindings](#simple-bindings),
 > [Singleton Bindings](#singleton-bindings), or [Instance Bindings](#instance-bindings) based on whether you want a
 > new copy, a shared single copy, or an object instance.</span>
 
@@ -205,7 +205,7 @@ implementation, of course!
 <a name="factory-bindings"></a>
 #### [Factory Bindings](#factory-bindings)
 
-Instead of binding a class name or an instance, you could also bind a callback function that gets invoked every
+Instead of binding a class name or an instance, you can also bind a callback function that gets invoked every
 time a dependency needs to be resolved. Just remember that the actual binding resolved is whatever the last
 statement of this factory callback is.
 
@@ -245,7 +245,7 @@ There are two ways to resolve a dependency — via constructor injection or usin
 <a name="constructor-injection"></a>
 #### [Constructor Injection](#constructor-injection)
 
-If a class depends on some other classes, it could just *declare* the dependencies in its constructor to get them
+If a class depends on some other classes, it can just *declare* the dependencies in its constructor to get them
 automatically injected. As long as this class itself is registered in the container, the container will be able
 to resolve the dependencies including all the transitive dependencies.
 
