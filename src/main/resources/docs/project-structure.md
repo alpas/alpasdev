@@ -52,7 +52,7 @@ This is where all your app's [custom configuration classes](/docs/configuration)
 
 **src/main/kotlin/controllers**
 
-A place for all your [HTTP controllers](/docs/controllers). If uou wish you could create subdirectories to better 
+A place for all your [HTTP controllers](/docs/controllers). If you wish you could create subdirectories to better 
 organize your controllers and we highly recommend that you do so.
 
 **src/main/kotlin/database/migrations**
