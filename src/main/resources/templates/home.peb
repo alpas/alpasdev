@@ -13,11 +13,11 @@
                 </div>
                 <ul class="text-indigo-400 text-lg hidden lg:inline-flex">
                     <li class="font-semibold"><a href="/docs" class="hover:text-indigo-200">Documentation</a></li>
-                    <li class="font-semibold ml-8"><a href="{{ config('links.slack') }}"
+                    <li class="font-semibold ml-4 lg:ml-8"><a href="{{ config('links.slack') }}"
                                                       class="hover:text-indigo-200">Slack</a></li>
-                    <li class="font-semibold ml-8"><a href="{{ config('links.github') }}" class="hover:text-indigo-200">GitHub</a>
+                    <li class="font-semibold ml-4 lg:ml-8"><a href="{{ config('links.github') }}" class="hover:text-indigo-200">Contribute</a>
                     </li>
-                    <li class="font-semibold ml-8"><a href="{{ config('links.twitter') }}"
+                    <li class="font-semibold ml-4 lg:ml-8"><a href="{{ config('links.twitter') }}"
                                                       class="hover:text-indigo-200">Twitter</a>
                     </li>
                 </ul>
