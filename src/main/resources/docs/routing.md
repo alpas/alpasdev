@@ -28,8 +28,8 @@
 
 Start by registering your app routes on an instance of `dev.alpas.routing.Router`. Although you could do this
 from anywhere, Alpas convention is to add them in the `routes.kt` file and then load them in
-`providers/RouteServiceProvider.kt` class. When [scaffolding a project](/docs/installation)
-both these files are created for you and is already wired to load your routes. All you
+`providers/RouteServiceProvider.kt` class. When [scaffolding a project](/docs/installation),
+both of these files are created for you and are already wired to load your routes. All you
 need to do is add your routes in `routes.kt` file.
 
 Alpas routing supports all the routes that respond to any HTTP verbs: `get`, `post`, `put`, `patch`, `delete`, and
@@ -118,7 +118,7 @@ fun Router.addRoutes() {
 <a name="required-parameters"></a>
 #### [Required Parameters](#required-parameters)
 
-If you want to capture parameters within your route, you could do so by wrapping a parameter name with angle brackets
+If you want to capture parameters within your route, you can do so by wrapping a parameter name with angle brackets
 `<>`. You can later [access these captured values](/docs/http-request#parameters) from your controller.
 
 <span class="line-numbers" data-start="5" data-file="routes.kt">
@@ -143,7 +143,7 @@ fun Router.addRoutes() {
 <a name="route-name"></a>
 #### [Route Name](#route-name)
 
-You can set names for your routes to make it easy to refer them from your code esp. while generating URLs.
+You can set names for your routes to make it easy to refer them from your code, especially while generating URLs.
 Setting a name for a route gives you the flexibility of changing its path without having to refactor
 everywhere it is referenced. To give a name to a route, just call `name()` method on the route.
 
@@ -211,7 +211,7 @@ fun Router.addRoutes() {
 <a name="route-groups"></a>
 ### [Route Groups](#route-groups)
 
-Instead of repeating common attributes, such as path prefix, name, middleware etc., for each route, you can
+Instead of repeating common attributes, such as path prefix, name, middleware, etc., for each route, you can
 instead use route groups. Grouping routes also helps you better organize your routes making them more
 readable and maintainable.
 
@@ -331,7 +331,7 @@ fun Router.addRoutes() {
 
 Instead of assigning a list of middleware to a group or to a route, sometimes it is more convenient to
 make a list of middleware, give it a name, and then assign this name. This allows you to share a
-middleware group and uniformly apply it to different routes and routes groups. 
+middleware group and uniformly apply it to different routes and route groups. 
 
 To create a named middleware route, you need to first register your middleware group inside `HttpKernel`'s
 `registerRouteMiddlewareGroups()` method with a name and then call `middlewareGroup()` on your routes,
