@@ -18,9 +18,9 @@ Logback is what we use and highly recommend.
 ### [Configuration](#configuration)
 
 Alpas does away with the traditional way of configuring your app using xml and properties files. However,
-configuring of logging is done using couple of xml files. To make it convenient, two xml configuration
+configuring logging is done using a couple of xml files. To make it convenient, two xml configuration
 files for Logback is created for you when you scaffold a new project. Make sure to copy these
-files to your production server esp. if you are deploying using a fat JAR.
+files to your production server especially if you are deploying using a fat JAR.
 
 <div class="sublist">
 
@@ -38,7 +38,7 @@ comes first. You are free to configure it as per your requirements, of course!
 - `console_log_config.xml`
 
 This config file is used when you are running Alpas console commands. To reduce clutter, only the errors are
-logged to *stdout*, everything else is ignored. You can configure it according to your needs, of course!
+logged to *stdout*. Everything else is ignored. You can configure it according to your needs.
 
 </div>
 
@@ -46,7 +46,7 @@ logged to *stdout*, everything else is ignored. You can configure it according t
 ### [HttpCall Logger](#httpcall-logger)
 
 Every `HttpCall` gets its own instance of a logger. Most of the times you will be using this logger to log
-a message. There are different levels of logging-`trace`, `debug`, `info`, `warn`, and `error` and
+a message. There are different levels of logging - `trace`, `debug`, `info`, `warn`, and `error` and
 each level has its corresponding methods for actual logging of a message. You can either log a
 string message or a `Throwable` object. You can also log an object of type `Any?` for which
 the return value of its `toString()` will be logged.
@@ -76,7 +76,7 @@ If instead of using the logger from `HttpCall` doesn't work for you, you can eas
 a logger like so: `val myLogger = KotlinLogging.logger {}`.
 
 This creates an instance of `KLogger`, the name of which is set to the name of the class declaring it.
-If you want to give it your own name to this logger, you could do something like:
+If you want to give your own name to this logger, you could do something like:
 `val myLogger = KotlinLogging.logger("myname")`
 
 <a name="configuring-a-dedicated-logger"></a>
