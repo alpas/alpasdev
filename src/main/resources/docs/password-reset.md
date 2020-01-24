@@ -8,15 +8,15 @@
 
 
 Allowing users to reset their forgotten passwords is a feature provided by pretty much every app that allows
-accounts registration with a password. Alpas provides all the views, controllers, and everything else
-an app needs for supporting password reset feature with almost no efforts from your side.
+account registration with a password. Alpas provides all the views, controllers, and everything else
+an app needs for supporting password reset feature with almost no effort from your side.
 
-Alpas creates a secure time-boxed token and saves it in the database whenever user requests a password reset email. 
+Alpas creates a secure time-boxed token and saves it in the database whenever a user requests a password reset email. 
 Any previous tokens will first be removed. After the token is saved, an email is sent to the reset email address
 containing a link.
 
-When the user clicks this link, they are redirected to `auth/passwords/reset` page, which asks the user to enter
-their email address and a password. If the token has not yet expired and all the user's inputs are valid,
+When the user clicks this link, they are redirected to the `auth/passwords/reset` page, which asks the user to enter
+their email address and a password. If the token has not yet expired and all the user's inputs are valid, the
 user's record is updated with a hashed version of the new password, the token is deleted, user is
 logged in and then redirected to `/` route.
 
