@@ -14,7 +14,7 @@ command line.
 The core of Alpas framework itself is built with many service providers.
 
 > /alert/ <span>Unlike [configs](/docs/configuration), service providers are not automatically registered by the 
-> framework. It's upto you to register your service providers in either one or both of `HttpKernel` and `ConsoleKernel`.
+> framework. It's up to you to register your service providers in either one or both of `HttpKernel` and `ConsoleKernel`.
 
 
 <a name="getting-started"></a>
@@ -66,12 +66,12 @@ you shouldn't try to use any other bindings inside this method.
 - `boot()`
 
 The `boot` method is called when all the providers have been registered (but not necessarily booted). You should be
-able to use any other bindings provided by other service providers inside this method.
+able to use other bindings provided by other service providers inside this method.
 
 <a name="commands"></a>
 - `commands()`
 
-You service providers may have some Alpas console commands. The `commands` method is the perfect place
+Your service providers may have some Alpas console commands. The `commands` method is the perfect place
 to return a list of all those commands. This method is called right after the `register` method so
 not all the service providers are registered yet.
 
@@ -83,8 +83,8 @@ not all the service providers are registered yet.
 Once you have created a service provider, you must register it by appending it to the list of service providers
 returned by `serviceProviders()` method in either one or both of `HttpKernel` or `ConsoleKernel` classes.
 
-Whether to register your service provider in one or both the kernels depends on in what mode you want your service
-provider to be available in. For an example, by default `ViewServiceProvider` class is added to only
+Whether to register your service provider in one or both the kernels depends on what mode you want your service
+provider to be available in. For an example, by default the `ViewServiceProvider` class is added to only
 `HttpKernel` and not to `ConsoleKernel` as it doesn't make sense to have any view related
 services available in console mode.
 
