@@ -8,9 +8,9 @@
     
 Ozone is a thin layer on top of the excellent [Ktorm][ktorm-github] library by Vincent Lau*.
 
-Ozone makes setting up and interacting with Ktorm seamless and simple. It also adds few
+Ozone makes setting up and interacting with Ktorm seamless and simple. It also adds a few
 other features on top of Ktorm such as [entity commands](#creating-tables-and-entities),
-[migrations](/docs/migrations), database pool configuration etc.
+[migrations](/docs/migrations), database pool configuration, etc.
 
 In this document, we'll talk mostly about the Ozone layer and won't go too much into the nitty-gritty
 technical details of Ktorm. For that, we'd recommend going through its thoroughly written
@@ -82,15 +82,15 @@ Users.delete { it.id eq id }
 
 >/info/<span>Since there is only one table of a given name in the database, it makes sense to only have one such
 >instance of table in your code as well. You do so by representing the table as an [`object`][kotlin-object]
->instead of a `class`. However, this is not a strict requirement. There are certainly few cases where having
->multiple instances makes sense—for an example if there are two tables with an identical schema.</span>
+>instead of a `class`. However, this is not a strict requirement. There are certainly a few cases where having
+>multiple instances makes sense — for an example, if there are two tables with an identical schema.</span>
 
 For advanced usage, please [checkout the DSL wiki](https://ktorm.liuwj.me/en/schema-definition.html).
 
 <a name="dao"></a>
 ### [Ozone Data Access Object (DAO)](#dao)
 
-DSL is very powerful for running queries and doing [advanced queries][dsl-advanced] but it is very convenient to
+DSL is very powerful for running queries and doing [advanced queries][dsl-advanced], but it is very convenient to
 map a result to an actual object and interact with it directly. Ozone DAO APIs allows you to do exactly that.
 
 <a name="ozone-entity"></a>
@@ -173,7 +173,7 @@ For advanced usage, please [checkout the DAO wiki](https://ktorm.liuwj.me/en/ent
 
 As you may have noticed, creating an entity and table with Ozone requires a little boilerplate code.
 Rather than creating an entity and the corresponding table by hand, you can use `make:entity`
-Alpas command. The entity and its table will be put in one file under `entities` folder. 
+Alpas command. The entity and its table will be put in one file under the `entities` folder. 
 
 ```bash
 
@@ -279,8 +279,8 @@ One major downside of using a database framework like Ozone/Ktorm is that the SQ
 get run on your database are opaque to you. You may be making a small innocent mistake like lazy loading
 a relation instead of eagerly loading and running into the trap of [N+1 query problem][n+1].
 
-Once quick way to see behind-the-scenes database queries is by logging them, which, fortunately,
-is already done for you. All you need to do is print out the actual queries that was run by
+One quick way to see behind-the-scenes database queries is by logging them, which, fortunately,
+is already done for you. All you need to do is print out the actual queries that were ran by
 adding the following 2 lines in your [logging configuration files][log-config].
 
 <span class="line-numbers" data-start="32" data-file="app_log_config.xml">
