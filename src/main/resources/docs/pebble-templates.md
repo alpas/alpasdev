@@ -19,7 +19,7 @@
 
 Alpas uses [Pebble](https://pebbletemplates.io/) as its templating engine. Pebble is a modern, very powerful
 templating engine with great features such as Template inheritance (`layout`, `extends`, `partials` etc.),
-Macros, built-in auto-escaping security, rich set of built-in tags, filters, and functions etc.
+Macros, built-in auto-escaping security, rich set of built-in tags, filters, and functions, etc.
 
 It also very straightforward to extend the engine with your own filters, tags, and functions.
 
@@ -42,7 +42,7 @@ in-house built templating engine (may it rest in peace)!
 ### [Templates Location](#templates-location)
 
 By default, templates should be kept in `resources/templates` folder and must end with `.peb` extension. If you wish,
-you could configure both the location and the extension [by overriding](/docs/configuration#core-configs)
+you can configure both the location and the extension [by overriding](/docs/configuration#core-configs)
 `templatesDirectory` and `templateExtension` properties of `dev.alpas.view.ViewConfig` class.
 Unless you have a good reason to do so, we highly recommend using the default values.
 
@@ -136,9 +136,9 @@ You can reference this template from a controller like so:
  
  `call.render("docs/latest/toc")` Or, alternatively, `call.render("docs.latest.toc")`.
 
-> /tip/ <span> During development you will be tweaking your templates and changing the data that get passed
+> /tip/ <span> During development, you will be tweaking your templates and changing the data that get passed
 >from a controller a lot. If you are using [IntelliJ IDEA](https://www.jetbrains.com/idea/),
->instead of recompiling and re-running your app again and again, you could just reload your
+>instead of recompiling and re-running your app again and again, you can just reload your
 >changed classes from `Run > Reload Changed Classes` menu and then switch to your browser
 >and reload the page. Even better - set a shortcut for this menu like **CMD+R**.
 >This is a huge time saver and productivity booster!
@@ -177,8 +177,8 @@ call.render("index", mapOf("name" to "Jane", "address" to address))
 #### [Sharing view data on HttpCall object](#sharing-view-data-on-httpcall-object)
 
 A handy method, aptly named `shareWithView(key: String, value: Any?)`, can be used to share some data
-with the templates from anywhere an `HttpCall` is accessible—from a helper function, a private
-function within a controller, or from within the [ValidationGuard](/docs/validation) etc.
+with the templates from anywhere an `HttpCall` is accessible — from a helper function, a private
+function within a controller, or from within the [ValidationGuard](/docs/validation).
 
 ```kotlin
 
@@ -207,13 +207,13 @@ Your value is: ${{ valuation }}
 #### [Configuration Values](#configuration-values)
 
 Alpas already makes all your configs available in your view templates using a combo of ``config()`` 
-function and a convention that is based on the name of your config class—camelcase class name
+function and a convention that is based on the name of your config class — camelcase class name
 with the suffix *Config* stripped off.
 
 Let's say you want to access `appUrl` config defined in `AppConfig` class from one of your templates.
 You can access it like so: `{{ config('app.appUrl') }}`.
 
-Notice how `AppConfig` class is simply referred as `app`.
+Notice how `AppConfig` class is simply referred to as `app`.
  
 Let's see another example. Say you want to access `adminEmail` config defined in an `AdminConfig`
 class from one of your templates, you'd do: `{{ config('admin.adminEmail') }}`.
@@ -505,18 +505,18 @@ how to do it.
 **We highly recommend that you go through the official Pebble documentation on extensibility to learn more about it.**
 
 Read the [source code](https://github.com/PebbleTemplates/pebble) on how they have implemented
-their own filters, tags, functions etc. before writing your own.
+their own filters, tags, functions, etc. before writing your own.
 
 Once you have created your own extensions, you need to reigster it with Alpas to make them available in your templates.
 You can do this in a few ways. The easiest way is to extend `dev.alpas.view.ViewServiceProvider` class and overriding
 `loadExtensions(app: Application): Iterable<AbstractExtension>` method returning a list of your extensions.
 
 >/alert/ <span>Make sure to register your newly created service provider class instead of
->`dev.alpas.view.ViewServiceProvider` in `HttpKernel` otherwise your extensions won't
+>`dev.alpas.view.ViewServiceProvider` in `HttpKernel`. Otherwise, your extensions won't
 >be loaded.</span>
 
 >/tip/ Very rarely you'll need to write more than one extension as an extension can return a
->list of filters, tags, functions etc.
+>list of filters, tags, functions, etc.
 
 Let's see a real example of writing a `ago` custom filter and registering it in four relatively simple steps:
 
@@ -626,7 +626,7 @@ from a controller to a template when rendering.
 
 One great advantage of Pebble being a sub-set of Twig templating engine is that JetBrains has an 
 [official Twig Plugin](https://plugins.jetbrains.com/plugin/index?xmlId=com.jetbrains.twig) that
-provides a handful of twig features—syntax highlighting, auto-completion, live templates etc.
+provides a handful of twig features — syntax highlighting, auto-completion, live templates, etc.
 To apply this plugin, your templates must end with a `.twig` extension and IntelliJ IDEA
 will pick it up automatically.
 
