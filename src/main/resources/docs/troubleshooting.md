@@ -9,8 +9,8 @@ available by running `alpas help` first. </span>
 
 - **`alpas help` doesn't list the commands that I'm looking for.**
 > /help/ <span> Most probably because the service provider that actually provides those commands are not registered.
-Check `ConsoleKernel.kt` file and make sure the service provider is actually registered. If it is not register
-it, and then run `alpas build`. The commands should be available now. </span>
+Check `ConsoleKernel.kt` file and make sure the service provider is actually registered. If it is not, register
+it and then run the `alpas build`. The commands should be available now. </span>
 
 - **`alpas migrate` doesn't run new migrations.**
 > /help/ <span> Most probably because you haven't built the app after adding a new migration. Run `alpas build`
@@ -19,7 +19,7 @@ to build the app first and then run the migration. </span>
 - **I'm stuck. I'm having other issues. I need to ask something else. I just want to hangout with cool Alpas devs.**
 > /help/ <span>Please [join our Slack channel][alpas-slack] and say hi. </span>
 >
-- **I found a bug. I've a feature request.**
+- **I found a bug. I have a feature request.**
 > /help/ <span> If you found a security related bug, please email us. For other issues and feature/enhancement
 requests, please [open an issue][alpas-github-issue] on GitHub. </span>
 

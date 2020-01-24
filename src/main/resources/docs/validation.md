@@ -51,7 +51,7 @@ fun create(call: HttpCall) {
 
 </span>
 
-Instead of applying multiple rules, you could also pass a map of rules where the key is the
+Instead of applying multiple rules, you can also pass a map of rules where the key is the
 name of the field, and the value is a list of *rule objects* for the field.
 
 <span class="line-numbers" data-start="15">
@@ -72,7 +72,7 @@ fun create(call: HttpCall) {
 <a name="failing-fast"></a>
 #### [Failing Fast](#failing-fast)
 
-Sometimes you may wish to not continue with the validation after the first validation fails i.e.—bail
+Sometimes you may wish to not continue with the validation after the first validation fails - i.e., bail
 on the first error. To achieve this, set `failfast` to `true` when applying your rules.
 
 <span class="line-numbers" data-start="15">
@@ -128,7 +128,7 @@ validation rules, it is desirable to better organize validation rules to make th
 You may also want to do more within the rules, such as caching an expensive database lookup to be
 retrieved later, or reuse the validation rules from other places.
 
-You definitely don't want all these complex logic scattered all over the places in your controller.
+You definitely don't want all this complex logic scattered all over the places in your controller.
 To facilitate this, Alpas allows you to validate a call using a dedicated `ValidationGuard` class.
 
 To create a `ValidationGuard` class, you can use the `make:guard` Alpas command. This creates
@@ -140,7 +140,7 @@ $ alpas make:guard CreatePageGuard
 
 ```
 
-When you open the newly generated guard class you'll see that a `rules()` method is already overriden
+When you open the newly generated guard class, you'll see that a `rules()` method is already overriden
 for you. All you need to do is to return a map of rules where the key is the name of the field,
 and the value is a list of rule objects for the field.
 
@@ -231,13 +231,13 @@ for validating an e-mail address using RFC 2822 compliant criteria.
 
 Validates that there exists a matching *confirm* field and that the value matches the value of this attribute.
 
-For example, if the attribute under validation is `password`, there must existing an attribute,
+For example, if the attribute under validation is `password`, there must be an existing attribute,
 either `password_confirm` **or** `confirm_password`, and the value of it must match the value
 of `password`. The value of the *confirm* field can neither be `null` nor `blank`.
 
 - `Unique(table: String, column: String? = null, ignore: String? = null)`
 
-The value must not exists in the given database *table* for the given *column*.
+The value must not exist in the given database *table* for the given *column*.
 If the *column* is null, the name of the attribute will be used for the column.
 
 <span class="line-numbers" data-start="8">
@@ -291,12 +291,12 @@ call.applyRules("email") {
 On the other hand, when updating the profile, you want to let the user update their profile **with**or
 **without** updating the `email` address field. If the user only wants to update, say, the `name`
 field and **not** the `email` field, you do not want to apply email uniqueness validation rule
-for this user. Otherwise, validation would fail every time, and the user would't be able to
+for this user. Otherwise, validation would fail every time and the user won't be able to
 update their name without also updating their email address.
 
-In this case, you need to ignore the uniqueness check but only against the user's id. You
+In this case, you need to ignore the uniqueness check. but only against the user's id. You
 can achieve this by setting the `ignore` parameter in the format `<column_name>:<value>`.
-Your rule for this would look something like:
+Your rule for this will look something like:
 
 <span class="line-numbers" data-start="10">
 
@@ -313,8 +313,8 @@ call.applyRules("email") {
 
 ```
 
-In the above example, the uniqueness check for user's email is ignored for the row where `id` is *4*.
-But if them email matches for any other rows then the validation fails.
+In the above example, the uniqueness check for the user's email is ignored for the row where `id` is *4*.
+But, if them email matches for any other rows, then the validation fails.
 
 </span>
 
@@ -392,8 +392,8 @@ fun create(call: HttpCall) {
 All the rules that come bundled with Alpas have some sensible error messages set for each validation rule.
 If you want to customize a message, you can easily do so by passing a callback for the `message`
 parameter when applying a rule. The message is of type `ErrorMessage`, which is a typealias
-for `((String, Any?) -> String)?`. It is a function that takes two parameters—the name
-of the attribute and the actual value—and returns an error message.
+for `((String, Any?) -> String)?`. It is a function that takes two parameters — the name
+of the attribute and the actual value — and returns an error message.
 
 <span class="line-numbers" data-start="16">
 
@@ -494,7 +494,7 @@ By default, when validation fails, Alpas throws a `ValidationException`. If you 
 override and handle error the way you want it.
 
 From this method, returning a `true` or `Nothing` means you handled the error and thus Alpas will continue.
-Returning `false` means you want Alpas to do what it usually does after validation fails—throwing a
+Returning `false` means you want Alpas to do what it usually does after validation fails — throw a
 validation exception.
 
 <span class="line-numbers" data-start="3" data-file="guards/CreatePageGuard.kt">
@@ -525,7 +525,7 @@ Alpas internally catches the `ValidationException` thrown and [renders it](/docs
 appropriately based on whether the caller [wants a JSON response](/docs/http-request#wants-json) or not.
 
 If it wants a JSON response, the validation errors are returned as a JSON object with **422** status code.
-If JSON response is not wanted, it flashes both the validation errors and the current inputs—except for
+If the JSON response is not wanted, it flashes both the validation errors and the current inputs; except, for
 critical fields such as `password`, `confirm_password`, `password_confirm` etc.—and
 [redirects the user back](/docs/http-response/#redirect-back) to the previous page.
 
