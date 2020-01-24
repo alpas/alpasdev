@@ -7,6 +7,7 @@ import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
 import dev.alpas.Environment
 import dev.alpas.ResourceLoader
+import dev.alpas.mustStartWith
 import dev.alpas.orAbort
 import redis.clients.jedis.JedisPool
 import java.nio.file.Paths
@@ -17,7 +18,7 @@ class Documentation(
     private val jedisPool: JedisPool
 ) {
 
-    private fun docsPath(page: String) = Paths.get("docs", page)
+    private fun docsPath(page: String) = Paths.get("", "docs", page).toString().mustStartWith("/")
 
     private val markdown by lazy { Markdown() }
 
@@ -39,7 +40,7 @@ class Documentation(
     }
 
     private fun readSource(page: String): String {
-        return resourceLoader.load(docsPath("$page.md").toString())
+        return resourceLoader.load(docsPath("$page.md"))
             ?.readText()
             .orAbort("Page $page not found!")
     }
