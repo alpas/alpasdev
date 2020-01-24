@@ -24,8 +24,8 @@ Currently, Alpas comes bundled with 2 mail drivers:
 <a name="getting-started"></a>
 ### [Getting Started](#getting-started)
 
-If you open `configs/MailConfig.kt`, you'll notice that Alpas has lazily loaded two drivers for you—`smpt` for SMTP
-Driver and `local` for the Local Mail Driver.You can get an instance of one of these drivers during the runtime
+If you open `configs/MailConfig.kt`, you'll notice that Alpas has lazily loaded two drivers for you — `smpt` for SMTP
+Driver and `local` for the Local Mail Driver. You can get an instance of one of these drivers during the runtime
 by calling `driver()` method on `MailConfig` class. You can pass the name of a driver or use the default driver.
 You can decide to always use a specific driver by setting `MAIL_DRIVER` variable to one of the driver names.
 
@@ -100,7 +100,7 @@ It is easy to add a custom driver. All you have to do is create a class that imp
 `dev.alpas.mailing.drivers.MailDriver` interface and override `send(mail: MailMessage)`
 method. Eventually, register this new driver in `MailConfig` class under a name.
 
-Let's see and example of how to write your own [SparkPost](https://sparkpost.com) driver by
+Let's see an example of how to write your own [SparkPost](https://sparkpost.com) driver by
 wrapping their official [Java client API](https://github.com/SparkPost/java-sparkpost).
 
 <div class="ordered-list">
