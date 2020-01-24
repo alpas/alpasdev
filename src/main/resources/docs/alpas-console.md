@@ -5,7 +5,7 @@
 - [Writing Output](#writing-output)
 
 As you may have already noticed, Alpas comes with a bunch of console commands—`make:controller`, `make:job`,
-`route:list` etc. to name a few—to assist you in performing some tasks from a command-line. You run an
+and `route:list`, to name a few, that assist you in performing some tasks from a command-line. You can run an
 Alpas command by prepending it with `alpas`.
 
 To see a list of all the Alpas commands as well as a short description for each, you can use `alpas list` command.
@@ -66,17 +66,17 @@ Generator commands create some files and folders when invoked. `make:command` is
 generator command and so is `make:controller`.
 
 While you can use a simple command like `GreetCommand` above to write a generator
-command, you have to wired few things to get it right.
+command, you have to wire a few things to get it right.
 
 Instead of extending `dev.alpas.console.Command` class, you can extend `dev.alpas.console.GeneratorCommand`
 class to make your life much easier while writing generator commands. While it may not always satisfy
-all your needs, but most of the times it does and even it doesn't, it's a good place to start.
+all your needs, most of the time it will. Even if it doesn't, it's a good place to start.
 
 You can pass `--generator` or `-g` to `make:command` command to create a generator type command
 for you. Then all you have to do is override one abstract method—`populateOutputFile()`.
 
 Let's see an example of how we can write a `make:sandwich` generator command that creates a `NameOfSandwich.kt`
-file under `sandwiches` folder, creating this folder if it already doesn't exist.
+file under `sandwiches` folder, creating this folder if it doesn't already exist.
 
 <div class="ordered-list">
 
@@ -135,8 +135,8 @@ class MakeSandwich(srcPackage: String) :
 
 </span>
 
-Notice that we have a couple of placeholders in the code—`StubPackageName` and `StubClazzName` both
-of which will be replaced with proper texts automatically when we actually run the command.
+Notice that we have a couple of placeholders in the code—`StubPackageName` and `StubClazzName`, both
+of which will be replaced with proper text automatically when we actually run the command.
 
 3. Register this command in `ConsoleKernel` class:
 
@@ -180,7 +180,7 @@ $ alpas make:sandwich club blt
 <a name="register"></a>
 #### [Registering Custom Commands](#register)
 
-After you have created your own commands, you must register them with the app otherwise they won't be available
+After you have created your own commands, you must register them with the app. Otherwise, they won't be available
 to you. You can register a command in a number of ways—the easiest one is by overriding `commands()` method
 in `ConsoleKernel` class and returning a list of all your commands.
 
