@@ -20,7 +20,7 @@ different queue backends without having to change your code.
 
 The backends for queues are called `connections` in Alpas such as `DatabaseQueueConnection`. Each connection
 could have multiple queues that you could selectively use for queuing different tasks most possibly
-based on their priorities such as *high priority queue*, *low priority queue* etc.
+based on their priorities, such as *high priority queue*, *low priority queue*, etc.
 
 <a name="registering-queue-connections"></a>
 ### [Registering Queue Connections](#registering-queue-connections)
@@ -29,7 +29,7 @@ If you open `configs/Queue.kt`, you'll notice that Alpas has lazily registered t
 Each connection is regestered with a name. Alpas uses this key to pick one of these connections based on
 the value of `QUEUE_CONNECTION` in your `.env` file. This is set to `passthrough` by default.
 
-Feel free to register more queue connections or remove the ones that you know for sure you would't use.
+Feel free to register more queue connections or remove the ones that you know for sure you won't use.
 
 Once you are happy with your queue connections, make sure to register `QueueServiceProvider::class` 
 by [adding it to the list of service providers](/docs/service-providers#registering) in both
@@ -158,20 +158,20 @@ fun sendInvoice(call: HttpCall){
 
 If you would like to delay the processing of a queued job after you have dispatched it, you can do so
 by overriding `delayInSeconds` property of the job. It is set to **1 second** by default, which
-means it will be available to be processed within approx. 1 second of adding it to the queue.
+means it will be available to be processed within approximately 1 second of adding it to the queue.
 
 <a name="retrying-failed-jobs"></a>
 #### [Retrying Failed Jobs](#retrying-failed-jobs)
 
-Although undesirable, your job might fail during processing for one reason or the other. Usually when that
-happens you would want to give few chances for that job to be processed again. You can do so by
-overriding `tries` property of the job. It is set to **3 tries** by default. If the job keeps
-failing even after the number of tries set in the job, it will be added to a failed job
-queue for you to do further introspection.
+Although undesirable, your job might fail during processing for one reason or the other. Usually, when that
+happens you would want to allot a few chances for that job to be processed again. You can do so by
+overriding the `tries` property of the job. It is set to **3 tries** by default. If the job keeps
+failing after the number of alloted tries set in the job, it will be added to a failed job
+queue for you to do further inspection.
 
-> /alert/ <span>A job instance gets serialized as a JSON before putting it in a queue. This means a job must
+> /alert/ <span>A job instance gets serialized as JSON before putting it in a queue. This means a job must
 >be serializable along with all its properties and dependencies. Also, make sure that the values injected
->via primary constructor are not private otherwise the job will fail to deserialize, and it won't be
+>via primary constructor are not private. Otherwise, the job will fail to deserialize, and it won't be
 >processed.</span>
 
 <a name="available-drivers"></a>
@@ -195,10 +195,10 @@ completely ignores both `tries` and `delayInSeconds` properties.
 <a name="database"></a>
 #### [Database](#database)
 
-You can put your jobs in a database by setting `QUEUE_CONNECTION` value in your `.env` file to `database`. In order
-to hold the jobs in the database, you'd need two tables—one for holding the actual jobs and another for holding
-the failed jobs. You can use `queue:tables` Alpas command to generate a pre-built migration for you. Just
-like every other migrations, the migration will be put under `database/migrations` folder. Once the
+You can put your jobs in a database by setting the `QUEUE_CONNECTION` value in your `.env` file to `database`. In order
+to hold the jobs in the database, you need two tables—one for holding the actual jobs and another for holding
+the failed jobs. You can use the `queue:tables` Alpas command to generate a pre-built migration for you. Just
+like any other migration, this migration will be put under the `database/migrations` folder. Once the
 migration is created, you can migrate your database using `migrate` Alpas command.
 
 ```bash
@@ -218,15 +218,15 @@ $ alpas migrate
 #### [Active MQ](#activemq)
 
 For a more robust, flexible, and cross-platform queuing, you can use [ActiveMQ][activemq], which Alpas
-supports out-of-the-box. It requires a small ceremony to set up a messaging server, called a broker,
-but once that is done, you get the one of the most popular messaging servers for queueing your jobs.
+supports out-of-the-box. It requires a small ceremony to set up a messaging server, called a broker.
+Once that is done, you get one of the most popular messaging servers for queueing your jobs.
 
-Checkout the [official ActiveMQ website][activemq] for more information of plethora
+Checkout the [official ActiveMQ website][activemq] for more information on a plethora
 of other features it provides out-of-the-box.
 
 Since Alpas abstracts away the intricacies of interacting with different queue drivers, nothing
 changes as far as queueing, de-queueing, and processing of jobs is concerned. You do need
-to set few values in you `.env` file:
+to set few values in your `.env` file:
 
 <span data-file=".env">
 
@@ -274,7 +274,7 @@ $ bin/artemis create --name=mybroker --user=admin --require-login ./mybroker
 ```
 
 4. Once created, you can run start `mybroker` broker using `aretemis run` command. If you always want
-to run this broker, for an example in a production server, you can run it in the background by
+to run this broker, for example in a production server, you can run it in the background by
 using `artemis-service start` command. Let's run the broker before moving to the next step.
 
 ```bash
@@ -353,7 +353,7 @@ $ alpas queue:work database
 <a name="selecting-queues"></a>
 #### [Selecting Queues](#selecting-queues)
 
-Not just the connection, you can also pick what queues you want to process by specifying
+Not just the connection, you can also pick what queues you want to process by specifying the
 `--queue` option to `queue:work` command.
 
 ```bash
