@@ -26,7 +26,7 @@ $ alpas make:middleware AdminOnlyMiddleware
 ```
 
 Let's say this middleware checks if the logged in user is actually an admin. If the checks passes,
-it will forward the call but if not it throws an `AuthenticationException` exception.
+it will forward the call. If not, it throws an `AuthenticationException` exception.
 
 <span class="line-numbers" data-start="8" data-file="middleware/AdminOnlyMiddleware.kt">
 
