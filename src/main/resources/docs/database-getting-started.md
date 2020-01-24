@@ -4,14 +4,14 @@
     - [Accessing Transaction Values](#accessing-transcation-values)
     - [Different Database Connections](#different-database-connections)
     
-Just like with any other libraries, Java and Kotlin ecosystem is very rich when it comes to interacting
-with databases. There are many choices for ORMs, connection pools, configurations, migrations etc.
+Just like with any other libraries, Java and Kotlin ecosystems are very rich when it comes to interacting
+with databases. There are many choices for ORMs, connection pools, configurations, migrations, etc.
 
 Instead of tiring you out with decision fatigue and confusing you with configurations and terminologies,
-we have done all the database setup out-of-the-box for you. This means, with Alpas, interaction
+we have done all the database setup out-of-the-box for you. This means, with Alpas, interacting
 with a database is as easy and as hassle-free as it can be.
 
-With a simple to configure single or [multiple database](#multiple-database-connections) connections, the
+With simple to configure single or [multiple database](#multiple-database-connections) connections, the
 [fastest JDBC database pool connection][hikari], [migrations](/docs/migrations), and the
 [Ozone SQL framework](/docs/ozone) all packed and ready to go, you'll be looking
 forward to interacting with your database and running queries like a pro.
@@ -20,10 +20,10 @@ forward to interacting with your database and running queries like a pro.
 ### [Registering Database Connections](#registering-database-connections)
 
 If you open the `configs/DatabaseConfig.kt` file, you'll notice that Alpas has registered one database connection
-for you already. If `addConnections()` call is commented out, make sure to uncomment it out as the first thing.
+for you already. If `addConnections()` call is commented out, make sure to uncomment it out as a first step.
 
 The default connection that is configured for you is a MySQL database connection and is registered
-as `mysql`. However, it could be any of number of other supported database dialects.
+as `mysql`. However, it could be any number of other supported database dialects.
 
 <div class="sublist">
 
@@ -49,8 +49,8 @@ You can create your own database connection by implementing `dev.alpas.ozone.Dat
 interface. To help you get started without any fuss or fear, Alpas comes bundled with two
 such connections—`MySqlConnection` and `SqliteConnection`.
 
->/alert/<span>Most of the database related features are disabled unless there exists at least
->one database connection. Make sure you have a `DatabaseConfig` class defined and that
+>/alert/<span>Most of the database related features are disabled unless at least
+>one database connection exists. Make sure you have a `DatabaseConfig` class defined and that
 >`addConnections()` method is called from within the `init{}` block.</span>
 
 <a name="multiple-database-connections"></a>
@@ -61,7 +61,7 @@ them during runtime. You are not restricted to creating multiple connections wit
 or different databases. You can declare multiple connections even for the same vendor or even the same database.
 This allows you to, for an example, run different types of database queries on different databases.
 
-You add multiple connections by declaring them in your `DatabaseConfig` class.
+You can add multiple connections by declaring them in your `DatabaseConfig` class.
 
 <span class="line-numbers" data-start="9" data-file="configs/DatabaseConfig.kt">
 
@@ -107,9 +107,9 @@ fun index(call: HttpCall){
 <a name="transactions"></a>
 ### [Transactions](#transactions)
 
-In case of some errors, if you want to recover gracefully from any kind of **CRUD** database operations—**C**reate,
-**R**etrieve, **U**pdate, and **D**elete—you can wrap it in a `useTransaction` block. If an exception is thrown
-within this block, an auto rollback of the database will be performed and hence ensuring that your
+In case of errors, if you want to recover gracefully from any kind of **CRUD** database operations — **C**reate,
+**R**etrieve, **U**pdate, and **D**elete — you can wrap it in a `useTransaction` block. If an exception is thrown
+within this block, an auto rollback of the database will be performed, and hence, ensuring that your
 database is in the correct state and that the data consistency is maintained.
 
 <span class="line-numbers" data-start="5">
@@ -141,7 +141,7 @@ If you need to run some CRUD operations on a different connection, you can
 #### [Accessing Transaction Values](#accessing-transcation-values)
 
 If you want to access some values of a `useTransaction` block outside the block, then you can declare
-some mutable **var**s outside the block and assign them inside the block. If this sounds awful
+some mutable **var**s outside the block and assign them inside the block. If this sounds awful,
 then `useTransaction` block actually returns the value of the last expression in the block.
 You can assign this to a **val** and use it outside the block.
 
@@ -166,8 +166,8 @@ val users = useTransaction {
 #### [Different Database Connections](#different-database-connections)
 
 By default, **CRUD operations run on the last database that was connected**. In Alpas, the default database
-is loaded the first time your application starts. This means, a "naked" database operation—operation
-outside a db block—runs in the context of this database. However, you can easily run SQL
+is loaded the first time your application starts. This means, a "naked" database operation — an operation
+outside a db block — runs in the context of this database. However, you can easily run SQL
 statements on a specific database by passing an instance of a database object
 obtained by calling [`connect()` method](#multiple-database-connections).
 
@@ -202,7 +202,7 @@ fun index(call: HttpCall){
 
 ```
 
->/alert/<span>Don't forget that the "naked" database operations are always run on the last connected
+>/alert/<span>Don't forget that the "naked" database operations always run on the last connected
 >database. This is the common source of bugs and confusion when working with multiple databases.
 
 [hikari]: https://github.com/brettwooldridge/HikariCP#jmh-benchmarks-checkered_flag

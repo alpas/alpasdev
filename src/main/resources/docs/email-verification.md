@@ -9,13 +9,13 @@
 
 If your web app accepts an email address during registration, you may want to verify the email address to check the
 legitimacy of it. Alpas supports sending and verifying email out-of-the box and saves you from re-implementing this
-convenient but time-consuming feature for each application. It requires almost no efforts on your side other than
+convenient, but time-consuming, feature for each application. It requires almost no effort on your side other than
 making sure that you have the proper mail driver to actually deliver the verification request emails.
 
 During registration, Alpas checks whether `User` entity's `mustVerifyEmail` flag is set to `true` or not. If it is,
 then it creates a signed time-boxed link and sends an email to the user.
 
-When user clicks the link, it first asks user to login and then checks the validity of the link. If it is
+When a user clicks the link, it first asks the user to login and then checks the validity of the link. If it is
 correct, unmodified, and unexpired, Alpas proceeds to mark the user as verified by setting
 `email_verified_at` column of `users` table to current timestamp. After verification is
 successfully completed, the user is then redirected to `/home` route.
@@ -40,7 +40,7 @@ are already set to enable verification during registration, so you don't have to
 ### [Route Setup](#route-setup)
 
 To enable verification, `requireEmailVerification` parameter must be set to `true` when calling
-`authRoutes()`. For you convenience, this is set to `true` by default.
+`authRoutes()`. For your convenience, this is set to `true` by default.
 
 **You must apply** `VerifiedEmailOnlyMiddleware` to each of your routes that you
 [want to protect](/docs/routing#guarded-routes) and only want verified users to

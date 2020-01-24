@@ -20,7 +20,7 @@ want to set up a machine for development or for production.
 ### [Development](#development)
 
 Alpas is easy to get started with on any *nix based machines; all you need is a JDK. Windows is supported
-but only under the [WSL](https://www.youtube.com/watch?v=80pTki0iUsc&t=158s) or using
+but only under [WSL](https://www.youtube.com/watch?v=80pTki0iUsc&t=158s) or using
 [GitBash](https://www.youtube.com/watch?v=hFiFQcfT9U0).
 
 <div class="sublist">
@@ -105,7 +105,7 @@ available at `http://localhost:8080`
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
 very convenient to have your web app accessible from a different device on the same network. This
-is very helpful during development esp. if you are trying to access your web app from a mobile
+is very helpful during development especially if you are trying to access your web app from a mobile
 device for, say, testing and debugging the app’s UI.
 
 Alpas makes it really easy to serve your web app over an IP address. To do so set `ENABLE_NETWORK_SHARE`

@@ -46,7 +46,7 @@ Tells you whether the request wants a JSON response or not.
 - `expectsJson` 
 
 Tells you whether the request is "expecting" a JSON response or not. This is true if the request has
-explicitly mentioned that it wants a JSON response **or*- if the request is an AJAX request.
+explicitly mentioned that it wants a JSON response **or** if the request is an AJAX request.
 
 - `body` 
 
