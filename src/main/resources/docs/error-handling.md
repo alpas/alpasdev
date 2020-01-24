@@ -8,7 +8,7 @@ Alpas tries its best to handle it gracefully.
 
 Based on the exception's status code, it first converts it to a proper HTTP exception type, such as 
 `NotFoundHttpException` for **404**, `ValidationException` for **422**, `MethodNotAllowedException`
-for **405**, `InternalServerException` for **500** etc. It then gives each exception a chance
+for **405**, `InternalServerException` for **500**, etc. It then gives each exception a chance
 to [report](#report) and then [render](#render) the exception.
 
 Each exception type does what is appropriate for it. Most of the exceptions return a message and a status code if the
@@ -22,11 +22,11 @@ render a beautiful error page.
  <a name="default-error-templates"></a>
  ### [Default Error Templates](#default-error-templates)
  
-When you scaffold a new Alpas web app, two error templates for the most common HTTP exceptions—**404 Page Not Found**
-and **500 Internal Server Exception**—are created for you under `resources/errors` directory.
+When you scaffold a new Alpas web app, two error templates for the most common HTTP exceptions — **404 Page Not Found**
+and **500 Internal Server Exception** — are created for you under `resources/errors` directory.
 
 These error pages look great out of the box! However, you are more than welcome to
-modify it to make it fit more with your app's overall branding.
+modify them to make them fit more with your app's overall branding.
 
 > /alert/ <span>**Do not** change the name or the location of the default error templates.</span>
 
@@ -35,7 +35,7 @@ modify it to make it fit more with your app's overall branding.
 
 Alpas's default way of handling the exceptions may or may not work for you. You may want to tweak it or completely
 change the behavior. Alpas allows you to easily intercept an exception being thrown and handle it the way you
-want it. This applies for both the built-in exceptions and your own custom exceptions.
+want it to. This applies for both the built-in exceptions and your own custom exceptions.
 
 To intercept an exception, you need to provide your own subclass of `dev.alpas.exceptions.ExceptionHandler`
 class and then override one or more of `report()`, `render()`, or `handle()` methods.
@@ -46,7 +46,7 @@ class and then override one or more of `report()`, `render()`, or `handle()` met
 - `report(exception: HttpException, call: HttpCall)`
 
 Override this method to log or send the given HTTP exception to external services like [Bugsnag](https://bugsnag.com),
-[Sentry](https://sentry.io) etc. By default, the `report()` method passes the exception to the base class which
+[Sentry](https://sentry.io,) etc. By default, the `report()` method passes the exception to the base class which
 then calls the `report()` method on the exception itself. Most of the built-in exceptions just logs a message
 either as a warning or as an error.
 
@@ -120,7 +120,7 @@ resort to your IDE's console.
 
 You can control whether the stacktrace gets dumped to your web page or not by setting a proper value for
 `APP_LEVEL` variable in your `.env` file. Setting it to [development](/docs/configuration#dev) dumps
-the stacktrace but setting it to [production](/docs/configuration#production) doesn't.
+the stacktrace; but, setting it to [production](/docs/configuration#production) doesn't.
 
 >/alert/ <span>Make sure to set your app's level to production, before your app goes live to avoid
 >exposing any internal data through a dumped stacktrace.</span>
