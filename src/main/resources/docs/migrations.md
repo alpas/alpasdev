@@ -12,10 +12,10 @@
     - [Extra Columns](#extra-columns)
     - [Customizing Columns](#customizing-columns)
 
-Migrations are like version control for your database. There are many advantages of using migrations—
+Migrations are like version control for your database. There are many advantages of using migrations —
 being able to easily create a database with ease, being able to share the same database schema with
 a team, being able to recreate a production database that is exactly like the development one as
-far as the schema is concerned, being able to quickly iterate on a database design etc.
+far as the schema is concerned, being able to quickly iterate on a database design, etc.
 
 With Alpas's built-in migration support, you can take advantages of all the above
 benefits of migrations without breaking a sweat.
@@ -25,12 +25,12 @@ benefits of migrations without breaking a sweat.
 
 Your [Ozone table](/docs/ozone#ozone-table) must extend from `MigratingTable` instead of just `Table` to support
 migration. Once it extends from `MigratingTable`, you can further [customize](#customizing-columns) the
-table's columns such as marking it nullable, setting the size of a varchar column etc.
+table's columns such as marking it nullable, setting the size of a varchar column, etc.
 
 <a name="creating-migrations"></a>
 ### [Creating Migrations](#creating-migrations)
 
-You can create a migration by using `make:migration` Alpas command. It takes the name of the migration,
+You can create a migration by using the `make:migration` Alpas command. It takes the name of the migration,
 and the [Ozone table instance](/docs/ozone#ozone-table) to create.
 
 ```bash
@@ -45,15 +45,15 @@ $ alpas make:migration create_receipts_table --create=receipts
 
 Migrations work by tracking your migration files under `database/migrations` folders in a database
 table called `migrations`. Migrations files are named after the time when these files are created.
-This helps to keep track of them easily as well as to sort them chronologically.
+This helps keep track of them easily as well as to sort them chronologically.
 
-When a migration is run, it checks if any of the migration files are already migrated or not. All
-the outstanding migrations are then run in one batch, which is numbered. When performing the
+When a migration is ran, it checks if any of the migration files are already migrated or not. All
+the outstanding migrations are then ran in one batch, which is numbered. When performing the
 rollback, all the migrations from the latest batch are picked and performed rollback.
 
-A migration file contains two methods—`up()` and `down()`. The `up()` method is conventionally used
+A migration file contains two methods — `up()` and `down()`. The `up()` method is conventionally used
 to add new tables or to modify an existing table, while the `down()` method, again conventionally,
-used to "undo" the operations of the `up()` method. During the actual migration, Alpas calls the
+is used to "undo" the operations of the `up()` method. During the actual migration, Alpas calls the
 `up()` method and during the rollback it invokes the `down()` method.
 
 <span class="line-numbers" data-start="6" data-file="database/migrations/2020_01_01_123456_create_receipts_table.kt">
@@ -77,7 +77,7 @@ class CreateReceiptsTable : Migration() {
 <a name="migrating"></a>
 ### [Migrating](#migrating)
 
-Running migration is as easy as running `db:migrate` Alpas command. This will
+Running migration is as easy as running the `db:migrate` Alpas command. This will
 migrate all of your outstanding migrations in one batch.
 
 ```bash
@@ -185,7 +185,7 @@ class CreateOrdersTables : Migration() {
 ### [Migrating-Table Columns](#migrating-table-columns)
 
 A subclass of `MigratingTable` adds more columns for your convenience and allows further
-customization of your table's columns as and when you are declaring them.
+customization of your table's columns when you are declaring them.
 
 <a name="extra-columns"></a>
 #### [Extra Columns](#extra-columns)
