@@ -69,10 +69,10 @@ This comes in very handy during development, especially when you are tweaking yo
 <a name="auto-reload-frontend"></a>
 #### [Frontend Asset Changes](#auto-reload-frontend)
 
-When you are working with tweaking the design of your app or making the interactive aspect of the app just right, you
-may want your assets to recompile and the browser to reload automatically as soon as you make save yours changes.
-Alpas comes everything wired to facilitate this rapid prototyping so that you can make interactions faster
-without having to recompile everything and refreshing your browser for every small changes.
+When you are tweaking the design of your app or making the interactive aspect of the app just right, you may want
+your assets to recompile and the browser to reload automatically as soon as you save your changes. Alpas comes
+wired with everything to facilitate this rapid prototyping so that you can iterate on your design faster
+without having to recompile everything and refreshing your browser for every small change.
 
 This works by linking `storage/src/main/web` folder to the actual `src/main/resources/web` folder.
 This should be done automatically when you initialized the project. But in case it isn't,
@@ -105,7 +105,7 @@ etc. and you will notice that after few seconds the browser will auto-refresh wi
 Unfortunately, Kotlin being a compiled language, your code changes won't be loaded immediately and automatically.
 You may have to recompile and re-serve your app for the changes to load, especially for big changes.
 
-However, most of the times, if you are running your app from IntelliJ IDEA, you can just reload your changed classes
+However, most of the time, if you are running your app from IntelliJ IDEA, you can just reload your changed classes
 using `Run > Reload Changed Classes` menu. If you have `yarn watch` running in the background, then it can detect
 the code reload changes and automatically refresh the browser for you as well. Our recommendation is to set a
 shortcut for `Run > Reload Changed Classes` and trigger it using the shortcut. We have set this to `CMD+R`.
