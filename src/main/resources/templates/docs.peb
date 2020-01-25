@@ -11,8 +11,9 @@
 
     <link rel="stylesheet" href="{{ mix('css/docs.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
-          rel="stylesheet">
+{#    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"#}
+{#          rel="stylesheet">#}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900&display=swap" rel="stylesheet">
 
     <script src="/js/breakpoints.min.js" defer></script>
     <script src="/js/browser.min.js" defer></script>
@@ -79,7 +80,7 @@
                 </div>
             </div>
             <div class="md:pr-10 pl-16 pr-5 leading-relaxed docs_content md:max-w-4xl w-full xl:max-w-5xl">
-                <h1 class="text-3xl my-16 font-bold uppercase">{{ title }}</h1>
+                <h1 class="text-3xl my-16 text-gray-700 uppercase font-mediumggj">{{ title }}</h1>
                 {{ content | raw }}
             </div>
         </div>

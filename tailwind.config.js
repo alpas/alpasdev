@@ -3,6 +3,10 @@ module.exports = {
         require('@tailwindcss/custom-forms'),
     ],
     theme: {
+        fontFamily: {
+            sans: ['Gilroy', 'sans-serif'],
+            mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+        },
         extend: {
             colors: {
                 blue: {

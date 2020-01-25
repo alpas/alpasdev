@@ -90,11 +90,6 @@ checkJava() {
 
 if [[ $# -eq 1 ]]; then
   case "$1" in
-  init)
-    cecholn "RED" " Oops! I need your app name."
-    printf " Please provide app's full name. The command should be something like:"
-    cecholn "GREEN" " ./alpas init com.example.blog"
-    ;;
   watch)
     shift;
     ./gradlew run -t --quiet "$@"
