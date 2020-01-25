@@ -165,11 +165,12 @@ return unexpired cookies [back to the server in the subsequent requests](#/docs/
 <a name="attaching-cookies"></a>
 #### [Attaching Cookies](#attaching-cookies)
 
-Send a cookie back to the client by calling one of `addCookie()` methods.
+Send a cookie back to the client by calling the `add()` method on the `cookie` property,
+which is an instance of `CookieJar`.
 
 <div class="sublist">
 
-- `fun addCookie(name: String, value: String?, lifetime: Duration, path: String?, domain: String?, secure: Boolean, httpOnly: Boolean)`
+- `fun add(name: String, value: String?, lifetime: Duration, path: String?, domain: String?, secure: Boolean, httpOnly: Boolean)`
 
     * **name** - The name of the cookie. Must not be empty.
     * **value** - The payload of the cookie.
@@ -184,11 +185,34 @@ Send a cookie back to the client by calling one of `addCookie()` methods.
 
 </div>
 
+```kotlin
+
+// ...
+
+call.cookie.add("some_name", "some_value")
+// Alternatively, since `CookieJar` implements the `set()` operator method,
+// you can also do.
+call.cookie["some_name"] = "some_value"
+
+// ...
+
+```
+
 <a name="forgetting-cookies"></a>
 #### [Forgetting Cookies](#forgetting-cookies)
 
-You can forget/ clear a cookie by calling `forgetCookie()` method and passing the name of the cookie
-that you would want to clear. Optionally, you can also pass the cookie's `path` and/or the `domain`.
+You can forget/ clear a cookie by calling `forget()` method and passing the name of the cookie that
+you would want to clear. Optionally, you can also pass the cookie's `path` and/or the `domain`.
+
+```kotlin
+
+// ...
+
+call.cookie.forget("some_name")
+
+// ...
+
+```
 
 <a name="redirects"></a>
 ### [Redirects](#redirects)

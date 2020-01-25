@@ -166,7 +166,7 @@ Returns all the header values for the given key if exists.
 <a name="cookies"></a>
 ### [Retrieving Cookies](#cookies)
 
-You read the cookies from an incoming request, use the `cookie` method on the `HttpCall` object.
+To read the cookies from an incoming request, use the `cookie` property of the `HttpCall` object.
 
 <span class="line-numbers" data-start="8">
 
@@ -174,7 +174,11 @@ You read the cookies from an incoming request, use the `cookie` method on the `H
 
 //...
 
+call.cookie.get("username")
+// Alternatively
 call.cookie("username")
+// Alternatively
+call.cookie["username"]
 
 //...
 
