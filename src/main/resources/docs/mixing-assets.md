@@ -1,4 +1,7 @@
 - [Configuration](#configuration) 
+- [Watching Changes and Auto Reloading](#auto-reloading)
+    - [Frontend Asset Changes](#auto-reload-frontend)
+    - [Code Changes](#auto-reload-code)
 - [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
 - [Setting Environment Variables](#setting-environment-variables)
 
@@ -58,13 +61,54 @@ This comes in very handy during development, especially when you are tweaking yo
 
 >/alert/ <span> If you are serving your app, the recompilation of assets are not automatically
 >reflected in your browser. You have to recompile and reserve your app again.</span>
+</div>
 
->/tip/ <span> Recompiling and re-serving your app after each small tweak gets tiring and annoying very soon.
->If you are running your app from within IntelliJ IDEA, then a much better approach is to just reload your
->changed classes from `Run > Reload Changed Classes` menu. Once your assets are done compiling, give it a
->couple of seconds before reloading the classes.</span>
+<a name="auto-reloading"></a>
+### [Watching Changes and Auto Reloading](#auto-reloading)
+
+<a name="auto-reload-frontend"></a>
+#### [Frontend Asset Changes](#auto-reload-frontend)
+
+When you are tweaking the design of your app or making the interactive aspect of the app just right, you may want
+your assets to recompile and the browser to reload automatically as soon as you save your changes. Alpas comes
+wired with everything to facilitate this rapid prototyping so that you can iterate on your design faster
+without having to recompile everything and refreshing your browser for every small change.
+
+This works by linking `storage/src/main/web` folder to the actual `src/main/resources/web` folder.
+This should be done automatically when you initialized the project. But in case it isn't,
+you can use the `link:web` Alpas command to do this for you.
+
+```bash
+$ alpas link:web
+```
+
+Once the link has been created, you need to follow two steps:
+
+<div class="ordered-list">
+
+1. Run and serve the app, preferably from IntelliJ, if not, using the `alpas serve` command.
+2. Open the terminal and from the root of the project run the `yarn watch` command.
 
 </div>
+
+<br/>
+
+Your "auto-syncing" app should now be available at a new port, which is by default port
+**3000** i.e. the app is accessible at http://localhost:3000
+
+To try it out, make some changes in one of your frontend assets like *app.less*, *app.js*, *welcome.vue*,
+etc. and you will notice that after few seconds the browser will auto-refresh with the new changes.
+
+<a name="auto-reload-code"></a>
+#### [Code Changes](#auto-reload-code)
+
+Unfortunately, Kotlin being a compiled language, your code changes won't be loaded immediately and automatically.
+You may have to recompile and re-serve your app for the changes to load, especially for big changes.
+
+However, most of the time, if you are running your app from IntelliJ IDEA, you can just reload your changed classes
+using `Run > Reload Changed Classes` menu. If you have `yarn watch` running in the background, then it can detect
+the code reload changes and automatically refresh the browser for you as well. Our recommendation is to set a
+shortcut for `Run > Reload Changed Classes` and trigger it using the shortcut. We have set this to `CMD+R`.
 
 <a name="cache-busting-with-asset-fingerprinting"></a>
 ### [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
