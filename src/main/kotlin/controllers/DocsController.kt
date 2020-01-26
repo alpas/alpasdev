@@ -11,9 +11,8 @@ class DocsController : Controller() {
         val page = call.paramAsString("page") ?: "installation"
         val doc = call.make<Documentation>()
         val content = doc.get(page)
-        val toc = doc.toc()
         val title = page.replace("-", " ").toTitleCase()
-        call.render("docs", mapOf("content" to content, "title" to title, "toc" to toc))
+        call.render("docs", mapOf("content" to content, "title" to title, "page" to page))
     }
 
     fun index(call: HttpCall) {
