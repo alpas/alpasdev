@@ -9,41 +9,63 @@
         <div class="intro-bg bg-contain bg-no-repeat bg-center px-8 xl:px-0">
             <nav class="flex container mx-auto pt-4 lg:pt-16 lg:items-center flex-col-reverse lg:flex-row">
                 <div class="flex-grow text-gray-100 mt-12 lg:mt-0">
-                {% include '_alpas.peb' with {"width": "200px"} %}
+                {% include '_alpas.peb' with {"width": "170px"} %}
                 </div>
-                <ul class="text-indigo-400 text-lg hidden lg:inline-flex">
-                    <li class="font-semibold"><a href="/docs" class="hover:text-indigo-200">Documentation</a></li>
-                    <li class="font-semibold ml-4 lg:ml-8"><a href="{{ config('links.slack') }}"
-                                                      class="hover:text-indigo-200">Slack</a></li>
-                    <li class="font-semibold ml-4 lg:ml-8"><a href="{{ config('links.github') }}" class="hover:text-indigo-200">Contribute</a>
-                    </li>
-                    <li class="font-semibold ml-4 lg:ml-8"><a href="{{ config('links.twitter') }}"
-                                                      class="hover:text-indigo-200">Twitter</a>
-                    </li>
-                </ul>
-                <div class="lg:ml-12">
-                    <div class="relative">
-                        <input id="algolia"
-                               class="bg-transparent focus:outline-none text-lg rounded-none
-                               placeholder-indigo-400 focus:placeholder-indigo-300 py-2 text-indigo-100
+                <div class="flex items-center">
+                    <ul class="text-lg items-center">
+                        <li class="font-semibold">
+                            <a href="https://kutt.it/tj9Z3n"
+                               class="hover:text-indigo-200 text-yellow-100 uppercase">
+                                <div class="flex">
+                                    <svg class="h-5 inline-block self-center text-indigo-200" viewBox="0 0 640 512"
+                                         aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <path d="M32,512 L128,512 L128,384 C128,278 214,192 320,192 C426,192 512,278 512,384 L512,512 L608,512 L608,128 L32,128 L32,512 Z"
+                                                  fill="currentColor" fill-rule="nonzero"></path>
+                                            <g transform="translate(204.800000, 256.000000)" fill-rule="nonzero">
+                                                <path d="M137.5,55.6 C123.5,36.8 106.1,17.8 86.4,0 C35.9,45.6 4.26325641e-14,105 4.26325641e-14,140.8 C4.26325641e-14,204.4 51.6,256 115.2,256 C178.8,256 230.4,204.4 230.4,140.8 C230.4,114.2 203.7,59.2 166.4,25.6 C155.7,35.2 146,45.4 137.5,55.6 Z"
+                                                      fill="#D02702"></path>
+                                                <path d="M153,192.5 C142.4,200.2 129.3,204.8 115.2,204.8 C79.9,204.8 51.2,180.4 51.2,140.8 C51.2,121.1 63.1,103.7 86.8,74 C90.2,78.1 135.1,138.1 135.1,138.1 L163.8,103.9 C165.8,107.4 167.7,110.8 169.3,114.1 C182.7,140.7 177.1,174.9 153,192.5 Z"
+                                                      fill="#F8E71C"></path>
+                                            </g>
+                                            <path d="M624,0 L16,0 C7.2,0 0,7.2 0,16 L0,80 C0,88.8 7.2,96 16,96 L624,96 C632.8,96 640,88.8 640,80 L640,16 C640,7.2 632.8,0 624,0 Z"
+                                                  id="Path" fill="currentColor" fill-rule="nonzero"></path>
+                                        </g>
+                                    </svg>
+                                    <span class="ml-2">Fireplace</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="text-lg hidden lg:inline-flex items-center ml-6">
+                        <li class="font-semibold"><a href="/docs"
+                                                     class="hover:text-indigo-300 text-indigo-200 uppercase">Documentation</a>
+                        </li>
+                        <li class="text-indigo-400 ml-6"> {% include '_home_social.peb' %} </li>
+                    </ul>
+                    <div class="ml-8 inline-block flex-1">
+                        <div class="relative">
+                            <input id="algolia"
+                                   class="bg-transparent focus:outline-none text-lg rounded-none
+                               placeholder-indigo-100 focus:placeholder-indigo-100 py-2 text-white
                                pl-10 block appearance-none leading-normal
-                               border-b border-blue-500 focus:border-indigo-200 w-full"
-                               type="text"
-                               placeholder="Search the docs"
-                               autocomplete="off"
-                               spellcheck="false"
-                               role="combobox"
-                               aria-autocomplete="list"
-                               aria-expanded="false"
-                               aria-label="search input"
-                               aria-owns="algolia-autocomplete-listbox-0"
-                               dir="auto">
-
-                        <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
-                            <svg class="fill-current pointer-events-none text-indigo-500 w-4 h-4"
-                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                            </svg>
+                               border-b border-indigo-200 focus:border-indigo-100 w-full"
+                                   type="text"
+                                   placeholder="Search the docs"
+                                   autocomplete="off"
+                                   spellcheck="false"
+                                   role="combobox"
+                                   aria-autocomplete="list"
+                                   aria-expanded="false"
+                                   aria-label="search input"
+                                   aria-owns="algolia-autocomplete-listbox-0"
+                                   dir="auto">
+                            <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <svg class="fill-current pointer-events-none text-indigo-500 w-4 h-4"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,7 +76,7 @@
                     leading-snug max-w-2xl">
                         The Rapid and Delightful Kotlin Web Framework
                     </h1>
-                    <div class="max-w-2xl text-xl md:text-2xl mt-16 xl:mt-20 text-yellow-200 leading-chill">
+                    <div class="max-w-2xl text-xl md:text-2xl mt-16 xl:mt-20 text-indigo-100 leading-chill">
                         <p>
                             Alpas is a batteries-included web framework for Kotlin with a very strong focus on
                             developers’
@@ -188,38 +210,8 @@
                         our official Slack</a> and asking questions. Please do!
                     </p>
                 </div>
-                <div class="flex mt-12">
-                    <a href="{{ config('links.slack') }}"
-                       class="text-gray-100 hover:text-gray-500" title="Join our Slack" target="_alpas-slack">
-                        <svg class="w-5" aria-hidden="true" focusable="false" role="img"
-                             xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 448 512">
-                            <path fill="currentColor"
-                                  d="M94.12 315.1c0 25.9-21.16 47.06-47.06 47.06S0 341 0 315.1c0-25.9 21.16-47.06 47.06-47.06h47.06v47.06zm23.72 0c0-25.9 21.16-47.06 47.06-47.06s47.06 21.16 47.06 47.06v117.84c0 25.9-21.16 47.06-47.06 47.06s-47.06-21.16-47.06-47.06V315.1zm47.06-188.98c-25.9 0-47.06-21.16-47.06-47.06S139 32 164.9 32s47.06 21.16 47.06 47.06v47.06H164.9zm0 23.72c25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06H47.06C21.16 243.96 0 222.8 0 196.9s21.16-47.06 47.06-47.06H164.9zm188.98 47.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06s-21.16 47.06-47.06 47.06h-47.06V196.9zm-23.72 0c0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06V79.06c0-25.9 21.16-47.06 47.06-47.06 25.9 0 47.06 21.16 47.06 47.06V196.9zM283.1 385.88c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06-25.9 0-47.06-21.16-47.06-47.06v-47.06h47.06zm0-23.72c-25.9 0-47.06-21.16-47.06-47.06 0-25.9 21.16-47.06 47.06-47.06h117.84c25.9 0 47.06 21.16 47.06 47.06 0 25.9-21.16 47.06-47.06 47.06H283.1z"></path>
-                        </svg>
-                    </a>
-
-                    <a href="{{ config('links.github') }}"
-                       class="ml-6 text-gray-100 hover:text-gray-500" title="Star us on GitHub"
-                       target="_alpas-github">
-                        <svg class="w-6" aria-hidden="true" focusable="false" role="img"
-                             xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 496 512">
-                            <path fill="currentColor"
-                                  d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
-                        </svg>
-                    </a>
-
-                    <a href="{{ config('links.twitter') }}"
-                       class="ml-6 text-gray-100 hover:text-gray-500" title="Follow us on Twitter"
-                       target="_alpas-twitter">
-                        <svg class="w-6" aria-hidden="true" focusable="false" role="img"
-                             xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 512 512">
-                            <path fill="currentColor"
-                                  d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
-                        </svg>
-                    </a>
+                <div class="mt-12 text-white">
+                {% include '_home_social.peb' %}
                 </div>
                 <div class="mt-12">
                         <span class="text-gray-100">
