@@ -35,10 +35,6 @@ class Documentation(
 
     private fun convert(page: String) = markdown.convert(readSource(page))
 
-    fun toc(): String {
-        return get("toc")
-    }
-
     private fun readSource(page: String): String {
         return resourceLoader.load(docsPath("$page.md"))
             ?.readText()
