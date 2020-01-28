@@ -7,8 +7,9 @@
     - [Creating New Project](#creating-new-project)
     - [Configuring](#configuring)
 - [Serving](#serving)
-    - [Locally](#serving-locally)
-    - [Over Network](#serving-over-network)
+    - [Locally](#locally)
+    - [IntelliJ](#intellij)
+    - [Over the Network](#over-network)
 
 <a name="system-requirements"></a>
 ### [System Requirements](#system-requirements)
@@ -89,26 +90,37 @@ Once the new app is initialized, you can start [configuring your app](/docs/conf
 `.env` file that is automatically created under the project’s root directory during the initialization.
 
 <a name="serving"></a>
+### [Serving](#serving-locally)
+
 <a name="serving-locally"></a>
-#### [Serving Locally](#serving-locally)
+#### [Locally](#locally)
 
 You can serve your app from the command line or import it in IntelliJ IDEA and then run it from within the IDE.
 To serve it from the command line, use: `./alpas serve`. If everything goes well, your web app will be
 available at `http://localhost:8080`
 
-To run with IntelliJ, you will need to ensure the project is setup to run Java 9. 
-1. To check, click on File > Project Structure > Project and see what is selected for Project SDK. 
-2. To switch to Java 9, click New > select JDK and then locate the path to where the Java 9 folder is located. If you installed Java 9 using sdkman per the setup instructions above, then the path is likely ~/.sdkman/candidates/java. 
+#### [IntelliJ](#intellij)
 
-To run the project in IntelliJ, use the tree navigation to go to src > main > kotlin > right click start.kt and click run.
+To run with IntelliJ, you will need to ensure the project is setup to run Java 9. 
+
+<div class="ordered-list">
+
+1. To check, click on `File > Project Structure > Project` and see what is selected for Project SDK. 
+2. To switch to Java 9, from the same window, click `Platform Settings > SDKs > + > Add SDK` and then
+locate the path to where the Java 9 folder is located. If you installed Java 9 using *sdkman* per
+the setup instructions above, then the path is likely `~/.sdkman/candidates/java`.
+
+
+Once you have added JDK 9, go back to step up and select Java 9.
+
+</div>
+
+To run the project in IntelliJ, use the project navigation to select `src/main/kotlin/start.kt` and 
+`right-click > Run...`. You can also open this file instead and hit the green play (►) button.
 If everything goes well, your web app will be available at http://localhost:8080
 
-> /info/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
-> if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
-> your `.env` file.</span>
-
-<a name="serving-over-network"></a>
-#### [Serving Over Network](#serving-over-network)
+<a name="over-network"></a>
+#### [Over the Network](#over-network)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
 very convenient to have your web app accessible from a different device on the same network. This
@@ -118,6 +130,10 @@ device for, say, testing and debugging the app’s UI.
 Alpas makes it really easy to serve your web app over an IP address. To do so set `ENABLE_NETWORK_SHARE`
 to `true` in your `.env` file. Build and re-serve your app and it should be available from both
 `http://localhost:<port>` and `http://<local-device-ip>:<port>`.
+
+> /info/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
+> if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
+> your `.env` file.</span>
 
 > /power/ <span>Alpas runs on an embedded [Jetty Web Server](https://www.eclipse.org/jetty/).
 
