@@ -92,9 +92,16 @@ Once the new app is initialized, you can start [configuring your app](/docs/conf
 <a name="serving-locally"></a>
 #### [Serving Locally](#serving-locally)
 
-You can serve your app from the command line or import it in IntellJ IDEA and then run it from within the IDE.
+You can serve your app from the command line or import it in IntelliJ IDEA and then run it from within the IDE.
 To serve it from the command line, use: `./alpas serve`. If everything goes well, your web app will be
 available at `http://localhost:8080`
+
+To run with IntelliJ, you will need to ensure the project is setup to run Java 9. 
+1. To check, click on File > Project Structure > Project and see what is selected for Project SDK. 
+2. To switch to Java 9, click New > select JDK and then locate the path to where the Java 9 folder is located. If you installed Java 9 using sdkman per the setup instructions above, then the path is likely ~/.sdkman/candidates/java. 
+
+To run the project in IntelliJ, use the tree navigation to go to src > main > kotlin > right click start.kt and click run.
+If everything goes well, your web app will be available at http://localhost:8080
 
 > /info/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
 > if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
