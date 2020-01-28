@@ -26,5 +26,6 @@ To contribute to the documentation of Alpas, please follow the following steps:
 
 Thank you for making Alpas better!
 
+[alpas-docs]: https://alpas.dev/docs
 [alpas-setup]: https://alpas.dev/docs/installation
 [devto-tutorial]: https://dev.to/ashokgelal/let-s-build-a-web-app-from-scratch-to-finish-with-alpas-and-kotlin-29eo
