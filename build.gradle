@@ -31,7 +31,7 @@ dependencies {
     implementation "dev.alpas:framework:$alpas_version"
 //    implementation 'com.github.alpas:alpas:da127905'
 //    testImplementation 'com.github.alpas.alpas:pulsar:da127905'
-    implementation 'ch.qos.logback:logback-classic:1.3.0-alpha4'
+    implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
     implementation 'mysql:mysql-connector-java:5.1.46'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "com.vladsch.flexmark:flexmark:$flexmark_version"
