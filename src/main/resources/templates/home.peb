@@ -38,9 +38,11 @@
                         </li>
                     </ul>
                     <ul class="text-lg hidden lg:inline-flex items-center ml-6">
-                        <li class="font-semibold"><a href="/docs"
-                                                     class="hover:text-indigo-300 text-indigo-200 uppercase">Documentation</a>
+                        <li class="font-semibold">
+                            <a href="https://medium.com/alpas-dev" title="Read our Blog"
+                               class="hover:text-indigo-300 text-indigo-200 uppercase">Blog</a>
                         </li>
+
                         <li class="text-indigo-400 ml-6"> {% include '_home_social.peb' %} </li>
                     </ul>
                     <div class="ml-8 inline-block flex-1">
