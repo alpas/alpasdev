@@ -20,20 +20,22 @@ want to set up a machine for development or for production.
 <a name="development"></a>
 ### [Development](#development)
 
-Alpas is easy to get started with on any *nix based machines; all you need is a JDK. Windows is supported
-but only under [WSL](https://www.youtube.com/watch?v=80pTki0iUsc&t=158s) or using
-[GitBash](https://www.youtube.com/watch?v=hFiFQcfT9U0).
+Alpas is easy to get started with on any *nix based machines; all you need is a JDK. Windows
+is supported but only under WSL or using GitBash.
 
 <div class="sublist">
 
 - macOS or Linux
-- Windows support is only available with WSL ([watch how to](https://www.youtube.com/watch?v=80pTki0iUsc&t=158s))
-or GitBash ([watch how to](https://www.youtube.com/watch?v=hFiFQcfT9U0)).
+- Windows support is only available with WSL or GitBash.
 - JDK >= 9.0
 - Gradle >= 5.6
 - [IntelliJ IDEA Community or Ultimate][intellij] (Optional, but highly recommended)
 
 </div>
+
+>/watch/<span> Watch [**Setting up GitBash and SDKMan on Windows**](https://kutt.it/sDS63q) and
+>[**Alpas Installation on Windows With WSL**](https://kutt.it/18hxT8) by
+>[*AlpasCasts*](https://kutt.it/XnILn0).</span>
 
 > /info/ <span>You need a GitHub account to create your project based on [Alpas’s starter template][template].
 > Once created, you can host your project anywhere you would like.</span>
@@ -111,13 +113,17 @@ locate the path to where the Java 9 folder is located. If you installed Java 9 u
 the setup instructions above, then the path is likely `~/.sdkman/candidates/java`.
 
 
-Once you have added JDK 9, go back to step up and select Java 9.
+Once you have added JDK 9, go back to step one and select Java 9.
+
 
 </div>
 
 To run the project in IntelliJ, use the project navigation to select `src/main/kotlin/start.kt` and 
 `right-click > Run...`. You can also open this file instead and hit the green play (►) button.
 If everything goes well, your web app will be available at http://localhost:8080
+
+>/watch/<span> Watch [**Installing IntelliJ IDEA and Serving an Alpas App on Mac**](https://kutt.it/ZdIyO1)
+>by [*AlpasCasts*](https://kutt.it/XnILn0).</span>
 
 <a name="over-network"></a>
 #### [Over the Network](#over-network)
@@ -131,7 +137,7 @@ Alpas makes it really easy to serve your web app over an IP address. To do so se
 to `true` in your `.env` file. Build and re-serve your app and it should be available from both
 `http://localhost:<port>` and `http://<local-device-ip>:<port>`.
 
-> /info/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
+> /alert/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
 > if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
 > your `.env` file.</span>
 
