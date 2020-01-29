@@ -639,6 +639,9 @@ To apply this plugin, your templates must end with a `.peb` extension. Make sure
 [official doc](https://github.com/bjansen/pebble-intellij/blob/master/README.md) on
 how to set it up properly.
 
+>/watch/<span> Watch [**Setting up Pebble IntelliJ plugin for your Alpas app**](https://kutt.it/ZdIyO1)
+>by [*AlpasCasts*](https://kutt.it/XnILn0).</span>
+
 > /power/ <span>Alpas's templating is proudly powered by [Pebble Templates](https://pebbletemplates.io/).
 
 [jinja]: https://palletsprojects.com/p/jinja/
