@@ -186,6 +186,23 @@
         </div>
     </div>
 
+    <div class="section-bg-part bg-blue-800 pt-10 lg:pt-16 xl:pt-20">
+        <div class="flex flex-row flex-wrap justify-between container mx-auto px-8 xl:px-0">
+            <div class="flex flex-col pb-10">
+                <p class="text-2xl text-gray-100 font-semibold leading-snug uppercase">
+                    <strong>Keep your thumb on Alpas' pulse</strong>
+                </p>
+            </div>
+            <div class="pb-10">
+                <a href="{{ route('newsletter') }}"
+                   class="bg-red-600 md:px-4 px-3 py-3 rounded text-base md:text-lg text-white
+                   hover:text-red-200 tracking-wide hover:bg-red-700">Get Our Newsletter &rarr;
+                </a>
+            </div>
+
+        </div>
+    </div>
+
     <div class="section-bg-part bg-gray-800 pt-10 lg:pt-16 xl:pt-20">
         <div class="flex flex-row justify-between container mx-auto px-8 xl:px-0">
             <div class="flex flex-col pb-10">
