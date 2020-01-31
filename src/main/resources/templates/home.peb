@@ -14,7 +14,7 @@
                 <div class="flex items-center">
                     <ul class="text-lg items-center">
                         <li class="font-semibold">
-                            <a href="https://kutt.it/tj9Z3n"
+                            <a href="https://fireplace.alpas.dev"
                                class="hover:text-indigo-200 text-yellow-100 uppercase">
                                 <div class="flex">
                                     <svg class="h-5 inline-block self-center text-indigo-200" viewBox="0 0 640 512"
@@ -192,12 +192,12 @@
         <div class="flex flex-row justify-between container mx-auto px-8 xl:px-0 self-center">
             <p class="text-2xl text-gray-100 font-bold uppercase tracking-wide">
                 Keep your thumb on Alpas's pulse
-                </p>
-                <a href="{{ route('newsletter') }}"
+            </p>
+            <a href="{{ route('newsletter') }}"
                class="bg-red-600 md:px-4 px-3 rounded text-base md:text-lg text-white
                    hover:text-red-200 tracking-wide hover:bg-red-700 py-2">Get Our Newsletter &rarr;
-                </a>
-            </div>
+            </a>
+        </div>
     </div>
 
     <div class="section-bg-part bg-gray-800 pt-10 lg:pt-16 xl:pt-20">
