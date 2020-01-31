@@ -1,0 +1,43 @@
+{% extends 'layout/app.peb' %}
+
+{% block title %} Alpas Newsletter Signup {% endblock %}
+
+{% block content %}
+
+<div class="leading-loose">
+    <div class="section-intro">
+        <div class="intro-bg bg-contain bg-no-repeat bg-center">
+            <div class="hero-content flex flex-row justify-center xxl:justify-center">
+                <div class="hero-content-left flex flex-col py-6 lg:py-10 px-10 md:px-16 xl:px-32 mt-10">
+                    <div class="text-gray-100">
+                        <a href="/">
+                            {% include '_alpas.peb' with {"width": "222px"} %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="px-4 lg:px-6 xl:px-10 flex flex-col">
+
+                    <div align="center">
+                        <h2 class="text-3xl md:text-4xl xl:text-5xl mt-16 xl:mt-20 text-indigo-200 font-semibold
+                        leading-snug max-w-2xl">
+                            Get the Alpas Newsletter
+                        </h2>
+                        <p class="text-xl mt-4 lg:mt-10" style="color:white">And keep your thumb on the pulse of all things Alpas</p>
+                        <div align="center" style="">
+                            <iframe class="mj-w-res-iframe" frameborder="0" scrolling="no" marginheight="0" style="max-width:700px; width:100%; margin-left: auto;margin-right: auto;" src="https://app.mailjet.com/widget/iframe/4SPC/kFf"></iframe>
+                        </div>
+                        <p>
+                            <a href="/" style="color:#ffffff">
+                                <- back to Alpas
+                            </a>
+                        </p>
+                    </div>
+            </div>
+        </div>
+        <div class="intro-clouds h-20 lg:h-56 md:h-32 bg-cover bg-no-repeat"></div>
+    </div>
+</div>
+<script type="text/javascript" src="https://app.mailjet.com/statics/js/iframeResizer.min.js"></script>
+
+{% endblock %}
