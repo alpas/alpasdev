@@ -189,14 +189,16 @@
     </div>
 
     <div class="section-bg-part bg-blue-800 py-16">
-        <div class="flex flex-row justify-between container mx-auto px-8 xl:px-0 self-center">
-            <p class="text-2xl text-gray-100 font-bold uppercase tracking-wide">
+        <div class="lg:flex lg:justify-between container mx-auto px-8 xl:px-0 lg:self-center">
+            <p class="text-2xl text-gray-100 font-bold uppercase tracking-wide leading-normal">
                 Keep your thumb on Alpas's pulse
             </p>
-            <a href="{{ route('newsletter') }}"
-               class="bg-red-600 md:px-4 px-3 rounded text-base md:text-lg text-white
-                   hover:text-red-200 tracking-wide hover:bg-red-700 py-2">Get Our Newsletter &rarr;
-            </a>
+            <div class="mt-4 lg:mt-0">
+                <a href="{{ route('newsletter') }}"
+                   class="bg-red-600 md:px-4 px-3 rounded text-base md:text-lg text-white mt-8
+                   hover:text-red-200 hover:bg-red-700 py-2">Get Our Newsletter &rarr;
+                </a>
+            </div>
         </div>
     </div>
 
