@@ -25,7 +25,7 @@
                         </h2>
                         <p class="text-xl mt-4 lg:mt-10" style="color:white">And keep your thumb on the pulse of all things Alpas</p>
                         <div align="center" style="">
-                            <iframe class="mj-w-res-iframe" frameborder="0" scrolling="no" marginheight="0" style="max-width:1000px; width:100%; margin-left: auto;margin-right: auto;" src="https://app.mailjet.com/widget/iframe/4SPC/kFf"></iframe>
+                            <iframe class="mj-w-res-iframe" frameborder="0" scrolling="no" marginheight="0" style="max-width:700px; width:100%; margin-left: auto;margin-right: auto;" src="https://app.mailjet.com/widget/iframe/4SPC/kFf"></iframe>
                         </div>
                         <p>
                             <a href="/" style="color:#ffffff">
