@@ -4,6 +4,7 @@
     - [Controller Routes](#controller-routes)
 - [Route Parameters](#route-parameters)
     - [Required Parameters](#required-parameters)
+- [Wildcard Route](#wildcard-route)
 - [Route Attributes](#route-attributes)
     - [Route Name](#route-name)
     - [Route Middleware](#route-middleware)
@@ -22,6 +23,11 @@
     - [Template Helpers](#template-helpers)
     - [Controller Helpers](#controller-helpers)
     - [Alpas Route Commands](#alpas-command)
+
+
+Routing in Alpas is strongly typed making it very easy to navigate and refactor. It also makes some good educated
+guesses based on conventions for your method names and paths. This means you can succinctly write your routes
+without compromising the expressiveness and clarity — something that Alpas is really well-known for.
 
 <a name="getting-started"></a>
 ### [Getting Started](#getting-started)
@@ -53,8 +59,13 @@ fun Router.addRoutes() {
     get("/") { 
         reply("Hello, World!")
     }
+    
+    // The root path "/" is optional. So you can shorten it to this.
+    get {
+        reply("Hello, World!")
+    }
 
-    post("/ping") {
+    post("ping") {
         reply("pong")
     }
 }
@@ -66,31 +77,33 @@ fun Router.addRoutes() {
 <a name="controller-routes"></a>
 #### [Controller Routes](#controller-routes)
 
-If your code for responding to an HTTP call is more complex, you can pass in the class name of a
-[controller](/docs/controllers) as the second parameter, and the name of the action as the
-third parameter.
+If your code for responding to an HTTP call is more complex, you can pass in the function name of a
+[controller](/docs/controllers) method as the second parameter. This is the recommended way of
+setting up your routes in Alpas.
 
 <span class="line-numbers" data-start="3" data-file="routes.kt">
 
 ```kotlin
+
 fun Router.addRoutes() {
-    // The 'index' method in your DocsController class is 
-    // invoked when the request matches /docs route.
-    get("/docs", DocsController::class, "index")
+    // When the request matches /docs route, the index
+    // method of DocsController class is invoked.
+    get("docs", DocsController::index)
 }
+
 ```
 
 </span>
 
-While using controller routes, the name of the method is actually optional. Alpas follows some conventions to
-determine what controller action to call when a path matches:
+While using controller routes, the function name is actually optional. Alpas follows some
+conventions to determine what controller action to call when a path matches:
 
 <div class="sublist">
 
 - `index()` method for a `get` request
 - `store()` method for a `post` request
 - `delete()` method for a `delete` request
--  `update()` method for a `patch` request
+- `update()` method for a `patch` request
 
 </div>
 
@@ -99,13 +112,10 @@ determine what controller action to call when a path matches:
 ```kotlin
 
 fun Router.addRoutes() {
-    get("/docs", DocsController::class) // call DocsController#index()
-    post("/docs", DocsController::class) // calls DocsController#store()
-    delete("/docs", DocsController::class) // calls DocsController#delete()
-    update("/docs", DocsController::class) // calls DocsController#update()
-
-    // You can pass your own method name if you want to invoke a different method.
-    get("/docs", DocsController::class, "show") // call DocsController#show()
+    get<DocsController>("docs")     // calls DocsController#index()
+    post<DocsController>("docs")    // calls DocsController#store()
+    delete<DocsController>("docs")  // calls DocsController#delete()
+    update<DocsController>("docs")  // calls DocsController#update()
 }
 
 ```
@@ -127,13 +137,37 @@ If you want to capture parameters within your route, you can do so by wrapping a
 
 fun Router.addRoutes() {
     // page is a required parameter
-    get("/docs/<page>", DocsController::class)
+    get<DocsController>("/docs/<page>")
 
     // both post_id and comment_id are required parameters
-    get("/posts/<post_id>/comments/<comment_id>", PostController::class)
+    get<PageController>("/posts/<post_id>/comments/<comment_id>")
 }
 
 ```
+
+</span>
+
+### [Wildcard Route](#wildcard-route)
+
+With a wildcard you can match and capture any route components. It is a catch-all route. These kinds of routes are
+very helpful if you want any paths to match to the same handler. A wildcard route is very common and comes in very
+handy if you are writing a single page application (SPA). Alpas supports a wildcard routing by adding two routes:
+
+<span class="line-numbers" data-start="5" data-file="routes.kt">
+
+```kotlin
+
+fun Router.addRoutes() {
+    // These matches all of /docs, /docs/index, /docs/page/toc, /docs/index?page=1, etc.
+    get("docs/<pathParamName:path>", DocsController::handleEverything)
+    get("docs", DocsController::handleEverything)
+}
+
+```
+
+In the above example, all your paths params will be captured by `pathParamName` variable. So, for a path like
+`docs/page/toc`, the value of `pathParamName` will be `page/toc`. Query parameters are separately captured
+and their values are available under their respective keys.
 
 </span>
 
@@ -152,7 +186,7 @@ everywhere it is referenced. To give a name to a route, just call `name()` metho
 ```kotlin
 
 fun Router.addRoutes() {
-    get("/docs", DocsController::class).name("docs.show")
+    get<DocsController>("docs").name("docs.show")
 }
 
 ```
@@ -199,9 +233,8 @@ by calling the `middleware()` method on the route. If you want, you can also pas
 ```kotlin
 
 fun Router.addRoutes() {
-    get("/docs", DocsController::class).middleware(MyMiddleware::class)
-    get("/admin", DocsController::class)
-        .middleware(MyMiddleware::class, AnotherMiddleware::class)
+    get<DocsController>("docs").middleware(MyMiddleware::class)
+    get<DocsController>("admin").middleware(MyMiddleware::class, AnotherMiddleware::class)
 }
 
 ```
@@ -225,15 +258,15 @@ You can set a prefix for a group. The prefix gets prepended to each route as if 
 ```kotlin
 
 fun Router.addRoutes() {
-    group("/docs") {
-         // matches /docs path
-        get(DocsController::class, "index")
+    group("docs") {
+        // matches /docs path
+        get(DocsController::index)
 
-         // matches /docs/toc path
-        get("/toc", DocsController::class, "showToc")
+        // matches /docs/toc path
+        get("toc", DocsController::showToc)
 
-         // matches /docs/latest path
-        get("/latest", DocsController::class, "showLatest")
+        // matches /docs/latest path
+        get("latest", DocsController::showLatest)
     }
 }
 
@@ -251,11 +284,11 @@ and sub-groups receives all the merged attributes from its parents as well as it
 ```kotlin
 
 fun Router.addRoutes() {
-    group("/docs") {
-        group("/latest") {
+    group("docs") {
+        group("latest") {
               // Receives all the attributes from both "docs" and "latest" groups.
              // matches /docs/latest path
-            get(DocsController::class)
+            get<DocsController>()
         }
     }
 }
@@ -277,13 +310,13 @@ with a dot (.) in between the names.
 fun Router.addRoutes() {
     group("/docs") {
          // will be available as "docs.show"
-        get(DocsController::class).name("show")
+        get<DocsController>().name("show")
     }.name("docs")
 
     group("/admin") {
         group("/profile") {
              // will be available as "admin.profile.show"
-            get(ProfileController::class).name("show")
+            get<ProfileController>().name("show")
         }.name("profile")
     }.name("admin")
 }
@@ -306,16 +339,16 @@ gets applied to all its grandchildren routes.
 ```kotlin
 
 fun Router.addRoutes() {
-    group("/admin") {
-        group("/profile") {
+    group("admin") {
+        group("profile") {
 
-            get(ProfileController::class)
+            get<ProfileController>()
 
             // The middleware assigned to this route, in order, are:
             // 1. SecretMiddleware      2. SuperSecretMiddleware
             // 3. ProfileMiddleware     4. AdminMiddleware     
             // 5. AuthOnlyMiddleware
-            get("/secret", ProfileController::class)
+            get<ProfileController>("secret")
               .middleware(SecretMiddleware::class, SuperSecretMiddleware::class)
 
         }.middleware(ProfileMiddleware::class)
@@ -368,16 +401,16 @@ override fun registerRouteMiddlewareGroups(
 ```kotlin
 
 fun Router.addRoutes() {
-    group("/admin/profile") {
+    group("admin/profile") {
         // all the middleware defined under key 'secret' 
         // will be applied to this route
-        get("/secret", AdminProfileController::class)
+        get<AdminProfileController>("secret")
     }.middlewareGroup("secret")
 
-    group("/user/profile") {
+    group("user/profile") {
         // all the middleware defined under key 'secret' 
         // will be applied to this route as well
-        get("/secret", UserProfileController::class)
+        get<UserProfileController>("secret")
     }.middlewareGroup("secret")
 }
 
@@ -415,17 +448,17 @@ apply `VerifiedEmailOnlyMiddleware` middleware or call `mustBeVerified()` method
 
 fun Router.addRoutes() {
     // anyone can access this route
-    get("/", WelcomeController::class)
+    get<WelcomeController>()
 
     // only guests can access this route
-    get("/docs", DocsController::class).mustBeGuest()
+    get("docs", DocsController::index).mustBeGuest()
 
     // only logged in users can access this route
-    get("/profile", UserController::class).mustBeAuthenticated()
+    get("profile", UserController::index).mustBeAuthenticated()
 
     // only authenticated users who have also verified
     // their email addresses can access this route
-    get("/admin", AdminController::class).mustBeAuthenticated().mustBeVerified()
+    get("admin", AdminController::index).mustBeAuthenticated().mustBeVerified()
 }
 
 ```
