@@ -147,6 +147,7 @@ fun Router.addRoutes() {
 
 </span>
 
+<a name="wildcard-route"></a>
 ### [Wildcard Route](#wildcard-route)
 
 With a wildcard you can match and capture any route components. It is a catch-all route. These kinds of routes are
