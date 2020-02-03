@@ -3,8 +3,8 @@
 - [Running Seeder](#running-seeder)
 
 You can use a seeder class to quickly populate your database with some dummy data. This is very useful
-during testing as well as for a demo apps. Coupled with an [Entity Factory](/docs/entity-factory),
-this is a very powerful tool to cook some test data really quick.
+during testing as well as for demo apps. Coupled with an [Entity Factory](/docs/entity-factory),
+this is a very powerful tool to quickly cook up some test data.
 
 <a name="getting-started"></a>
 ### [Getting Started](#getting-started)
@@ -12,7 +12,7 @@ this is a very powerful tool to cook some test data really quick.
 A seeder is just a class, or an object, extending the abstract `dev.alpas.ozone.Seeder` class.
 The extending class is required to override the only abstract method — `run()`.
 
-The `run()` methods receives an instance of `Application` to make it easier for you to resolve dependencies if any.
+The `run()` methods receives an instance of `Application` to make it easier for you to resolve dependencies, if any.
 Inside the `run()` method, you can populate your data and insert them into a database in any way you want. However,
 you may want to hook it up with an [Entity Factory](/docs/entity-factory) for quickly creating entity instances.
 
@@ -51,7 +51,7 @@ internal class ArticlesSeeder : Seeder() {
 
 You can run a seeder by using the `db:seed` Alpas console command. This command optionally takes the name
 of the seeder to run. If no name is passed, it runs the `DatabaseSeeder` class. If this class doesn't
-exist then it will throw an error.
+exist, then it will throw an error.
 
 ```bash
 
