@@ -1,4 +1,5 @@
 - [Templates Location](#templates-location)
+- [Auto Reloading Template Changes](#auto-reload-templates)
 - [The Template](#the-template)
     - [Nested Templates](#nested-templates)
 - [Data Access](#data-access)
@@ -14,10 +15,13 @@
 - [Template Tags](#template-tags)
 - [Template Filters](#template-filters)    
 - [Extending Pebble](#extending-pebble)
+    - [Creating Pebble Extensions](#creating-pebble-extensions)
+    - [Adding Custom Tags](#adding-custom-tags)
+    - [Adding Custom Conditional Tags](#adding-custom-conditional-tags)
 - [Global Variables](#global-variables)
 - [Syntax Highlighting](#syntax-highlighting)
 
-Alpas uses [Pebble](https://pebbletemplates.io/) as its templating engine. Pebble is a modern, very powerful
+Alpas uses [Pebble](https://pebbletemplates.io/) as its templating engine. Pebble is a modern, powerful
 templating engine with great features such as Template inheritance (`layout`, `extends`, `partials` etc.),
 Macros, built-in auto-escaping security, rich set of built-in tags, filters, and functions, etc.
 
@@ -41,14 +45,40 @@ in-house built templating engine (may it rest in peace)!
 <a name="templates-location"></a>
 ### [Templates Location](#templates-location)
 
-By default, templates should be kept in `resources/templates` folder and must end with `.peb` extension. If you wish,
-you can configure both the location and the extension [by overriding](/docs/configuration#core-configs)
-`templatesDirectory` and `templateExtension` properties of `dev.alpas.view.ViewConfig` class.
-Unless you have a good reason to do so, we highly recommend using the default values.
+Templates must be kept in `resources/templates` folder and, by default, must end with `.peb` extension.
+If you wish, you can change the default extension [by overriding](/docs/configuration#core-configs)
+`templateExtension` property of `dev.alpas.view.ViewConfig` class.
 
 > /info/ <span>For performance boost, templates are cached during [production](/docs/configuration#checking-environment)
 >but not during development. Any data that you pass to a template are **not cached**. So you can render the same
 >template for different requests without worrying about either the performance or stale data.
+
+<a name="global-variables"></a>
+### [Global Variables](#global-variables)
+
+If you want some variables to be globally available to all your templates, you can override `getGlobalVariables()`
+method in your custom extension and return a `Map<String, Any>`. This map will be merged into the data passed
+from a controller to a template when rendering. 
+
+<a name="auto-reload-templates"></a>
+### [Auto Reloading Template Changes](#auto-reload-templates)
+
+When you are tweaking and making changes to a template, you may want your new changes to be visible immediately, and,
+preferably, have the browser reload the changes for you as you make changes. This facilitates rapid development
+experience without having to recompile everything and switch back-and-forth between the browser and your IDE.
+
+If it isn't already set up when you first initialized your project, it's easy to enable this by using
+the `link:templates` Alpas command.
+
+```bash
+
+$ alpas link:templates
+
+```
+
+Once the link is created, you can run the app, make some changes in one of your templates, switch to
+the browser, and refresh. If you want even a better and more rapid development experience, combine
+this with the [Watching Changes and Auto Reloading](/docs/mixing-assets#auto-reloading).
 
 <a name="the-template"></a>
 ### [The Template](#the-template)
@@ -499,26 +529,38 @@ uses [TimeAgo](https://github.com/marlonlom/timeago) to perform the actual conve
 
 [Extensibility](https://pebbletemplates.io/wiki/guide/extending-pebble/) is at the heart of Pebble.
 Creating your own tags, functions, filters, tests, and a global variable is very straight forward.
-Pebble has a whole [page](https://pebbletemplates.io/wiki/guide/extending-pebble/) dedicated on
-how to do it.
 
-**We highly recommend that you go through the official Pebble documentation on extensibility to learn more about it.**
+<a name="creating-pebble-extensions"></a>
+#### [Creating Pebble Extensions](#creating-pebble-extensions)
 
-Read the [source code](https://github.com/PebbleTemplates/pebble) on how they have implemented
-their own filters, tags, functions, etc. before writing your own.
+You write a Pebble Extension is Alpas by simply implementing the `dev.alpas.view.extensions.PebbleExtension` and
+overriding the appropriate methods such as `tests()`, `filters()`, etc. Each of these methods receive an
+instance of an `Application` to make it easy for you to resolve any dependencies you need.
 
-Once you have created your own extensions, you need to reigster it with Alpas to make them available in your templates.
-You can do this in a few ways. The easiest way is to extend `dev.alpas.view.ViewServiceProvider` class and overriding
-`loadExtensions(app: Application): Iterable<AbstractExtension>` method returning a list of your extensions.
+<span class="line-numbers" data-start="4" data-file="MyPebbleExtensions.kt">
 
->/alert/ <span>Make sure to register your newly created service provider class instead of
->`dev.alpas.view.ViewServiceProvider` in `HttpKernel`. Otherwise, your extensions won't
->be loaded.</span>
+```kotlin
 
->/tip/ Very rarely you'll need to write more than one extension as an extension can return a
+class MyPebbleExtension : PebbleExtension {
+    fun tokenParsers(app: Application): List<TokenParser>? {
+        TODO("Return a list of custom token parsers")
+    }
+
+    fun filters(app: Application): Map<String, Filter>? {
+        TODO("Return a list of custom filters")
+    }
+}
+
+```
+
+</span>
+
+The discovery of your extension is done automatically by Alpas; you don't need to register or anything.
+
+>/info/ Very rarely you'll need to write more than one extension as an extension can return a
 >list of filters, tags, functions, etc.
 
-Let's see a real example of writing a `ago` custom filter and registering it in four relatively simple steps:
+Let's see a real example of writing a `ago` custom filter and registering it in two very simple steps:
 
 <div class="ordered-list">
 
@@ -557,54 +599,13 @@ class AgoFilter : Filter {
 
 2. Create an extension and return a list of filters, tags, functions etc.
 
-<span class="line-numbers" data-start="2" data-file="MyPebbleExtensions.kt">
+<span class="line-numbers" data-start="4" data-file="MyPebbleExtensions.kt">
 
 ```kotlin
 
-class MyPebbleExtensions : AbstractExtension() {
-    override fun getFilters(): Map<String, Filter> {
+class MyPebbleExtension : PebbleExtension() {
+    override fun getFilters(app: Application): Map<String, Filter> {
         return mapOf("ago" to AgoFilter())
-    }
-}
-
-```
-
-</span>
-
-3. Create your own version of `ViewServiceProvider` and return a list of all your custom extensions.
-
-<span class="line-numbers" data-start="3" data-file="providers/MyViewServiceProvider.kt">
-
-```kotlin
-
-class MyViewServiceProvider : dev.alpas.view.ViewServiceProvider() {
-    override fun loadExtensions(app: Application): Iterable<AbstractExtension> {
-        return listOf(MyPebbleExtensions())
-    }
-}
-
-```
-
-</span>
-
-4. Register your new service provider in `HttpKernel` and remove `dev.alpas.view.ViewServiceProvider`.
-
-<span class="line-numbers" data-start="3" data-file="HttpKernel.kt">
-
-```kotlin
-
-class HttpKernel : HttpKernel() {
-    override fun serviceProviders(app: Application): Iterable<KClass<out ServiceProvider>> {
-        return listOf(
-            // ...,
-            // ...,
-            // ...,
-            MyViewServiceProvider::class,
-            // ...,
-
-            // Don't forget to remove the following
-            // ViewServiceProvider::class
-        )
     }
 }
 
@@ -614,12 +615,107 @@ class HttpKernel : HttpKernel() {
 
 </div>
 
-<a name="global-variables"></a>
-### [Global Variables](#global-variables)
+Pebble has a whole [page](https://pebbletemplates.io/wiki/guide/extending-pebble/) dedicated on how to do it.
+Just keep in mind that for every Pebble's extension function there is an overloaded version that is passed
+the app instance of resolving bindings.
 
-If you want some variables to be globally available to all your templates, you can override `getGlobalVariables()`
-method in your custom extension and return a `Map<String, Any>`. This map will be merged into the data passed
-from a controller to a template when rendering. 
+**We highly recommend that you go through the official Pebble documentation on extensibility to learn more about it.**
+
+Read the [source code](https://github.com/PebbleTemplates/pebble) on how they have implemented
+their own filters, tags, functions, etc. before writing your own.
+
+<a name="adding-custom-tags"></a>
+#### [Adding Custom Tags](#adding-custom-tags)
+
+Alpas lets you quickly register a custom Pebble tag without having to write a complete token parser. Inside the
+`register()` method of your custom extension, you can add a new tag by its name and a callback that receives a
+`TagContext` object. All you need to do is return the actual string that should get rendered.
+
+Let's say we want to write a custom tag `greet` that would just greet a *name* variable within an `<h1>` tag.
+This is how you'd create this custom tag.
+
+<span class="line-numbers" data-start="2" data-file="MyPebbleExtension.kt">
+
+```kotlin
+
+class MyPebbleExtension : PebbleExtension() {
+    override fun register(app: Application, customTags: CustomTags) {
+        customTags.add("header") {
+            """<h1 class="font-lg color-red">Hello, {{ name }}!</h1>"""
+        }
+    }
+}
+
+```
+
+</span>
+
+You can now use this new custom tag of yours in any templates.
+
+```twig
+
+<div> {% greet %} </div>
+
+{# should render something like: <div> Hello, Jane! </div> #}
+
+```
+
+<a name="adding-custom-conditional-tags"></a>
+#### [Adding Custom Conditional Tags](#adding-custom-conditional-tags)
+
+A conditional tag is similar to an `if/else` tag but is customized for a specific purpose that could be reused.
+Let's say you want to render a block of HTML tags, or include a partial template only if your app is in production
+mode. You can achieve this by using an if tag by doing something like:
+
+```twig
+
+<div class="text-lg">
+
+{% if env.isLocal or env.isDev %}
+<p>Render this only in dev mode.</p>
+{% else %}
+<p>Render this only in prod mode.</p>
+{% endif %}
+
+</div>
+
+```
+
+Instead of scattering this *if* conditional logic, you can write a conditional tag, say `dev`, and use
+this tag instead. Here's how you'd do it.
+
+<span class="line-numbers" data-start="2" data-file="MyPebbleExtension.kt">
+
+```kotlin
+
+class MyPebbleExtension : PebbleExtension() {
+    override fun register(app: Application, conditionalTags: ConditionalTags) {
+        conditionalTags.add("dev") {
+            // the current HttpCall instance is available here as 'call'
+            call.env.isLocal || call.env.isDev
+        }
+    }
+}
+
+```
+
+</span>
+
+You can now use this conditional `dev` tag anywhere in your templates.
+
+```twig
+
+<div class="text-lg">
+
+{% dev %}
+<p>Render this only in dev mode.</p>
+{% else %}
+<p>Render this is only prod mode.</p>
+{% enddev %}
+
+</div>
+
+```
 
 <a name="syntax-highlighting"></a>
 ### [Syntax Highlighting](#syntax-highlighting)
