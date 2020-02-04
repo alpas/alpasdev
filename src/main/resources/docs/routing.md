@@ -25,7 +25,7 @@
     - [Alpas Route Commands](#alpas-command)
 
 
-Routing in Alpas is strongly typed making it very easy to navigate and refactor. It also makes some good educated
+Routing in Alpas is strongly typed, making it very easy to navigate and refactor. It also makes some good educated
 guesses based on conventions for your method names and paths. This means you can succinctly write your routes
 without compromising the expressiveness and clarity — something that Alpas is really well-known for.
 

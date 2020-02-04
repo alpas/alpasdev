@@ -7,8 +7,8 @@
 - [Creating Entities Using `from` Method](#from-method)
 
 An entity factory allows you to define a blueprint for an Ozone entity, which can then be used to make one or
-multiple copies of the entity. You can combine an entity factory with a [seeder](/docs/seeding) to populate
-your database with some quick dummy data easily.
+multiple copies of the entity. You can combine an entity factory with a [seeder](/docs/seeding) to easily populate
+your database with some quick dummy data.
 
 <a name="getting-started"></a>
 ### [Getting Started](#getting-started)
@@ -58,7 +58,7 @@ dummy data, Alpas comes bundled with the [Java Faker](https://github.com/DiUS/ja
 `faker` object is available for you to use inside your factories. You can create your faker instance if you need.
 
 As mentioned before, the only method you are required to override in your concrete factory is the `entity()` method.
-From this method just return an instance of the actual entity **without actually persisting in the database** as
+From this method, just return an instance of the actual entity **without actually persisting in the database** as
 you may not always want to persist it in the database.
 
 <span class="line-numbers" data-start="11" data-file="database/factories/UserFactory.kt">
