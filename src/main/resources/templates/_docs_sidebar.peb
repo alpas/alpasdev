@@ -57,7 +57,7 @@
                         <h4 id="frontend">Frontend</h4>
                         <ul>
                         {{ li('Pebble Templates', page, 'pebble-templates') }}
-                                {{ li('Mixing Assets', page, 'mixing-assets') }}
+                            {{ li('Mixing Assets', page, 'mixing-assets') }}
                         </ul>
                     </li>
                     <li>
@@ -65,6 +65,7 @@
                         <ul>
                         {{ li('Introduction', page, 'security') }}
                             {{ li('Authentication', page) }}
+                            {{ li('CSRF Protection', page, 'csrf-protection') }}
                             {{ li('Auth Scaffolding', page, 'authentication-scaffolding') }}
                             {{ li('Password Reset', page, 'password-reset') }}
                             {{ li('Email Verification', page, 'email-verification') }}
