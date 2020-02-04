@@ -2,6 +2,7 @@
 - [Watching Changes and Auto Reloading](#auto-reloading)
     - [Frontend Asset Changes](#auto-reload-frontend)
     - [Code Changes](#auto-reload-code)
+    - [Template Changes](#auto-reload-templates)
 - [Cache Busting with Asset Fingerprinting](#cache-busting-with-asset-fingerprinting)
 - [Setting Environment Variables](#setting-environment-variables)
 
@@ -79,25 +80,46 @@ This should be done automatically when you initialized the project. But in case 
 you can use the `link:web` Alpas command to do this for you.
 
 ```bash
+
 $ alpas link:web
+
 ```
 
-Once the link has been created, you need to follow two steps:
+Once the link has been created, you need to follow 2 easy steps:
 
 <div class="ordered-list">
 
-1. Run and serve the app, preferably from IntelliJ, if not, using the `alpas serve` command.
-2. Open the terminal and from the root of the project run the `yarn watch` command.
+1. Run the app on app's default port, preferably from IntelliJ, if not, using the `alpas serve` command.
+2. Open the terminal and from the root of the project run the `yarn watch` command. Note the port address.
 
 </div>
 
 <br/>
 
-Your "auto-syncing" app should now be available at a new port, which is by default port
+Your "auto-syncing" app should now be available at a new port, the port from Step 2 above, which is by default port
 **3000** i.e. the app is accessible at http://localhost:3000
 
-To try it out, make some changes in one of your frontend assets like *app.less*, *app.js*, *welcome.vue*,
+To try it out, make some changes in one of your frontend assets like *app.less*, *app.js*, *Welcome.vue*,
 etc. and you will notice that after few seconds the browser will auto-refresh with the new changes.
+
+
+<a name="auto-reload-templates"></a>
+#### [Template Changes](#auto-reload-templates)
+
+Similar to [auto reloading of assets](#auto-reload-frontend), you can also auto reload changes made to
+[templates](/docs/pebble-templates) without recompiling your code. Also, since this is not really
+frontend asset changes, you actually don't even have to run `yarn watch` in the background
+to see the new changes. Although, the combined experience is more rapid.
+
+This works by linking `storage/src/main/templates` folder to the actual `src/main/resources/templates`
+folder. This should be done automatically when you initialized the project. But in case it isn't,
+you can use the `link:templates` Alpas command to do this for you.
+
+```bash
+
+$ alpas link:templates
+
+```
 
 <a name="auto-reload-code"></a>
 #### [Code Changes](#auto-reload-code)
