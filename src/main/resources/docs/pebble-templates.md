@@ -45,7 +45,7 @@ in-house built templating engine (may it rest in peace)!
 <a name="templates-location"></a>
 ### [Templates Location](#templates-location)
 
-Templates must be kept in `resources/templates` folder and, by default, must end with `.peb` extension.
+Templates must be kept in the `resources/templates` folder and, by default, must end with `.peb` extension.
 If you wish, you can change the default extension [by overriding](/docs/configuration#core-configs)
 `templateExtension` property of `dev.alpas.view.ViewConfig` class.
 

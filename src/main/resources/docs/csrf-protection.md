@@ -1,6 +1,6 @@
 Cross Site Request Forgery (CSRF), is a common attack that works by executing command on behalf of currently 
 authenticated user but by an unauthenticated user. Alpas comes with out-of-the box support for protecting
-you against the CSRF attacks. If an incoming request is one of `POST`, `PUT`, `PATCH`, or `DELETE` methods then
+you against the CSRF attacks. If an incoming request is one of `POST`, `PUT`, `PATCH`, or `DELETE` methods, then
 Alpas makes sure that these requests are made by the currently authenticated user. If not, it
 raises a `TokenMismatchException`.
 
@@ -48,6 +48,6 @@ the value of `X-CSRF-TOKEN` is considered to be unencrypted while the value of `
 to be encrypted and hence it will be decrypted before validating the accuracy of the token.
 
 It may look like a lot of work to make CSRF protection work when making an AJAX call from JavaScript, but
-in practice a library like Axios should automatically notice that an encrypted `XSRF-TOKEN` cookie is
+in practice, a library like Axios should automatically notice that an encrypted `XSRF-TOKEN` cookie is
 included and should read it and send back as it is in the request the header. It can read the value,
 of course, because of the [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy).

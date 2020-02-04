@@ -89,8 +89,8 @@ Once the link has been created, you need to follow 2 easy steps:
 
 <div class="ordered-list">
 
-1. Run the app on app's default port, preferably from IntelliJ, if not, using the `alpas serve` command.
-2. Open the terminal and from the root of the project run the `yarn watch` command. Note the port address.
+1. Run the app on app's default port, preferably from IntelliJ or by using the `alpas serve` command.
+2. Open the terminal and from the root of the project run the `yarn watch` command. Keep note of the port address.
 
 </div>
 
@@ -100,7 +100,7 @@ Your "auto-syncing" app should now be available at a new port, the port from Ste
 **3000** i.e. the app is accessible at http://localhost:3000
 
 To try it out, make some changes in one of your frontend assets like *app.less*, *app.js*, *Welcome.vue*,
-etc. and you will notice that after few seconds the browser will auto-refresh with the new changes.
+etc. and you will notice that after a few seconds the browser will auto-refresh with the new changes.
 
 
 <a name="auto-reload-templates"></a>
