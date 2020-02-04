@@ -63,7 +63,7 @@ A directory for all your database migration files.
 
 A home for your database entities.
 
-**src/main/kotlin/RouteServiceProvider**
+**src/main/kotlin/providers**
 
 This is where you should be put all your [service providers](/docs/service-providers).
 
