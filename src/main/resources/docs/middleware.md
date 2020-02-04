@@ -3,6 +3,7 @@
 - [Registering Middleware](#registering-middleware)
     - [Route Entry Middleware](#route-entry-middleware)
     - [Server Entry Middleware](#server-entry-middleware)
+    - [Appending Middleware](#appending-middleware)
 
 A Middleware, as the name implies, sits in the middle of a request lifecycle and lets you intercept an
 incoming request and act on it. Think of it as like filters that an `HttpCall` must pass through. 
@@ -127,6 +128,28 @@ override fun registerServerEntryMiddleware(middleware: MutableList<KClass<out Mi
 }
 
 //...
+
+```
+
+</span>
+
+<a name="appending-middleware"></a>
+#### [Appending Middleware](#appending-middleware)
+
+Instead of registering a middleware from inside `HttpKernel`'s `registerServerEntryMiddleware()` method, you
+can append a middleware class to [Server Entry Middleware] stack from anywhere by calling `append()` method
+on an app instance. This makes it very easy to push a middleware from, for an example, a third-party
+service provider package.
+
+<span class="line-numbers" data-start="7" data-file="providers/AdminServiceProvider.kt">
+
+```kotlin
+
+class AdminServiceProvider : ServiceProvider {
+    override fun boot(app: Application) {
+        app.append(AdminMiddleware::class)
+    }
+}
 
 ```
 
