@@ -135,6 +135,7 @@ class CreateOrdersTables : Migration() {
 
 </span>
 
+>/info/Creating a table from a migration is only supported for SQLite and MySQL databases at this time.
 
 <a name="customizing-tables"></a>
 #### [Customizing Tables](#customizing-tables)
