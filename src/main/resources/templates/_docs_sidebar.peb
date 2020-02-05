@@ -1,14 +1,12 @@
 <div id="sidebar" class="bg-gray-100 pb-20 pt-5">
     <div class="inner fixed h-screen flex flex-col">
-        <div class="flex flex-col lg:flex-row mt-5 xl:mt-10 self-center">
+        <div class="flex flex-col lg:flex-row mt-10 self-center">
             <a href="/" class="text-4xl font-medium text-gray-700">
             {% include '_alpas.peb' with {"width": "122px"} %}
             </a>
             <div class="italic lg:ml-4 text-sm mt-2 lg:mt-0 self-center">[alpha]</div>
         </div>
-        <div class="flex justify-center mt-6 lg:mt-8">
-        </div>
-        <nav id="menu" class="outline-none docs_toc flex py-5 flex-col h-screen overflow-y-auto" tabindex="0">
+        <nav id="menu" class="outline-none docs_toc flex py-5 flex-col h-screen overflow-y-auto mt-6 lg:mt-8" tabindex="0">
             <div class="overflow-auto leading-relaxed pl-5 ml-5 mt-2 lg:mt-8 xl:pl-32">
             {% macro li(title, page, link) %}
             {% set link = link is empty ? title.toLowerCase() : link %}
