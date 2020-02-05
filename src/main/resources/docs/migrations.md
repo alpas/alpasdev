@@ -8,6 +8,7 @@
     - [Creating Tables](#creating-tables)
     - [Customizing Tables](#customizing-tables)
     - [Dropping Tables](#dropping-tables)
+    - [Executing Queries](#executing-queries)
 - [Migrating-Table Columns](#migrating-table-columns)
     - [Extra Columns](#extra-columns)
     - [Customizing Columns](#customizing-columns)
@@ -135,7 +136,8 @@ class CreateOrdersTables : Migration() {
 
 </span>
 
->/info/Creating a table from a migration is only supported for SQLite and MySQL databases at this time.
+>/info/<span>Creating a table from a migration is only supported for SQLite and MySQL databases at this time. For
+>PostgreSQL you can [run a raw query](#executing-queries) to perform the migration.</span>
 
 <a name="customizing-tables"></a>
 #### [Customizing Tables](#customizing-tables)
@@ -181,6 +183,45 @@ class CreateOrdersTables : Migration() {
 ```
 
 </span>
+
+#### [Executing Queries](#executing-queries)
+
+For advanced use cases and for features that are available for certain database vendors, such as `createTable()`, you
+can migrate your database by passing a raw query to `execute()` method. Even if you have run a raw query, you'd still
+get the benefits of migrating your database up and down as this operation is tracked in the migrations table as well.
+
+For an example, given that you have executed the proper query in the `down()` method,
+it will be applied when calling the `alpas db:rollback` command.
+
+
+<span class="line-numbers" data-start="4" data-file="database/migrations/2020_01_01_123456_create_users_table.kt">
+
+```kotlin
+
+class CreateUsersTable : Migration() {
+    override fun up() {
+        val createQuery = """
+            CREATE TABLE IF NOT EXISTS users (
+              username varchar(45) NOT NULL,
+              password varchar(450) NOT NULL,
+              enabled integer NOT NULL DEFAULT '1',
+              PRIMARY KEY (id)
+            )
+        """.trimIndent()
+
+        execute(createQuery)
+    }
+
+    override fun down() {
+        val dropQuery = "DROP TABLE users"
+        execute(dropQuery)
+    }
+}
+
+```
+
+</span>
+
 
 <a name="migrating-table-columns"></a>
 ### [Migrating-Table Columns](#migrating-table-columns)
