@@ -94,8 +94,8 @@
                     </div>
                     <div class="align-bottom self-start pt-16 pb-8">
                         <a href="{{ route('docs.index') }}"
-                           class="bg-red-600 md:px-4 px-3 py-3 rounded text-base md:text-lg text-white
-                           hover:text-red-200 tracking-wide hover:bg-red-700">Get Started &rarr;</a>
+                           class="bg-red-700 md:px-6 p-4 text-base md:text-xl text-yellow-100
+                           hover:text-red-100 tracking-wide hover:bg-red-600">Get Started &rarr;</a>
                     </div>
                 </div>
                 <div class="hero-content-right self-center justify-end flex md:flex hidden">
