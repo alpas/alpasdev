@@ -12,7 +12,7 @@
 Tables in a database are often related to each other. With raw SQL queries you can retrieve these relationships
 with JOINs. You want the same kind of flexibility while using entities but without having to resort to 
 writing raw queries. Since entities in Ozone are strongly typed, it only makes sense to have the
-relationships be strongly typed as well. Ozone and Ktorm makes you easy to retrieve an entity
+relationships be strongly typed as well. Ozone and Ktorm makes it easy to retrieve an entity
 along with its entity relatives without making you worry about left and right joins.
 
 <a name="one-to-one"></a>
@@ -27,16 +27,16 @@ While designing a database schema, only one of the tables would have a column th
 `foreignTable_id` such as "user_id".
 
 The table that has the **foreign key** defined in its table gets to be on the `belongsTo` side of the relationship.
-Think of it as a dog with a collar tag that says "I belong to this awesome owner with this phone number".
+Think of it as a pet dog with a collar tag that says "I belong to this awesome owner with this phone number".
 This is true for not just one-to-one but also one-to-many relationships.
 
 On the other side of the relationship, the table that ***does not*** have a foreign key pointing to the other table
 gets to be on the `hasOne` side of the relationship.
 
 Understanding the differences between `belongsTo` and `hasOne` is very important as it is a common source of
-confusion esp. among beginners.
+confusion, especially among beginners.
 
-Let's now see an example of two entities with one-to-one relationship.
+Let's now see an example of two entities with a one-to-one relationship.
 
 <span class="line-numbers" data-start="3" data-file="entities/User.kt">
 
@@ -86,7 +86,7 @@ object Profiles : MigratingTable<Profile>("profiles") {
 #### [belongsTo](#belongs-to)
 
 `belongsTo` relationship can be mentioned by replacing `bindTo` with `belongsTo()` method in the table itself. In
-our example since one profile belongs to one user:
+our example, one profile belongs to one user:
 
 <span class="line-numbers" data-start="3"  data-file="entities/Profile.kt">
 
@@ -134,7 +134,7 @@ assertNotNull(user)
 <a name="has-one"></a>
 #### [hasOne](#has-one)
 
-On the other side of `belongsTo` is `hasOne`. This table doesn't have a column referring to the other table so to
+On the other side of `belongsTo` is `hasOne`. This table doesn't have a column referring to the other table. To
 bind to a "virtual" entity, it needs to define a property with a custom getter and use `hasOne()` method.
 
 <span class="line-numbers" data-start="3"  data-file="entities/User.kt">
@@ -176,7 +176,7 @@ designed the schema. You can override this convention as well if you have define
    
     - **foreignKey**: The foreign key of the relative table. This is by default derived as: **entityClassName + "_id"**
     where *entityClassName* is the lowercased name of this entity class. So, if a *User* hasOne *Profile*, this
-    foreign key would be `user_id` the *Profiles* table.
+    foreign key would be `user_id` in the *Profiles* table.
    
     - **localKey**: The name of the column that the *foreignKey* points to. By default, it is `id`. This is the "local"
     key of this entity not the entity that has defined the `foreignKey` i.e. not Profile entity's id but User entity's
