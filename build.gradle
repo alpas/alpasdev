@@ -2,7 +2,7 @@ buildscript {
     ext.kotlin_version = '1.3.61'
     ext.ktorm_version = '2.5'
     ext.flexmark_version = '0.50.50'
-    ext.alpas_version = '0.13.0'
+    ext.alpas_version = '0.14.0'
 }
 
 plugins {
@@ -28,14 +28,14 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    compile project(':framework')
+//    compile project(':framework')
 //    testCompile project(':pulsar')
 
 //    implementation 'com.github.alpas:alpas:2ea5594'
 //    testImplementation 'com.github.alpas.alpas:pulsar:2ea5594'
 
-//    implementation "dev.alpas:framework:$alpas_version"
-//    testImplementation("dev.alpas:pulsar:$alpas_version")
+    implementation "dev.alpas:framework:$alpas_version"
+    testImplementation "dev.alpas:pulsar:$alpas_version"
     implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
     implementation 'mysql:mysql-connector-java:5.1.46'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
@@ -48,10 +48,10 @@ dependencies {
 }
 
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "9"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "9"
 }
 
 jar {
