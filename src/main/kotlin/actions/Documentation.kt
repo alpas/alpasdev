@@ -5,11 +5,9 @@ import com.vladsch.flexmark.ext.tables.TablesExtension
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
 import com.vladsch.flexmark.util.data.MutableDataSet
-import dev.alpas.Environment
-import dev.alpas.ResourceLoader
-import dev.alpas.mustStartWith
-import dev.alpas.orAbort
+import dev.alpas.*
 import redis.clients.jedis.JedisPool
+import java.io.File
 import java.nio.file.Paths
 
 class Documentation(
@@ -18,7 +16,14 @@ class Documentation(
     private val jedisPool: JedisPool
 ) {
 
-    private fun docsPath(page: String) = Paths.get("", "docs", page).toString().mustStartWith("/")
+    private fun docsPath(page: String): String {
+        val docsStorageLink = env.storagePath(*RESOURCES_DIRS, "docs", page)
+        return if (File(docsStorageLink).exists()) {
+            docsStorageLink
+        } else {
+            Paths.get("docs", page).toString().mustStartWith("/")
+        }
+    }
 
     private val markdown by lazy { Markdown() }
 

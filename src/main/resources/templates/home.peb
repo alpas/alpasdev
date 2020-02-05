@@ -17,7 +17,7 @@
                             <a href="https://fireplace.alpas.dev"
                                class="hover:text-indigo-200 text-yellow-100 uppercase">
                                 <div class="flex">
-                                    <svg class="h-5 inline-block self-center text-indigo-200" viewBox="0 0 640 512"
+                                    <svg class="h-4 inline-block self-center text-indigo-200" viewBox="0 0 640 512"
                                          aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                             <path d="M32,512 L128,512 L128,384 C128,278 214,192 320,192 C426,192 512,278 512,384 L512,512 L608,512 L608,128 L32,128 L32,512 Z"
@@ -40,10 +40,12 @@
                     <ul class="text-lg hidden lg:inline-flex items-center ml-6">
                         <li class="font-semibold">
                             <a href="https://medium.com/alpas-dev" title="Read our Blog"
-                               class="hover:text-indigo-300 text-indigo-200 uppercase">Blog</a>
+                               class="hover:text-indigo-200 text-yellow-100 uppercase">Blog</a>
                         </li>
-
-                        <li class="text-indigo-400 ml-6"> {% include '_home_social.peb' %} </li>
+                        <li class="font-semibold ml-6">
+                            <a href="/docs" title="Read the Docs"
+                               class="hover:text-indigo-200 text-yellow-100 uppercase">Docs</a>
+                        </li>
                     </ul>
                     <div class="ml-8 inline-block flex-1">
                         <div class="relative">
@@ -92,8 +94,8 @@
                     </div>
                     <div class="align-bottom self-start pt-16 pb-8">
                         <a href="{{ route('docs.index') }}"
-                           class="bg-red-600 md:px-4 px-3 py-3 rounded text-base md:text-lg text-white
-                           hover:text-red-200 tracking-wide hover:bg-red-700">Get Started &rarr;</a>
+                           class="bg-red-700 md:px-6 p-4 text-base md:text-xl text-yellow-100
+                           hover:text-red-100 tracking-wide hover:bg-red-600">Get Started &rarr;</a>
                     </div>
                 </div>
                 <div class="hero-content-right self-center justify-end flex md:flex hidden">
