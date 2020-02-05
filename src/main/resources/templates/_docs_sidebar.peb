@@ -76,6 +76,7 @@
                         <ul>
                         {{ li('Getting Started', page, 'database-getting-started') }}
                             {{ li('Ozone', page) }}
+                            {{ li('Relationship', page, 'entity-relationship') }}
                             {{ li('Migrations', page) }}
                             {{ li('Seeding', page) }}
                             {{ li('Factory', page, 'entity-factory') }}
