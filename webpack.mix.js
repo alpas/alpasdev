@@ -2,6 +2,7 @@ let mix = require('laravel-mix')
 const tailwindcss = require('tailwindcss')
 const publicPath = 'src/main/resources/web'
 const resources = 'src/main/resources'
+const docsPath = `${resources}/docs`
 
 mix
     .setPublicPath(publicPath)
@@ -24,7 +25,8 @@ if (!mix.inProduction()) {
         proxy: `localhost:${process.env.MIX_APP_PORT}`,
         files: [
             'out/**/*',
-            `${publicPath}`,
+            publicPath,
+            docsPath
         ],
     })
 }
