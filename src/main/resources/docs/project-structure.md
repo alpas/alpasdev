@@ -15,7 +15,9 @@ A standard Alpas project structure look something like this:
             ├── configs/
             ├── controllers/
             ├── database/
+                ├── factories/
                 ├── migrations/
+                ├── seeds/
             ├── entities/
             ├── providers/
             └── ConsoleKernel.kt
@@ -55,30 +57,38 @@ This is where all your app's [custom configuration classes](/docs/configuration)
 A place for all your [HTTP controllers](/docs/controllers). If you wish you could create subdirectories to better 
 organize your controllers and we highly recommend that you do so.
 
+**src/main/kotlin/database/factories**
+
+A directory for keeping all your [entity factories](/docs/entity-factory).
+
 **src/main/kotlin/database/migrations**
 
-A directory for all your database migration files.
+A directory for all your database [migration files](/docs/migrations).
+
+**src/main/kotlin/database/seeds**
+
+All the [database seeders](/docs/seeding) are kept in this folder.
 
 **src/main/kotlin/entities**
 
-A home for your database entities.
+A home for your [Ozone entities](/docs/ozone).
 
-**src/main/kotlin/RouteServiceProvider**
+**src/main/kotlin/providers**
 
 This is where you should be put all your [service providers](/docs/service-providers).
 
 **src/main/resources/css**
 
-This directory is for putting all your css source files. This directory is referenced only from the `webpack.mix.js`
-file. You could change the name or the location of this directory. If you did so, make sure to modify the 
-`webpack.mix.js` file accordingly.
+This directory is for putting all your [css source files](/docs/mixing-assets). This directory is referenced
+only from the `webpack.mix.js` file. You could change the name or the location of this directory. If you
+did so, make sure to modify the `webpack.mix.js` file accordingly.
 
 **src/main/resources/js**
 
-This directory is for putting all your JavaScript source files. This directory is referenced only from the 
-`webpack.mix.js` file. You could change the name or the location of this directory. If you end up making a change,
-make sure to modify the `webpack.mix.js` file accordingly. This folder is also where you'd put all your React/VueJS
-components.
+This directory is for putting all your [JavaScript source files](/docs/mixing-assets). This directory is
+referenced only from the `webpack.mix.js` file. You could change the name or the location of this
+directory. If you end up making a change, make sure to modify the `webpack.mix.js` file
+accordingly. This folder is also where you'd put all your React/VueJS components.
 
 **src/main/templates**
 
@@ -97,7 +107,7 @@ You should place all your tests in here. Feel free to organize your tests in sub
 **storage**
 
 This directory contains the assets mostly created during the runtime of your app such as all your file based
-[sessions](/docs/sessions), [application logs](/docs/logging) etc.
+[sessions](/docs/sessions), [application logs](/docs/logging), etc.
 
 <a name="files"></a>
 ### [Files](#files)

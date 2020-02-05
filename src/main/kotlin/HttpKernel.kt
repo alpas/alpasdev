@@ -4,7 +4,6 @@ import dev.alpas.Application
 import dev.alpas.ServiceProvider
 import dev.alpas.alpasdev.providers.DocumentationServiceProvider
 import dev.alpas.alpasdev.providers.JedisServiceProvider
-import dev.alpas.alpasdev.providers.ViewServiceProvider
 import dev.alpas.encryption.EncryptionServiceProvider
 import dev.alpas.hashing.HashServiceProvider
 import dev.alpas.http.HttpKernel
@@ -13,6 +12,7 @@ import dev.alpas.ozone.OzoneServiceProvider
 import dev.alpas.queue.QueueServiceProvider
 import dev.alpas.routing.RouteServiceProvider
 import dev.alpas.session.SessionServiceProvider
+import dev.alpas.view.ViewServiceProvider
 import kotlin.reflect.KClass
 
 @Suppress("unused")

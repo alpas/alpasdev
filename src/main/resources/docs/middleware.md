@@ -3,6 +3,8 @@
 - [Registering Middleware](#registering-middleware)
     - [Route Entry Middleware](#route-entry-middleware)
     - [Server Entry Middleware](#server-entry-middleware)
+    - [Appending Middleware](#appending-middleware)
+- [Named Middleware Group](#named-middleware-group)
 
 A Middleware, as the name implies, sits in the middle of a request lifecycle and lets you intercept an
 incoming request and act on it. Think of it as like filters that an `HttpCall` must pass through. 
@@ -131,3 +133,86 @@ override fun registerServerEntryMiddleware(middleware: MutableList<KClass<out Mi
 ```
 
 </span>
+
+<a name="appending-middleware"></a>
+#### [Appending Middleware](#appending-middleware)
+
+Instead of registering a middleware from inside `HttpKernel`'s `registerServerEntryMiddleware()` method, you
+can append a middleware class to [Server Entry Middleware] stack from anywhere by calling `append()` method
+on an app instance. This makes it very easy to push a middleware from, for an example, a third-party
+service provider package.
+
+<span class="line-numbers" data-start="7" data-file="providers/AdminServiceProvider.kt">
+
+```kotlin
+
+class AdminServiceProvider : ServiceProvider {
+    override fun boot(app: Application) {
+        app.append(AdminMiddleware::class)
+    }
+}
+
+```
+
+</span>
+
+<a name="named-middleware-group"></a>
+### [Named Middleware Group](#named-middleware-group)
+
+Instead of assigning a list of middleware to a group or to a route, sometimes it is more convenient to
+make a list of middleware, give it a name, and then assign this name. This allows you to share a
+middleware group and uniformly apply it to different routes and route groups. 
+
+To create a named middleware route, you need to first register your middleware group inside `HttpKernel`'s
+`registerRouteMiddlewareGroups()` method with a name and then call `middlewareGroup()` on your routes,
+or your route groups, by passing the name.
+
+
+<div class="ordered-list">
+
+1. Register the middleware group
+
+<span class="line-numbers" data-start="15" data-file="HttpKernel.kt">
+
+```kotlin
+
+//...
+
+override fun registerRouteMiddlewareGroups(
+    groups: HashMap<String,
+    List<KClass<out Middleware<HttpCall>>>>) {
+
+    groups["secret"] = listOf(SecretMiddleware::class, SuperSecretMiddleware::class)
+}
+
+//...
+
+```
+
+</span>
+
+2. Apply the middleware group name
+
+<span class="line-numbers" data-start="5" data-file="routes.kt">
+
+```kotlin
+
+fun Router.addRoutes() {
+    group("admin/profile") {
+        // all the middleware defined under key 'secret' 
+        // will be applied to this route
+        get<AdminProfileController>("secret")
+    }.middlewareGroup("secret")
+
+    group("user/profile") {
+        // all the middleware defined under key 'secret' 
+        // will be applied to this route as well
+        get<UserProfileController>("secret")
+    }.middlewareGroup("secret")
+}
+
+```
+
+</span>
+
+</div>

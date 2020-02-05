@@ -8,7 +8,7 @@
 </a>
 
 <a href="{{ config('links.github') }}"
-   class="ml-6 text-gray-700 hover:text-gray-800" title="Star us on GitHub" target="_alpas-github">
+   class="ml-4 lg:ml-6 text-gray-700 hover:text-gray-800" title="Star us on GitHub" target="_alpas-github">
     <svg class="w-6" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 496 512">
         <path fill="currentColor"
@@ -17,7 +17,7 @@
 </a>
 
 <a href="{{ config('links.twitter') }}"
-   class="ml-6 text-gray-700 hover:text-gray-800" title="Follow us on Twitter" target="_alpas-twitter">
+   class="ml-4 lg:ml-6 text-gray-700 hover:text-gray-800" title="Follow us on Twitter" target="_alpas-twitter">
     <svg class="w-6" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 512 512">
         <path fill="currentColor"

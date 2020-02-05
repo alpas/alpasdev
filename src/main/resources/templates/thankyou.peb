@@ -11,27 +11,22 @@
                 <div class="hero-content-left flex flex-col py-6 lg:py-10 px-10 md:px-16 xl:px-32 mt-10">
                     <div class="text-gray-100">
                         <a href="/">
-                            {% include '_alpas.peb' with {"width": "222px"} %}
+                        {% include '_alpas.peb' with {"width": "222px"} %}
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="px-4 lg:px-6 xl:px-10 flex flex-col" style="padding-bottom:100px">
-
-                    <div align="center">
-                        <h2 class="text-3xl md:text-4xl xl:text-5xl mt-16 xl:mt-20 text-indigo-200 font-semibold
+            <div class="px-4 lg:px-6 xl:px-10 flex flex-col items-center" style="padding-bottom:100px">
+                <h2 class="text-3xl md:text-4xl xl:text-5xl mt-16 xl:mt-20 text-indigo-200 font-semibold
                         leading-snug max-w-2xl">
-                            Thanks for Signing Up! 🎉
-                        </h2>
-                        <p class="text-xl mt-4 lg:mt-10" style="color:white">
-                            Your email has been confirmed and you're all set to receive future newsletters
-                        </p>
-                        <p>
-                            <a href="/" style="color:#ffffff">
-                                <- back to Alpas
-                            </a>
-                        </p>
-                    </div>
+                    Thanks for Signing Up! 🎉
+                </h2>
+                <p class="text-xl mt-4 lg:mt-10" style="color:white">
+                    Your email has been confirmed and you're all set to receive future newsletters
+                </p>
+                <div class="mt-10 mb-32">
+                    <a href="/" class="text-indigo-100">&larr; Back to Alpas</a>
+                </div>
             </div>
         </div>
         <div class="intro-clouds h-20 lg:h-56 md:h-32 bg-cover bg-no-repeat"></div>
