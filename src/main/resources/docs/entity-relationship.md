@@ -19,24 +19,25 @@ along with its entity relatives without making you worry about left and right jo
 ### [One To One](#one-to-one)
 
 The simplest of all the relations is one-to-one. For example, a `User` could have one `Profile` and one profile
-belongs to only one `User`. So a one-to-one relationship is best described by **hasOne** and **belongsTo** names.
-In our example, `Users` *hasOne* `Profile` and inversely, `Profile` **belongsTo** `User`.
+belongs to only one `User`. So a one-to-one relationship is best described by **hasOne** and **belongsTo**
+names. In our example, a `User` *hasOne* `Profile` and inversely, a `Profile` **belongsTo** one `User`.
 
-While designing a database schema, only one of the tables would have a column that points to an id of the other
-"foreign" table. This key is called a **foreign key** and generally, this column is named
-`foreignTable_id` such as "user_id".
+While designing a database schema, only one of the tables would have a column that points to an id
+of the other "foreign" table. This key is called a **foreign key** and generally, this column
+is named `foreignTable_id` such as "user_id".
 
-The table that has the **foreign key** defined in its table gets to be on the `belongsTo` side of the relationship.
-Think of it as a pet dog with a collar tag that says "I belong to this awesome owner with this phone number".
-This is true for not just one-to-one but also one-to-many relationships.
+The table that has the **foreign key** defined in its table gets to be on the `belongsTo` side of the
+relationship. Think of it as a pet dog with a collar tag that says "I belong to this awesome owner
+with this phone number". This is true for not just one-to-one but also one-to-many relationships.
 
-On the other side of the relationship, the table that ***does not*** have a foreign key pointing to the other table
-gets to be on the `hasOne` side of the relationship.
+On the other side of the relationship, the table that ***does not*** have a foreign key pointing
+to the other table gets to be on the `hasOne` side of the relationship.
 
-Understanding the differences between `belongsTo` and `hasOne` is very important as it is a common source of
-confusion, especially among beginners.
+Understanding the differences between `belongsTo` and `hasOne` is very important as it is a
+common source of confusion, especially among beginners.
 
-Let's now see an example of two entities with a one-to-one relationship.
+Let's now see an example of two entities with a one-to-one relationship. We'll start with plain
+entities without any relationship and then modify them to connect them in the next steps.
 
 <span class="line-numbers" data-start="3" data-file="entities/User.kt">
 
