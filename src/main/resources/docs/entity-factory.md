@@ -5,6 +5,7 @@
     - [Manually Saving an Entity](#manual-saving)
     - [Overriding Entity's Blueprint Properties](#overriding-properties)
 - [Creating Entities Using `from` Method](#from-method)
+### [Transforming Values Before Persisting](#transforming-values)
 
 An entity factory allows you to define a blueprint for an Ozone entity, which can then be used to make one or
 multiple copies of the entity. You can combine an entity factory with a [seeder](/docs/seeding) to easily populate
@@ -13,13 +14,13 @@ your database with some quick dummy data.
 <a name="getting-started"></a>
 ### [Getting Started](#getting-started)
 
-A factory is simply a class, or preferably, an object, implementing the `dev.alpas.ozone.EntityFactory` interface.
-The implementor is required to provide an instance of an [Ozone table](/docs/ozone#ozone-table) instance and must
-override `entity()` method. This method is where you would return an [Ozone Entity](/docs/ozone/#ozone-entity) instance.
+A factory is simply a class, or preferably, an object, extending the abstract `EntityFactory` class. You are
+required to provide an instance of an [Ozone table](/docs/ozone#ozone-table) instance and must override `entity()`
+method. This method is where you would return an [Ozone Entity](/docs/ozone/#ozone-entity) instance.
 
-The quickest way to create an entity factory is by using the `make:factory` Alpas console command. This command
-takes the name of the entity, or a list of entities for which the corresponding factory needs to be created.
-All the entity factories are conventionally kept under `database/factories` directory. 
+The quickest way to create an entity factory is by using the `make:factory` Alpas console command. This
+command takes the name of the entity, or a list of entities for which the corresponding factory needs
+to be created. All the entity factories are conventionally kept under `database/factories` directory. 
 
 ```bash
 
@@ -80,21 +81,21 @@ override fun entity(): User {
 
 </span>
 
-Feel free to fill all the properties of your entity in this method. You can override any properties later when
-you are actually calling this factory.
+Feel free to fill all the properties of your entity in this method. You can override any
+properties later when you are actually calling this factory.
 
 <a name="using-factories"></a>
 ### [Using Factories](#using-factories)
 
-Since a factory is just an object instance (or a class), you can use it directly. There are few things you
-can do with a factory.
+Since a factory is just an object instance (or a class), you can use it directly.
+There are few things you can do with a factory.
 
 <a name="persisting-entity"></a>
 #### [Creating and Persisting an Entity](#persisting-entity)
 
-The `create()` method is responsible for actually creating an instance of an entity from the blueprint and
-persist in the database. It also returns a fresh copy of the entity from the database to make sure all
-the relationship bindings are available on it, if any.
+The `create()` method is responsible for actually creating an instance of an entity from the blueprint
+and persist in the database. It also returns a fresh copy of the entity from the database to
+make sure all the relationship bindings are available on it, if any.
 
 ```kotlin
 
@@ -106,8 +107,8 @@ val user = UserFactory.create()
 <a name="manual-saving"></a>
 #### [Manually Saving an Entity](#manual-saving)
 
-If you just built an instance of an entity without persisting it, you can call the `saveAndRefresh()` method
-to save it to the database and return a fresh copy of it.
+If you just built an instance of an entity without persisting it, you can call the `saveAndRefresh()`
+method to save it to the database and return a fresh copy of it.
 
 ```kotlin
 
@@ -155,5 +156,56 @@ val user = from(UserFactory, mapOf("name" to "Jane Doe"))
 
 // Create 5 instances of the User entity.
 val users = from(UserFactory, 5, mapOf("country" to "USA"))
+
+```
+<a name="transforming-values"></a>
+### [Transforming Values Before Persisting](#transforming-values)
+
+You can transform the value of an entity's property before saving it to database by overriding `transform()` method
+and returning a new value. This is useful, for an example, to hash a password before it gets saved in the database.
+
+There are other ways you can achieve this but doing it inside the `trasnsform()`
+method keeps all those transformations in one place.
+
+Let's see an example of a `UserFactory` that hashes a password before saving.
+
+<span class="line-numbers" data-start="11" data-file="database/factories/UserFactory.kt">
+
+```kotlin
+
+internal class UserFactory(private val hasher: Hasher) : EntityFactory<User>() {
+    override val table = Users
+
+    override fun entity(): User {
+        return User {
+            firstName = faker.name().firstName()
+            lastName = faker.name().lastName()
+            email = faker.internet().safeEmailAddress()
+            password = "secret"
+        }
+    }
+
+    override fun transform(name: String, value: Any?): Any? {
+        return if (name == "password") {
+            hasher.hash(value.toString())
+        } else {
+            value
+        }
+    }
+}
+
+```
+
+</span>
+
+The "secret" password now will be hashed before persisting. Moreover, you can override the password
+while applying this factory, and the transformation will still be applied.
+
+```kotlin
+
+val hasher = app.make<Hasher>()
+
+// The overriden password "mysupersecretpassword" will be transformed as well
+val user = from(UserFactory(hasher), mapOf("password" to "mysupersecretpassword"))
 
 ```
