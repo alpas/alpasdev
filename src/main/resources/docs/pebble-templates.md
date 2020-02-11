@@ -537,16 +537,16 @@ You write a Pebble Extension is Alpas by simply implementing the `dev.alpas.view
 overriding the appropriate methods such as `tests()`, `filters()`, etc. Each of these methods receive an
 instance of an `Application` to make it easy for you to resolve any dependencies you need.
 
-<span class="line-numbers" data-start="4" data-file="MyPebbleExtensions.kt">
+<span class="line-numbers" data-start="4" data-file="src/main/kotlin/views/MyPebbleExtension.kt">
 
 ```kotlin
 
 class MyPebbleExtension : PebbleExtension {
-    fun tokenParsers(app: Application): List<TokenParser>? {
+    override fun tokenParsers(app: Application): List<TokenParser>? {
         TODO("Return a list of custom token parsers")
     }
 
-    fun filters(app: Application): Map<String, Filter>? {
+    override fun filters(app: Application): Map<String, Filter>? {
         TODO("Return a list of custom filters")
     }
 }
@@ -555,10 +555,9 @@ class MyPebbleExtension : PebbleExtension {
 
 </span>
 
-The discovery of your extension is done automatically by Alpas; you don't need to register or anything.
+>/tip/The discovery of your extension is done automatically by Alpas; you don't need to register it or do anything.
+>Just make sure your extension is in the class path.
 
->/info/ Very rarely you'll need to write more than one extension as an extension can return a
->list of filters, tags, functions, etc.
 
 Let's see a real example of writing a `ago` custom filter and registering it in two very simple steps:
 
@@ -603,8 +602,8 @@ class AgoFilter : Filter {
 
 ```kotlin
 
-class MyPebbleExtension : PebbleExtension() {
-    override fun getFilters(app: Application): Map<String, Filter> {
+class MyPebbleExtension : PebbleExtension {
+    override fun filters(app: Application): Map<String, Filter> {
         return mapOf("ago" to AgoFilter())
     }
 }
@@ -623,6 +622,9 @@ the app instance of resolving bindings.
 
 Read the [source code](https://github.com/PebbleTemplates/pebble) on how they have implemented
 their own filters, tags, functions, etc. before writing your own.
+
+Also, keep in mind that very rarely you'd need to write more than one extension as an extension can return
+a list of filters, tags, functions, etc.
 
 <a name="adding-custom-tags"></a>
 #### [Adding Custom Tags](#adding-custom-tags)
