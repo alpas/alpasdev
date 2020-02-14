@@ -92,24 +92,24 @@ Here is an example of what a typical layout template looks like in Alpas.
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
-    <script src="{{ mix('js/app.js') }}" defer></script>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
+  <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
 <body>
 
 <div id="app">
-    <main>
-        {% if hasFlash('success') %}
-            <div>
-                <div class="text-green">{{ flash('success') }}</div>
-            </div>
-        {% endif %}
+  <main>
+    {% if hasFlash('success') %}
+      <div>
+          <div class="text-green">{{ flash('success') }}</div>
+      </div>
+    {% endif %}
 
-        {% block content %} {% endblock %}
-    </main>
+    {% block content %} {% endblock %}
+  </main>
 </div>
 
 </body>
@@ -129,9 +129,9 @@ And, this is what a child template looks like:
 {% block title %} Welcome Page  {% endblock %}
 
 {% block content %}
-    <div>
-        <h1>Hello, {{ name }}!</h1>
-    </div>
+  <div>
+    <h1>Hello, {{ name }}!</h1>
+  </div>
 {% endblock %}
 ```
 
@@ -217,7 +217,6 @@ call.shareWithView("valuation", 25000000)
 
 ```
 
-
 ```kotlin
 
 // you can append additional context data from
@@ -283,7 +282,7 @@ set **and then** any remaining values from the map are passed as query parameter
 <!-- the url will be something like: https://example.com/docs/routing?ver=2 -->
 
 <a href="{{ route('docs.show', {'page': 'routing', 'ver': '2'}) }}">
-    Show Routing Docs
+  Show Routing Docs
 </a>
 
 ```
@@ -306,7 +305,7 @@ Checks if the name of the current route matches any of the `names`.
 
 ```twig
 {% if routeIsOneOf(['docs.index', 'docs.toc']) %}
-    <h1>Hello Index and TOC!</h1>
+  <h1>Hello Index and TOC!</h1>
 {% endif %}
 ```
 
@@ -318,7 +317,7 @@ You can negate the check like so:
 
 ```twig
 {% if not routeIsOneOf(['docs.index', 'docs.toc']) %}
-    <h1>Hello, page!</h1>
+  <h1>Hello, page!</h1>
 {% endif %}
 ```
 </span>
@@ -336,10 +335,10 @@ If multiple values exist for the given `key`, it returns a list of all values.
 ```twig
 
 <form action="/users" method="post">
-    {% csrf %}
-    <input type="text" name="username" value="{{ old('username') }}" />
-    <input type="email" name="email" value="{{ old('email', 'johndoe@example.com') }}" />
-    <button type="submit">Create</button>
+  {% csrf %}
+  <input type="text" name="username" value="{{ old('username') }}" />
+  <input type="email" name="email" value="{{ old('email', 'johndoe@example.com') }}" />
+  <button type="submit">Create</button>
 </form>
 
 ```
@@ -447,9 +446,9 @@ If the current user is authenticated, evaluates the block within. Otherwise, eva
 ```twig
 
 {% auth %}
-    <h1>Hello, {{ auth.user.name }}! You are so awesome! </h1>
+  <h1>Hello, {{ auth.user.name }}! You are so awesome! </h1>
 {% else %}
-    <h1> Welcome, guest! You're awesome!</h1>
+  <h1> Welcome, guest! You're awesome!</h1>
 {% endauth %}
 
 ```
@@ -466,9 +465,9 @@ Otherwise, evaluates the *else* block.
 ```twig
 
 {% guest %}
-    <h1> Welcome, guest! You're awesome!</h1>
+  <h1> Welcome, guest! You're awesome!</h1>
 {% else %}
-    <h1>Hello, {{ auth.user.name }}! You are so awesome! </h1>
+  <h1>Hello, {{ auth.user.name }}! You are so awesome! </h1>
 {% endauth %}
 
 ```
@@ -500,8 +499,8 @@ useful filter when passing data as a JSON encoded string to a frontend library l
 
 ```twig
 
-    <h1> Your Tasks</h1>
-    <task-list :tasks="{{ tasks is empty ? '[]' : tasks | json_encode }}"></task-list>
+<h1> Your Tasks</h1>
+<task-list :tasks="{{ tasks is empty ? '[]' : tasks | json_encode }}"></task-list>
 
 ```
 
@@ -516,7 +515,7 @@ uses [TimeAgo](https://github.com/marlonlom/timeago) to perform the actual conve
 
 ```twig
 
-    <h3>This task was created: {{ task.createdAt | ago }}</h3>
+<h3>This task was created: {{ task.createdAt | ago }}</h3>
 
 ```
 

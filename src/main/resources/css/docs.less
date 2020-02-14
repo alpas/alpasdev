@@ -1,10 +1,11 @@
 @tailwind base;
 @tailwind components;
 
+
 html {
-  font-size: 1em;
+  font-size: 1.1em;
   box-sizing: border-box;
-  @apply tracking-wide font-sans;
+@apply tracking-wide font-sans;
 }
 
 body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-resizing *, body.is-resizing *:before, body.is-resizing *:after {
@@ -108,6 +109,8 @@ br {
   opacity: 1;
 }
 
+/* purgecss start ignore */
+
 .docs_content {
   span.clipboard {
   @apply w-3 ml-1 cursor-pointer;
@@ -149,8 +152,12 @@ br {
   @apply mb-5 pr-10 leading-chill;
   }
 
+  p + p {
+  @apply mt-8;
+  }
+
   blockquote {
-  @apply bg-gray-100 m-6 p-6 self-center shadow-lg;
+  @apply bg-gray-100 m-6 p-6 self-center shadow-lg mt-10;
 
     &.help {
     @apply shadow-none rounded;
@@ -198,6 +205,11 @@ br {
       fill: gray;
     }
   }
+
+  blockquote + p {
+  @apply mt-10;
+  }
+
 
   h1 {
   @apply text-gray-800;
@@ -263,9 +275,9 @@ br {
         counter-increment: item;
       }
 
-      li:before {
+      li::before {
         content: counter(item);
-      @apply bg-gray-300 inline-block text-gray-600 rounded-full mr-3 h-8 w-8 text-center ml-8 text-sm;
+      @apply inline-block text-gray-600 mr-1 h-8 w-8 text-center text-sm;
       }
     }
   }
@@ -375,6 +387,7 @@ br {
   }
 }
 
+/* purgecss end ignore */
 ul li {
 @apply mb-2;
 
@@ -397,7 +410,7 @@ ul li {
 }
 
 strong {
-  @apply font-medium;
+@apply font-medium;
 }
 
 .docs_toc {
