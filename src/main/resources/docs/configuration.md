@@ -8,7 +8,7 @@
 <a name="configs"></a>
 ### [Configs](#configs)
 
-Alpas uses strongly typed config classes for configuring the framework. All these configs live under the `configs` folder.
+Alpas uses strongly typed config classes for configuring the framework. All these configs live in the `configs` folder.
 
 <a name="custom-configs"></a>
 #### Custom Configs
@@ -20,16 +20,22 @@ having to do anything to load it. You can then later ask for a singleton copy of
 Here is an example of how you could create your own config class and then how to access its properties
 from a controller:
 
-<span class="line-numbers" data-start="5">
+<span class="line-numbers" data-start="5" data-file="configs/AdminConfig.kt">
 
 ```kotlin
 
-// configs/AdminConfig.kt
 class AdminConfig(env: Environment) : Config {
     val adminEmail = env("ADMIN_EMAIL", "admin@example.com")
 }
 
-// controllers/AdminController.kt
+```
+
+</span>
+
+<span class="line-numbers" data-start="5" data-file="controllers/AdminController.kt">
+
+```kotlin
+
 class AdminController : Controller() {
     fun show(call: HttpCall) {
         val email = call.make<AdminConfig>().adminEmail
@@ -58,11 +64,10 @@ Let's say you want to change the default extension of your [view templates](/doc
 which is set in `dev.alpas.view.ViewConfig` class, to `.twig`. To do this, first create a new class
 under `configs` folder and override the value like so:
 
-<span class="line-numbers" data-start="5">
+<span class="line-numbers" data-start="5" data-file="configs/ViewConfig.kt">
 
 ```kotlin
 
-// configs/ViewConfig.kt
 class ViewConfig(env: Environment) : dev.alpas.view.ViewConfig(env) {
     // change existing config
     override val templateExtension = ".twig"
@@ -133,11 +138,10 @@ any available environment variables through an `env` object.
 Here is an example of how you could access an environment variable named `SSO_SHARED_SECRET` from your
 controller:
 
-<span class="line-numbers" data-start="6">
+<span class="line-numbers" data-start="6" data-file="controllers/AdminController.kt">
 
 ```kotlin
 
-// controllers/AdminController.kt
 class SsoLoginController : Controller() {
     fun login(call: HttpCall) {
         val ssoSecret:String? = call.env('SSO_SHARED_SECRET')
