@@ -17,6 +17,8 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="{{ mix('js/docs.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/plugins/line-numbers/prism-line-numbers.min.css"/>
     {% include '_ga.peb' %}
 </head>
 
