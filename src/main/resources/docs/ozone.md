@@ -289,7 +289,7 @@ adding the following 2 lines in your [logging configuration files][log-config].
 
 <!-- ... -->
 
-<logger name="me.liuwj.ktorm.database.Database" level="debug">
+<logger name="me.liuwj.ktorm.database" level="debug">
 </logger>
 
 <!-- ... -->
