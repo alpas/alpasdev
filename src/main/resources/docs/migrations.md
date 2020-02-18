@@ -8,10 +8,10 @@
     - [Creating Tables](#creating-tables)
     - [Customizing Tables](#customizing-tables)
     - [Dropping Tables](#dropping-tables)
+    - [Modifying Table](#modifying-table)
     - [Executing Queries](#executing-queries)
-- [Migrating-Table Columns](#migrating-table-columns)
-    - [Extra Columns](#extra-columns)
-    - [Customizing Columns](#customizing-columns)
+- [Customizing Columns](#customizing-columns)
+    - [Column Binding Conventions](#column-binding-conventions)
 
 Migrations are like version control for your database. There are many advantages of using migrations —
 being able to easily create a database with ease, being able to share the same database schema with
@@ -24,8 +24,8 @@ benefits of migrations without breaking a sweat.
 <a name="preparing-migrations"></a>
 ### [Preparing Table for Migration](#preparing-migrations)
 
-Your [Ozone table](/docs/ozone#ozone-table) must extend from `MigratingTable` instead of just `Table` to support
-migration. Once it extends from `MigratingTable`, you can further [customize](#customizing-columns) the
+Your [Ozone table](/docs/ozone#ozone-table) must extend from `OzoneTable` instead of just `Table` to support
+migration. Once it extends from `OzoneTable`, you can further [customize](#customizing-columns) the
 table's columns such as marking it nullable, setting the size of a varchar column, etc.
 
 <a name="creating-migrations"></a>
@@ -111,6 +111,9 @@ $ alpas db:refresh
 
 ```
 
+You can also pass a `--seed` flag to automatically [run the default seeder](/docs/seeding#running-seeder)
+after the refreshing is completed.
+
 <a name="tables"></a>
 ### [Tables](#tables)
 
@@ -136,8 +139,8 @@ class CreateOrdersTables : Migration() {
 
 </span>
 
->/info/<span>Creating a table from a migration is only supported for SQLite and MySQL databases at this time. For
->PostgreSQL you can [run a raw query](#executing-queries) to perform the migration.</span>
+>/info/<span>Creating a table from a migration is only supported for SQLite, MySQL, and PostgresSQL at
+>this time. For other vendors, you can [run a raw query](#executing-queries) to perform the migration.</span>
 
 <a name="customizing-tables"></a>
 #### [Customizing Tables](#customizing-tables)
@@ -184,9 +187,39 @@ class CreateOrdersTables : Migration() {
 
 </span>
 
+<a name="modifying-table"></a>
+#### [Modifying Table](#modifying-table)
+
+Ozone supports some basic table modification operations with `addColumn()` and `dropColumn()` methods.
+
+<span class="line-numbers" data-start="6" data-file="database/migrations/2020_01_01_123456_modify_users_table.kt">
+
+```kotlin
+
+class AddAvatarColumnsToUsersTable : Migration() {
+    override fun up() {
+        modifyTable(Users) {
+            addColumn(Users.avatarUrl).after(Users.name)
+            addColumn(Users.avatarProvider).after(Users.avatarUrl)
+        }
+    }
+
+    override fun down() {
+        modifyTable(Apps) {
+            dropColumn("avatar_url", "avatar_provider")
+        }
+    }
+}
+
+```
+
+</span>
+
+You can create a modifying migration by using the `make:migration --modify=<table>` Alpas command.
+
 #### [Executing Queries](#executing-queries)
 
-For advanced use cases and for features that are available for certain database vendors, such as `createTable()`, you
+For advanced use cases and for features that are unavailable for certain database vendors, such as `createTable()`, you
 can migrate your database by passing a raw query to `execute()` method. Even if you have run a raw query, you'd still
 get the benefits of migrating your database up and down as this operation is tracked in the migrations table as well.
 
@@ -223,39 +256,25 @@ class CreateUsersTable : Migration() {
 </span>
 
 
-<a name="migrating-table-columns"></a>
-### [Migrating-Table Columns](#migrating-table-columns)
-
-A subclass of `MigratingTable` adds more columns for your convenience and allows further
-customization of your table's columns when you are declaring them.
-
-<a name="extra-columns"></a>
-#### [Extra Columns](#extra-columns)
-
-Here are some more column types it adds on top of the [default ones](/docs/ozone#default-column-types).
-
-| Function Name     | Ozone Type               | Comments                                               |
-| ----------------- | ------------------------ | ------------------------------------------------------ |
-| `increments()`    | `int()`                  | An auto-incrementing unsigned integer primary key.     |
-| `bigIncrements()` | `long()`                 | An auto-incrementing unsigned long primary key.        |
-| `string()`        | `text()`                 | A varchar column that accepts a size (255 by default). |
-
 <a name="customizing-columns"></a>
-#### [Customizing Columns](#customizing-columns)
+### [Customizing Columns](#customizing-columns)
 
-You can further customize a column by chaining a number of convenience methods on a column.
+You can further customize a column by chaining a number of convenience methods on a column. These
+add extra attributes to a column metadata, which are used during migration.
+
 
 | Function Name         | Available On               | Comments                                                  |
 | --------------------- | -------------------------- | --------------------------------------------------------- |
-| `size(Int)`           | Any column of type string. | Set the size of a string column.                          |
-| `default(Any)`        | Any column type.           | Set the default value of a column.                        |
-| `useCurrent()`        | Any `Temporal` column.     | Use the current timestamp as a default value.             |
-| `unsigned()`          | Any column of type number. | Set the column type as unsigned.                          |
 | `autoIncrement()`     | Any column of type number. | Set the column type as as auto-incrementing.              |
+| `reference()`         | Reference a foreign table. | Adds a reference constraint to a foreign table.           |
+| `default(Any)`        | Any column type.           | Set the default value of a column.                        |
+| `index()`             | Any column type.           | Create an index on the column.                            |
 | `nullable()`          | Any column type.           | Set the column type is nullable.                          |
 | `precision(Int, Int)` | Any column of type number. | Set the total precision and the number of decimal places. |
+| `size(Int)`           | Any column of type string. | Set the size of a string column.                          |
 | `unique()`            | Any column type.           | Add a UNIQUE constraint on the column.                    |
-| `index()`             | Any column type.           | Create an index on the column.                            |
+| `unsigned()`          | Any column of type number. | Set the column type as unsigned.                          |
+| `useCurrent()`        | Any `Temporal` column.     | Use the current timestamp as a default value.             |
 
 <br/>
 
@@ -265,13 +284,14 @@ Here is an example of columns customization of a fictional `Users` table.
 
 ```kotlin
 
-object Users : MigratingTable<User>("users") {
+object Users : OzoneTable<User>("users") {
     val id by bigIncrements("id")
     val pin by smallInt("pin").unsigned()
     val email by varchar("email").index().unique()
     val password by varchar("password").size(100)
     val name by varchar("name").index().nullable()
     val emailIsVerified by boolean("email_verified").default(false)
+    val teamId by long("team_id").unsigned().reference { onDeleteCascade() }
     val createdAt by timestamp("created_at").useCurrent()
 }
 
@@ -279,4 +299,62 @@ object Users : MigratingTable<User>("users") {
 
 </span>
 
->/info/<span>Alpas currently doesn't support adding, deleting, or modifying existing columns of a table.</span>
+
+<a name="column-binding-conventions"></a>
+#### [Column Binding Conventions](#column-binding-conventions)
+
+There are some columns that show up regularly in a database, especially with a web application — auto incrementing
+primary key, a *created_at* timestamp field, and an *updated_at* timestamp field. Ozone has a shortcut
+for declaring all of these fields within a table.
+
+<div class="sublist">
+
+* `bigIncrements() / increments()`
+
+Declare an auto-incrementing unsigned primary key field of name *id* and bind it to its entity's `id` property.
+
+* `createdAt() / updatedAt()`
+
+Declare and bind a nullable timestamp field of name *created_at / updated_at* and bind to its entity's property
+of the same name.
+
+<span class="line-numbers" data-start="7" data-file="entities/Users.kt">
+
+```kotlin
+
+object Users: OzoneTable<User>() {
+
+// Instead of declaring a primary this way...
+val id by bigInt("id").autoIncrement().unsigned().primaryKey().bindTo{ it.id }
+val id by int("id").autoIncrement().unsigned().primaryKey().bindTo{ it.id }
+
+// ...you can declare it like this
+val id by bigIncrements()
+val id by increments()
+
+// You can override the name of the column and the 
+// consequently the name of the field it binds to
+val id by bigIncrements("uid")
+
+// Instead of declaring created_at and updated_at fields this way...
+val createdAt by timestamp("created_at").nullable().useCurrent().bindTo { it.createdAt }
+val updatedAt by timestamp("updated_at").nullable().useCurrent().bindTo { it.updatedAt }
+
+// ...you can declare them like this:
+val createdAt by createdAt()
+val updatedAt by updatedAt()
+
+// You can customize some of its properties as well
+val createdAt by createdAt(name="created_date", nullable=false, useCurrent=false)
+
+// ...
+
+}
+
+```
+
+</span>
+
+</div>
+
+>/info/<span>Alpas currently doesn't support modifying existing columns of a table.</span>
