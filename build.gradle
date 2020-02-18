@@ -31,8 +31,8 @@ dependencies {
 //    implementation 'com.github.alpas:alpas:2ea5594'
 //    testImplementation 'com.github.alpas.alpas:pulsar:2ea5594'
 
-    implementation 'com.github.alpas:alpas:9052e5'
-    testImplementation 'com.github.alpas.alpas:pulsar:9052e5'
+    implementation 'com.github.alpas:alpas:4b0d0f'
+    testImplementation 'com.github.alpas.alpas:pulsar:4b0d0f'
 
 //    implementation "dev.alpas:framework:$alpas_version"
 //    testImplementation "dev.alpas:pulsar:$alpas_version"

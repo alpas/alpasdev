@@ -269,11 +269,11 @@ br {
       }
 
       li {
-        content: counter(item);
         counter-increment: item;
       }
 
       li::before {
+        content: counter(item);
       @apply inline-block text-gray-600 mr-1 h-8 w-8 text-center text-sm;
       }
     }
