@@ -146,7 +146,6 @@ br {
   @apply px-0;
   }
 
-
   p {
   @apply mb-5 pr-10 leading-chill;
   }
@@ -205,11 +204,6 @@ br {
     }
   }
 
-  blockquote + p {
-  @apply mt-10;
-  }
-
-
   h1 {
   @apply text-gray-800;
 
@@ -259,7 +253,11 @@ br {
   }
 
   h3 ~ h4:first-of-type, h4 ~ h4 {
-  @apply mt-4;
+  @apply mt-6;
+  }
+
+  pre + h4, pre + p, pre + h3, blockquote + h4, blockquote + p, blockquote + h3 {
+  @apply mt-10;
   }
 
   .ordered-list {
@@ -271,11 +269,11 @@ br {
       }
 
       li {
+        content: counter(item);
         counter-increment: item;
       }
 
       li::before {
-        content: counter(item);
       @apply inline-block text-gray-600 mr-1 h-8 w-8 text-center text-sm;
       }
     }
@@ -383,6 +381,10 @@ br {
 
   .pure-table-striped tr:nth-child(2n-1) td {
   @apply bg-gray-100;
+  }
+
+  .pure-table + p {
+    @apply mt-10;
   }
 }
 
