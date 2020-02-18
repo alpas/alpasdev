@@ -122,19 +122,19 @@ Returns the route parameter value of the given key.
 
 Returns the query parameter value of the given key.
 
-- `fun paramAsKey(key: String) : String?` 
+- `fun stringParam(key: String) : String?` 
 
 Returns the value of the given key as a nullable string.
 
-- `fun paramAsInt(key: String) : Int?` 
+- `fun intParam(key: String) : Int?` 
 
 Returns the value of the given key as a nullable int.
 
-- `fun paramAsLong(key: String) : Long?` 
+- `fun longParam(key: String) : Long?` 
 
 Returns the value of the given key as a nullable long.
 
-- `fun paramAsBool(key: String) : Long?` 
+- `fun boolParam(key: String) : Long?` 
 
 Returns the value of the given key as a nullable bool.
 
