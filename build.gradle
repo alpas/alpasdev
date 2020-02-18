@@ -6,7 +6,7 @@ plugins {
 
 ext.kotlin_version = '1.3.61'
 ext.flexmark_version = '0.60.2'
-ext.alpas_version = '0.14.2'
+ext.alpas_version = '0.15.0'
 
 startScripts {
     applicationName = 'alpasdev'
@@ -28,14 +28,11 @@ dependencies {
 //    compile project(':framework')
 //    testCompile project(':pulsar')
 
-//    implementation 'com.github.alpas:alpas:2ea5594'
-//    testImplementation 'com.github.alpas.alpas:pulsar:2ea5594'
+//    implementation 'com.github.alpas:alpas:786260'
+//    testImplementation 'com.github.alpas.alpas:pulsar:786260'
 
-    implementation 'com.github.alpas:alpas:4b0d0f'
-    testImplementation 'com.github.alpas.alpas:pulsar:4b0d0f'
-
-//    implementation "dev.alpas:framework:$alpas_version"
-//    testImplementation "dev.alpas:pulsar:$alpas_version"
+    implementation "dev.alpas:framework:$alpas_version"
+    testImplementation "dev.alpas:pulsar:$alpas_version"
     implementation 'ch.qos.logback:logback-classic:1.3.0-alpha5'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "com.vladsch.flexmark:flexmark:$flexmark_version"
