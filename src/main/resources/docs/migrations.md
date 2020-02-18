@@ -26,7 +26,7 @@ benefits of migrations without breaking a sweat.
 
 Your [Ozone table](/docs/ozone#ozone-table) must extend from `OzoneTable` instead of just `Table` to support
 migration. Once it extends from `OzoneTable`, you can further [customize](#customizing-columns) the
-table's columns such as marking it nullable, setting the size of a varchar column, etc.
+table's columns, such as marking it nullable, setting the size of a varchar column, etc.
 
 <a name="creating-migrations"></a>
 ### [Creating Migrations](#creating-migrations)
