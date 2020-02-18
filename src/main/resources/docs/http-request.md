@@ -79,7 +79,7 @@ Gives you the values of just the query parameters.
 
 Returns all the values for the given key as a nullable list.
 
-- `fun onlyParams(key: String, vararg keys: String): Map<String, Any?>` 
+- `fun params(key: String, vararg keys: String): Map<String, Any?>` 
 
 Returns a map of values for only the specified keys.
 
@@ -93,7 +93,7 @@ Returns a map of values for everything but the specified keys.
 
 //...
 
-val only = call.onlyParams("username", "email", "phone")
+val only = call.params("username", "email", "phone")
 val except = call.paramsExcept("password", "password_confirm")
 
 //...
