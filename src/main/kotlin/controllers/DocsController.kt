@@ -8,7 +8,7 @@ import dev.alpas.routing.Controller
 
 class DocsController : Controller() {
     fun show(call: HttpCall) {
-        val page = call.paramAsString("page") ?: "installation"
+        val page = call.stringParam("page") ?: "installation"
         val doc = call.make<Documentation>()
         val content = doc.get(page)
         val title = page.replace("-", " ").toTitleCase()

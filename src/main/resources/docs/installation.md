@@ -6,10 +6,11 @@
 - [Installation](#installation)
     - [Creating New Project](#creating-new-project)
     - [Configuring](#configuring)
-- [Serving](#serving)
-    - [Locally](#locally)
+- [Running](#running)
+    - [Command Line](#running-commandline)
     - [IntelliJ](#intellij)
     - [Over the Network](#over-network)
+    - [Auto Port Selection](#auto-port-selection)
 
 <a name="system-requirements"></a>
 ### [System Requirements](#system-requirements)
@@ -80,7 +81,7 @@ After you have set up your machine, it only takes a few steps to have your new A
 2. Give it a name. Once done, clone your new repo on your local machine.
 4. At the root of the project there is a script named *alpas*. Make it executable: `chmod +x ./alpas` <span class="clipboard" data-clipboard-text='chmod +x ./alpas'></span>
 5. Initialize your new project using the full package name: `./alpas init com.example.myapp` <span class="clipboard" data-clipboard-text='./alpas init com.example.myapp'></span>
-6. Once done, to [serve your app](#serving-locally), do: `./alpas serve` <span class="clipboard" data-clipboard-text='./alpas serve'></span>
+6. Once done, to [run your app](#running), do: `./alpas serve` <span class="clipboard" data-clipboard-text='./alpas serve'></span>
 6. Open your new project in IntelliJ IDEA. **Optional but very highly recommended!**
 
 </div>
@@ -91,17 +92,17 @@ After you have set up your machine, it only takes a few steps to have your new A
 Once the new app is initialized, you can start [configuring your app](/docs/configuration). Start with the
 `.env` file that is automatically created under the project’s root directory during the initialization.
 
-<a name="serving"></a>
-### [Serving](#serving-locally)
+<a name="running"></a>
+### [Running](#running)
 
-<a name="serving-locally"></a>
-#### [Locally](#locally)
+<a name="running-commandline"></a>
+#### [Running from the Command Line](#running-commandline)
 
 You can serve your app from the command line or import it in IntelliJ IDEA and then run it from within the IDE.
 To serve it from the command line, use: `./alpas serve`. If everything goes well, your web app will be
 available at `http://localhost:8080`
 
-#### [IntelliJ](#intellij)
+#### [Running from IntelliJ](#intellij)
 
 To run with IntelliJ, you will need to ensure the project is setup to run Java 9. 
 
@@ -112,9 +113,7 @@ To run with IntelliJ, you will need to ensure the project is setup to run Java 9
 locate the path to where the Java 9 folder is located. If you installed Java 9 using *sdkman* per
 the setup instructions above, then the path is likely `~/.sdkman/candidates/java`.
 
-
 Once you have added JDK 9, go back to step one and select Java 9.
-
 
 </div>
 
@@ -126,7 +125,7 @@ If everything goes well, your web app will be available at http://localhost:8080
 >by [*AlpasCasts*](https://kutt.it/XnILn0).</span>
 
 <a name="over-network"></a>
-#### [Over the Network](#over-network)
+#### [Serving Over the Network](#over-network)
 
 By default, when you serve your web app it is available at `http://localhost:<port>`. Sometimes it is
 very convenient to have your web app accessible from a different device on the same network. This
@@ -140,6 +139,19 @@ to `true` in your `.env` file. Build and re-serve your app and it should be avai
 > /alert/ <span>All the new apps are by default initialized to serve from port 8080. You will get an error
 > if the port is already in use. If you want to use a different port, change the `APP_PORT` value in
 > your `.env` file.</span>
+
+<a name="auto-port-selection"></a>
+### [Auto Port Selection](#auto-port-selection)
+
+You can set the port on which your app gets served in your `.env` file. However, the port you have set in your
+`.env` file may not always be available as there could be another app already running on that port.
+
+In order to not throw an error and to not force you to make a temporary change in your `.env` file,
+***in development mode***, Alpas automatically selects a different port in case that port is busy.
+
+When you run your app again, if the selected port is free, it switches back to the original port otherwise it continues
+to serve on a temporary port. Pay attention to the port address printed on the console to know which temporary port
+is selected to serve your application. This temporary port selection is not available in production mode. 
 
 > /power/ <span>Alpas runs on an embedded [Jetty Web Server](https://www.eclipse.org/jetty/).
 

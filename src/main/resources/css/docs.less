@@ -3,7 +3,7 @@
 
 
 html {
-  font-size: 1.1em;
+  font-size: 1em;
   box-sizing: border-box;
 @apply tracking-wide font-sans;
 }
@@ -118,7 +118,7 @@ br {
 
   span[data-file]::before {
     content: attr(data-file);
-  @apply text-gray-600 text-base float-right px-3 py-2 bg-gray-100 shadow;
+  @apply text-gray-600 text-base float-right px-3 py-2 bg-gray-100 shadow rounded-t;
   }
 
   pre[class*="language"] {
@@ -145,7 +145,6 @@ br {
   pre > code {
   @apply px-0;
   }
-
 
   p {
   @apply mb-5 pr-10 leading-chill;
@@ -205,11 +204,6 @@ br {
     }
   }
 
-  blockquote + p {
-  @apply mt-10;
-  }
-
-
   h1 {
   @apply text-gray-800;
 
@@ -259,7 +253,11 @@ br {
   }
 
   h3 ~ h4:first-of-type, h4 ~ h4 {
-  @apply mt-4;
+  @apply mt-6;
+  }
+
+  pre + h4, pre + p, pre + h3, blockquote + h4, blockquote + p, blockquote + h3 {
+  @apply mt-10;
   }
 
   .ordered-list {
@@ -383,6 +381,10 @@ br {
 
   .pure-table-striped tr:nth-child(2n-1) td {
   @apply bg-gray-100;
+  }
+
+  .pure-table + p {
+    @apply mt-10;
   }
 }
 
