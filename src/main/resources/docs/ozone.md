@@ -14,7 +14,7 @@
 - [Query Logging](#query-logging)
     
 Ozone is a thin layer on top of the excellent [Ktorm][ktorm-github] library. Ozone comes bundled with lots of
-features needed to write a modern web app such  as [entity commands](#creating-tables-and-entities),
+features needed to write a modern web app such as [entity commands](#creating-tables-and-entities),
 [migrations](/docs/migrations), database pool configuration, [entity factories](/docs/entity-factory),
 [seeding](/docs/seeding) etc.
 
@@ -234,12 +234,11 @@ val user = Users.create(attributes)
 <a name="attribute-map-plus-assignment-builder"></a>
 #### [Creating an entity using an attribute map + an assignment builder](#attribute-map-plus-assignment-builder)
 
-When you are creating an entity by using an attribute map but then have to set some additional attributes then
+When you are creating an entity by using an attribute map, you then have to set some additional attributes and then
 you can use the overloaded `create()` method that takes an attribute map as the first parameter and
 an assignment builder closure as the second parameter.
 
-This is very helpful when you are creating a new entity with some user inputs
-but you also have to, for an example, set some foreign key values.
+This is very helpful when you are creating a new entity with some user inputs but you also have to, for an example, set some foreign key values.
 
 ```kotlin
 
@@ -301,7 +300,7 @@ Users.batchInsert {
 <a name="finding-entity"></a>
 ### [Finding Entity](#finding-entity)
 
-To find many entities that meet a condition, use the `findList()` method and pass a predicate closure.
+To find multiple entities that meet a condition, use the `findList()` method and pass a predicate closure.
 
 ```kotlin
 
@@ -322,7 +321,7 @@ a list of IDs and you want to fetch the corresponding entities, you can use `fin
 <a name="finding-or-creating-entity"></a>
 #### [Finding or creating an entity](#finding-or-creating-entity)
 
-Sometimes you might be trying to find an entity with some given constraints and if it doesn't exist, you might want
+Sometimes you might be trying to find an entity with some given constraints, and if it doesn't exist, you might want
 to insert a new record instead. While you can do this by manually using one of the `find()` methods and then use
 one of the `insert()` methods to create a new record. Or you can use one of the Ozone's `findOrCreate()` methods.
 
