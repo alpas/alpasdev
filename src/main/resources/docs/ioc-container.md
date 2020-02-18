@@ -7,6 +7,7 @@
 - [Resolving Dependencies](#resolving-dependencies)
     - [Constructor Injection](#constructor-injection)
     - [Using `make()`](#make-resolve)
+    - [Using `makeMany()`](#make-many-resolve)
 - [HttpCall DI Container](#httpcall-container)
 
 [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection) allows you to manage a class's dependencies
@@ -22,11 +23,10 @@ instance of a dependency.
 Here is an example of a [config class](/docs/configuration) where a singleton instance of `Environment` class is
 automatically injected via its constructor:
 
-<span class="line-numbers" data-start="3">
+<span class="line-numbers" data-start="3" data-file="configs/AdminConfig.kt">
 
 ```kotlin
 
-// configs/AdminConfig.kt
 class AdminConfig(env: Environment) : Config {
     val adminEmail = env("admin_email", "admin@example.com")
 }
@@ -39,11 +39,10 @@ In the following example, nothing gets injected in the constructor. Instead, we 
 of `AdminConfig`. This is possible because `HttpCall` is a container and hence is very capable of resolving
 dependencies.
 
-<span class="line-numbers" data-start="6">
+<span class="line-numbers" data-start="6" data-file="controllers/AdminController.kt">
 
 ```kotlin
 
-// controllers/AdminController.kt
 class AdminController : Controller() {
     fun show(call: HttpCall) {
         val adminConfig = call.make<AdminConfig>()
@@ -71,25 +70,33 @@ this app instance to register your dependencies.
 Register a binding on a container using the `bind` method and pass the java classname of the class you are trying
 to bind.
 
-<span class="line-numbers" data-start="8">
+<span class="line-numbers" data-start="1" data-file="StripePaymentProcessor.kt">
 
 ```kotlin
 
-    // StripePaymentProcessor.kt
     class StripePaymentProcessor(client: HttpClient) {
-        init {
-            println("StripePaymentProcessor instance Created")
-        }
+        init { println("StripePaymentProcessor instance Created") }
     }
 
-    // HttpClient.kt
+```
+
+</span>
+
+<span class="line-numbers" data-start="1" data-file="HttpClient.kt">
+
+```kotlin
+
     class HttpClient {
-        init {
-            println("HttpClient instance Created")
-        }
+        init { println("HttpClient instance Created") }
     }
+```
 
-   // PaymentServiceProvider.kt
+</span>
+
+<span class="line-numbers" data-start="8" data-file="PaymentServiceProvider.kt">
+
+```kotlin
+
    // ...
    override fun register(app: Application) {
         app.bind(HttpClient::class.java)
@@ -112,23 +119,26 @@ To get one single shared instance of a dependency, you could use the container's
 A singleton dependency gets resolved only once.
 
 
-<span class="line-numbers" data-start="8">
+<span class="line-numbers" data-start="1" data-file="StripePaymentProcessor.kt">
 
 ```kotlin
 
-    // StripePaymentProcessor.kt
     class StripePaymentProcessor {
-        init {
-            println("StripePaymentProcessor instance Created")
-        }
+        init { println("StripePaymentProcessor instance Created") }
     }
+```
+</span>
 
-   // PaymentServiceProvider.kt
+<span class="line-numbers" data-start="8" data-file="PaymentServiceProvider.kt">
+
+```kotlin
+
    // ...
    override fun register(app: Application) {
         app.singleton(StripePaymentProcessor::class.java)
     }
    // ...
+
 ```
 
 </span>
@@ -142,11 +152,10 @@ is like a [singleton binding](#singleton-bindings) but without auto-injecting th
 this instance that you are binding, which is up to you now.
 
 
-<span class="line-numbers" data-start="8">
+<span class="line-numbers" data-start="8" data-file="PaymentServiceProvider.kt">
 
 ```kotlin
 
-   // PaymentServiceProvider.kt
    // ...
    override fun register(app: Application) {
         val processor = StripePaymentProcessor()
@@ -166,27 +175,35 @@ interface. This way you don't have to depend on a specific implementation of a c
 that you need from a class. When resolving, you will refer to the abstraction instead of the concrete
 implementation, of course!
 
-<span class="line-numbers" data-start="10">
+<span class="line-numbers" data-start="1" data-file="PaymentProcessor.kt">
 
 ```kotlin
 
-    // PaymentProcess.kt
     interface PaymentProcessor {
         fun process()
     }
+```
 
-    // StripePaymentProcessor.kt
+</span>
+
+<span class="line-numbers" data-start="1" data-file="StripePaymentProcessor.kt">
+
+```kotlin
+
     class StripePaymentProcessor : PaymentProcessor {
-        init {
-            println("StripePaymentProcessor instance Created")
-        }
+        init { println("StripePaymentProcessor instance Created") }
 
         override fun process() {
             println("Payment processed through Stripe")
         }
     }
+```
+</span>
 
-   // PaymentServiceProvider.kt
+<span class="line-numbers" data-start="8" data-file="PaymentServiceProvider.kt">
+
+```kotlin
+
    // ...
    override fun register(app: Application) {
         app.bind(PaymentProcessor::class.java, StripePaymentProcessor::class.java)
@@ -209,9 +226,10 @@ Instead of binding a class name or an instance, you can also bind a callback fun
 time a dependency needs to be resolved. Just remember that the actual binding resolved is whatever the last
 statement of this factory callback is.
 
-<span class="line-numbers" data-start="9">
+<span class="line-numbers" data-start="9" data-file="PaymentServiceProvider.kt">
 
 ```kotlin
+
    override fun register(app: Application) {
         app.bindFactory {
             println("StripePaymentProcessor factory binding called")
@@ -222,12 +240,17 @@ statement of this factory callback is.
             StripePaymentProcessor()
         }
     }
+```
+</span>
+
+<span class="line-numbers" data-start="1" data-file="StripePaymentProcessor.kt">
+
+```kotlin
 
     class StripePaymentProcessor {
-        init {
-            println("StripePaymentProcessor instance Created")
-        }
+        init { println("StripePaymentProcessor instance Created") }
     }
+
 ```
 
 </span>
@@ -249,35 +272,49 @@ If a class depends on some other classes, it can just *declare* the dependencies
 automatically injected. As long as this class itself is registered in the container, the container will be able
 to resolve the dependencies including all the transitive dependencies.
 
-<span class="line-numbers" data-start="11">
+<span class="line-numbers" data-start="1" data-file="StripePaymentProcessor.kt">
 
 ```kotlin
 
-    // StripePaymentProcessor.kt
     // An instance of HttpClient gets automatically injected
     class StripePaymentProcessor(client: HttpClient) {
-        init {
-            println("StripePaymentProcessor instance created")
-        }
+        init { println("StripePaymentProcessor instance created") }
     }
 
-    // HttpClient.kt
+```
+
+</span>
+
+<span class="line-numbers" data-start="1" data-file="HttpClient.kt">
+
+```kotlin
+
     // When resolving this class as a dependency of some other class(es), 
     // an instance of Logger class gets automatically injected as well.
     class HttpClient(logger: Logger) {
-        init {
-            println("HttpClient instance created")
-        }
+        init { println("HttpClient instance created") }
     }
 
-    // Logger.kt
+```
+
+</span>
+
+<span class="line-numbers" data-start="1" data-file="Logger.kt">
+
+```kotlin
+
     class Logger {
-        init {
-            println("Logger instance created")
-        }
+        init { println("Logger instance created") }
     }
 
-    // PaymentServiceProvider.kt
+```
+
+</span>
+
+<span class="line-numbers" data-start="8" data-file="PaymentServiceProvider.kt">
+
+```kotlin
+
     // ...
     override fun register(app: Application) {
         app.bind(Logger::class.java)
@@ -292,14 +329,14 @@ to resolve the dependencies including all the transitive dependencies.
 
 <a name="make-resolve"></a>
 #### [Using `make()`](#make-resolve)
+
 Another way to have a dependency resolved out of a container is to use `make()` method. To resolve a dependency
 using `make`, just like binding, you need a shared container that contains the bindings that you have wired.
 
-<span class="line-numbers" data-start="6">
+<span class="line-numbers" data-start="6" data-file="SubscriptionController.kt">
 
 ```kotlin
 
-// controllers/SubscriptionController.kt
 class SubscriptionController : Controller() {
     fun show(call: HttpCall) {
         val processor = call.make<PaymentProcessor>()
@@ -309,6 +346,27 @@ class SubscriptionController : Controller() {
 ```
 
 </span>
+
+<a name="make-many-resolve"></a>
+#### [Using `makeMany()`](#make-many-resolve)
+
+With `makeMany()` you can resolve multiple instances of a type that have a common ancestor — by either extending an
+abstract class or by implementing an interface.
+
+```kotlin
+
+// declare
+class StripePaymentProcessor : PaymentProcessor
+class BrainTreePaymentProcessor : PaymentProcessor
+
+// bind
+container.bind(BrainTreePaymentProcessor::class.java)
+container.bind(StripePaymentProcessor::class.java)
+
+// resolve
+val processors: List<PaymentProcessor> = container.makeMany<PaymentProcessor>()
+
+```
 
 <a name="httpcall-container"></a>
 ### [HttpCall as a DI Container](#httpcall-container)
