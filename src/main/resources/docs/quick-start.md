@@ -29,14 +29,14 @@ You'll learn quite a bit building this simple app.
 <div class="sublist">
 
 - How to get Alpas setup and running on your local device
-- How to create a connection with a MySQL database
-- How to create tables in Alpas and migrate them to a MySQL database
+- How to connect with a MySQL database
+- How to create database tables in Alpas and migrate them
 - How to create, retrieve, update, and delete data in your MySQL database
-- How to create an entity object
+- How to create a database entity object
 - How to create a controller
-- How to update routes
-- How to interact with the MySQL database using Ktorm and Ozone
-- How to protect against cross site request forgery
+- How to add routes
+- How to interact with the MySQL database using Ozone
+- How to protect your app against the cross site request forgery attacks
 - How to connect an interactive front-end with the powerful Alpas back-end
 - How to create a fun, yet useful to-do list! ✅
 
@@ -46,37 +46,36 @@ And, this only scratches the surface of Alpas's features!
 
 <a name="need"></a>
 ### [What you'll need](#need)
-<div class="sublist">
+
+<div class="">
+
 Before moving to the first step, go through the following list and make sure you have everything you will need to get started. 
 Don't worry, everything you need is free to use! 
 
-- An Integrated Developer Environment (IDE) - we will be using the [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) Community version 
-- A GitHub account - If you don't have a GitHub account, [create an account here](https://github.com/join?source=header-home) 
-- [Sourcetree](https://www.sourcetreeapp.com/) to manage your GIT Repo; we will also cover how to manage GIT directly through command line if you don't want to use Sourcetree
-- MySQL Server installed and running on your local machine 
-    - [Instructions for installing SQL Server on Mac](https://tableplus.com/blog/2018/11/how-to-download-mysql-mac.html)
-    - [Instructions for installing SQL Server on Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)
-- [Sequel Pro](https://sequelpro.com/download) to manage and view our to-do database
-- Just a little bit of time ⏳ (Seriously though - this will only take about 15 - 20 minutes of your time 🙌)
+- ✓ An Integrated Developer Environment (IDE) - we will be using the [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) Community version .
+- ✓ A GitHub account - If you don't have a GitHub account, [create an account here](https://github.com/join?source=header-home) .
+- <strike>✓ [Sourcetree](https://www.sourcetreeapp.com/) to manage your GIT Repo; we will also cover how to manage GIT directly through command line if you don't want to use Sourcetree.</strike>
+- ✓ MySQL Server installed and running on your local machine.
+    - &nbsp; &nbsp; &nbsp; &nbsp; - [Instructions for installing on Mac](https://tableplus.com/blog/2018/11/how-to-download-mysql-mac.html)
+    - &nbsp; &nbsp; &nbsp; &nbsp; - [Instructions for installing on Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)
+- ✓ [Sequel Pro](https://sequelpro.com/download) to manage and view our to-do database.
+- ⏳ Just a little bit of time - this will only take about 15 - 20 minutes of your time 🙌
 
 </div>
 
+<div class="border-t mt-8"></div>
 
 ### Let's Get Started!
-
 
 <a name="setup"></a>
 ### [Step 1: Setup your environment](#setup)
 
 Setting up your environment is quick and painless. 
 
-1. Refer to the [setup instructions](/docs/installation#setup) in the Installation doc and perform the necessary steps 
+1. Refer to the [setup instructions](/docs/installation#setup) and perform the necessary steps .
 2. If using Windows, be sure to watch [**Setting up GitBash and SDKMan on Windows**](https://kutt.it/sDS63q) and
-                                                                                                                                                [**Alpas Installation on Windows With WSL**](https://kutt.it/18hxT8) by
-                                                                                                                                                [*AlpasCasts*](https://kutt.it/XnILn0)
-    
-3. Make sure that you have installed sdkman, Java 9.0.7-zulu, and gradle
-
+[**Alpas Installation on Windows With WSL**](https://kutt.it/18hxT8) by [*AlpasCasts*](https://kutt.it/XnILn0).
+3. Make sure that you have installed Java 9.0.7-zulu and gradle.
 
 <a name="create-project"></a>
 ### [Step 2: Create and add the starter project to your local machine](#create-project)
@@ -88,15 +87,22 @@ The following steps are taken from the [Installation](/docs/installation#install
 <a name="github"></a>
 #### [Create to-do project on GitHub and clone to your local machine](#github)
 
+<div class="ordered-list">
+
 1. Go to the [Alpas Starter project](https://github.com/alpas/starter) on GitHub
 2. Click the green **Use this template** button
 3. On the 'Create a new repository from starter' page, type **todolist** for 'Repository name'
 4. Click **Create repository from template** - you now copied the startup template to your GitHub account!
 5. On your new todolist repo page, select **Clone or download** 
 6. You will have an option to use HTTPS or SSH - let's use **HTTPS** for now
-7. Select option to **Open in Desktop**
-8. If you have Sourcetree installed, this will prompt a message to open via Sourcetree, which you can select that option to continue
 
+<strike>7. Select option to **Open in Desktop**</strike>
+
+<strike>8. If you have Sourcetree installed, this will prompt a message to open via Sourcetree, which you can select that option to continue</strike>
+
+</div>
+
+<strike>
 > /info/ <span>**If you'd rather use command line to clone your repo, perform the 
 > following steps instead of steps 5 thru 8 above.** 
 > 1. Open Command Line in Windows; or, Terminal for Mac
@@ -106,13 +112,15 @@ The following steps are taken from the [Installation](/docs/installation#install
 > Having fun using command line? Here is a list of [helpful GIT commands](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html). 
 > </span>
 
+</strike>
+
 <a name="configs"></a>
 #### [Open to-do project on your local machine and make some top level configs](#configs)
 
-1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**, on your machine - *note: it's likely under your user directory unless you placed the project somewhere else*
+1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**, on your machine <strike>- *note: it's likely under your user directory unless you placed the project somewhere else*</strike>
 2. Double click **todolist** to open 
 3. If you are prompted to **import Gradle**, go ahead and do so
-4. In IntelliJ, click on the **Terminal** tab (located towards the bottom left)
+4. In IntelliJ, click on the **Terminal** tab (located towards the bottom left) **NOT ALWAYS**
 5. In the terminal, type in `chmod +x ./alpas`<span class="clipboard" data-clipboard-text='chmod +x ./alpas'></span> and hit return - this will make Alpas executable
 6. Next, in terminal, type `./alpas init com.todo.list`<span class="clipboard" data-clipboard-text='./alpas init com.todo.list'></span> and hit return - this will name your app
 7. While we are in terminal, type `./alpas help`<span class="clipboard" data-clipboard-text='./alpas help'></span> - this displays a list of commands you can run to find information about your app as well as provide quick actions such as creating new entities 
@@ -131,6 +139,8 @@ Let's first start by creating a new database on your local machine. If you haven
 <a name="sequel-pro"></a>
 #### [Create the to-do database in Sequel Pro](#sequel-pro)
 
+<div class="ordered-list">
+
 1. Open **Sequel Pro**
 2. Add a new connection 
 3. Type **127.0.0.1** into Host 
@@ -140,10 +150,15 @@ Let's first start by creating a new database on your local machine. If you haven
 7. Once connected to your local MySQL server, go to **Database > Add Database**
 8. Create a new database named **todolist**
 
+</div>
+
 That's all for now in Sequel Pro. We will add tables and fields during the next steps. 
 
 <a name="connect-db"></a>
 #### [Connect your to-do project to MySQL database](#connect-db)
+
+<div class="ordered-list">
+
 1. Go back to the to-do project up in IntelliJ
 2. Navigate to the **.env** file under the project root folder
 3. In .env, update `DB_PASSWORD=secret` to replace 'secret' with your password; leave blank if you did not setup your MySQL database with a password
@@ -152,17 +167,26 @@ That's all for now in Sequel Pro. We will add tables and fields during the next 
 6. Uncomment `// addConnections(env)` by removing `//`
 7. **Run** the project 
 
+</div>
+
 If you run and are able to successfully access [http://localhost:8080/](http://localhost:8080/), then congrats! You have successfully connected the project to your MySQL database. 
 
 <a name="setup-entity"></a>
 ### [Step 4: Setup your task entity](#setup-entity)
 
+<div class="ordered-list">
 
 1. In IntelliJ's terminal, type `./alpas make:entity task`<span class="clipboard" data-clipboard-text='./alpas make:entity task'></span> and tap return - this will create a new entity 'Task' and corresponding table
-2. Navigate to the new **Task.kt** entity at **todolist > src > main > kotlin > entities**
-3. Update the page to look like the following - check out the helper comments in the code 
+ under **src > main > kotlin > entities** folder
+2. Update the page to look like the following - check out the helper comments in the code 
 
-```
+</div>
+
+<span class="line-numbers" data-start="1" data-file="src/main/kotlin/entities/Task.kt">
+
+
+```kotlin
+
 package com.todo.list.entities
 
 import dev.alpas.ozone.*
@@ -175,7 +199,7 @@ interface Task : OzoneEntity<Task> {
     var createdAt: Instant?
     var updatedAt: Instant?
     
-    // add interface val for completed totdos as a boolean
+    // add a boolean property for completed todos
     val completed: Boolean
 
     companion object : OzoneEntity.Of<Task>()
@@ -186,22 +210,30 @@ object Tasks : OzoneTable<Task>("tasks") {
     val name by string("name").size(150).nullable().bindTo { it.name }
     val createdAt by createdAt()
     val updatedAt by updatedAt()
-    
-    // add object val for completed todos
+
+    // add a completed column for completed todos
     val completed by boolean("completed").default(false).bindTo { it.completed }
 }
 
-// for more information on Entities, visit https://alpas.dev/docs/entity-relationship#main
 ```
+
+</span>
 
 <a name="setup-controller"></a>
 ### [Step 5: Setup your task controller](#setup-controller)
 
-1. In IntelliJ's terminal, type `./alpas make:controller TaskController`<span class="clipboard" data-clipboard-text='./alpas make:controller TaskController'></span> and tap return - this creates a TaskController
-2. Navigate to the new **TaskController.kt** controller at **todolist > src > main > kotlin > controllers**
-3. Update the page to look like the following - check out the helper comments in the code 
+<div class="ordered-list">
 
-```
+1. In IntelliJ's terminal, type `./alpas make:controller TaskController`<span class="clipboard" data-clipboard-text='./alpas make:controller TaskController'></span> and tap return - this creates a 'TaskController'
+under **todolist > src > main > kotlin > controllers** folder.
+2. Update the class to look like the following - check out the helper comments in the code 
+
+</div>
+
+<span class="line-numbers" data-start="1" data-file="src/main/kotlin/controllers/TaskController.kt">
+
+```kotlin
+
 package com.todo.list.controllers
 
 import dev.alpas.http.HttpCall
@@ -287,16 +319,25 @@ class TaskController : Controller() {
     }
 }
 
-// For more information on Controllers, visit https://alpas.dev/docs/controllers#main
 ```
+
+</span>
 
 <a name="setup-routes"></a>
 ### [Step 6: Setup your routes](#setup-routes)
 
+<div class="ordered-list">
+
 1. Navigate to the new **routes.kt** at **todolist > src > main > kotlin**
 2. Update the page to look like the following - check out the helper comments in the code 
 
-```
+</div>
+
+<span class="line-numbers" data-start="1" data-file="src/main/kotlin/routes.kt">
+
+
+```kotlin
+
 package com.todo.list
 
 import com.todo.list.controllers.TaskController // Update WelcomeController to TaskController
@@ -316,147 +357,161 @@ private fun RouteGroup.webRoutesGroup() {
     get("/", TaskController::index).name("welcome") // Update WelcomeController to TaskController
 
     // Add the following routes
-    post("/", TaskController::class).name("store")
-    delete("/", TaskController::class).name("delete")
-    patch("/", TaskController::class).name("update")
+    post("/", TaskController::store).name("store")
+    delete("/", TaskController::delete).name("delete")
+    patch("/", TaskController::update).name("update")
 }
 
 private fun Router.apiRoutes() {
     // register API routes here
 }
+
 ```
+
+</span>
 
 <a name="migrate-table"></a>
 ### [Step 6: Migrate tables to database](#migrate-table)
+
 We are super close! Just a few more steps! In this step we will [create the to-do table and migrate](https://alpas.dev/docs/migrations#main) to the todolist database. 
+
+<div class="ordered-list">
 
 1. In IntelliJ's terminal, type `./alpas make:migration create_tasks_table --create=tasks`<span class="clipboard" data-clipboard-text='./alpas make:migration create_tasks_table --create=tasks'></span> - this will create new data migration script
 2. In terminal, type `./alpas db:migrate`<span class="clipboard" data-clipboard-text='./alpas db:migrate'></span> this will migrate the tasks table and columns we created earlier to your checklist db - go ahead and check it out in Sequel Pro
 
+</div>
+
 <a name="update-ui"></a>
 ### [Step 7: Update the front end](#update-ui)
+
 This last major step is all about updating the front end. 
 
 In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resources > templates** and update to look like the following. 
 
-```
+<span class="line-numbers" data-start="1" data-file="src/main/resources/templates/welcome.peb">
+
+
+```twig
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Alpas - To-Do List</title>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Alpas - To-Do List</title>
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 
 <body class="bg-orange-100 h-screen">
 
 <!-- This section displays the flash messages received from TaskController -->
 <div class="container-fluid fixed w-full flex justify-center">
-    {% if hasFlash('success') %}
-        <div class="w-1/3 text-white bg-green-500 py-2 px-10 text-center">
-            {{ flash('success') }}
-        </div>
-    {% endif %}
+  {% if hasFlash('success') %}
+    <div class="w-1/3 text-white bg-green-500 py-2 px-10 text-center">
+      {{ flash('success') }}
+    </div>
+  {% endif %}
 </div>
 
 <div class="container mx-auto pt-20 px-20">
-    <div class="w-full flex justify-between mx-auto">
-
-        <div class="w-1/2 text-4xl font-extrabold text-gray-700">
-            To-Do List
-        </div>
-        <div class="text-center">
-            <!-- Here we show completed tasks vs total tasks -->
-            <h5 class="text-4xl font-extrabold text-blue-600"> {{ completed }} / {{ total }}</h5>
-            <p class="text-sm text-gray-600">completed / total</p>
-        </div>
-
+  <div class="w-full flex justify-between mx-auto">
+    <div class="w-1/2 text-4xl font-extrabold text-gray-700"> To-Do List</div>
+    <div class="text-center">
+      <!-- Here we show completed tasks vs total tasks -->
+      <h5 class="text-4xl font-extrabold text-blue-600"> {{ completed }} / {{ total }}</h5>
+      <p class="text-sm text-gray-600">completed / total</p>
     </div>
+  </div>
 
-    <div>
-        <!-- This form is where the user enters the to-do item and makes a post request -->
-        <form method="POST" action="{{ route('store') }}">
-            <div class="form-group">
-                <!-- CSRF is a protection mechanism; view https://alpas.dev/docs/csrf-protection#main for more info -->
-                {% csrf %}
-                <input type="text" class="form-control mt-2 w-1/3 py-3 px-2 bg-gray-200 rounded-sm" id="task" name="newTask" autofocus="autofocus"
-                       placeholder="Go fishin'">
-                <button type="submit" class="ml-2 p-3 px-8 inline-block bg-green-500 text-green-100">Add</button>
-            </div>
-            <!-- This checks to make sure to-do entry is a valid entry -->
-            {% if hasError("newTask") %}
-                <div class="text-red-600 mt-3">{{ firstError("newTask") }}</div>
-            {% endif %}
-        </form>
-    </div>
+  <div>
+    <!-- This form is where the user enters the to-do item and makes a post request -->
+    <form method="POST" action="{{ route('store') }}">
+      <div class="form-group">
+        <!-- CSRF is a protection mechanism; view https://alpas.dev/docs/csrf-protection#main for more info -->
+        {% csrf %}
+        <input type="text" class="form-control mt-2 w-1/3 py-3 px-2 bg-gray-200 rounded-sm" id="task" name="newTask"
+               autofocus="autofocus"
+               placeholder="Go fishin'">
+        <button type="submit" class="ml-2 p-3 px-8 inline-block bg-green-500 text-green-100">Add</button>
+      </div>
+      <!-- This checks to make sure to-do entry is a valid entry -->
+      {% if hasError("newTask") %}
+        <div class="text-red-600 mt-3">{{ firstError("newTask") }}</div>
+      {% endif %}
+    </form>
+  </div>
 
-    <div class="py-10">
-        <!-- If no to-dos, display the following message -->
-        {% if total == 0 %}
-            <div class="alert alert-warning">
-                Add some to-dos!
-            </div>
-        {% else %}
-        <!-- If to-dos do exist, then we iterate on displaying each to-do item -->
-            <div>
-                <ul class="text-xl">
-                    {% for task in tasks %}
-                    <li>
-                        <div class="flex pt-1">
-                            <div class="pr-4">
-                            <!-- This form let's the user mark a todo task as completed or not and makes patch call to update database -->
-                                <form action="{{ route('update', {"id": task.id}) }}" method="POST">
-                                    {% csrf %}
-                                    <input type="hidden" name="_method" value="patch"/>
-                                    <input type="checkbox" name="state"
-                                           onChange="this.form.submit()" {{ task.completed ? 'checked' : '' }} />
-                                    {# {% if task.completed %} #}
-                                        {# {% csrf %} #}
-                                        {# <input type="hidden" name="_method" value="patch"/> #}
-                                        {# <input type="checkbox" onChange="this.form.submit()" checked /> #}
-                                    {# {% else %} #}
-                                        {# {% csrf %} #}
-                                        {# <input type="hidden" name="_method" value="patch"/> #}
-                                        {# <input type="checkbox" onChange="this.form.submit()" /> #}
-                                    {# {% endif %} #}
-                                </form>
-                            </div>
+  <div class="py-10">
+    <!-- If no to-dos, display the following message -->
+    {% if total == 0 %}
+      <div class="alert alert-warning">
+        Add some to-dos!
+      </div>
+    {% else %}
+      <!-- If to-dos do exist, then we iterate on displaying each to-do item -->
+      <div>
+        <ul class="text-xl">
+          {% for task in tasks %}
+            <li>
+              <div class="flex pt-1">
+                <div class="pr-4">
+                  <!-- This form let's the user mark a todo task as completed or not and makes patch call to update database -->
+                  <form action="{{ route('update', {"id": task.id}) }}" method="POST">
+                    {% csrf %}
+                    <input type="hidden" name="_method" value="patch"/>
+                    <input type="checkbox" name="state"
+                           onChange="this.form.submit()" {{ task.completed ? 'checked' : '' }} />
+                    {# {% if task.completed %} #}
+                    {# {% csrf %} #}
+                    {# <input type="hidden" name="_method" value="patch"/> #}
+                    {# <input type="checkbox" onChange="this.form.submit()" checked /> #}
+                    {# {% else %} #}
+                    {# {% csrf %} #}
+                    {# <input type="hidden" name="_method" value="patch"/> #}
+                    {# <input type="checkbox" onChange="this.form.submit()" /> #}
+                    {# {% endif %} #}
+                  </form>
+                </div>
 
-                        {% if task.completed %}
-                            <div class="line-through">
-                                {{ task.name }}
-                            </div>
-                        {% else %}
-                            <div class="">
-                                {{ task.name }}
-                            </div>
-                        {% endif %}
-                            <div class="pl-3">
-                                <!-- This form lets user delete a to-do task -->
-                                <form action="{{ route('delete', {"id": task.id}) }}" method="POST">
-                                {% csrf %}
-                                    <input type="hidden" name="_method" value="delete"/>
-                                    <button class="hover:text-red-800 text-red-600 text-sm hover-target">
-                                        remove
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    </div>
+                {% if task.completed %}
+                  <div class="line-through">
+                    {{ task.name }}
+                  </div>
+                {% else %}
+                  <div class="">
+                    {{ task.name }}
+                  </div>
+                {% endif %}
+                <div class="pl-3">
+                  <!-- This form lets user delete a to-do task -->
+                  <form action="{{ route('delete', {"id": task.id}) }}" method="POST">
+                    {% csrf %}
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="hover:text-red-800 text-red-600 text-sm hover-target">
+                      remove
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
 </div>
 
 </body>
 
 </html>
+
 ```
+
+</span>
+
 <a name="run-app"></a>
 ### [Step 8: Run the to-do app and play around](#run-app)
 
