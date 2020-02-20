@@ -20,7 +20,8 @@
                         <h4 id="getting-started">Getting Started</h4>
                         <ul>
                         {{ li('Installation', page) }}
-                                {{ li('Configuration', page) }}
+                            {{ li('Quick Start Guide', page, 'quick-start-guide-todo-list') }}
+                            {{ li('Configuration', page) }}
                                 {{ li('Project Structure', page, 'project-structure') }}
                         </ul>
                     </li>
