@@ -73,10 +73,14 @@ Don't worry, everything you need is free to use!
 
 Setting up your environment is quick and painless. 
 
+<div class="ordered-list">
+
 1. Refer to the [setup instructions](/docs/installation#setup) and perform the necessary steps.
 Make sure you have Java version 9.0 or higher installed.
 2. If using Windows, be sure to watch [**Setting up GitBash and SDKMan on Windows**](https://kutt.it/sDS63q) and
 [**Alpas Installation on Windows With WSL**](https://kutt.it/18hxT8) by [*AlpasCasts*](https://kutt.it/XnILn0).
+
+</div>
 
 <div class="border-t mt-8"></div>
 
