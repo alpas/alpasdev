@@ -35,7 +35,7 @@ $ alpas make:factory Project Contact Post
 
 ```kotlin
 
-internal object UserFactory : EntityFactory<User> {
+internal object UserFactory : EntityFactory<User, Users> {
     override val table = Users
     
     override fun entity(): User {
@@ -158,6 +158,21 @@ val user = from(UserFactory, mapOf("name" to "Jane Doe"))
 val users = from(UserFactory, 5, mapOf("country" to "USA"))
 
 ```
+
+While using `from`, you can also override the properties using strongly typed assignment builder:
+
+```kotlin
+
+// Create a user instance, override the properties with values from
+// the given map, persist the instance, and fetch a fresh copy of it.
+val user = from(UserFactory) {
+    it.name to "Jane M. Doe"
+    it.email to "differentjane@example.com"
+}
+
+```
+
+
 <a name="transforming-values"></a>
 ### [Transforming Values Before Persisting](#transforming-values)
 
@@ -173,7 +188,7 @@ Let's see an example of a `UserFactory` that hashes a password before saving.
 
 ```kotlin
 
-internal class UserFactory(private val hasher: Hasher) : EntityFactory<User>() {
+internal class UserFactory(private val hasher: Hasher) : EntityFactory<User, Users>() {
     override val table = Users
 
     override fun entity(): User {

@@ -50,7 +50,7 @@ interface User : Entity<User> {
     companion object : Entity.Factory<User>()
 }
 
-object Users : MigratingTable<User>("users") {
+object Users : OzoneTable<User>("users") {
     val id by bigIncrements("id").bindTo { it.id }
     val name by string("name").bindTo { it.name }
 }
@@ -72,7 +72,7 @@ interface Profile : Entity<Profile> {
     companion object : Entity.Factory<Profile>()
 }
 
-object Profiles : MigratingTable<Profile>("profiles") {
+object Profiles : OzoneTable<Profile>("profiles") {
     val id by bigIncrements("id").bindTo { it.id }
     val handle by string("handle").bindTo { it.handle }
     val isActive by boolean("s_active").bindTo { it.isActive }
@@ -106,7 +106,7 @@ interface Profile : Entity<Profile> {
     companion object : Entity.Factory<Profile>()
 }
 
-object Profiles : MigratingTable<Profile>("profiles") {
+object Profiles : OzoneTable<Profile>("profiles") {
     val id by bigIncrements("id").bindTo { it.id }
     val handle by string("handle").bindTo { it.handle }
     val isActive by boolean("s_active").bindTo { it.isActive }
@@ -238,7 +238,7 @@ interface Employee : Entity<Employee> {
     companion object : Entity.Factory<Employee>()
 }
 
-object Employees : MigratingTable<Employee>("employees") {
+object Employees : OzoneTable<Employee>("employees") {
     val id by bigIncrements("id").bindTo { it.id }
     val fullName by string("full_name").bindTo { it.fullName }
     val role by string("role").bindTo { it.role }
@@ -270,7 +270,7 @@ interface Department : Entity<Department> {
     companion object : Entity.Factory<Department>()
 }
 
-object Departments : MigratingTable<Department>("departments") {
+object Departments : OzoneTable<Department>("departments") {
     val id by bigIncrements("id").bindTo { it.id }
     val name by string("name").bindTo { it.name }
 }

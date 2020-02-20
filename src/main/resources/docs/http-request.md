@@ -79,7 +79,7 @@ Gives you the values of just the query parameters.
 
 Returns all the values for the given key as a nullable list.
 
-- `fun onlyParams(key: String, vararg keys: String): Map<String, Any?>` 
+- `fun params(key: String, vararg keys: String): Map<String, Any?>` 
 
 Returns a map of values for only the specified keys.
 
@@ -93,7 +93,7 @@ Returns a map of values for everything but the specified keys.
 
 //...
 
-val only = call.onlyParams("username", "email", "phone")
+val only = call.params("username", "email", "phone")
 val except = call.paramsExcept("password", "password_confirm")
 
 //...
@@ -122,19 +122,19 @@ Returns the route parameter value of the given key.
 
 Returns the query parameter value of the given key.
 
-- `fun paramAsKey(key: String) : String?` 
+- `fun stringParam(key: String) : String?` 
 
 Returns the value of the given key as a nullable string.
 
-- `fun paramAsInt(key: String) : Int?` 
+- `fun intParam(key: String) : Int?` 
 
 Returns the value of the given key as a nullable int.
 
-- `fun paramAsLong(key: String) : Long?` 
+- `fun longParam(key: String) : Long?` 
 
 Returns the value of the given key as a nullable long.
 
-- `fun paramAsBool(key: String) : Long?` 
+- `fun boolParam(key: String) : Long?` 
 
 Returns the value of the given key as a nullable bool.
 
