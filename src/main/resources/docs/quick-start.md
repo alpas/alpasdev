@@ -21,26 +21,26 @@
 In this guide, you will quickly get Alpas up-and-running on your local machine and create a simple to-do app.
 
 Don't worry about your skill level - this quick start guide is meant to provide step-by-step instructions useful to those of any skill level. 💪🏽  
-
-<a name="learn"></a>
-### [What you'll learn](#learn)
-You'll learn quite a bit building this simple app.
-
-<div class="sublist">
-
-- How to get Alpas setup and running on your local device
-- How to connect with a MySQL database
-- How to create database tables in Alpas and migrate them
-- How to create, retrieve, update, and delete data in your MySQL database
-- How to create a database entity object
-- How to create a controller
-- How to add routes
-- How to interact with the MySQL database using Ozone
-- How to protect your app against the cross site request forgery attacks
-- How to connect an interactive front-end with the powerful Alpas back-end
-- How to create a fun, yet useful to-do list! ✅
-
-</div>
+### What you'll learn
+>/tip/ 
+> <span>You'll learn quite a bit building this simple app.
+>
+><div class="sublist">
+>
+>- How to get Alpas setup and running on your local device
+>- How to connect with a MySQL database
+>- How to create database tables in Alpas and migrate them
+>- How to create, retrieve, update, and delete data in your MySQL database
+>- How to create a database entity object
+>- How to create a controller
+>- How to add routes
+>- How to interact with the MySQL database using Ozone
+>- How to protect your app against the cross site request forgery attacks
+>- How to connect an interactive front-end with the powerful Alpas back-end
+>- How to create a fun, yet useful to-do list! ✅
+>
+></div>
+</span>
 
 And, this only scratches the surface of Alpas's features! 
 
@@ -117,6 +117,9 @@ The following steps are taken from the [Installation](/docs/installation#install
 <a name="configs"></a>
 #### [Open to-do project on your local machine and make some top level configs](#configs)
 
+<div class="ordered-list">
+
+
 1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**, on your machine <strike>- *note: it's likely under your user directory unless you placed the project somewhere else*</strike>
 2. Double click **todolist** to open 
 3. If you are prompted to **import Gradle**, go ahead and do so
@@ -128,6 +131,8 @@ The following steps are taken from the [Installation](/docs/installation#install
 9. Now, find **start.kt** in your project - you can either tap the shift key twice to open quick search or follow the path **todolist > src > kotlin > start.kt**
 10. Right click on **start.kt** and select option to **Run**
 11. Once run is successful, click [http://localhost:8080/](http://localhost:8080/) to view the project in your browser
+
+</div>
 
 **TADA!** 🎉 - you are viewing the basic Alpas start screen. But, there is still a bit more to do to create your to-do list. Now that we have Alpas successfully installed and running
 on your machine, let's create your to-do list! 
