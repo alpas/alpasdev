@@ -14,8 +14,6 @@
 - [Step 7: Update the front end](#update-ui)
 - [Step 8: Run the to-do app and play around](#run-app)
 
-    
-
 <a name="build"></a>
 ### [What you'll build](#build)
 In this guide, you will quickly get Alpas up-and-running on your local machine and create a simple to-do app.
@@ -68,17 +66,19 @@ Don't worry, everything you need is free to use!
 
 >/info/
 ><span>If you have previously successfully used the starter template and served an Alpas app, jump ahead to 
->[Step 3: Setup your database][step3]</span>
+>[Step 3: Setup your database](#setup-database)</span>
 
 <a name="setup"></a>
 ### [Step 1: Setup your environment](#setup)
 
 Setting up your environment is quick and painless. 
 
-1. Refer to the [setup instructions](/docs/installation#setup) and perform the necessary steps .
+1. Refer to the [setup instructions](/docs/installation#setup) and perform the necessary steps.
+Make sure you have Java version 9.0 or higher installed.
 2. If using Windows, be sure to watch [**Setting up GitBash and SDKMan on Windows**](https://kutt.it/sDS63q) and
 [**Alpas Installation on Windows With WSL**](https://kutt.it/18hxT8) by [*AlpasCasts*](https://kutt.it/XnILn0).
-3. Make sure that you have installed Java 9.0.7-zulu and gradle.
+
+<div class="border-t mt-8"></div>
 
 <a name="create-project"></a>
 ### [Step 2: Create and add the starter project to your local machine](#create-project)
@@ -90,6 +90,7 @@ The following steps are taken from the [Installation](/docs/installation#install
 <a name="github"></a>
 #### [Create to-do project on GitHub and clone to your local machine](#github)
 
+<div class="ordered-list">
 
 1. Go to the [Alpas Starter project](https://github.com/alpas/starter) on GitHub
 2. Click the green **Use this template** button
@@ -99,26 +100,42 @@ The following steps are taken from the [Installation](/docs/installation#install
 6. You will have an option to use HTTPS or SSH - let's use **HTTPS** for now
 7. Pull the repo down to your local 
 
+</div>
 
 <a name="configs"></a>
 #### [Open to-do project on your local machine and make some top level configs](#configs)
 
+<div class="ordered-list">
 
-1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**, on your machine
-2. Double click **todolist** to open 
-3. If you are prompted to **import Gradle**, go ahead and do so
-4. In IntelliJ, locate the **Terminal** tab 
-5. In the terminal, type in `chmod +x ./alpas`<span class="clipboard" data-clipboard-text='chmod +x ./alpas'></span> and hit return - this will make Alpas executable
-6. Next, in terminal, type `./alpas init com.todo.list`<span class="clipboard" data-clipboard-text='./alpas init com.todo.list'></span> and hit return - this will name your app
-7. While we are in terminal, type `./alpas help`<span class="clipboard" data-clipboard-text='./alpas help'></span> - this displays a list of commands you can run to find information about your app as well as provide quick actions such as creating new entities 
-8. Before we run the project, let's check to make sure IntelliJ is set to build using Java-9.0.7-zulu - Go to **File > Project Structure, then go to Project and make sure Project SDK has **Java 9** selected**; if it doesn't, follow instructions on how to serve Alpas with IntelliJ in the [Installation documentation](/docs/installation)
-9. Now, find **start.kt** in your project - you can either tap the shift key twice to open quick search or follow the path **todolist > src > kotlin > start.kt**
+1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**. Double-click it to open.
+3. If you are prompted to **import Gradle**, go ahead and do so.
+4. In IntelliJ, locate the **Terminal** tab.
+5. In the terminal, type in `chmod +x ./alpas`<span class="clipboard" data-clipboard-text='chmod +x ./alpas'></span>
+and hit return - this will make Alpas executable.
+6. Next, in terminal, type `./alpas init com.todo.list`<span class="clipboard" data-clipboard-text='./alpas init com.todo.list'></span>
+and hit return - this will initialize your app.
+7. While we are in terminal, type `./alpas help`<span class="clipboard" data-clipboard-text='./alpas help'></span> - 
+this displays a list of commands you can run to find information about your app as well as provide quick actions
+such as creating new entities.
+8. Before we run the project, let's check to make sure IntelliJ is set to build using Java 9.0 -
+Go to **File > Project Structure, then go to Project and make sure Project SDK has **Java 9** selected**;
+if it doesn't, follow instructions on how to serve Alpas with IntelliJ
+in the [Installation documentation](/docs/installation).
+9. Now, find **start.kt** in your project - you can either tap the shift key twice to open quick
+search or follow the path **todolist > src > kotlin > start.kt**.
 10. Right click on **start.kt** and select option to **Run**
 11. Once run is successful, click [http://localhost:8080/](http://localhost:8080/) to view the project in your browser
 
+</div>
 
-**TADA!** 🎉 - you are viewing the basic Alpas start screen. But, there is still a bit more to do to create your to-do list. Now that we have Alpas successfully installed and running
-on your machine, let's create your to-do list! 
+<br/>
+
+**TADA!** 🎉
+
+You are viewing the basic Alpas start screen. But, there is still a bit more to do to create your to-do list.
+Now that we have Alpas successfully installed and running on your machine, let's create the actual app! 
+
+<div class="border-t mt-8"></div>
 
 <a name="setup-database"></a>
 ### [Step 3: Setup your database](#setup-database)
@@ -127,15 +144,16 @@ Let's first start by creating a new database on your local machine. If you haven
 <a name="sequel-pro"></a>
 #### [Create the to-do database in Sequel Pro](#sequel-pro)
 
+<div class="ordered-list">
 
-1. Open **Sequel Pro**
-2. Add a new connection 
-3. Type **127.0.0.1** into Host 
-4. Type in **root** for the Username
-5. If you entered a password when installing MySQL, add in the password; otherwise, leave it blank
-6. Click **Connect**
-7. Once connected to your local MySQL server, go to **Database > Add Database**
-8. Create a new database named **todolist**
+1. Open **Sequel Pro** and add a new connection.
+2. Type **127.0.0.1** into Host an **root** for the *Username*.
+3. If you entered a password when installing MySQL, add in the password; otherwise, leave it blank.
+4. Click **Connect**.
+5. Once connected to your local MySQL server, go to **Database > Add Database**
+and create a new database named **todolist**
+
+</div>
 
 
 That's all for now in Sequel Pro. We will add tables and fields during the next steps. 
@@ -143,25 +161,33 @@ That's all for now in Sequel Pro. We will add tables and fields during the next 
 <a name="connect-db"></a>
 #### [Connect your to-do project to MySQL database](#connect-db)
 
+<div class="ordered-list">
 
-1. Go back to the to-do project up in IntelliJ
-2. Navigate to the **.env** file under the project root folder
-3. In .env, update `DB_PASSWORD=secret` to replace 'secret' with your password; leave blank if you did not setup your MySQL database with a password
-4. Update `DB_DATABASE` to point to `todolist`
-5. Go to the **DatabaseConfig** file in **todolist > src > main > kotlin > configs** 
-6. Uncomment `// addConnections(env)` by removing `//`
-7. **Run** the project 
+1. Go back to the to-do project up in IntelliJ and navigate to the `.env` file under the project root folder.
+3. In `.env`, update `DB_PASSWORD=secret` to replace 'secret' with your password; leave blank if you 
+did not setup your MySQL database with a password.
+4. Update `DB_DATABASE` to point to `todolist`.
+5. Go to the `DatabaseConfig.kt` file in **todolist > src > main > kotlin > configs**.
+6. Uncomment `// addConnections(env)` by removing `//`.
+7. **Run** the project .
 
+</div>
 
-If you run and are able to successfully access [http://localhost:8080/](http://localhost:8080/), then congrats! You have successfully connected the project to your MySQL database. 
+If you run and are able to successfully access [http://localhost:8080/](http://localhost:8080/), then congrats!
+You have successfully connected the project to your MySQL database. 
+
+<div class="border-t mt-8"></div>
 
 <a name="setup-entity"></a>
 ### [Step 4: Setup your task entity](#setup-entity)
 
+<div class="ordered-list">
 
-1. In terminal, type `./alpas make:entity task`<span class="clipboard" data-clipboard-text='./alpas make:entity task'></span> and tap return - this will create a new entity 'Task' and corresponding table
- under **src > main > kotlin > entities** folder
-2. Update **task.kt** to look like the following - check out the helper comments in the code 
+1. In terminal, type `./alpas make:entity task`<span class="clipboard" data-clipboard-text='./alpas make:entity task'></span> and tap return
+- this will create a new entity 'Task' and corresponding table under **src > main > kotlin > entities** folder.
+2. Update **task.kt** to look like the following - check out the helper comments in the code.
+
+</div>
 
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/entities/Task.kt">
@@ -181,7 +207,7 @@ interface Task : OzoneEntity<Task> {
     var createdAt: Instant?
     var updatedAt: Instant?
     
-    // add a boolean property for completed todos
+    // Add a boolean property for completed todos
     val completed: Boolean
 
     companion object : OzoneEntity.Of<Task>()
@@ -193,23 +219,26 @@ object Tasks : OzoneTable<Task>("tasks") {
     val createdAt by createdAt()
     val updatedAt by updatedAt()
 
-    // add a completed column for completed todos
+    // Add a completed column for completed todos
     val completed by boolean("completed").default(false).bindTo { it.completed }
 }
-
-// for more information on Entities, visit https://alpas.dev/docs/entity-relationship#main
 
 ```
 
 </span>
 
+<div class="border-t mt-8"></div>
+
 <a name="setup-controller"></a>
 ### [Step 5: Setup your task controller](#setup-controller)
 
+<div class="ordered-list">
 
 1. In IntelliJ's terminal, type `./alpas make:controller TaskController`<span class="clipboard" data-clipboard-text='./alpas make:controller TaskController'></span> and tap return - this creates a 'TaskController'
 under **todolist > src > main > kotlin > controllers** folder
 2. Update **TaskController.kt** to look like the following - check out the helper comments in the code 
+
+</div>
 
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/controllers/TaskController.kt">
@@ -239,63 +268,74 @@ class TaskController : Controller() {
         // Go ahead and remove the following line
         // call.reply("Hello, TaskController!")
 
-        // add in the following
+        // ADD IN THE FOLLOWING
         
-        // calls the database for all todo items
+        // Get the latest todo items from the database
         val tasks = Tasks.latest().toList()  
-        // referring to the previous call, this checks to see how many todos are in the database
+        // Get the total size of the tasks
         val total = tasks.size 
-        // now, we see how many of the total todos have been completed
+        // Now, get the completed todo items 
         val completed = tasks.count { it.completed } 
         
-        // Now we will call the front end page template to display to the user, passing along the values we defined above
+        // Now render the 'welcome' page to display a list of todo items to the user
         call.render ("welcome", mapOf("tasks" to tasks, "total" to total, "completed" to completed))
     }
     
-    // Let's create a function to store new todo items that have been added via the front end
+    // Let's create a function to store a new todo item that have been added via a form.
     fun store(call: HttpCall) {
         
-        // Before we write the new todo task to the database, let's first validate to make sure there is data with at least 2 characters
-        // If validation fails, a message will be sent back to front end with the failure reasons
+        // Before we write the new todo task to the database, let's first validate to
+        // make sure there is data with at least 2 characters. If validationfails,
+        // a message will be sent back to the user with the failure reasons.
         call.applyRules("newTask") {
             required()
             min(2)
         }.validate() 
         
-        // If validation has passed, the next part will write new data to database
+        // If validation has passed, then create a new todo item in the databse
         Tasks.create() {
-            it.name to call.stringParam("newTask") // this pulls the todo text from the http call
+            // Get the name of the task that was passed
+            val taskName = call.stringParam("newTask")
+            it.name to taskname
         }
         
-        // If new todo task has successfully been written to db, a success message is sent back to front end
+        // If a new todo task has successfully been created and saved to the database,
+        // let's send a success message back to the user to let them know.
         flash("success", "Successfully added to-do")
         call.redirect().back()
     }
     
-    // Next up, let's create a function to delete a todo task
+    // Next up, let's create a function to delete a todo item
     fun delete(call: HttpCall) {
-        // We will get the todo tasks id that is marked for deletion and then remove todo from database
+        // We will get the todo tasks id that is marked for deletion
+        // and then remove that item from database
         val id = call.longParam("id").orAbort() 
         Tasks.delete { it.id eq id }
         flash("success", "Successfully removed to-do")
+
+        // Go back to the same page that the user came from
         call.redirect().back()
     }
     
-    // Lastly, let's create a function to update a todo task as being completed; or, to reverse completion state
+    // Lastly, let's create a function to update a todo task
+    // to make as either completed or uncompleted.
     fun update(call: HttpCall) {
+        // Get the intended boolean state of todo task as determined by a checkbox.
+        // If the checkbox was not checked this will return a null. 
+        
+        val markAsComplete = call.param("state") != null 
+
+        // The id of the todo item we are trying to update.
         val id = call.longParam("id").orAbort()
         
-        // Let's get the current boolean state of todo task and then change state
-        val markAsComplete = call.param("state") != null 
-        
+        // Update the item in the database to set the new completion state.
         Tasks.update { 
             it.completed to markAsComplete
-            where {
-                it.id eq id
-            }
+            where { it.id eq id }
         }
         
-        // Based on if markAsComplete is equal to 'True', let's flash the appropriate message
+        // Based on if markAsComplete is equal to 'True',
+        // let's flash the appropriate message.
         if (markAsComplete) {
             flash("success", "Successfully completed the to-do")
         } else {
@@ -306,22 +346,23 @@ class TaskController : Controller() {
     }
 }
 
-// For more information on Controllers, visit https://alpas.dev/docs/controllers#main
-
 ```
 
 </span>
 
+<div class="border-t mt-8"></div>
+
 <a name="setup-routes"></a>
 ### [Step 6: Setup your routes](#setup-routes)
 
+<div class="ordered-list">
 
 1. Navigate to the new **routes.kt** at **todolist > src > main > kotlin**
 2. Update the page to look like the following - check out the helper comments in the code 
 
+</div>
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/routes.kt">
-
 
 ```kotlin
 
@@ -359,15 +400,21 @@ private fun Router.apiRoutes() {
 
 </span>
 
+<div class="border-t mt-8"></div>
+
 <a name="migrate-table"></a>
 ### [Step 6: Migrate tables to database](#migrate-table)
 
 We are super close! Just a few more steps! In this step we will [create the to-do table and migrate](https://alpas.dev/docs/migrations#main) to the todolist database. 
 
+<div class="ordered-list">
 
 1. In terminal, type `./alpas make:migration create_tasks_table --create=tasks`<span class="clipboard" data-clipboard-text='./alpas make:migration create_tasks_table --create=tasks'></span> - this will create new data migration script
 2. In terminal, type `./alpas db:migrate`<span class="clipboard" data-clipboard-text='./alpas db:migrate'></span> this will migrate the tasks table and columns we created earlier to your checklist db - go ahead and check it out in Sequel Pro
 
+</div>
+
+<div class="border-t mt-8"></div>
 
 <a name="update-ui"></a>
 ### [Step 7: Update the front end](#update-ui)
@@ -417,12 +464,14 @@ In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resource
     <!-- This form is where the user enters the to-do item and makes a post request -->
     <form method="POST" action="{{ route('store') }}">
       <div class="form-group">
-        <!-- CSRF is a protection mechanism; view https://alpas.dev/docs/csrf-protection#main for more info -->
+        <!-- CSRF is a protection mechanism; 
+            view https://alpas.dev/docs/csrf-protection#main for more info -->
         {% csrf %}
-        <input type="text" class="form-control mt-2 w-1/3 py-3 px-2 bg-gray-200 rounded-sm" id="task" name="newTask"
-               autofocus="autofocus"
-               placeholder="Go fishin'">
-        <button type="submit" class="ml-2 p-3 px-8 inline-block bg-green-500 text-green-100">Add</button>
+        <input type="text" class="form-control mt-2 w-1/3 py-3 px-2 bg-gray-200 rounded-sm"
+            id="task" name="newTask" autofocus="autofocus" placeholder="Go fishin'">
+        <button type="submit" class="ml-2 p-3 px-8 inline-block bg-green-500 text-green-100">
+            Add
+        </button>
       </div>
       <!-- This checks to make sure to-do entry is a valid entry -->
       {% if hasError("newTask") %}
@@ -434,9 +483,7 @@ In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resource
   <div class="py-10">
     <!-- If no to-dos, display the following message -->
     {% if total == 0 %}
-      <div class="alert alert-warning">
-        Add some to-dos!
-      </div>
+      <div class="alert alert-warning"> Add some to-dos! </div>
     {% else %}
       <!-- If to-dos do exist, then we iterate on displaying each to-do item -->
       <div>
@@ -445,32 +492,20 @@ In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resource
             <li>
               <div class="flex pt-1">
                 <div class="pr-4">
-                  <!-- This form let's the user mark a todo task as completed or not and makes patch call to update database -->
+                  <!-- This form let's the user mark a todo task as completed or not 
+                        and makes patch call to update database -->
                   <form action="{{ route('update', {"id": task.id}) }}" method="POST">
                     {% csrf %}
                     <input type="hidden" name="_method" value="patch"/>
                     <input type="checkbox" name="state"
                            onChange="this.form.submit()" {{ task.completed ? 'checked' : '' }} />
-                    {# {% if task.completed %} #}
-                    {# {% csrf %} #}
-                    {# <input type="hidden" name="_method" value="patch"/> #}
-                    {# <input type="checkbox" onChange="this.form.submit()" checked /> #}
-                    {# {% else %} #}
-                    {# {% csrf %} #}
-                    {# <input type="hidden" name="_method" value="patch"/> #}
-                    {# <input type="checkbox" onChange="this.form.submit()" /> #}
-                    {# {% endif %} #}
                   </form>
                 </div>
 
                 {% if task.completed %}
-                  <div class="line-through">
-                    {{ task.name }}
-                  </div>
+                  <div class="line-through"> {{ task.name }} </div>
                 {% else %}
-                  <div class="">
-                    {{ task.name }}
-                  </div>
+                  <div class=""> {{ task.name }} </div>
                 {% endif %}
                 <div class="pl-3">
                   <!-- This form lets user delete a to-do task -->
@@ -478,8 +513,8 @@ In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resource
                     {% csrf %}
                     <input type="hidden" name="_method" value="delete"/>
                     <button class="hover:text-red-800 text-red-600 text-sm hover-target">
-                      remove
-                    </button>
+                    remove
+                   </button>
                   </form>
                 </div>
               </div>
@@ -499,16 +534,22 @@ In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resource
 
 </span>
 
+<div class="border-t mt-8"></div>
+
 <a name="run-app"></a>
 ### [Step 8: Run the to-do app and play around](#run-app)
 
+<div class="ordered-list">
+
 1. In IntelliJ, click **Run** to run app
 2. Once successfully running, click on the localhost to view the to-do list
+
+</div>
+
+<br/>
 
 **HURRAY!!! You created your very first Alpas app!!!** 🎉🎉🎉
 
 Now, play around with your new to-do list. 🕹
 
-
-[step3]: #setup-database
-
+<br/>

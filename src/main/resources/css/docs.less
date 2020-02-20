@@ -83,9 +83,6 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-re
   font-style: italic;
 }
 
-.algolia-autocomplete {
-@apply w-full;
-}
 
 @media screen and (max-width: 480px) {
   html, body {
@@ -96,6 +93,8 @@ body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-re
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+/* purgecss start ignore */
 
 br {
 @apply my-4;
@@ -109,9 +108,12 @@ br {
   opacity: 1;
 }
 
-/* purgecss start ignore */
+.algolia-autocomplete {
+@apply w-full;
+}
 
 .docs_content {
+
   span.clipboard {
   @apply w-3 ml-1 cursor-pointer;
   }
@@ -262,7 +264,7 @@ br {
 
   .ordered-list {
     ol {
-    @apply list-none leading-loose;
+    @apply list-none leading-loose m-0;
 
       &:first-of-type {
         counter-reset: item;
@@ -384,11 +386,10 @@ br {
   }
 
   .pure-table + p {
-    @apply mt-10;
+  @apply mt-10;
   }
 }
 
-/* purgecss end ignore */
 ul li {
 @apply mb-2;
 
@@ -446,6 +447,8 @@ strong {
     }
   }
 }
+
+/* purgecss end ignore */
 
 /* Wrapper */
 #wrapper {
