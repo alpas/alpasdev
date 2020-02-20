@@ -40,7 +40,7 @@ Don't worry about your skill level - this quick start guide is meant to provide 
 >- How to create a fun, yet useful to-do list! ✅
 >
 ></div>
-</span>
+
 
 And, this only scratches the surface of Alpas's features! 
 
@@ -52,9 +52,8 @@ And, this only scratches the surface of Alpas's features!
 Before moving to the first step, go through the following list and make sure you have everything you will need to get started. 
 Don't worry, everything you need is free to use! 
 
-- ✓ An Integrated Developer Environment (IDE) - we will be using the [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) Community version .
-- ✓ A GitHub account - If you don't have a GitHub account, [create an account here](https://github.com/join?source=header-home) .
-- <strike>✓ [Sourcetree](https://www.sourcetreeapp.com/) to manage your GIT Repo; we will also cover how to manage GIT directly through command line if you don't want to use Sourcetree.</strike>
+- ✓ An Integrated Developer Environment (IDE) - we will be using the [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) Community version
+- ✓ A GitHub account - If you don't have a GitHub account, [create an account here](https://github.com/join?source=header-home)
 - ✓ MySQL Server installed and running on your local machine.
     - &nbsp; &nbsp; &nbsp; &nbsp; - [Instructions for installing on Mac](https://tableplus.com/blog/2018/11/how-to-download-mysql-mac.html)
     - &nbsp; &nbsp; &nbsp; &nbsp; - [Instructions for installing on Windows](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html)
@@ -66,6 +65,10 @@ Don't worry, everything you need is free to use!
 <div class="border-t mt-8"></div>
 
 ### Let's Get Started!
+
+>/info/
+><span>If you have previously successfully used the starter template and served an Alpas app, jump ahead to 
+>[Step 3: Setup your database][step3]</span>
 
 <a name="setup"></a>
 ### [Step 1: Setup your environment](#setup)
@@ -87,7 +90,6 @@ The following steps are taken from the [Installation](/docs/installation#install
 <a name="github"></a>
 #### [Create to-do project on GitHub and clone to your local machine](#github)
 
-<div class="ordered-list">
 
 1. Go to the [Alpas Starter project](https://github.com/alpas/starter) on GitHub
 2. Click the green **Use this template** button
@@ -95,35 +97,17 @@ The following steps are taken from the [Installation](/docs/installation#install
 4. Click **Create repository from template** - you now copied the startup template to your GitHub account!
 5. On your new todolist repo page, select **Clone or download** 
 6. You will have an option to use HTTPS or SSH - let's use **HTTPS** for now
+7. Pull the repo down to your local 
 
-<strike>7. Select option to **Open in Desktop**</strike>
-
-<strike>8. If you have Sourcetree installed, this will prompt a message to open via Sourcetree, which you can select that option to continue</strike>
-
-</div>
-
-<strike>
-> /info/ <span>**If you'd rather use command line to clone your repo, perform the 
-> following steps instead of steps 5 thru 8 above.** 
-> 1. Open Command Line in Windows; or, Terminal for Mac
-> 2. Clone your repo by entering `git clone https://github.com/accountname/todolist.git`<span class="clipboard" data-clipboard-text='git clone https://github.com/accountname/todolist.git'></span> - swap **accountname** with your GitHub account's name
-> 3. Enter `git checkout master`<span class="clipboard" data-clipboard-text='git checkout master'></span> to checkout the master branch
-> 
-> Having fun using command line? Here is a list of [helpful GIT commands](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html). 
-> </span>
-
-</strike>
 
 <a name="configs"></a>
 #### [Open to-do project on your local machine and make some top level configs](#configs)
 
-<div class="ordered-list">
 
-
-1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**, on your machine <strike>- *note: it's likely under your user directory unless you placed the project somewhere else*</strike>
+1. Open IntelliJ and go to **File > Open** and find the root folder, **todolist**, on your machine
 2. Double click **todolist** to open 
 3. If you are prompted to **import Gradle**, go ahead and do so
-4. In IntelliJ, click on the **Terminal** tab (located towards the bottom left) **NOT ALWAYS**
+4. In IntelliJ, locate the **Terminal** tab 
 5. In the terminal, type in `chmod +x ./alpas`<span class="clipboard" data-clipboard-text='chmod +x ./alpas'></span> and hit return - this will make Alpas executable
 6. Next, in terminal, type `./alpas init com.todo.list`<span class="clipboard" data-clipboard-text='./alpas init com.todo.list'></span> and hit return - this will name your app
 7. While we are in terminal, type `./alpas help`<span class="clipboard" data-clipboard-text='./alpas help'></span> - this displays a list of commands you can run to find information about your app as well as provide quick actions such as creating new entities 
@@ -132,7 +116,6 @@ The following steps are taken from the [Installation](/docs/installation#install
 10. Right click on **start.kt** and select option to **Run**
 11. Once run is successful, click [http://localhost:8080/](http://localhost:8080/) to view the project in your browser
 
-</div>
 
 **TADA!** 🎉 - you are viewing the basic Alpas start screen. But, there is still a bit more to do to create your to-do list. Now that we have Alpas successfully installed and running
 on your machine, let's create your to-do list! 
@@ -144,7 +127,6 @@ Let's first start by creating a new database on your local machine. If you haven
 <a name="sequel-pro"></a>
 #### [Create the to-do database in Sequel Pro](#sequel-pro)
 
-<div class="ordered-list">
 
 1. Open **Sequel Pro**
 2. Add a new connection 
@@ -155,14 +137,12 @@ Let's first start by creating a new database on your local machine. If you haven
 7. Once connected to your local MySQL server, go to **Database > Add Database**
 8. Create a new database named **todolist**
 
-</div>
 
 That's all for now in Sequel Pro. We will add tables and fields during the next steps. 
 
 <a name="connect-db"></a>
 #### [Connect your to-do project to MySQL database](#connect-db)
 
-<div class="ordered-list">
 
 1. Go back to the to-do project up in IntelliJ
 2. Navigate to the **.env** file under the project root folder
@@ -172,20 +152,17 @@ That's all for now in Sequel Pro. We will add tables and fields during the next 
 6. Uncomment `// addConnections(env)` by removing `//`
 7. **Run** the project 
 
-</div>
 
 If you run and are able to successfully access [http://localhost:8080/](http://localhost:8080/), then congrats! You have successfully connected the project to your MySQL database. 
 
 <a name="setup-entity"></a>
 ### [Step 4: Setup your task entity](#setup-entity)
 
-<div class="ordered-list">
 
-1. In IntelliJ's terminal, type `./alpas make:entity task`<span class="clipboard" data-clipboard-text='./alpas make:entity task'></span> and tap return - this will create a new entity 'Task' and corresponding table
+1. In terminal, type `./alpas make:entity task`<span class="clipboard" data-clipboard-text='./alpas make:entity task'></span> and tap return - this will create a new entity 'Task' and corresponding table
  under **src > main > kotlin > entities** folder
-2. Update the page to look like the following - check out the helper comments in the code 
+2. Update **task.kt** to look like the following - check out the helper comments in the code 
 
-</div>
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/entities/Task.kt">
 
@@ -220,6 +197,8 @@ object Tasks : OzoneTable<Task>("tasks") {
     val completed by boolean("completed").default(false).bindTo { it.completed }
 }
 
+// for more information on Entities, visit https://alpas.dev/docs/entity-relationship#main
+
 ```
 
 </span>
@@ -227,13 +206,11 @@ object Tasks : OzoneTable<Task>("tasks") {
 <a name="setup-controller"></a>
 ### [Step 5: Setup your task controller](#setup-controller)
 
-<div class="ordered-list">
 
 1. In IntelliJ's terminal, type `./alpas make:controller TaskController`<span class="clipboard" data-clipboard-text='./alpas make:controller TaskController'></span> and tap return - this creates a 'TaskController'
-under **todolist > src > main > kotlin > controllers** folder.
-2. Update the class to look like the following - check out the helper comments in the code 
+under **todolist > src > main > kotlin > controllers** folder
+2. Update **TaskController.kt** to look like the following - check out the helper comments in the code 
 
-</div>
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/controllers/TaskController.kt">
 
@@ -263,9 +240,13 @@ class TaskController : Controller() {
         // call.reply("Hello, TaskController!")
 
         // add in the following
-        val tasks = Tasks.latest().toList()  // calls the database for all todo items
-        val total = tasks.size // referring to the previous call, this checks to see how many todos are in the database
-        val completed = tasks.count { it.completed } // now, we see how many of the total todos have been completed
+        
+        // calls the database for all todo items
+        val tasks = Tasks.latest().toList()  
+        // referring to the previous call, this checks to see how many todos are in the database
+        val total = tasks.size 
+        // now, we see how many of the total todos have been completed
+        val completed = tasks.count { it.completed } 
         
         // Now we will call the front end page template to display to the user, passing along the values we defined above
         call.render ("welcome", mapOf("tasks" to tasks, "total" to total, "completed" to completed))
@@ -275,10 +256,11 @@ class TaskController : Controller() {
     fun store(call: HttpCall) {
         
         // Before we write the new todo task to the database, let's first validate to make sure there is data with at least 2 characters
+        // If validation fails, a message will be sent back to front end with the failure reasons
         call.applyRules("newTask") {
             required()
             min(2)
-        }.validate() // If validation fails, a message will be sent back to front end with the failure reasons
+        }.validate() 
         
         // If validation has passed, the next part will write new data to database
         Tasks.create() {
@@ -324,6 +306,8 @@ class TaskController : Controller() {
     }
 }
 
+// For more information on Controllers, visit https://alpas.dev/docs/controllers#main
+
 ```
 
 </span>
@@ -331,12 +315,10 @@ class TaskController : Controller() {
 <a name="setup-routes"></a>
 ### [Step 6: Setup your routes](#setup-routes)
 
-<div class="ordered-list">
 
 1. Navigate to the new **routes.kt** at **todolist > src > main > kotlin**
 2. Update the page to look like the following - check out the helper comments in the code 
 
-</div>
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/routes.kt">
 
@@ -345,7 +327,8 @@ class TaskController : Controller() {
 
 package com.todo.list
 
-import com.todo.list.controllers.TaskController // Update WelcomeController to TaskController
+// Update WelcomeController to TaskController
+import com.todo.list.controllers.TaskController 
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
 
@@ -359,7 +342,8 @@ fun Router.addRoutes() = apply {
 }
 
 private fun RouteGroup.webRoutesGroup() {
-    get("/", TaskController::index).name("welcome") // Update WelcomeController to TaskController
+    // Update WelcomeController to TaskController
+    get("/", TaskController::index).name("welcome") 
 
     // Add the following routes
     post("/", TaskController::store).name("store")
@@ -380,12 +364,10 @@ private fun Router.apiRoutes() {
 
 We are super close! Just a few more steps! In this step we will [create the to-do table and migrate](https://alpas.dev/docs/migrations#main) to the todolist database. 
 
-<div class="ordered-list">
 
-1. In IntelliJ's terminal, type `./alpas make:migration create_tasks_table --create=tasks`<span class="clipboard" data-clipboard-text='./alpas make:migration create_tasks_table --create=tasks'></span> - this will create new data migration script
+1. In terminal, type `./alpas make:migration create_tasks_table --create=tasks`<span class="clipboard" data-clipboard-text='./alpas make:migration create_tasks_table --create=tasks'></span> - this will create new data migration script
 2. In terminal, type `./alpas db:migrate`<span class="clipboard" data-clipboard-text='./alpas db:migrate'></span> this will migrate the tasks table and columns we created earlier to your checklist db - go ahead and check it out in Sequel Pro
 
-</div>
 
 <a name="update-ui"></a>
 ### [Step 7: Update the front end](#update-ui)
@@ -528,5 +510,5 @@ In IntelliJ, open the **welcome.peb** file at **todolist > src > main > resource
 Now, play around with your new to-do list. 🕹
 
 
-[template]: https://github.com/alpas/starter
-[intellij]: https://www.jetbrains.com/idea/download
+[step3]: #setup-database
+
