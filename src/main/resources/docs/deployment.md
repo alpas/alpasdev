@@ -9,7 +9,7 @@ command and then copying the jar over to the root of your server.
 <a name="prerequsities"></a>
 ### [Prerequisites](#prerequsities)
 
-You can use any Linux server for deploying but we recommend Ubuntu 18.04 LTS or higher.
+You can use any Linux server for deploying, but we recommend Ubuntu 18.04 LTS or higher.
 Here are the pre-requisites for your deployment server.
 
 <div class="sublist">
@@ -21,7 +21,7 @@ Here are the pre-requisites for your deployment server.
 
 </div>
 
-You can use a tool like [Cleaver](https://getcleaver.com) to quickly provision a server and creating a new site
+You can use a tool like [Cleaver](https://getcleaver.com) to quickly provision a server and create a new site
 with SSL certificates ready to go.
 
 <a name="first-run"></a>
@@ -30,10 +30,13 @@ with SSL certificates ready to go.
 >/alert/<span>The following steps assume that your domain name is `example.com`, your app name is `example`, and
 >your web root folder for this app is under `/home/cleaver/example.com`. Make changes accordingly for your web app.
 
+On your provisioned server - 
+
 <div class="ordered-list">
 
 1. Install JRE: `sudo apt install openjdk-11-jre-headless` <span class="clipboard" data-clipboard-text='sudo apt install openjdk-11-jre-headless'></span>
-2. Create a service file `/etc/systemd/system/example.com.service` and paste the following contents:
+2. Create a service file `/etc/systemd/system/example.com.service` and paste the following contents - <strong>note:</strong> if you used Cleaver to provision
+your server, the file exists but you will need to modify it accordingly
 
 <span class="line-numbers" data-start="1" data-file="/etc/systemd/system/example.com.service">
 
@@ -58,7 +61,8 @@ WantedBy=multi-user.target
 
 </span>
 
-3. Create a nginx config file for your domain `/etc/nginx/sites-available/example.com` and paste the following:
+3. Create a nginx config file for your domain `/etc/nginx/sites-available/example.com` and paste the following - <strong>note:</strong>
+if the file already exists, you will need to make modifications accordingly 
 
 <span class="line-numbers" data-start="1" data-file="/etc/nginx/sites-available/example.com">
 
@@ -117,25 +121,25 @@ server {
 
 </span>
 
-Make note of the port number **9999** above in `proxy_pass  http://localhost:9999;`. You can change it to some random
+Make note of the port number **9999** above in `proxy_pass  http://localhost:9999;`. You can change it to any random
 port number but you'll need this port number value in your `.env` file later.
 
 4. Check to see if `/etc/nginx/sites-enabled/example.com` exists.
 
-If not, you need to create a link pointing to the above config file we created by running: `cd /etc/nginx/sites-enabled && ln -s ../sites-available/example.com .`
+If not, you need to create a link pointing to the above config file we created by running: `cd /etc/nginx/sites-enabled && ln -s ../sites-available/example.com` <span class="clipboard" data-clipboard-text='cd /etc/nginx/sites-enabled && ln -s ../sites-available/example.com'></span>.
 
-5. Now you need to these files from your local project folder over to remote `/home/cleaver/example.com` folder:
+5. Now you need to copy these files from your local project folder over to remote `/home/cleaver/example.com` folder:
 
 <div class="sublist">
 
 * app_log_config.xml
-* console_log.config.xml
+* console_log_config.xml
 * .env
 * example.jar
 
 </div>
 
-You can use `scp` command to copy from your local machine to remote machine. This is how we'd copy an `example.jar` file:
+You can use `scp` command to copy <strong>from your local machine</strong> to the remote server. This is how we'd copy an `example.jar` file (be sure to run `alpas jar` command in your project's root to create jar file):
 
 ```bash
 
@@ -160,11 +164,11 @@ APP_URL=example.com
 
 </span>
 
-7. Let's reload the service file: `sudo systemctl daemon-reload`,
-8. Let's test nginx config to make sure everything is good: `sudo service nginx configtest`. If this says **[ FAIL ]**, then
+7. Let's reload the service file: `sudo systemctl daemon-reload`<span class="clipboard" data-clipboard-text='sudo systemctl daemon-reload'></span>.
+8. Let's test nginx config to make sure everything is good: `sudo service nginx configtest`<span class="clipboard" data-clipboard-text='sudo service nginx configtest'></span>. If this says **[ FAIL ]**, then
 something is wrong in your nginx config file. Don't proceed before fixing it.
-9. If step 8 says **[ OK ]**, then run `sudo service nginx reload`.
-10. Let's restart the actual web app now `sudo service thatappshow.com restart`.
+9. If step 8 says **[ OK ]**, then run `sudo service nginx reload`<span class="clipboard" data-clipboard-text='sudo service nginx reload'></span>.
+10. Let's restart the actual web app now `sudo service example.com restart`<span class="clipboard" data-clipboard-text='sudo service example.com restart'></span>.
 
 Give it a couple of seconds and your site should now be available at `https://example.com`.
 
@@ -178,16 +182,16 @@ have to do is build your jar file locally, copy it over, and then restart the we
 
 <div class="ordered-list">
 
-1. To build the jar: `./alpas jar`.
-2. To copy the jar: `scp -i ~/.ssh/cleaver/<private-ssh-key> ./example.jar cleaver@<server-ip>:/home/cleaver/example.com/`.
-3. To restart the server (from within the remote server and as a root user): `sudo service thatappshow.com restart`.
+1. To build the jar: `./alpas jar`<span class="clipboard" data-clipboard-text='./alpas jar'></span>.
+2. To copy the jar: `scp -i ~/.ssh/cleaver/<private-ssh-key> ./example.jar cleaver@<server-ip>:/home/cleaver/example.com/`<span class="clipboard" data-clipboard-text='scp -i ~/.ssh/cleaver/<private-ssh-key> ./example.jar cleaver@<server-ip>:/home/cleaver/example.com/'></span>.
+3. To restart the server (from within the remote server and as a root user): `sudo service example.com restart`<span class="clipboard" data-clipboard-text='sudo service example.com restart'></span>.
 
 </div>
 
 <a name="troubleshooting"></a>
 ### [Troubleshooting](#troubleshooting)
 
-If you run into any issue, you can check the log files. Most of the times it is because you didn't use the correct
+If you run into any issues, you can check the log files. Most of the times it is because you didn't use the correct
 port number and somehow mis-configured your nginx config file. Run the following command to check the log messages 
 of your as they come in:
 
