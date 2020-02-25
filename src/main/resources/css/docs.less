@@ -139,6 +139,12 @@ br {
     }
   }
 
+  .bottom-nav {
+    a {
+      @apply border-none;
+    }
+  }
+
   code {
   @apply bg-gray-300 font-mono rounded text-sm text-indigo-800 inline-block tracking-wide;
     padding: .1rem .3rem;
@@ -214,20 +220,23 @@ br {
     }
   }
 
-  h1 + ul li {
-    > a::before {
-      content: "⸗ ";
-    @apply text-red-500 text-xl;
-    }
+  h1 + ul {
+    @apply text-base leading-normal;
+    li {
+      > a::before {
+        content: "⸗ ";
+      @apply text-red-500;
+      }
 
-    a {
-    @apply text-gray-700 font-medium border-none;
-    }
+      a {
+      @apply text-gray-700 font-medium border-none;
+      }
 
-    ul {
-      li {
-        a {
-        @apply text-gray-700 font-normal border-none;
+      ul {
+        li {
+          a {
+          @apply text-gray-700 font-normal border-none;
+          }
         }
       }
     }
@@ -420,15 +429,15 @@ strong {
 
   ul {
     li {
-    @apply mb-4;
+    @apply mb-8;
 
-      > a::before {
-        content: "⸗ ";
-      @apply text-red-500 text-xl font-bold;
-      }
+      //> a::before {
+      //  content: "⸗ ";
+      //@apply text-red-500 text-xl font-bold;
+      //}
 
       h4 {
-      @apply uppercase text-gray-600 font-medium;
+      @apply uppercase text-gray-600 font-semibold tracking-wide pb-2;
       }
 
       ul {
@@ -507,11 +516,11 @@ strong {
   -ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   position: relative;
-  width: 17em;
+  width: 14em;
 }
 
 #sidebar > .inner {
-  width: 17em;
+  width: 14em;
 }
 
 #sidebar .toggle {
@@ -520,7 +529,7 @@ strong {
   -ms-transition: left 0.5s ease;
   transition: left 0.5s ease;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  left: 17em;
+  left: 14em;
   outline: 0;
   overflow: hidden;
   position: absolute;
@@ -537,17 +546,17 @@ strong {
 }
 
 #sidebar.inactive {
-  margin-left: -17em;
+  margin-left: -14em;
 }
 
 @media screen and (min-width: 1281px) {
   #sidebar {
-    width: 24em;
+    width: 21em;
   }
 
   #sidebar > .inner {
     padding: 0;
-    width: 24em;
+    width: 21em;
   }
 
   #sidebar > .inner > .alt {
@@ -557,7 +566,7 @@ strong {
   }
 
   #sidebar .toggle {
-    left: 24em;
+    left: 21em;
     display: none;
   }
 
@@ -566,7 +575,7 @@ strong {
   }
 
   #sidebar.inactive {
-    margin-left: -24em;
+    margin-left: -21em;
   }
 }
 
