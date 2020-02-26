@@ -6,7 +6,7 @@ plugins {
 
 ext.kotlin_version = '1.3.61'
 ext.flexmark_version = '0.60.2'
-ext.alpas_version = '0.15.0'
+ext.alpas_version = '0.15.2'
 
 startScripts {
     applicationName = 'alpasdev'
@@ -15,7 +15,7 @@ startScripts {
 mainClassName = 'dev.alpas.alpasdev.StartKt'
 
 group 'dev.alpas.alpasdev'
-version '0.19.2'
+version '0.19.3'
 
 repositories {
     jcenter()
