@@ -87,12 +87,12 @@
             </h1>
             <div class="max-w-2xl text-xl md:text-2xl mt-16 text-indigo-100 leading-chill">
               <p>
-                Alpas is a batteries-included yet a modular web framework for Kotlin with a very strong
+                Alpas is a batteries-included, yet a modular, web framework for Kotlin with a very strong
                 focus on
                 developers' productivity.
               </p>
               <p class="mt-5">
-                The main goal of Alpas is to get you started quickly and enable you to move faster while
+                The main goal of Alpas is to get you started quickly and enable you to move fast while
                 letting you enjoy doing what you are the best at — crafting a delightful web app.
               </p>
               <p class="mt-5">
@@ -128,7 +128,7 @@
         </h2>
         <div class="self-center max-w-3xl">
           <p class="text-xl mt-4 lg:mt-10">
-            Alpas strives to be simple and elegant and wants to serve you whether you have written any JVM
+            Alpas strives to be simple and elegant and wants to serve you whether you have written JVM
             based web apps before or not. There is no xml or properties files to configure, no scattered
             annotations to memorize, and best of all — there is no huge learning curve to
             <a class="primary" href="{{ route('docs.index', ['installation']) }}">get started</a>!
@@ -168,7 +168,7 @@
                 it remains flexible for you to <a class="primary" href="/docs/service-providers">extend
                   it</a> to make it more powerful than it already is.
               </p>
-              <p class="mt-5">We have sweated picking the good parts, so you don’t have to!</p>
+              <p class="mt-5">We have sweated hand crafting the good parts, so you don’t have to!</p>
               <p class="mt-5">Alpas is also <a class="primary" href="/docs/service-providers">very
                   modular</a>
                 so you still have the authority to choose what you like and don't like. Create an
