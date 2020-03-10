@@ -3,7 +3,7 @@
 - [Retrieving Request Parameters](#parameters)
 - [Retrieving Headers](#headers)
 - [Retrieving Cookies](#cookies)
-- [Form Method Spoofing](#spoofing)
+- [Asynchronous Request](#asynchronous-request)
 
 Alpas wraps every request that hits your app with an `HttpCall` object. `HttpCall` is no doubt the most powerful
 object in Alpas. It has everything you need to get any data and operations you need out of a request.
@@ -189,28 +189,54 @@ call.cookie["username"]
 > /info/ <span> Alpas encrypts and signs almost all of your outgoing cookies and decrypts them when it receives a 
 > request. If the cookies are changed by the client, they will be invalidated and removed automatically as well.
 
-<a name="spoofing"></a>
-### [Form Method Spoofing](#spoofing)
+<a name="asynchronous-request"></a>
+### [Asynchronous Request](#asynchronous-request)
 
-HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DELETE**. To use these methods in your form
-so that the correct route gets matched, you need to spoof it by passing a hidden field named `_method` with your form.
+Alpas supports asynchronous request processing by passing a `CompletableFuture` instance to the `HttpCall#hold()` method.
 
-For your convenience, Alpas also somes with a `{{ spoof() }}` view function that you can use to create the hidden field
-for you. `spoof()` takes the name of the method you want to spoof — one of **PUT**, **PATCH**, or, **DELETE** methods.
+<span class="line-numbers" data-start="6">
 
-<span class="line-numbers" data-start="20">
+```kotlin
 
-```twig
+// ...
 
-<form action="/docs" method="post">
-    {{ spoof('delete') }}
-    {# <input type="hidden" name="_method" value="delete"/> #}
-    <button type="submit">Delete</button>
-</form>
+fun store(call: HttpCall) {
+    call.hold(delay(1000))
+}
+
+private val executorService: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+private fun delay(sleep: Int) : CompletableFuture<String> {
+    return CompletableFuture<String>().apply {
+        executorService.schedule({ complete("ok") }, sleep, TimeUnit.MILLISECONDS)
+    }
+}
 
 ```
 
 </span>
 
-Method spoofing is enabled by default. But you can disable it by setting `allowMethodSpoofing`
-property to `false` in your `AppConfig` class.>
+Your completable future must be either of type `String` or an object of a class implementing `dev.alpas.http.Response`
+interface. So, if you want to render a template asynchronously, you have to return an instance of `ViewResponse`,
+which already implements the `Response` interface. Similarly, there is `JsonResponse` class for returning
+back something to the client as a JSON object.
+
+<span class="line-numbers" data-start="6">
+
+```kotlin
+
+// ...
+
+fun store(call: HttpCall) {
+    call.hold(delay(1000))
+}
+
+private val executorService: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
+private fun delay(sleep: Int) : CompletableFuture<ViewResponse> {
+    return CompletableFuture<ViewResponse>().apply {
+        executorService.schedule({ complete(ViewResponse("welcome")) }, sleep, TimeUnit.MILLISECONDS)
+    }
+}
+
+```
+
+</span>
