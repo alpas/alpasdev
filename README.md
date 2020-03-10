@@ -8,7 +8,7 @@
 
 #### **New to Alpas?** Read [the docs][alpas-docs] or follow a full tutorial on [Building a web app from scratch to finish with Alpas + Kotlin][devto-tutorial].
 
-Alpas is a batteries-included yet a modular web framework for Kotlin with a very strong focus on developers'
+Alpas is a batteries-included, yet a modular web framework for Kotlin with a very strong focus on developers'
 productivity. The main goal of Alpas is to get you started quickly and enable you to move faster
 while letting you enjoy doing what you are the best at — crafting a delightful web app.
 
