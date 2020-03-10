@@ -469,16 +469,19 @@ fun Router.addRoutes() {
 <a name="spoofing"></a>
 ### [Form Method Spoofing](#spoofing)
 
-HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DELETE**. To use these methods
-in your form so that the correct route gets matched, you need to spoof it by passing a hidden field named
-`_method` with your form.
+HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DELETE**. To use these methods in your form
+so that the correct route gets matched, you need to spoof it by passing a hidden field named `_method` with your form.
+
+For your convenience, Alpas also somes with a `{{ spoof() }}` view function that you can use to create the hidden field
+for you. `spoof()` takes the name of the method you want to spoof — one of **PUT**, **PATCH**, or, **DELETE** methods.
 
 <span class="line-numbers" data-start="20">
 
-```html
+```twig
 
 <form action="/docs" method="post">
-    <input type="hidden" name="_method" value="delete"/>
+    {{ spoof('delete') }}
+    {# <input type="hidden" name="_method" value="delete"/> #}
     <button type="submit">Delete</button>
 </form>
 
