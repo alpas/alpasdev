@@ -472,7 +472,7 @@ fun Router.addRoutes() {
 HTTP forms only support **GET** or **POST** but not **PUT**, **PATCH**, or **DELETE**. To use these methods in your form
 so that the correct route gets matched, you need to spoof it by passing a hidden field named `_method` with your form.
 
-For your convenience, Alpas also comes with a `{{ spoof() }}` view function that you can use to create the hidden field
+For your convenience, Alpas also somes with a `{{ spoof() }}` view function that you can use to create the hidden field
 for you. `spoof()` takes the name of the method you want to spoof — one of **PUT**, **PATCH**, or, **DELETE** methods.
 
 <span class="line-numbers" data-start="20">
