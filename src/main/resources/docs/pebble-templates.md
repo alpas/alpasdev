@@ -18,6 +18,7 @@
     - [Creating Pebble Extensions](#creating-pebble-extensions)
     - [Adding Custom Tags](#adding-custom-tags)
     - [Adding Custom Conditional Tags](#adding-custom-conditional-tags)
+    - [Adding Custom Functions](#adding-custom-functions)
 - [Global Variables](#global-variables)
 - [Syntax Highlighting](#syntax-highlighting)
 
@@ -717,6 +718,33 @@ You can now use this conditional `dev` tag anywhere in your templates.
 </div>
 
 ```
+<a name="adding-custom-functions"></a>
+#### [Adding Custom Functions](#adding-custom-functions)
+
+You can also register your custom function easily with Alpas by just overriding an overloaded `register` method.
+Function is very similar to a tag but it outputs some text and accepts zero or multiple arguments.
+
+Here is how the `{{ spoof() }}` method is actually implemented in Alpas.
+
+<span class="line-numbers" data-start="12" data-file="MyPebbleExtension.kt">
+
+```kotlin
+
+class MyPebbleExtension : PebbleExtension() {
+    override fun register(app: Application, customFunctions: CustomFunctions) {
+        customFunctions.add("spoof", listOf("method")) {
+
+            val method = args?.get("method")
+                ?: throw Exception("spoof() function requires the name of the method to spoof")
+
+            """<input type="hidden" name="_method" value="${method.toString().toLowerCase()}">"""
+        }
+    }
+}
+
+```
+
+</span>
 
 <a name="syntax-highlighting"></a>
 ### [Syntax Highlighting](#syntax-highlighting)
