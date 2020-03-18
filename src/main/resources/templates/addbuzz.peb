@@ -1,0 +1,31 @@
+{% extends 'layout/app.peb' %}
+
+{% block title %} Delightful Web Development in Kotlin {% endblock %}
+
+{% block content %}
+<div class="section-simple">
+    <div class="px-4 lg:px-6 xl:px-10 py-6 flex container max-w-1/3 mx-auto">
+        <form method="POST" class="w-full" action="{{ route('submit') }}">
+            <div class="py-2">
+                {% csrf %}
+                <input type="text" name="title" class="border-solid border-4 border-gray-600 form-input" style="outline: solid !important" placeholder="title">
+            </div>
+            <div class="py-2">
+                <input type="text" name="url" class="border-solid border-4 border-gray-600" style="outline: solid !important" placeholder="https://honeybuzz.com">
+            </div>
+            <div class="py-2">
+                <textarea class="w-full" name="body" rows="10" cols="10" style="outline: solid !important"></textarea>
+            </div>
+            <div>
+            <a class="text-sm uppercase" href="/buzz/1">
+                cancel
+            </a>
+            <button class="text-white text-sm hover-target uppercase" style="background-color:green; padding:4 4 4 4; margin-left:10px">
+                save
+            </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

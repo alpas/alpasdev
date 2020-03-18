@@ -1,0 +1,74 @@
+<nav class="flex container mx-auto pt-4 lg:pt-16 lg:items-center flex-col-reverse lg:flex-row">
+  <div class="flex-grow text-gray-100 mt-12 lg:mt-0">
+    <a href="/">
+    {% include '_alpas.peb' with {"width": "170px"} %}
+    </a>
+  </div>
+  <div class="flex items-center">
+    <ul class="text-lg items-center">
+      <li class="font-semibold">
+        <a href="https://fireplace.alpas.dev"
+           class="hover:text-indigo-200 text-yellow-100 uppercase">
+          <div class="flex">
+            <svg class="h-4 inline-block self-center text-indigo-200" viewBox="0 0 640 512"
+                 aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                    d="M32,512 L128,512 L128,384 C128,278 214,192 320,192 C426,192 512,278 512,384 L512,512 L608,512 L608,128 L32,128 L32,512 Z"
+                    fill="currentColor" fill-rule="nonzero"></path>
+                <g transform="translate(204.800000, 256.000000)" fill-rule="nonzero">
+                  <path
+                      d="M137.5,55.6 C123.5,36.8 106.1,17.8 86.4,0 C35.9,45.6 4.26325641e-14,105 4.26325641e-14,140.8 C4.26325641e-14,204.4 51.6,256 115.2,256 C178.8,256 230.4,204.4 230.4,140.8 C230.4,114.2 203.7,59.2 166.4,25.6 C155.7,35.2 146,45.4 137.5,55.6 Z"
+                      fill="#D02702"></path>
+                  <path
+                      d="M153,192.5 C142.4,200.2 129.3,204.8 115.2,204.8 C79.9,204.8 51.2,180.4 51.2,140.8 C51.2,121.1 63.1,103.7 86.8,74 C90.2,78.1 135.1,138.1 135.1,138.1 L163.8,103.9 C165.8,107.4 167.7,110.8 169.3,114.1 C182.7,140.7 177.1,174.9 153,192.5 Z"
+                      fill="#F8E71C"></path>
+                </g>
+                <path
+                    d="M624,0 L16,0 C7.2,0 0,7.2 0,16 L0,80 C0,88.8 7.2,96 16,96 L624,96 C632.8,96 640,88.8 640,80 L640,16 C640,7.2 632.8,0 624,0 Z"
+                    id="Path" fill="currentColor" fill-rule="nonzero"></path>
+              </g>
+            </svg>
+            <span class="ml-2">Fireplace</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <ul class="text-lg hidden lg:inline-flex items-center ml-6">
+      <li class="font-semibold">
+        <a href="/buzz" title="Read the buzz"
+           class="hover:text-indigo-200 text-yellow-100 uppercase">Buzz</a>
+      </li>
+      <li class="font-semibold ml-6">
+        <a href="/docs" title="Read the Docs"
+           class="hover:text-indigo-200 text-yellow-100 uppercase">Docs</a>
+      </li>
+    </ul>
+    <div class="ml-8 inline-block flex-1">
+      <div class="relative">
+        <input id="algolia"
+               class="bg-transparent focus:outline-none text-lg rounded-none
+                       placeholder-indigo-100 focus:placeholder-indigo-100 py-2 text-white
+                       pl-10 block appearance-none leading-normal
+                       border-b border-indigo-200 focus:border-indigo-100 w-full"
+               type="text"
+               placeholder="Search the docs"
+               autocomplete="off"
+               spellcheck="false"
+               role="combobox"
+               aria-autocomplete="list"
+               aria-expanded="false"
+               aria-label="search input"
+               aria-owns="algolia-autocomplete-listbox-0"
+               dir="auto">
+        <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+          <svg class="fill-current pointer-events-none text-indigo-500 w-4 h-4"
+               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path
+                d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

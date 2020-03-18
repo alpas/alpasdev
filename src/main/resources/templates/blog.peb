@@ -1,0 +1,79 @@
+{% extends 'layout/app.peb' %}
+
+{% block title %} Delightful Web Development in Kotlin {% endblock %}
+
+{% block content %}
+
+  <div class="leading-loose">
+    <div class="section-intro">
+      <div class="intro-bg bg-contain bg-no-repeat bg-center px-8 xl:px-0">
+
+        {% include '_nav.peb' %}
+
+        <div class="flex flex-row container justify-center mx-auto">
+
+            <h1 class="text-3xl md:text-4xl xl:text-5xl my-16 xl:mt-20 text-indigo-200 font-semibold
+                    italic">
+              All of the buzz in the galaxy... ✨
+            </h1>
+
+        </div>
+      </div>
+      <div class="intro-clouds h-20 lg:h-48 md:h-32 bg-cover bg-no-repeat"></div>
+    </div>
+    <div class="mt-10">
+      <div class="section-simple">
+
+        <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto" >
+          <a href="/buzz/freshhoney" class=" uppercase text-white font-bold text-center" style="background-color:#48bb78">Spreadda BUZZ 🐝</a>
+        </div>
+      </div>
+
+      {% for blog in blogs %}
+
+      <div class="section-simple">
+        <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
+          <div class="flex">
+          <form action="{{ route('edit', {"id": blog.id}) }}" method="GET">
+            <button class="text-sm uppercase">
+              Edit
+            </button>
+          </form>
+            <form action="{{ route('delete', {"id": blog.id}) }}" method="POST">
+            {% csrf %}
+            {{ spoof('delete') }}
+              <button class="hover:text-red-800 text-red-600 text-sm hover-target uppercase">
+                remove
+              </button>
+            </form>
+          </div>
+          <h3 class="text-2xl lg:text-3xl text-indigo-700 hover:text-indigo-500 font-semibold uppercase leading-snug">
+            <a href="{{ blog.url }}" target="_blank">
+              <span class="underline">{{ blog.title }}</span>
+            </a>
+          </h3>
+          <span class="text-sm">
+            {{ blog.createdAt }}
+          </span>
+          <p class="text-lg">
+            {{ blog.body | raw }}
+          </p>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+
+    <div class="section-simple">
+      <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
+    {% include '_pagination.peb' %}
+      </div>
+    </div>
+
+
+  {% include '_footer.peb' %}
+
+  </div>
+
+{% endblock %}
