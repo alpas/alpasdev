@@ -114,7 +114,7 @@ by overriding `fun afterLogoutRedirectTo(call: HttpCall)` method.
    
 Handles user registration.
 
-`auth/rgister.peb` template is used for showing the registration form. If you want to use
+`auth/register.peb` template is used for showing the registration form. If you want to use
 a different template or want to pass some extra arguments, you need to override
 `fun showRegistrationForm(call: HttpCall)` method and call `call.render()`
 method yourself.
