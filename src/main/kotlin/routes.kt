@@ -1,16 +1,22 @@
 package dev.alpas.alpasdev
 
+import dev.alpas.Environment
 import dev.alpas.alpasdev.controllers.*
 import dev.alpas.auth.authRoutes
 import dev.alpas.routing.Router
 
 fun Router.addRoutes() = apply {
     webRoutes()
-    authRoutes(requireEmailVerification = false)
+    authRoutes(requireEmailVerification = false, allowPasswordReset = false, addHomeRoute = false)
 }
 
 private fun Router.webRoutes() {
-    get<HomeController>().name("welcome")
+
+    get("/home") {
+        redirect().toRouteNamed("home")
+    }
+
+    get("/", HomeController::index).name("home")
     get("docs/<page>", DocsController::show).name("docs.show")
     get<DocsController>("docs").name("docs.index")
     get<NewsletterController>("newsletter").name("newsletter")
