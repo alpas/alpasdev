@@ -10,6 +10,11 @@ interface User : BaseUser<User> {
     override val mustVerifyEmail get() = true
 
     companion object : OzoneEntity.Of<User>()
+
+    fun isAdmin(): Boolean {
+        return email in listOf("admin@alpas.dev")
+    }
+
 }
 
 // https://alpas.dev/docs/ozone#dsl

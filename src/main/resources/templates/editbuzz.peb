@@ -3,35 +3,44 @@
 {% block title %} Delightful Web Development in Kotlin {% endblock %}
 
 {% block content %}
-<div class="section-simple">
-    <div class="px-4 lg:px-6 xl:px-10 py-6 flex container max-w-1/3 mx-auto">
-        <form method="POST" class="w-full" action="{{ route('update', {"id": blog.id}) }}">
+
+<div class="section-simple pt-20">
+    <div class="p-8 lg:px-6 xl:px-10 flex flex-col justify-left max-w-2xl mx-auto bg-gray-300" >
+        <form method="POST" class="w-full" action="{{ route('buzz.update', {"id": blog.id}) }}">
             <div class="py-2">
-                {% csrf %}
-                <input type="text" name="title" class="border-solid border-4 border-gray-600 form-input" style="outline: solid !important" placeholder="title" value="{{ blog.title }}">
+                {{ spoof('PATCH') }}
+            {% csrf %}
+                <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="title" value="{{ blog.title }}" required>
             </div>
             <div class="py-2">
-                <input type="text" name="url" class="border-solid border-4 border-gray-600 form-input" style="outline: solid !important" value="{{ blog.url }}">
+                <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" value="{{ blog.url }}" required>
             </div>
+            <!--
             <div class="py-2">
-            <textarea class="w-full" name="body" style="outline: solid !important">{{ blog.body }}</textarea>
+              <input type="date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full">
             </div>
+            -->
             <div class="py-2">
-            <a class="text-sm uppercase" href="/buzz/1">
-                cancel
-            </a>
-            {{ spoof('patch') }}
-            <button class="text-white text-sm hover-target uppercase" style="background-color:green; padding:4 4 4 4; margin-left:10px">
-                save
-            </button>
+                <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" required>{{ blog.body }}</textarea>
+            </div>
+            <div>
+
+            </div>
+            <div class="flex justify-end pt-2">
+                <button class="text-sm uppercase mx-4 newBuzz-close" type="button" onclick="goBack()">cancel</button>
+                <button class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Save</button>
             </div>
         </form>
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#flash').fadeOut(5000); // 5 seconds x 1000 milisec = 5000 milisec
-    });
-</script>
+{% endblock %}
+
+
+{% block pagescripts %}
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
 {% endblock %}

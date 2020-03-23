@@ -6,7 +6,7 @@ import dev.alpas.routing.Controller
 import dev.alpas.routing.ControllerMiddleware
 
 class HomeController : Controller() {
-    override fun middleware(call: HttpCall) = listOf(ControllerMiddleware(VerifiedEmailOnlyMiddleware::class))
+    //override fun middleware(call: HttpCall) = listOf(ControllerMiddleware(VerifiedEmailOnlyMiddleware::class))
 
     fun index(call: HttpCall) {
         call.render("home")

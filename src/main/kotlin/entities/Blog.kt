@@ -1,6 +1,7 @@
 package dev.alpas.alpasdev.entities
 
 import dev.alpas.ozone.*
+import me.liuwj.ktorm.schema.timestamp
 import java.time.Instant
 
 interface Blog : OzoneEntity<Blog> {
@@ -18,5 +19,5 @@ object Blogs : OzoneTable<Blog>("blogs") {
     val title by string("title").size(200).nullable().bindTo { it.title }
     val url by string("url").size(150).nullable().bindTo { it.url }
     val body by string("body").size(150).nullable().bindTo { it.body }
-    val createdAt by createdAt()
+    val createdAt by timestamp("created_at").nullable().bindTo { it.createdAt }
 }

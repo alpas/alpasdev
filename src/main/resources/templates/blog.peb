@@ -2,6 +2,18 @@
 
 {% block title %} Delightful Web Development in Kotlin {% endblock %}
 
+{% block pagestyle %}
+  <style>
+    .newBuzz {
+      transition: opacity 0.25s ease;
+    }
+
+    .display-none {
+        display:none;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
 
   <div class="leading-loose">
@@ -14,56 +26,87 @@
 
             <h1 class="text-3xl md:text-4xl xl:text-5xl my-16 xl:mt-20 text-indigo-200 font-semibold
                     italic">
-              All of the buzz in the galaxy... ✨
+              The best buzz in the galaxy... ✨
             </h1>
 
         </div>
       </div>
       <div class="intro-clouds h-20 lg:h-48 md:h-32 bg-cover bg-no-repeat"></div>
     </div>
-    <div class="mt-10">
-      <div class="section-simple">
 
-        <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto" >
-          <a href="/buzz/freshhoney" class=" uppercase text-white font-bold text-center" style="background-color:#48bb78">Spreadda BUZZ 🐝</a>
-        </div>
+    {% admin %}
+    <div class="section-simple">
+      <div class="px-4 lg:px-6 xl:px-10 flex flex-col container justify-left max-w-3xl mx-auto" >
+        <button class="newBuzz-open px-4 bg-orange-500 p-3 text-white font-bold hover:bg-orange-400">Spreadda Buzz 🐝</button>
       </div>
-
-      {% for blog in blogs %}
-
-      <div class="section-simple">
-        <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
-          <div class="flex">
-          <form action="{{ route('edit', {"id": blog.id}) }}" method="GET">
-            <button class="text-sm uppercase">
-              Edit
-            </button>
-          </form>
-            <form action="{{ route('delete', {"id": blog.id}) }}" method="POST">
-            {% csrf %}
-            {{ spoof('delete') }}
-              <button class="hover:text-red-800 text-red-600 text-sm hover-target uppercase">
-                remove
-              </button>
-            </form>
-          </div>
-          <h3 class="text-2xl lg:text-3xl text-indigo-700 hover:text-indigo-500 font-semibold uppercase leading-snug">
-            <a href="{{ blog.url }}" target="_blank">
-              <span class="underline">{{ blog.title }}</span>
-            </a>
-          </h3>
-          <span class="text-sm">
-            {{ blog.createdAt }}
-          </span>
-          <p class="text-lg">
-            {{ blog.body | raw }}
-          </p>
-        </div>
-      </div>
-
-      {% endfor %}
     </div>
 
+    <div class="newBuzz opacity-0 pointer-events-none display-none section-simple mt-4">
+      <div class="p-8 lg:px-6 xl:px-10 flex flex-col justify-left max-w-2xl mx-auto bg-gray-300" >
+        <form method="POST" class="w-full" action="{{ route('buzz.submit') }}">
+          <div class="py-2">
+          {% csrf %}
+            <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="title" required>
+          </div>
+          <div class="py-2">
+            <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" required>
+          </div>
+          <!--
+          <div class="py-2">
+            <input type="date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full">
+          </div>
+          -->
+          <div class="py-2">
+            <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" required></textarea>
+          </div>
+          <div>
+
+          </div>
+          <div class="flex justify-end pt-2">
+            <button class="text-sm uppercase mx-4 newBuzz-close" type="button">cancel</button>
+            <button class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  {% endadmin %}
+
+  {% for blog in blogs %}
+
+  <div class="section-simple">
+    <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
+    {% admin %}
+      <div class="flex">
+      <form action="{{ route('buzz.edit', {"id": blog.id}) }}" method="GET">
+        <button class="hover:text-blue-800 text-blue-600 text-sm hover-target uppercase">
+          Edit
+        </button>
+      </form>
+        <form action="{{ route('buzz.delete', {"id": blog.id}) }}" method="POST">
+        {% csrf %}
+        {{ spoof('delete') }}
+          <button class="hover:text-red-800 text-red-600 text-sm hover-target ml-4 uppercase">
+            remove
+          </button>
+        </form>
+      </div>
+      {% endadmin %}
+      <h3 class="text-xl text-blue-700 hover:text-blue-500 font-semibold uppercase leading-snug">
+        <a href="{{ blog.url }}" target="_blank">
+          {{ blog.title }}
+        </a>
+      </h3>
+      <span class="text-sm text-gray-600">
+        {{ blog.createdAt | ago }}
+      </span>
+      <p class="text-lg">
+        {{ blog.body | raw }}
+      </p>
+    </div>
+  </div>
+
+  {% endfor %}
 
     <div class="section-simple">
       <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
@@ -71,9 +114,32 @@
       </div>
     </div>
 
-
   {% include '_footer.peb' %}
 
   </div>
 
+{% endblock %}
+
+{% block pagescripts %}
+  <script>
+    var openNewBuzz = document.querySelectorAll('.newBuzz-open')
+    for (var i = 0; i < openNewBuzz.length; i++) {
+      openNewBuzz[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleOpenBuzz()
+      })
+    }
+
+    var closeNewBuzz = document.querySelectorAll('.newBuzz-close')
+    for (var i = 0; i < closeNewBuzz.length; i++) {
+      closeNewBuzz[i].addEventListener('click', toggleOpenBuzz)
+    }
+
+    function toggleOpenBuzz () {
+      const newBuzz = document.querySelector('.newBuzz')
+      newBuzz.classList.toggle('opacity-0')
+      newBuzz.classList.toggle('pointer-events-none')
+      newBuzz.classList.toggle('display-none')
+    }
+  </script>
 {% endblock %}
