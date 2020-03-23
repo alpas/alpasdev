@@ -12,9 +12,8 @@ interface User : BaseUser<User> {
     companion object : OzoneEntity.Of<User>()
 
     fun isAdmin(): Boolean {
-        return email in listOf("admin@alpas.dev")
+        return email in listOf("adam.miedema@gmail.com", "ashokgelal@gmail.com")
     }
-
 }
 
 // https://alpas.dev/docs/ozone#dsl

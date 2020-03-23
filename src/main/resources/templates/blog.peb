@@ -37,7 +37,7 @@
     {% admin %}
     <div class="section-simple">
       <div class="px-4 lg:px-6 xl:px-10 flex flex-col container justify-left max-w-3xl mx-auto" >
-        <button class="newBuzz-open px-4 bg-orange-500 p-3 text-white font-bold hover:bg-orange-400">Spreadda Buzz 🐝</button>
+        <button class="newBuzz-open px-4 bg-orange-500 p-3 text-white font-bold hover:bg-orange-400" onClick="get_now_datetime()">Spreadda Buzz 🐝</button>
       </div>
     </div>
 
@@ -51,11 +51,9 @@
           <div class="py-2">
             <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" required>
           </div>
-          <!--
           <div class="py-2">
-            <input type="date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full">
+            <input type="datetime-local" id="buzz-date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full">
           </div>
-          -->
           <div class="py-2">
             <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" required></textarea>
           </div>
@@ -141,5 +139,16 @@
       newBuzz.classList.toggle('pointer-events-none')
       newBuzz.classList.toggle('display-none')
     }
+  </script>
+
+  <script>
+    function get_now_datetime()
+        {
+            var myField = document.getElementById("buzz-date");
+            var now = new Date();
+            now.setSeconds(0,0);
+            now.toISOString();
+            myField.valueAsNumber = now.getTime() - now.getTimezoneOffset() * 60000;
+        }
   </script>
 {% endblock %}

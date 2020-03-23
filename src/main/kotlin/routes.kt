@@ -6,12 +6,12 @@ import dev.alpas.auth.authRoutes
 import dev.alpas.routing.RouteGroup
 import dev.alpas.routing.Router
 
-fun Router.addRoutes() = apply {
+fun Router.addRoutes(env: Environment) = apply {
     group {
         webRoutesGroup()
     }.middlewareGroup("web")
 
-    authRoutes(requireEmailVerification = false, allowPasswordReset = false, addHomeRoute = false)
+    authRoutes(allowRegistration = env("ALLOW_REGISTRATION", false), requireEmailVerification = false, allowPasswordReset = false, addHomeRoute = false)
 }
 
 
