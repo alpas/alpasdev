@@ -45,14 +45,6 @@
 
 {% include '_algolia_footer.peb' %}
 
-<div class="fixed bottom-0 right-0">
-{% if hasFlash('success') %}
-    <div class="right-0 text-white bg-green-500 py-2 px-4 text-center mb-8 mr-8" id="flash">
-    {{ flash('success') }}
-    </div>
-{% endif %}
-</div>
-
 {% block pagescripts %} {% endblock %}
 
 <script>

@@ -5,6 +5,7 @@ import dev.alpas.routing.Controller
 import dev.alpas.alpasdev.entities.Blogs
 import dev.alpas.ozone.latest
 import dev.alpas.alpasdev.actions.pagination
+import dev.alpas.alpasdev.guards.BlogGuard
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
 import dev.alpas.validation.required
@@ -36,23 +37,7 @@ class BlogController : Controller() {
 
     fun submit(call: HttpCall) {
 
-        call.applyRules("title") {
-            required()
-        }
-
-        call.applyRules("url") {
-            required()
-        }
-
-        call.applyRules("createdAt") {
-            required()
-        }
-
-        call.applyRules("body") {
-            required()
-        }
-
-        call.validate()
+        call.validateUsing(BlogGuard::class)
 
         val createdAt = getDateTime(call.stringParam("createdAt"))
 
@@ -78,23 +63,7 @@ class BlogController : Controller() {
 
     fun update(call: HttpCall) {
 
-        call.applyRules("title") {
-            required()
-        }
-
-        call.applyRules("url") {
-            required()
-        }
-
-        call.applyRules("createdAt") {
-            required()
-        }
-
-        call.applyRules("body") {
-            required()
-        }
-
-        call.validate()
+        call.validateUsing(BlogGuard::class)
 
         val createdAt = getDateTime(call.stringParam("createdAt"))
         val id = call.longParam("id").orAbort()

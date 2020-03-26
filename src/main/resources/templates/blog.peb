@@ -40,16 +40,16 @@
         <form method="POST" class="w-full" action="{{ route('buzz.submit') }}">
           <div class="py-2">
           {% csrf %}
-            <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="title" required>
+            <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="title" value="{{ old('title') }}" required>
           </div>
           <div class="py-2">
-            <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" required>
+            <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" value="{{ old('url') }}" required>
           </div>
           <div class="py-2">
-            <input type="datetime-local" id="buzz-date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full">
+            <input type="datetime-local" id="buzz-date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full" value="{{ old('createdAt') }}" required>
           </div>
           <div class="py-2">
-            <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" required></textarea>
+            <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" value="{{ old('body') }}" required></textarea>
           </div>
           <div>
 
@@ -109,6 +109,17 @@
   {% include '_footer.peb' %}
 
   </div>
+
+<div class="fixed bottom-0 right-0">
+{% if hasFlash('success') %}
+  <div class="right-0 text-white bg-green-500 py-2 px-4 text-center mb-8 mr-8" id="flash">
+  {{ flash('success') }}
+  </div>
+{% endif %}
+{% if hasError("title") or hasError("url") or hasError("createdAt") or hasError("body") %}
+  <div class="right-0 text-white bg-red-500 py-2 px-2 text-center mb-8 mr-8" id="flash">Submission Failed. Try Again.</div>
+{% endif %}
+</div>
 
 {% endblock %}
 
