@@ -11,7 +11,7 @@
            class="hover:text-indigo-200 text-yellow-100 uppercase">
           <div class="flex">
             <svg class="h-4 inline-block self-center text-indigo-200" viewBox="0 0 640 512"
-                 aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                 aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" alt="Alpas Kotlin Web Development Framework Fireplace Tutorial">
               <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <path
                     d="M32,512 L128,512 L128,384 C128,278 214,192 320,192 C426,192 512,278 512,384 L512,512 L608,512 L608,128 L32,128 L32,512 Z"

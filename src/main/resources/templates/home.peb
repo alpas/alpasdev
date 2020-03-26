@@ -43,7 +43,7 @@
           </div>
           <div class="hero-content-right self-center justify-end flex md:flex hidden">
             <div class="mt-10">
-              <img src="/images/landing/rocket.svg" alt="" class="w-48 lg:w-56">
+              <img src="/images/landing/rocket.svg" alt="Alpas Framework quickly launches web applications" class="w-48 lg:w-56">
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="mt-10 self-center pr-5 shadow-2xl">
           <a href="/images/landing/alpas-code-light@4x.png" target="_alpas-code">
-            <img src="/images/landing/alpas-code-light.png" alt="Alpas Code" width="875px">
+            <img src="/images/landing/alpas-code-light.png" alt="Alpas code example highlighting easy and powerful web development capabilities" width="875px">
           </a>
         </div>
       </div>
@@ -77,7 +77,7 @@
       <div class="px-4 md:px-10 lg:px-16 xl:px-20 container mx-auto">
         <div class="flex flex-row-reverse">
           <div class="w-full flex-grow self-center lg:block hidden">
-            <img src="/images/landing/bundle.svg" alt="">
+            <img src="/images/landing/bundle.svg" alt="Bundled with the modules and libraries that get you coding awesome web apps quickly">
           </div>
           <div class="lg:mr-10 xl:mr-20">
             <h3 class="text-3xl text-blue-500 font-semibold leading-snug">
@@ -117,7 +117,7 @@
       <div class="px-4 md:px-10 lg:px-16 xl:px-20 container mx-auto">
         <div class="flex flex-row">
           <div class="w-full flex-grow self-center px-10 lg:block hidden">
-            <img src="/images/landing/learning.svg" alt="">
+            <img src="/images/landing/learning.svg" alt="Documentation and community contribution make Alpas Kotlin Web Framework developer friendly">
           </div>
           <div class="lg:pl-10">
             <h3 class="text-3xl text-blue-500 font-semibold leading-snug">

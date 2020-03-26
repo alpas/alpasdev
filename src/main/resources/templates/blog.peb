@@ -18,30 +18,24 @@
 
   <div class="leading-loose">
     <div class="section-intro">
-      <div class="intro-bg bg-contain bg-no-repeat bg-center px-8 xl:px-0">
-
+      <div class="intro-bg bg-contain bg-no-repeat bg-center px-8 xl:px-0 pb-8">
         {% include '_nav.peb' %}
-
-        <div class="flex flex-row container justify-center mx-auto">
-
-            <h1 class="text-3xl md:text-4xl xl:text-5xl my-16 xl:mt-20 text-indigo-200 font-semibold
-                    italic">
-              The best buzz in the galaxy... ✨
-            </h1>
-
-        </div>
       </div>
-      <div class="intro-clouds h-20 lg:h-48 md:h-32 bg-cover bg-no-repeat"></div>
+    </div>
+    <div class="section-simple mt-10">
+      <div class="px-4 lg:px-6 xl:px-10 flex flex-col container text-center max-w-3xl mx-auto" >
+        <h1 class="text-3xl text-indigo-700 font-bold">Best buzz in the galaxy ✨</h1>
+      </div>
     </div>
 
     {% admin %}
-    <div class="section-simple">
+    <div class="section-simple mt-8">
       <div class="px-4 lg:px-6 xl:px-10 flex flex-col container justify-left max-w-3xl mx-auto" >
         <button class="newBuzz-open px-4 bg-orange-500 p-3 text-white font-bold hover:bg-orange-400" onClick="get_now_datetime()">Spreadda Buzz 🐝</button>
       </div>
     </div>
 
-    <div class="newBuzz opacity-0 pointer-events-none display-none section-simple mt-4">
+    <div class="newBuzz opacity-0 pointer-events-none display-none section-simple">
       <div class="p-8 lg:px-6 xl:px-10 flex flex-col justify-left max-w-2xl mx-auto bg-gray-300" >
         <form method="POST" class="w-full" action="{{ route('buzz.submit') }}">
           <div class="py-2">
@@ -90,7 +84,7 @@
         </form>
       </div>
       {% endadmin %}
-      <h3 class="text-xl text-blue-700 hover:text-blue-500 font-semibold uppercase leading-snug">
+      <h3 class="text-xl text-gray-900 hover:text-gray-700 font-semibold leading-snug">
         <a href="{{ blog.url }}" target="_blank">
           {{ blog.title }}
         </a>

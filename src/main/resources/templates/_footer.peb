@@ -23,7 +23,7 @@
     </div>
     <div class="self-center justify-end flex md:flex hidden">
       <div class="mt-10">
-        <img src="/images/landing/ship.svg" alt="" class="w-56 md:w-64">
+        <img src="/images/landing/ship.svg" alt="Launch your web application quick and easy" class="w-56 md:w-64">
       </div>
     </div>
   </div>
