@@ -469,7 +469,7 @@ Otherwise, evaluates the *else* block.
   <h1> Welcome, guest! You're awesome!</h1>
 {% else %}
   <h1>Hello, {{ auth.user.name }}! You are so awesome! </h1>
-{% endauth %}
+{% endguest %}
 
 ```
 
