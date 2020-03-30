@@ -207,14 +207,14 @@ call.render("index", mapOf("name" to "Jane", "address" to address))
 <a name="sharing-view-data-on-httpcall-object"></a>
 #### [Sharing view data on HttpCall object](#sharing-view-data-on-httpcall-object)
 
-A handy method, aptly named `shareWithView(key: String, value: Any?)`, can be used to share some data
+A handy method, aptly named `share(pair: Pair<String, Any?>, vararg pairs: Pair<String, Any>)`, can be used to share some data
 with the templates from anywhere an `HttpCall` is accessible — from a helper function, a private
 function within a controller, or from within the [ValidationGuard](/docs/validation).
 
 ```kotlin
 
 // anywhere from where a call is accessible
-call.shareWithView("valuation", 25000000)
+call.share(Pair("valuation", 25000000))
 
 ```
 
@@ -231,6 +231,13 @@ call.render("index", mapOf("name" to "John"))
 <h1>Hello, {{ name }}!</h1>
 Your value is: ${{ valuation }}
 
+```
+
+You can also call the data that was "shared" with the template using the, also aptly named, `shared(key: String)` method. 
+
+```kotlin
+// retrieves "25000000" from the previously shared valuation 
+call.shared("valuation")
 ```
 
 <a name="configuration-values"></a>
