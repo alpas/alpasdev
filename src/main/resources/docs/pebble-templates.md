@@ -237,10 +237,11 @@ Your value is: ${{ valuation }}
 #### [Configuration Values](#configuration-values)
 
 Alpas already makes all your configs available in your view templates using a combo of ``config()`` 
-function and a convention that is based on the name of your config class — camelcase class name
+function and a convention that is based on the name of your config class — lowercase class name
 with the suffix *Config* stripped off.
 
-Let's say you want to access `appUrl` config defined in `AppConfig` class from one of your templates.
+To give an example, let's say you created an `AppConfig` class that you extended under a `Configs` folder in your project
+and now you want to access the `appUrl` config you defined in the `AppConfig` class from one of your templates.
 You can access it like so: `{{ config('app.appUrl') }}`.
 
 Notice how `AppConfig` class is simply referred to as `app`.
