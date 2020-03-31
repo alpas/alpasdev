@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     {% block pagestyle %} {% endblock %}
 
@@ -48,9 +47,13 @@
 {% block pagescripts %} {% endblock %}
 
 <script>
-    $(document).ready(function() {
-        $('#flash').fadeOut(5000);
-    });
+    document.addEventListener('DOMContentLoaded', function(){
+        var s = document.getElementById('flash').style;
+        s.opacity = 1;
+        setTimeout(function() {
+        (function fade(){ (s.opacity-=.1) < 0 ? s.display = "none" : setTimeout(fade,40) })();
+        }, 3000);
+    }, false);
 </script>
 
 </body>

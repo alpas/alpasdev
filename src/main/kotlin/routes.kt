@@ -11,7 +11,7 @@ fun Router.addRoutes(env: Environment) = apply {
         webRoutesGroup()
     }.middlewareGroup("web")
 
-    authRoutes(allowRegistration = env("ALLOW_REGISTRATION", false), requireEmailVerification = false, allowPasswordReset = false, addHomeRoute = false)
+    authRoutes(allowRegistration = env("ALLOW_REGISTRATION", false), requireEmailVerification = false, allowPasswordReset = env("ALLOW_PASSWORD_RESET", false), addHomeRoute = false)
 }
 
 

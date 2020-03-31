@@ -11,8 +11,11 @@ interface User : BaseUser<User> {
 
     companion object : OzoneEntity.Of<User>()
 
-    fun isAdmin(): Boolean {
-        return email in listOf("adam.miedema@gmail.com", "ashokgelal@gmail.com")
+    fun isAdmin(emails: String): Boolean {
+
+       val admins = emails.split(",")
+
+       return email in admins
     }
 }
 

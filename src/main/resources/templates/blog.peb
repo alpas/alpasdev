@@ -1,6 +1,6 @@
 {% extends 'layout/app.peb' %}
 
-{% block title %} Delightful Web Development in Kotlin {% endblock %}
+{% block title %} Buzz - Alpas, Kotlin, and Web Development News {% endblock %}
 
 {% block pagestyle %}
   <style>

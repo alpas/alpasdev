@@ -8,7 +8,6 @@ import dev.alpas.alpasdev.actions.pagination
 import dev.alpas.alpasdev.guards.BlogGuard
 import dev.alpas.orAbort
 import dev.alpas.ozone.create
-import dev.alpas.validation.required
 import me.liuwj.ktorm.dsl.delete
 import me.liuwj.ktorm.dsl.eq
 import me.liuwj.ktorm.dsl.update
@@ -47,10 +46,10 @@ class BlogController : Controller() {
             it.createdAt to createdAt
             it.body to call.stringParam("body")
 
+            flash("success", "Successfully added some sweet honey 🍯")
+
             call.redirect().back()
         }
-
-        flash("success", "Successfully added some sweet honey 🍯")
     }
 
     fun edit(call: HttpCall) {
@@ -76,10 +75,10 @@ class BlogController : Controller() {
 
             where{ it.id eq id }
 
+            flash("success", "Successfully Saved")
+
             call.redirect().toRouteNamed("blog")
         }
-
-        flash("success", "Successfully Saved")
     }
 
     fun delete(call: HttpCall) {

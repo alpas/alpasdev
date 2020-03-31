@@ -1,6 +1,6 @@
 {% extends 'layout/app.peb' %}
 
-{% block title %} The best blog in the universe {% endblock %}
+{% block title %} Delightful Web Development in Kotlin {% endblock %}
 
 {% block content %}
 
