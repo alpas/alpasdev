@@ -11,8 +11,7 @@ import me.liuwj.ktorm.database.Database
 @Suppress("unused")
 class AppConfig(env: Environment) : BaseConfig(env) {
 
-   val adminEmails = env("ADMIN_EMAILS", "")
-
+   val adminEmails = env("ADMIN_EMAILS", "").split(",")
 }
 
 
