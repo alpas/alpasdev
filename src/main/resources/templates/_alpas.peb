@@ -1,4 +1,4 @@
-<svg width="{{ width }}" viewBox="0 0 222 49" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<svg width="{{ width }}" viewBox="0 0 222 49" version="1.1" xmlns="http://www.w3.org/2000/svg" alt="Alpas Kotlin Web Development Framework Logo">
     <g fill="currentColor" fill-rule="nonzero" stroke="none" stroke-width="1">
         <polygon points="35.0193736 31.3771579 24.936057 8.34592105 14.8527404 31.3771579 12.5163622 36.75 7.37633005 48.5 0.5 48.5 21.6614385 1.5 28.2709295 1.5 49.5 48.5 42.4908653 48.5 37.3508332 36.75"/>
         <polygon points="169.01901 31.3771579 158.935441 8.34592105 148.851871 31.3771579 146.515434 36.75 141.375273 48.5 134.5 48.5 155.66197 1.5 162.271626 1.5 183.5 48.5 176.490689 48.5 171.350528 36.75"/>
