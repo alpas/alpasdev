@@ -9,7 +9,7 @@
     }
 
     .display-none {
-        display:none;
+      display: none;
     }
   </style>
 {% endblock %}
@@ -17,143 +17,158 @@
 {% block content %}
 
   <div class="leading-loose">
-    <div class="section-intro">
-      <div class="intro-bg bg-contain bg-no-repeat bg-center px-8 xl:px-0 pb-8">
-        {% include '_nav.peb' %}
-      </div>
+    <div class="px-8 xl:px-0 py-8 bg-gray-800">
+      <nav class="flex container mx-auto py-4 lg:items-center flex-col-reverse lg:flex-row">
+        <div class="flex-grow text-gray-100 lg:mt-0">
+          <a href="/">
+            {% include '_alpas.peb' with {"width": "170px"} %}
+          </a>
+        </div>
+      </nav>
     </div>
-    <div class="section-simple mt-10">
-      <div class="px-4 lg:px-6 xl:px-10 flex flex-col container text-center max-w-3xl mx-auto" >
-        <h1 class="text-3xl text-indigo-700 font-bold">Best buzz in the galaxy ✨</h1>
+    <div class="section-simple mt-20">
+      <div class="px-4 lg:px-6 xl:px-10 flex flex-col container text-center max-w-3xl mx-auto">
+        <h1 class="text-3xl text-gray-900 font-bold">Best buzz in the galaxy ✨</h1>
       </div>
     </div>
 
     {% admin %}
-    <div class="section-simple mt-8">
-      <div class="px-4 lg:px-6 xl:px-10 flex flex-col container justify-left max-w-3xl mx-auto" >
-        <button class="newBuzz-open px-4 bg-orange-500 p-3 text-white font-bold hover:bg-orange-400" onClick="get_now_datetime()">Spreadda Buzz 🐝</button>
-      </div>
-    </div>
-
-    <div class="newBuzz opacity-0 pointer-events-none display-none section-simple">
-      <div class="p-8 lg:px-6 xl:px-10 flex flex-col justify-left max-w-2xl mx-auto bg-gray-300" >
-        <form method="POST" class="w-full" action="{{ route('buzz.submit') }}">
-          <div class="py-2">
-          {% csrf %}
-            <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="title" value="{{ old('title') }}" required>
-          </div>
-          <div class="py-2">
-            <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" value="{{ old('url') }}" required>
-          </div>
-          <div class="py-2">
-            <input type="datetime-local" id="buzz-date" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full" value="{{ old('createdAt') }}" required>
-          </div>
-          <div class="py-2">
-            <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" value="{{ old('body') }}" required></textarea>
-          </div>
-          <div>
-
-          </div>
-          <div class="flex justify-end pt-2">
-            <button class="text-sm uppercase mx-4 newBuzz-close" type="button">cancel</button>
-            <button class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Submit</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-  {% endadmin %}
-
-  {% for blog in blogs %}
-
-  <div class="section-simple">
-    <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
-    {% admin %}
-      <div class="flex">
-      <form action="{{ route('buzz.edit', {"id": blog.id}) }}" method="GET">
-        <button class="hover:text-blue-800 text-blue-600 text-sm hover-target uppercase">
-          Edit
-        </button>
-      </form>
-        <form action="{{ route('buzz.delete', {"id": blog.id}) }}" method="POST">
-        {% csrf %}
-        {{ spoof('delete') }}
-          <button class="hover:text-red-800 text-red-600 text-sm hover-target ml-4 uppercase">
-            remove
+      <div class="section-simple mt-8">
+        <div class="px-4 lg:px-6 xl:px-10 flex flex-col container justify-left max-w-3xl mx-auto">
+          <button class="newBuzz-open px-4 bg-orange-500 p-3 text-white font-bold hover:bg-orange-400"
+                  onClick="get_now_datetime()">Spreadda Buzz 🐝
           </button>
-        </form>
+        </div>
       </div>
-      {% endadmin %}
-      <h3 class="text-xl text-gray-900 hover:text-gray-700 font-semibold leading-snug">
-        <a href="{{ blog.url }}" target="_blank">
-          {{ blog.title }}
-        </a>
-      </h3>
-      <span class="text-sm text-gray-600">
-        {{ blog.createdAt | ago }}
-      </span>
-      <p class="text-lg">
-        {{ blog.body | raw }}
-      </p>
+
+      <div class="newBuzz opacity-0 pointer-events-none display-none section-simple">
+        <div class="p-8 lg:px-6 xl:px-10 flex flex-col justify-left max-w-2xl mx-auto bg-gray-300">
+          <form method="POST" class="w-full" action="{{ route('buzz.submit') }}">
+            <div class="py-2">
+              {% csrf %}
+              <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full"
+                     placeholder="title" value="{{ old('title') }}" required>
+            </div>
+            <div class="py-2">
+              <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full"
+                     placeholder="https://honeybuzz.com" value="{{ old('url') }}" required>
+            </div>
+            <div class="py-2">
+              <input type="datetime-local" id="buzz-date" name="createdAt"
+                     class="border-solid border-1 border-gray-600 form-input w-full" value="{{ old('createdAt') }}"
+                     required>
+            </div>
+            <div class="py-2">
+              <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10"
+                        value="{{ old('body') }}" required></textarea>
+            </div>
+            <div>
+
+            </div>
+            <div class="flex justify-end pt-2">
+              <button class="text-sm uppercase mx-4 newBuzz-close" type="button">cancel</button>
+              <button class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    {% endadmin %}
+
+    <div class="mt-12">
+      {% for blog in blogs %}
+        <div class="section-simple">
+          <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-4xl mx-auto">
+            {% admin %}
+              <div class="flex">
+                <form action="{{ route('buzz.edit', {"id": blog.id}) }}" method="GET">
+                  <button class="hover:text-blue-800 text-blue-600 text-sm hover-target uppercase">
+                    Edit
+                  </button>
+                </form>
+                <form action="{{ route('buzz.delete', {"id": blog.id}) }}" method="POST">
+                  {% csrf %}
+                  {{ spoof('delete') }}
+                  <button class="hover:text-red-800 text-red-600 text-sm hover-target ml-4 uppercase">
+                    remove
+                  </button>
+                </form>
+              </div>
+            {% endadmin %}
+            <h3 class="text-xl text-blue-800 hover:text-gray-700 font-semibold leading-snug">
+              <a href="{{ blog.url }}" target="_blank">
+                {{ blog.title }}
+              </a>
+            </h3>
+            <span class="py-4 text-sm text-gray-800">{{ blog.createdAt | ago }}</span>
+            <p class="text-lg text-gray-900">
+              {{ blog.body | raw }}
+            </p>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-  </div>
-
-  {% endfor %}
-
-    <div class="section-simple">
+    <div class="mt-20 section-simple">
       <div class="px-4 lg:px-6 xl:px-10 py-6 flex flex-col container justify-left max-w-3xl mx-auto">
-    {% include '_pagination.peb' %}
+        {% include '_pagination.peb' %}
       </div>
     </div>
 
-  {% include '_footer.peb' %}
+    <div class="mt-12 flex justify-center">
+      <a href="{{ route('newsletter') }}"
+         class="bg-red-600 md:px-4 px-3 rounded text-base md:text-lg text-white mt-8
+               hover:text-red-200 hover:bg-red-700 py-2 font-bold tracking-wide">Get Our Newsletter &rarr;
+      </a>
+    </div>
+    <div class="mt-10 lg:mt-48 section-bg-part bg-gray-800 pt-10 lg:pt-16 xl:pt-20">
+      <div class="intro-clouds h-32 bg-cover bg-no-repeat"></div>
+    </div>
 
   </div>
 
-<div class="fixed bottom-0 right-0">
-{% if hasFlash('success') %}
-  <div class="right-0 text-white bg-green-500 py-2 px-4 text-center mb-8 mr-8" id="flash">
-  {{ flash('success') }}
+  <div class="fixed bottom-0 right-0">
+    {% if hasFlash('success') %}
+      <div class="right-0 text-white bg-green-500 py-2 px-4 text-center mb-8 mr-8" id="flash">
+        {{ flash('success') }}
+      </div>
+    {% endif %}
+    {% if hasError("title") or hasError("url") or hasError("createdAt") or hasError("body") %}
+      <div class="right-0 text-white bg-red-500 py-2 px-2 text-center mb-8 mr-8" id="flash">Submission Failed. Try
+        Again.
+      </div>
+    {% endif %}
   </div>
-{% endif %}
-{% if hasError("title") or hasError("url") or hasError("createdAt") or hasError("body") %}
-  <div class="right-0 text-white bg-red-500 py-2 px-2 text-center mb-8 mr-8" id="flash">Submission Failed. Try Again.</div>
-{% endif %}
-</div>
 
 {% endblock %}
 
 {% block pagescripts %}
   <script>
-    var openNewBuzz = document.querySelectorAll('.newBuzz-open')
-    for (var i = 0; i < openNewBuzz.length; i++) {
-      openNewBuzz[i].addEventListener('click', function(event){
-    	event.preventDefault()
-    	toggleOpenBuzz()
-      })
-    }
+      let openNewBuzz = document.querySelectorAll('.newBuzz-open')
+      for (let i = 0; i < openNewBuzz.length; i++) {
+          openNewBuzz[i].addEventListener('click', function (event) {
+              event.preventDefault()
+              toggleOpenBuzz()
+          })
+      }
 
-    var closeNewBuzz = document.querySelectorAll('.newBuzz-close')
-    for (var i = 0; i < closeNewBuzz.length; i++) {
-      closeNewBuzz[i].addEventListener('click', toggleOpenBuzz)
-    }
+      const closeNewBuzz = document.querySelectorAll('.newBuzz-close');
+      for (let i = 0; i < closeNewBuzz.length; i++) {
+          closeNewBuzz[i].addEventListener('click', toggleOpenBuzz)
+      }
 
-    function toggleOpenBuzz () {
-      const newBuzz = document.querySelector('.newBuzz')
-      newBuzz.classList.toggle('opacity-0')
-      newBuzz.classList.toggle('pointer-events-none')
-      newBuzz.classList.toggle('display-none')
-    }
-  </script>
+      function toggleOpenBuzz() {
+          const newBuzz = document.querySelector('.newBuzz')
+          newBuzz.classList.toggle('opacity-0')
+          newBuzz.classList.toggle('pointer-events-none')
+          newBuzz.classList.toggle('display-none')
+      }
 
-  <script>
-    function get_now_datetime()
-        {
-            var myField = document.getElementById("buzz-date");
-            var now = new Date();
-            now.setSeconds(0,0);
-            now.toISOString();
-            myField.valueAsNumber = now.getTime() - now.getTimezoneOffset() * 60000;
-        }
+      function get_now_datetime() {
+          var myField = document.getElementById("buzz-date");
+          var now = new Date();
+          now.setSeconds(0, 0);
+          now.toISOString();
+          myField.valueAsNumber = now.getTime() - now.getTimezoneOffset() * 60000;
+      }
   </script>
 {% endblock %}

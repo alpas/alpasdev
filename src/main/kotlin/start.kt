@@ -5,9 +5,9 @@ import dev.alpas.Environment
 import dev.alpas.routing.BaseRouteLoader
 import dev.alpas.routing.Router
 
-fun main(args: Array<String>) :Unit = Alpas(args) {
+fun main(args: Array<String>): Unit = Alpas(args) {
     routes(RouteLoader(this.env))
-    }.ignite()
+}.ignite()
 
 class RouteLoader(private val env: Environment) : BaseRouteLoader() {
     override fun add(router: Router) {
