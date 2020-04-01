@@ -41,13 +41,29 @@
   {% block content %} {% endblock %}
 </div>
 
-{% include '_algolia_footer.peb' %}
+<div class="fixed bottom-0 right-0">
+  {% if hasFlash('success') %}
+    <div class="right-0 text-white bg-green-500 py-2 px-4 text-center mb-8 mr-8" id="flash">
+      {{ flash('success') }}
+    </div>
+  {% endif %}
+  {% if hasError("title") or hasError("url") or hasError("createdAt") or hasError("body") %}
+    <div class="right-0 text-white bg-red-500 py-2 px-2 text-center mb-8 mr-8" id="flash">Submission Failed. Try
+      Again.
+    </div>
+  {% endif %}
+</div>
+
 
 {% block pagescripts %} {% endblock %}
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const flash = document.getElementById('flash').style;
+        const el = document.getElementById('flash');
+        if(el == null)
+            return;
+
+        let flash = el.style;
         flash.opacity = 1;
         setTimeout(function () {
             (function fade() {
