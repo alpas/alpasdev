@@ -1,0 +1,31 @@
+<div class="section-bg-part bg-gray-800 pt-10 lg:pt-16 xl:pt-20">
+  <div class="flex flex-row justify-between container mx-auto px-8 xl:px-0">
+    <div class="flex flex-col pb-10">
+
+
+      <div class="mt-12 text-white">
+        {% include '_home_social.peb' %}
+      </div>
+      <div class="mt-12">
+        <a href="/">
+            <span class="text-gray-100">
+            {% include '_alpas.peb' with {"width": "122px"} %}
+            </span>
+        </a>
+        <h5 class="mt-2 text-gray-300 text-sm">Copyright © 2020 Little Bets LLC</h5>
+      </div>
+      <div class="mt-12">
+        <a href="{{ route('newsletter') }}"
+           class="bg-red-600 md:px-4 px-3 rounded text-base md:text-lg text-white mt-8
+               hover:text-red-200 hover:bg-red-700 py-2">Get Our Newsletter &rarr;
+        </a>
+      </div>
+    </div>
+    <div class="self-center justify-end flex md:flex hidden">
+      <div class="mt-10">
+        <img src="/images/landing/ship.svg" alt="Launch your web application quick and easy" class="w-56 md:w-64">
+      </div>
+    </div>
+  </div>
+  <div class="intro-clouds h-32 bg-cover bg-no-repeat"></div>
+</div>

@@ -2,26 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <link rel="icon" href="/favicon.svg">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
+  <meta charset="utf-8">
+  <link rel="icon" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> {{ env('APP_NAME') }} - {{ block('title') }}</title>
 
-    {% include '_header_meta.peb' %}
+  {% include '_header_meta.peb' %}
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
-    <script src="{{ mix('js/app.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap" rel="stylesheet">
+  <script src="{{ mix('js/app.js') }}" defer></script>
 
-    {% include '_ga.peb' %}
+  {% block pagestyle %} {% endblock %}
+
+  {% include '_ga.peb' %}
 </head>
 
 <body class="antialiased h-full">
 
+{% auth %}
+  <div class="container-fluid w-full flex justify-center bg-orange-700" style="z-index:100;">
+    <div class="w-2/3 text-white py-2 px-10 text-left">
+      The dictionary defines "{{ auth.user.name }}" as "a bad ass."
+    </div>
+    <div class="w-1/3 text-white hover:text-blue-600 py-2 px-10 text-right">
+      <form action="{{ route('logout') }}" method="POST">
+        {% csrf %}
+        <button class="hover:text-blue-800 text-white hover-target">
+          Logout
+        </button>
+      </form>
+    </div>
+  </div>
+{% endauth %}
+
 <div>
-    {% block content %} {% endblock %}
+  {% block content %} {% endblock %}
 </div>
+
 {% include '_algolia_footer.peb' %}
+
+{% block pagescripts %} {% endblock %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const flash = document.getElementById('flash').style;
+        flash.opacity = 1;
+        setTimeout(function () {
+            (function fade() {
+                (flash.opacity -= .1) < 0 ? flash.display = "none" : setTimeout(fade, 40)
+            })();
+        }, 3000);
+    }, false);
+</script>
+
 </body>
 </html>

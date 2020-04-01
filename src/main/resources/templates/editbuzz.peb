@@ -1,0 +1,41 @@
+{% extends 'layout/app.peb' %}
+
+{% block title %} Delightful Web Development in Kotlin {% endblock %}
+
+{% block content %}
+
+<div class="section-simple pt-20">
+    <div class="p-8 lg:px-6 xl:px-10 flex flex-col justify-left max-w-2xl mx-auto bg-gray-300" >
+        <form method="POST" class="w-full" action="{{ route('buzz.update', {"id": blog.id}) }}">
+            <div class="py-2">
+                {{ spoof('PATCH') }}
+            {% csrf %}
+                <input type="text" name="title" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="title" value="{{ blog.title }}" required>
+            </div>
+            <div class="py-2">
+                <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" value="{{ blog.url }}" required>
+            </div>
+            <div class="py-2">
+              <input type="datetime-local" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full" value="{{ createdAt }}">
+            </div>
+            <div class="py-2">
+                <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" required>{{ blog.body }}</textarea>
+            </div>
+            <div class="flex justify-end pt-2">
+                <button class="text-sm uppercase mx-4 newBuzz-close" type="button" onclick="goBack()">cancel</button>
+                <button class="px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block pagescripts %}
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
+{% endblock %}

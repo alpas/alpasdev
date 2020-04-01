@@ -15,7 +15,7 @@ startScripts {
 mainClassName = 'dev.alpas.alpasdev.StartKt'
 
 group 'dev.alpas.alpasdev'
-version '0.19.4'
+version '0.20.0'
 
 repositories {
     jcenter()
@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'mysql:mysql-connector-java:8.0.19'
 //    compile project(':framework')
 //    testCompile project(':pulsar')
 
