@@ -207,14 +207,14 @@ call.render("index", mapOf("name" to "Jane", "address" to address))
 <a name="sharing-view-data-on-httpcall-object"></a>
 #### [Sharing view data on HttpCall object](#sharing-view-data-on-httpcall-object)
 
-A handy method, aptly named `shareWithView(key: String, value: Any?)`, can be used to share some data
+A handy method, aptly named `share(pair: Pair<String, Any?>, vararg pairs: Pair<String, Any>)`, can be used to share some data
 with the templates from anywhere an `HttpCall` is accessible — from a helper function, a private
 function within a controller, or from within the [ValidationGuard](/docs/validation).
 
 ```kotlin
 
 // anywhere from where a call is accessible
-call.shareWithView("valuation", 25000000)
+call.share(Pair("valuation", 25000000))
 
 ```
 
@@ -233,14 +233,22 @@ Your value is: ${{ valuation }}
 
 ```
 
+You can also call the data that was "shared" with the template using the, also aptly named, `shared(key: String)` method. 
+
+```kotlin
+// retrieves "25000000" from the previously shared valuation 
+call.shared("valuation")
+```
+
 <a name="configuration-values"></a>
 #### [Configuration Values](#configuration-values)
 
 Alpas already makes all your configs available in your view templates using a combo of ``config()`` 
-function and a convention that is based on the name of your config class — camelcase class name
+function and a convention that is based on the name of your config class — lowercase class name
 with the suffix *Config* stripped off.
 
-Let's say you want to access `appUrl` config defined in `AppConfig` class from one of your templates.
+To give an example, let's say you created an `AppConfig` class that you extended under a `Configs` folder in your project
+and now you want to access the `appUrl` config you defined in the `AppConfig` class from one of your templates.
 You can access it like so: `{{ config('app.appUrl') }}`.
 
 Notice how `AppConfig` class is simply referred to as `app`.
@@ -469,7 +477,7 @@ Otherwise, evaluates the *else* block.
   <h1> Welcome, guest! You're awesome!</h1>
 {% else %}
   <h1>Hello, {{ auth.user.name }}! You are so awesome! </h1>
-{% endauth %}
+{% endguest %}
 
 ```
 
