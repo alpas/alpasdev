@@ -38,13 +38,11 @@ class BlogController : Controller() {
 
         call.validateUsing(BlogGuard::class)
 
-        val createdAt = getDateTime(call.stringParam("createdAt"))
-
         Blogs.create() {
             it.title to call.stringParam("title")
             it.url to call.stringParam("url")
-            it.createdAt to createdAt
             it.body to call.stringParam("body")
+            it.createdAt to Instant.now()
 
             flash("success", "Successfully added some sweet honey 🍯")
 
@@ -55,22 +53,19 @@ class BlogController : Controller() {
     fun edit(call: HttpCall) {
         val id = call.longParam("id").orAbort()
         var blog = Blogs.latest { it.id eq id }.toList()
-        var createdAt = LocalDateTime.ofInstant(blog[0].createdAt, ZoneOffset.UTC)
 
-        call.render("editbuzz", mapOf("blog" to blog[0], "createdAt" to createdAt))
+        call.render("editbuzz", mapOf("blog" to blog[0]))
     }
 
     fun update(call: HttpCall) {
 
         call.validateUsing(BlogGuard::class)
 
-        val createdAt = getDateTime(call.stringParam("createdAt"))
         val id = call.longParam("id").orAbort()
 
         Blogs.update {
             it.title to call.stringParam("title")
             it.url to call.stringParam("url")
-            it.createdAt to createdAt
             it.body to call.stringParam("body")
 
             where{ it.id eq id }
@@ -89,8 +84,4 @@ class BlogController : Controller() {
 
         flash("success", "Successfully removed the stinger 🐝")
     }
-}
-
-private fun getDateTime(date : String?): Instant? {
-    return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")).toInstant(ZoneOffset.ofHours(-6))
 }
