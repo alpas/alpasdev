@@ -16,9 +16,6 @@
                 <input type="text" name="url" class="border-solid border-1 border-gray-600 form-input w-full" placeholder="https://honeybuzz.com" value="{{ blog.url }}" required>
             </div>
             <div class="py-2">
-              <input type="datetime-local" name="createdAt" class="border-solid border-1 border-gray-600 form-input w-full" value="{{ createdAt }}">
-            </div>
-            <div class="py-2">
                 <textarea class="w-full border-1 border-gray-600 form-input" name="body" rows="10" cols="10" required>{{ blog.body }}</textarea>
             </div>
             <div class="flex justify-end pt-2">
