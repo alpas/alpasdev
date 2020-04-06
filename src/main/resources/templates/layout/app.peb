@@ -60,7 +60,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const el = document.getElementById('flash');
-        if(el == null)
+        if (el == null)
             return;
 
         let flash = el.style;
@@ -72,6 +72,8 @@
         }, 3000);
     }, false);
 </script>
+
+{% include '_algolia_footer.peb' %}
 
 </body>
 </html>

@@ -8,7 +8,6 @@ class BlogGuard : ValidationGuard() {
           return mapOf(
               "title" to listOf(Required()),
               "url" to listOf(Required()),
-              "createdAt" to listOf(Required()),
               "body" to listOf(Required())
           )
     }

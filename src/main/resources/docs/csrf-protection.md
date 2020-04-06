@@ -10,7 +10,7 @@ CSRF protection is enabled by default for `POST`, `PUT`, `PATCH`, and `DELETE` r
 you have to do on your part is to include a `csrf` token with any kind of above mentioned requests. This is
 preferably done by including a hidden input field within your HTTP form.
 
-Alpas includes a `csrf` tag that you can use in your templates to quickly populate a hidden input field
+Alpas includes a `csrf` tag that you can use in your Pebble Templates to quickly populate a hidden input field
 with a token that is valid for the current request. If you need just the raw token and not the full input
 field, you can use `_csrf` variable instead.
 
@@ -46,6 +46,26 @@ When making a request that needs to be validated against CSRF attacks, you can i
 and pass it back as either `X-CSRF-TOKEN` or `X-XSRF-TOKEN`. The only difference between these two tokens is that
 the value of `X-CSRF-TOKEN` is considered to be unencrypted while the value of `X-XSRF-TOKEN` is considered
 to be encrypted and hence it will be decrypted before validating the accuracy of the token.
+
+In the following example, we pass `X-CSRF-TOKEN` in the header of an Ajax call inside a Pebble Template. 
+
+```javascript
+
+ $.ajax({
+     url:"{{ route('showmore.load') }}",
+     method:"POST",
+     headers: {
+      'X-CSRF-TOKEN': '{{ _csrf }}'
+      },
+     data:{id:id},
+     success:function(data)
+     {
+        $('#button').remove();
+        $('#list').append(data);
+     }
+  });
+
+```
 
 It may look like a lot of work to make CSRF protection work when making an AJAX call from JavaScript, but
 in practice, a library like Axios should automatically notice that an encrypted `XSRF-TOKEN` cookie is
