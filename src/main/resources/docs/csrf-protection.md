@@ -47,6 +47,26 @@ and pass it back as either `X-CSRF-TOKEN` or `X-XSRF-TOKEN`. The only difference
 the value of `X-CSRF-TOKEN` is considered to be unencrypted while the value of `X-XSRF-TOKEN` is considered
 to be encrypted and hence it will be decrypted before validating the accuracy of the token.
 
+In the following example, we pass `X-CSRF-TOKEN` in the header of an Ajax call. 
+
+```javascript
+
+ $.ajax({
+     url:"{{ route('showmore.load') }}",
+     method:"POST",
+     headers: {
+      'X-CSRF-TOKEN': '{{ _csrf }}'
+      },
+     data:{id:id},
+     success:function(data)
+     {
+        $('#button').remove();
+        $('#list').append(data);
+     }
+  });
+
+```
+
 It may look like a lot of work to make CSRF protection work when making an AJAX call from JavaScript, but
 in practice, a library like Axios should automatically notice that an encrypted `XSRF-TOKEN` cookie is
 included and should read it and send back as it is in the request the header. It can read the value,
