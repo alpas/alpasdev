@@ -15,7 +15,7 @@ startScripts {
 mainClassName = 'dev.alpas.alpasdev.StartKt'
 
 group 'dev.alpas.alpasdev'
-version '0.20.3'
+version '0.20.4'
 
 repositories {
     jcenter()
