@@ -134,7 +134,7 @@ Returns the value of the given key as a nullable int.
 
 Returns the value of the given key as a nullable long.
 
-- `fun boolParam(key: String) : Long?` 
+- `fun boolParam(key: String) : Boolean?` 
 
 Returns the value of the given key as a nullable bool.
 
