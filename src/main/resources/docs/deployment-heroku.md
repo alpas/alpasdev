@@ -1,21 +1,32 @@
 - [Prerequisites](#prerequsities)
-- [Preparing the server - First Run](#first-run)
+- [Preparing Your Alpas App](#preparing-your-alpas-app)
+    - [Adding Additional Files](#adding-additional-files)
+    - [Altering Existing Files](#altering-existing-files)
+- [Preparing Your Heroku Environment](#preparing-your-heroku-environment)
+    - [Configuring the Environment](#configuring-the-environment)
+    - [Setting Up MySQL](#setting-up-mysql)
+- [Deploying and Running Migrations](#deploying-and-running-migrations)
 - [Subsequent Deployments](#subsequent-deployments)
 - [Troubleshooting](#troubleshooting)
+    - [Migrating with the Compiled Project](#migrating-with-the-compiled-project)
 
 These instructions will step you through the requirements to deploy an existing Alpas app to Heroku. 
 
 <a name="prerequsities"></a>
 ### [Prerequisites](#prerequsities)
->   1. An existing Alpas app running locally with a MySQL database connection - the Alpas docs are excellent 
->for [creating a new project](https://alpas.dev/docs/quick-start-guide-todo-list)
->   2. A [Heroku account](https://heroku.com/) as well as the 
->[Heroku CLI Tools](https://devcenter.heroku.com/articles/heroku-cli) installed
----
 
-## Part One - Preparing Your Alpas App
+<div class="sublist">
 
-### 1. Adding Additional Files
+* An existing Alpas app running locally with a MySQL database connection, checkout out the [Quick Start Guide](https://alpas.dev/docs/quick-start-guide-todo-list) to get your first Alpas up and running. 
+* A [Heroku account](https://heroku.com/) as well as the [Heroku CLI Tools](https://devcenter.heroku.com/articles/heroku-cli) installed
+
+</div>
+
+<a name="preparing-your-alpas-app"></a>
+## [Preparing Your Alpas App](#preparing-your-alpas-app)
+
+<a name="adding-additional-files"></a>
+### [Adding Additional Files](#adding-additional-files)
 
 Heroku reads from a special `Procfile` to run your application which should be in the root of your project.  This file should contain the command to execute the project's jar file:
 
@@ -46,7 +57,8 @@ Heroku randomly assigns a port in its environment for you to serve your app from
 >
 >```
 
-### 2. Altering Existing Files
+<a name="altering-existing-files"></a>
+### [Altering Existing Files](#altering-existing-files)
 
 We need to ensure that we are using Alpas version >=`0.16.3` since this allows us to explicitly set the `APP_HOST` variable
 (required later). Check the following and update accordingly in your `build.gradle` file:
@@ -78,9 +90,11 @@ Finally - go ahead and rebuild your project:
 
 >`./alpas jar`
 
-## Part Two - Preparing Your Heroku Environment
+<a name="preparing-your-heroku-environment"></a>
+## [Preparing Your Heroku Environment](#preparing-your-heroku-environment)
 
-### 1. Configuring the Environment
+<a name="configuring-the-environment"></a>
+### [Configuring the Environment](#configuring-the-environment)
 
 You're now ready to set up your Heroku environment:
 
@@ -99,11 +113,12 @@ Some variables will need to be altered/removed compared to your `.env` file:
 >* `APP_PORT` - this should not be added as we're dynamically deriving this from our `PortConfig.kt` file
 >* `APP_LEVEL = prod` this will put your app into production mode
 
-### 2. Setting up MYSQL
+<a name="setting-up-mysql"></a>
+### [Setting Up MySQL](#setting-up-mysql)
 
-On Heroku navigate to `Resources` and search for mysql.  Heroku supports a number of MYSQL database providers, I've used [JawsDB](https://elements.heroku.com/addons/jawsdb) successfully so feel free to use that but any should work fine. Once installed click on the add-on in Heroku, this will take you to its dashboard page which has some important information:
+On Heroku navigate to `Resources` and search for mysql.  Heroku supports a number of MYSQL database providers. Once installed click on the add-on in Heroku, this will take you to its dashboard page which has some important information:
 
-* The host url
+* The host URL
 * The username - note this will most likely not be root and be automatically provisioned
 * The password
 * The database name - if you're using JawsDB on the free tier it will automatically create one for you, you cannot create additional dbs without upgrading to a paid plan
@@ -118,7 +133,8 @@ Add these keys to your Heroku `Settings > Config Vars` with the following values
 >* `DB_USERNAME = {The username}`
 >* `DB_PASSWORD = {The password}`
 
-## Part Three - Deploying and Running Migrations
+<a name="deploying-and-running-migrations"></a>
+## [Deploying and Running Migrations](#deploying-and-running-migrations)
 
 You are now ready to deploy to Heroku!  Make sure you have a compiled jar file in your project root:
 
@@ -142,7 +158,8 @@ Once that has successfully executed you can then bring back up the app
 
 Refreshing your browser should bring up your home page and you are up and running in Heroku!
 
-## Subsequent Deployments
+<a name="subsequent-deployments"></a>
+## [Subsequent Deployments](#subsequent-deployments)
 
 Having successfully deployed to Heroku, future deployments follow three simple steps:
 
@@ -150,15 +167,18 @@ Having successfully deployed to Heroku, future deployments follow three simple s
 >2. Run `git push heroku master` to deploy to Heroku
 >3. If any migrations are required, follow the [migration steps](https://github.com/GideonBrimleaf/alpacasToDo#part-three---deploying-and-running-migrations) above
 
-## Problems with Dyno Memory?
+<a name="troubleshooting"></a>
+## [Troubleshooting](#troubleshooting)
 
->You may still find that the migration exits too early because the dyno capacity on the free tier has been maxed out.  If this happens try making a trivial change to your project to force a new deploy (with the Heroku web process set to 0), navigate to `App > More > Restart All Dynos` to reset the box.  Then try to run the migration command.
->Alternatively try `App > More > Restart All Dynos` followed by `heroku ps:scale web=0` to ensure that the app is not running when trying to run a migration.
+You may find that the migration exits too early because the dyno capacity on the free tier has been maxed out.  If this happens try making a trivial change to your project to force a new deploy (with the Heroku web process set to 0), navigate to `App > More > Restart All Dynos` to reset the box.  Then try to run the migration command.
 
-### Migrating with the Compiled Project
+Alternatively try `App > More > Restart All Dynos` followed by `heroku ps:scale web=0` to ensure that the app is not running when trying to run a migration.
 
->If the problem persists, you will need to run the `db:migrate` command on the compiled jar file.  The normal `alpas` script recompiles the entire project before running the migration which likely requires too much RAM for the lower/free tier dynos.  
->1. Create a new `alpas_prod.sh` file in the root of your project.
->2. Copy and paste in the contents of [this sample file](https://gist.github.com/GideonBrimleaf/fb57c60f5b10c547d0f88468d4aaa9ad) into your `alpas_prod.sh` file.  This is very similar to the original `alpas` script but runs against the already compiled jar file rather than using gradle commands which recompile the project. Be sure to rename the jar file reference in the script to your project's jar file after copying over. 
->3. As per the original `alpas` script, make sure this new file has executable rights with `chmod +x ./alpas_prod.sh`
->4. Step through [*Part Three*](https://github.com/GideonBrimleaf/alpacasToDo#part-three---deploying-and-running-migrations) above, substituting `heroku run ./alpas_prod.sh db:migrate` in for the migration command.  This will execute the migration without recompiling the project. 
+### [Migrating with the Compiled Project](#migrating-with-the-compiled-project)
+
+If the problem persists, you will need to run the `db:migrate` command on the compiled jar file.  The normal `alpas` script recompiles the entire project before running the migration which likely requires too much RAM for the lower/free tier dynos.
+
+1. Create a new `alpas_prod.sh` file in the root of your project.
+2. Copy and paste in the contents of [this sample file](https://gist.github.com/GideonBrimleaf/fb57c60f5b10c547d0f88468d4aaa9ad) into your `alpas_prod.sh` file.  This is very similar to the original `alpas` script but runs against the already compiled jar file rather than using gradle commands which recompile the project. Be sure to rename the jar file reference in the script to your project's jar file after copying over. 
+3. As per the original `alpas` script, make sure this new file has executable rights with `chmod +x ./alpas_prod.sh`
+4. Step through [Deploying and Running Migrations](#deploying-and-running-migrations) above, substituting `heroku run ./alpas_prod.sh db:migrate` in for the migration command.  This will execute the migration without recompiling the project. 
