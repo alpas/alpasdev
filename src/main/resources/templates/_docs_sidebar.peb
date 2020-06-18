@@ -85,7 +85,7 @@
               {{ li('Notifications', page) }}
               {{ li('Queues', page) }}
               {{ li('Deployment', page) }}
-              {{ li('Deployment Heroku', page, 'deployment-heroku') }}
+              {{ li('Deploying to Heroku', page, 'deploying-to-heroku') }}
             </ul>
           </li>
 
