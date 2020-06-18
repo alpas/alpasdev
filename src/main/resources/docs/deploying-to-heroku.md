@@ -120,7 +120,7 @@ You will now be able to add in all the contents of your `.env` file. Note, you c
 <div class="sublist">
  
 * `APP_HOST = 0.0.0.0` This binds your app to run on `0.0.0.0` rather than localhost (`127.0.0.1`) which is essential for Heroku. Remember, you need to be using Alpas 0.16.3 or greater to get this to work.
-* `GRADLE_TASK = shadowJar` This tells Heroku how to build your gradle project
+* `GRADLE_TASK = shadowJar` This tells Heroku how to build your gradle project.
 
 </div>
 
@@ -128,23 +128,23 @@ Some variables will need to be altered/removed compared to your `.env` file:
 
 <div class="sublist">
 
-* Any of the `DB` configs - we will add these once we have provisioned a Heroku database
-* `APP_PORT` - this should not be added as we're dynamically deriving this from our `PortConfig.kt` file
-* `APP_LEVEL = prod` this will put your app into production mode
+* Any of the `DB` configs - we will add these once we have provisioned a Heroku database.
+* `APP_PORT` - this should not be added as we're dynamically deriving this from our `PortConfig.kt` file.
+* `APP_LEVEL = prod` this will put your app into production mode.
 
 </div>
 
 <a name="setting-up-mysql"></a>
 ### [Setting Up MySQL](#setting-up-mysql)
 
-On Heroku navigate to `Resources` and search for mysql.  Heroku supports a number of MYSQL database providers. Once installed click on the add-on in Heroku, this will take you to its dashboard page which has some important information:
+On Heroku navigate to `Resources` and search for MySQL.  Heroku supports a number of MYSQL database providers. Once installed click on the add-on in Heroku, this will take you to its dashboard page which has some important information:
 
 <div class="sublist">
 
 * The host URL
 * The username - note this will most likely not be root and be automatically provisioned
 * The password
-* The database name - if you're using JawsDB on the free tier it will automatically create one for you, you cannot create additional dbs without upgrading to a paid plan
+* The database name - some free tier MySQL plans automatically create one for you and you cannot create additional databases without upgrading to a paid plan
 * The port number
 
 </div>
@@ -206,9 +206,9 @@ Having successfully deployed to Heroku, future deployments follow three simple s
 
 <div class="ordered-list">
 
-1. Commit your changes and recompile the project `./alpas jar`<span class="clipboard" data-clipboard-text='./alpas jar'></span>
-2. Run `git push heroku master`<span class="clipboard" data-clipboard-text='git push heroku master'></span> to deploy to Heroku
-3. If any migrations are required, follow the [migration steps](https://github.com/GideonBrimleaf/alpacasToDo#part-three---deploying-and-running-migrations) above
+1. Commit your changes and recompile the project `./alpas jar`<span class="clipboard" data-clipboard-text='./alpas jar'></span>.
+2. Run `git push heroku master`<span class="clipboard" data-clipboard-text='git push heroku master'></span> to deploy to Heroku.
+3. If any migrations are required, follow the [migration steps](#deploying-and-running-migrations) above.
 
 </div>
 
@@ -227,7 +227,7 @@ If the problem persists, you will need to run the `db:migrate` command on the co
 
 1. Create a new `alpas_prod.sh` file in the root of your project.
 2. Copy and paste in the contents of [this sample file](https://gist.github.com/GideonBrimleaf/fb57c60f5b10c547d0f88468d4aaa9ad) into your `alpas_prod.sh` file.  This is very similar to the original `alpas` script but runs against the already compiled jar file rather than using gradle commands which recompile the project. Be sure to rename the jar file reference in the script to your project's jar file after copying over. 
-3. As per the original `alpas` script, make sure this new file has executable rights with `chmod +x ./alpas_prod.sh`<span class="clipboard" data-clipboard-text='chmod +x ./alpas_prod.sh'></span>
+3. As per the original `alpas` script, make sure this new file has executable rights with `chmod +x ./alpas_prod.sh`<span class="clipboard" data-clipboard-text='chmod +x ./alpas_prod.sh'></span>.
 4. Step through [Deploying and Running Migrations](#deploying-and-running-migrations) above, substituting `heroku run ./alpas_prod.sh db:migrate`<span class="clipboard" data-clipboard-text='heroku run ./alpas_prod.sh db:migrate'></span> in for the migration command.  This will execute the migration without recompiling the project. 
 
 </div>
