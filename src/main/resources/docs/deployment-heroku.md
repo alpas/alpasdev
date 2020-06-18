@@ -46,7 +46,7 @@ java.runtime.version=1.9
 ```
 </span>
 
-Heroku randomly assigns a port in its environment for you to serve your app from. This is available from the system environment variable `"PORT"` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to 8080 in your local environment:
+Heroku randomly assigns a port in its environment for you to serve your app from. This is available from the system environment variable `"PORT"` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/configs/PortConfig.kt">
 
@@ -98,7 +98,7 @@ fun main(args: Array<String>) {
 ```
 </span>
 
-Finally - go ahead and rebuild your project `./alpas jar`
+Finally - go ahead and rebuild your project `./alpas jar` <span class="clipboard" data-clipboard-text='./alpas jar'></span>
 
 <a name="preparing-your-heroku-environment"></a>
 ## [Preparing Your Heroku Environment](#preparing-your-heroku-environment)
@@ -116,14 +116,23 @@ This will create an app in your account and set it as a remote for this project.
 navigate to the `App > Settings` section and click on `Reveal Config Vars`.
  
 You will now be able to add in all the contents of your `.env` file. Note, you can also do this via the command line with `heroku config:set {KEY}="{VALUE}"`. Some additional important variables to add:
+
+<div class="sublist">
  
-* `APP_HOST = 0.0.0.0`  This binds your app to run on `0.0.0.0` rather than localhost (`127.0.0.1`) which is essential for Heroku. Remember, you need to be using Alpas 0.16.3 or greater to get this to work.
+* `APP_HOST = 0.0.0.0` This binds your app to run on `0.0.0.0` rather than localhost (`127.0.0.1`) which is essential for Heroku. Remember, you need to be using Alpas 0.16.3 or greater to get this to work.
 * `GRADLE_TASK = shadowJar` This tells Heroku how to build your gradle project
 
+</div>
+
 Some variables will need to be altered/removed compared to your `.env` file:
+
+<div class="sublist">
+
 * Any of the `DB` configs - we will add these once we have provisioned a Heroku database
 * `APP_PORT` - this should not be added as we're dynamically deriving this from our `PortConfig.kt` file
 * `APP_LEVEL = prod` this will put your app into production mode
+
+</div>
 
 <a name="setting-up-mysql"></a>
 ### [Setting Up MySQL](#setting-up-mysql)
@@ -141,6 +150,7 @@ On Heroku navigate to `Resources` and search for mysql.  Heroku supports a numbe
 </div>
 
 Add these keys to your Heroku `Settings > Config Vars` with the following values:
+
 <div class="sublist">
 
 * `DB_HOST = {The host URL}`
@@ -161,7 +171,13 @@ You are now ready to deploy to Heroku!  Make sure you have a compiled jar file i
 ./alpas jar
 ```
 
-Then `git push heroku master` - Heroku will then detect that it needs to install the right JDK version (as per our `system.properties` file) and build a gradle project as per the `shadowJar` value we gave it earlier. This should be up and running at your designated Heroku url.
+Then deploy your app to Heroku by pushing your repository:
+
+```bash
+git push heroku master
+```
+
+Heroku will then detect that it needs to install the right JDK version (as per our `system.properties` file) and build a gradle project as per the `shadowJar` value we gave it earlier. This should be up and running at your designated Heroku url.
 
 In order to successfully migrate on the free tier of Heroku, you need to temporarily bring down your app as there is not enough RAM on the dyno to both serve the app and run the migration:
 
@@ -190,8 +206,8 @@ Having successfully deployed to Heroku, future deployments follow three simple s
 
 <div class="ordered-list">
 
-1. Commit your changes and recompile the project `./alpas jar`
-2. Run `git push heroku master` to deploy to Heroku
+1. Commit your changes and recompile the project `./alpas jar`<span class="clipboard" data-clipboard-text='./alpas jar'></span>
+2. Run `git push heroku master`<span class="clipboard" data-clipboard-text='git push heroku master'></span> to deploy to Heroku
 3. If any migrations are required, follow the [migration steps](https://github.com/GideonBrimleaf/alpacasToDo#part-three---deploying-and-running-migrations) above
 
 </div>
@@ -201,13 +217,17 @@ Having successfully deployed to Heroku, future deployments follow three simple s
 
 You may find that the migration exits too early because the dyno capacity on the free tier has been maxed out.  If this happens try making a trivial change to your project to force a new deploy (with the Heroku web process set to 0), navigate to `App > More > Restart All Dynos` to reset the box.  Then try to run the migration command.
 
-Alternatively try `App > More > Restart All Dynos` followed by `heroku ps:scale web=0` to ensure that the app is not running when trying to run a migration.
+Alternatively try `App > More > Restart All Dynos` followed by `heroku ps:scale web=0`<span class="clipboard" data-clipboard-text='heroku ps:scale web=0'></span> to ensure that the app is not running when trying to run a migration.
 
 ### [Migrating with the Compiled Project](#migrating-with-the-compiled-project)
 
 If the problem persists, you will need to run the `db:migrate` command on the compiled jar file.  The normal `alpas` script recompiles the entire project before running the migration which likely requires too much RAM for the lower/free tier dynos.
 
+<div class="ordered-list">
+
 1. Create a new `alpas_prod.sh` file in the root of your project.
 2. Copy and paste in the contents of [this sample file](https://gist.github.com/GideonBrimleaf/fb57c60f5b10c547d0f88468d4aaa9ad) into your `alpas_prod.sh` file.  This is very similar to the original `alpas` script but runs against the already compiled jar file rather than using gradle commands which recompile the project. Be sure to rename the jar file reference in the script to your project's jar file after copying over. 
-3. As per the original `alpas` script, make sure this new file has executable rights with `chmod +x ./alpas_prod.sh`
-4. Step through [Deploying and Running Migrations](#deploying-and-running-migrations) above, substituting `heroku run ./alpas_prod.sh db:migrate` in for the migration command.  This will execute the migration without recompiling the project. 
+3. As per the original `alpas` script, make sure this new file has executable rights with `chmod +x ./alpas_prod.sh`<span class="clipboard" data-clipboard-text='chmod +x ./alpas_prod.sh'></span>
+4. Step through [Deploying and Running Migrations](#deploying-and-running-migrations) above, substituting `heroku run ./alpas_prod.sh db:migrate`<span class="clipboard" data-clipboard-text='heroku run ./alpas_prod.sh db:migrate'></span> in for the migration command.  This will execute the migration without recompiling the project. 
+
+</div>
