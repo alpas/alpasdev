@@ -76,6 +76,7 @@ private val pages = listOf(
     "notifications",
     "queues",
     "deployment",
+    "deployment-heroku",
     "troubleshooting"
 )
 
