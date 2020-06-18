@@ -17,7 +17,7 @@ These instructions will step you through the requirements to deploy an existing 
 
 <div class="sublist">
 
-* An existing Alpas app running locally with a MySQL database connection, checkout out the [Quick Start Guide](https://alpas.dev/docs/quick-start-guide-todo-list) to get your first Alpas up and running. 
+* A basic Alpas app running locally with a MySQL database connection, checkout out the [Quick Start Guide](https://alpas.dev/docs/quick-start-guide-todo-list) to get your first Alpas up and running. 
 * A [Heroku account](https://heroku.com/) as well as the [Heroku CLI Tools](https://devcenter.heroku.com/articles/heroku-cli) installed
 
 </div>
@@ -46,7 +46,7 @@ java.runtime.version=1.9
 ```
 </span>
 
-Heroku randomly assigns a port in its environment for you to serve your app from. This is available from the system environment variable `"PORT"` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
+Heroku randomly assigns a port in its environment for you to serve your app from. This is available from the system environment variable `PORT` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/configs/PortConfig.kt">
 
@@ -78,7 +78,7 @@ ext.alpas_version = '0.16.3'
 ```
 </span>
 
-Alpas needs a `.env` file in the production environment to run migration scripts amongst other processes. As per the [Alpas docs](https://alpas.dev/docs/configuration#environment) you shouldn't commit one, so we'll create an empty one in our route directory if it doesn't exist whenever the `main` app function is invoked:
+Alpas needs a `.env` file in the production environment to run migration scripts amongst other processes. We'll create an empty one in our route directory if it doesn't exist whenever the `main` app function is invoked:
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/start.kt">
 
@@ -98,7 +98,7 @@ fun main(args: Array<String>) {
 ```
 </span>
 
-Finally - go ahead and rebuild your project `./alpas jar` <span class="clipboard" data-clipboard-text='./alpas jar'></span>
+Finally, go ahead and rebuild your project `./alpas jar` <span class="clipboard" data-clipboard-text='./alpas jar'></span>
 
 <a name="preparing-your-heroku-environment"></a>
 ## [Preparing Your Heroku Environment](#preparing-your-heroku-environment)
