@@ -84,7 +84,7 @@
               {{ li('Mail', page) }}
               {{ li('Notifications', page) }}
               {{ li('Queues', page) }}
-              {{ li('Deployment', page) }}
+              {{ li('Deploying to Linux', page, 'deploying-to-linux') }}
               {{ li('Deploying to Heroku', page, 'deploying-to-heroku') }}
             </ul>
           </li>
