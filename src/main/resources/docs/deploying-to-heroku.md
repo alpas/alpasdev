@@ -17,7 +17,7 @@ These instructions will step you through the requirements to deploy an existing 
 
 <div class="sublist">
 
-* A basic Alpas app running locally with a MySQL database connection, checkout out the [Quick Start Guide](https://alpas.dev/docs/quick-start-guide-todo-list) to get your first Alpas up and running. 
+* A basic Alpas app running locally with a MySQL database connection, checkout the [Quick Start Guide](https://alpas.dev/docs/quick-start-guide-todo-list) to get your first Alpas up and running. 
 * A [Heroku account](https://heroku.com/) as well as the [Heroku CLI Tools](https://devcenter.heroku.com/articles/heroku-cli) installed
 
 </div>
@@ -46,7 +46,7 @@ java.runtime.version=1.9
 ```
 </span>
 
-Heroku randomly assigns a port in its environment for you to serve your app from. This is available from the system environment variable `PORT` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
+Heroku randomly assigns a port in its environment to serve your app from. This is available from the system environment variable `PORT` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/configs/PortConfig.kt">
 
