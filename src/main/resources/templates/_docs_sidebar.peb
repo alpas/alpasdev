@@ -78,13 +78,19 @@
             </ul>
           </li>
           <li>
+            <h4 id="deployment">Deployment</h4>
+            <ul>
+              {{ li('Linux with Nginx', page, 'deploying-to-linux-with-nginx') }}
+              {{ li('Heroku', page, 'deploying-to-heroku') }}
+            </ul>
+          </li>
+          <li>
             <h4 id="advanced">Advanced</h4>
             <ul>
               {{ li('Alpas Console', page, 'alpas-console') }}
               {{ li('Mail', page) }}
               {{ li('Notifications', page) }}
               {{ li('Queues', page) }}
-              {{ li('Deployment', page) }}
             </ul>
           </li>
 

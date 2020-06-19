@@ -71,11 +71,12 @@ private val pages = listOf(
     "seeding",
     "entity-factory",
     "redis",
+    "deploying-to-linux-with-nginx",
+    "deploying-to-heroku",
     "alpas-console",
     "mail",
     "notifications",
     "queues",
-    "deployment",
     "troubleshooting"
 )
 
