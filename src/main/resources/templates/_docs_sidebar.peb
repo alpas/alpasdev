@@ -80,8 +80,8 @@
           <li>
             <h4 id="deployment">Deployment</h4>
             <ul>
-              {{ li('Deploying to Linux', page, 'deploying-to-linux') }}
-              {{ li('Deploying to Heroku', page, 'deploying-to-heroku') }}
+              {{ li('Linux with Nginx', page, 'deploying-to-linux-with-nginx') }}
+              {{ li('Heroku', page, 'deploying-to-heroku') }}
             </ul>
           </li>
           <li>
