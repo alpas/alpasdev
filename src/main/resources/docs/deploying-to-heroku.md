@@ -46,7 +46,7 @@ java.runtime.version=1.9
 ```
 </span>
 
-Heroku randomly assigns a port in its environment to serve your app from. This is available from the system environment variable `PORT` but you won't know what it is until runtime, so we can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
+Heroku randomly assigns a port in its environment to serve your app from. This is available from the system environment variable `PORT` but you won't know what it is until runtime, so you can't store it as a concrete environment variable.  Instead, the following allows you to read what the port number is when running and allow your app to be served up there, defaulting to port 8080 in your local environment:
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/configs/PortConfig.kt">
 
@@ -68,7 +68,7 @@ class PortConfig(env: Environment) : AppConfig(env) {
 <a name="altering-existing-files"></a>
 ### [Altering Existing Files](#altering-existing-files)
 
-We need to ensure that we are using Alpas version >=`0.16.3` since this allows us to explicitly set the `APP_HOST` variable
+Ensure that you are using Alpas version >=`0.16.3` since this allows you to explicitly set the `APP_HOST` variable
 (required later). Check the following and update accordingly in your `build.gradle` file:
 
 <span class="line-numbers" data-start="1" data-file="build.gradle">
@@ -78,7 +78,7 @@ ext.alpas_version = '0.16.3'
 ```
 </span>
 
-Alpas needs a `.env` file in the production environment to run migration scripts amongst other processes. We'll create an empty one in our route directory if it doesn't exist whenever the `main` app function is invoked:
+Alpas needs a `.env` file in the production environment to run migration scripts amongst other processes. Modify the `start.kt` file to create an empty one in your route directory if it doesn't exist whenever the `main` app function is invoked:
 
 <span class="line-numbers" data-start="1" data-file="src/main/kotlin/start.kt">
 
@@ -128,8 +128,8 @@ Some variables will need to be altered/removed compared to your `.env` file:
 
 <div class="sublist">
 
-* Any of the `DB` configs - we will add these once we have provisioned a Heroku database.
-* `APP_PORT` - this should not be added as we're dynamically deriving this from our `PortConfig.kt` file.
+* Any of the `DB` configs - these can be added once you have provisioned a database on Heroku.
+* `APP_PORT` - this should not be added as you are now dynamically deriving this from our `PortConfig.kt` file.
 * `APP_LEVEL = prod` this will put your app into production mode.
 
 </div>
