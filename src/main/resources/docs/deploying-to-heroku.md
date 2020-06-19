@@ -173,7 +173,7 @@ You are now ready to deploy to Heroku!  Make sure you have a compiled jar file i
 
 Then deploy your app to Heroku by pushing your repository:
 
-```bash
+```git
 git push heroku master
 ```
 
@@ -181,7 +181,7 @@ Heroku will then detect that it needs to install the right JDK version (as per o
 
 In order to successfully migrate on the free tier of Heroku, you need to temporarily bring down your app as there is not enough RAM on the dyno to both serve the app and run the migration:
 
-```bash
+```git
 heroku ps:scale web=0
 ```
 
@@ -193,7 +193,7 @@ heroku run ./alpas db:migrate
 
 Once that has successfully executed you can then bring back up the app
 
-```bash
+```git
 heroku ps:scale web=1
 ```
 
