@@ -115,7 +115,7 @@ fun Router.addRoutes() {
     get<DocsController>("docs")     // calls DocsController#index()
     post<DocsController>("docs")    // calls DocsController#store()
     delete<DocsController>("docs")  // calls DocsController#delete()
-    update<DocsController>("docs")  // calls DocsController#update()
+    patch<DocsController>("docs")   // calls DocsController#update()
 }
 
 ```
